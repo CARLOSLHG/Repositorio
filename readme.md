@@ -15,19 +15,19 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
 
 ### **Contenido del Repositorio**
 
-1. [HTML & CSS Projects](https://carloslhg.github.io/repo/html-css-projects/)  
+1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html-css-projects/)  
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
-2. [JavaScript Exercises](https://carloslhg.github.io/repo/javascript-exercises/)  
+2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript-exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
-3. [Python Projects](https://carloslhg.github.io/repo/python-projects/)  
+3. [Python Projects](https://carloslhg.github.io/repositorio/python-projects/)  
    Proyectos en Python que incluyen análisis de datos, scripts y automatizaciones.  
-4. [R Scripts](https://carloslhg.github.io/repo/r-scripts/)  
+4. [R Scripts](https://carloslhg.github.io/repositorio/r-scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
-5. [WordPress Development](https://carloslhg.github.io/repo/wordpress-development/)  
+5. [WordPress Development](https://carloslhg.github.io/repositorio/wordpress-development/)  
    Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
-6. [Data Analysis Projects](https://carloslhg.github.io/repo/data-analysis-projects/)  
+6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/data-analysis-projects/)  
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
-7. [PSeint Exercises](https://carloslhg.github.io/repo/pseint-exercises/)  
+7. [PSeint Exercises](https://carloslhg.github.io/repositorio/pseint-exercises/)  
    Lógica de programación aplicada en ejercicios usando PSeint.
 
 ---
