@@ -3,9 +3,10 @@
 ## **Datos Personales**
 
 Nombre: Carlos Luis Hernández Gutiérrez  
-Ubicación: Los Navalucillos, Toledo, España  
-Email: chcarlos3@gmail.com LinkedIn: [Carlos LHG LinkedIn](https://www.linkedin.com/in/carloslhg)  
-Portafolio: 
+Ubicación: Los Navalucillos, Toledo, España
+Email: chcarlos3@gmail.com
+LinkedIn: [Carlos LHG LinkedIn](https://www.linkedin.com/in/carloslhg)  
+Portafolio: (En construcción)
 
 ---
 
@@ -19,8 +20,8 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
 2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript-exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
-3. [Python Projects](https://carloslhg.github.io/repositorio/python-projects/)  
-   Proyectos en Python que incluyen análisis de datos, scripts y automatizaciones.  
+3. [Node Projects](https://carloslhg.github.io/repositorio/node-projects/)  
+   Proyectos en Node que incluyen análisis de datos, scripts y automatizaciones.  
 4. [R Scripts](https://carloslhg.github.io/repositorio/r-scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
 5. [WordPress Development](https://carloslhg.github.io/repositorio/wordpress-development/)  
