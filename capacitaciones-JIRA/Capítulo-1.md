@@ -97,6 +97,3 @@ Este capítulo proporciona una base sólida sobre Jira y el contexto del proyect
 En el siguiente capítulo, exploraremos los elementos esenciales en Jira, incluidos los tipos de usuarios, las incidencias, y los proyectos.
 
 ---
-
-¿Estás conforme con este nivel de detalle para el **Capítulo 1**? Si necesitas más profundidad en algún punto específico, puedo añadir ejemplos adicionales o explorar más sobre los beneficios de Jira.
-
