@@ -1,0 +1,81 @@
+# Capítulo 2: Elementos Esenciales en Jira
+
+Este capítulo abarca los componentes básicos de Jira, como los tipos de usuarios, las incidencias, los proyectos y los dashboards. Estos son elementos que cualquier usuario de Jira debe entender a fondo para manejar proyectos de manera efectiva.
+
+---
+
+## 2.1 Tipos de Usuarios en Jira
+
+En Jira, existen diferentes tipos de usuarios, cada uno con permisos y roles específicos. Estos tipos de usuario permiten una gestión flexible y segura de los proyectos y garantizan que cada miembro del equipo tenga acceso adecuado según su función.
+
+### Principales Tipos de Usuario
+- **Administrador del Sistema**: Tiene acceso completo a todas las configuraciones de Jira. Puede crear, modificar y eliminar proyectos, usuarios, roles y permisos.
+- **Administrador de Proyectos**: Encargado de gestionar configuraciones específicas de proyectos como flujos de trabajo, incidencias y pantallas.
+- **Usuario Estándar**: Participa activamente en los proyectos; puede crear y gestionar incidencias, asignarlas y colaborar en tareas.
+- **Observador (o Usuario Navegador)**: Tiene acceso a visualizar información en los proyectos sin la capacidad de editar o crear incidencias.
+
+#### Importancia de los Roles y Permisos en Jira
+La asignación adecuada de roles y permisos asegura que la información sea gestionada de manera segura y eficaz. Por ejemplo, un **Administrador del Sistema** tiene permisos para cambiar la configuración global de Jira, mientras que un **Usuario Estándar** solo puede operar dentro de las incidencias que le son asignadas.
+
+---
+
+## 2.2 Incidencias en Jira: Estructura y Funcionalidad
+
+Una incidencia en Jira es cualquier tarea, solicitud o problema que necesita ser rastreado y resuelto. Cada incidencia puede ser personalizada para reflejar distintos tipos de trabajo, lo que permite adaptarla a diferentes metodologías de proyecto.
+
+### Tipos de Incidencias
+- **Tarea (Task)**: Unidad básica de trabajo que se asigna y resuelve dentro de un proyecto.
+- **Bug**: Problema técnico que debe ser corregido, principalmente en entornos de desarrollo de software.
+- **Historia (Story)**: Requisito de negocio que forma parte de un desarrollo más amplio, como una **épica**.
+- **Épica (Epic)**: Incidencia de gran escala que puede dividirse en historias y tareas para un mayor control.
+- **Subtarea**: Parte de una tarea o historia que puede ser asignada y gestionada independientemente.
+
+### Componentes de una Incidencia
+Cada incidencia contiene una serie de elementos estándar:
+- **Título y Descripción**: Definen el objetivo y los detalles de la tarea.
+- **Prioridad**: Determina la urgencia de resolución de la incidencia.
+- **Estado**: Indica el progreso, como *Por hacer*, *En progreso*, o *Hecho*.
+- **Asignado a**: Usuario responsable de la resolución de la incidencia.
+
+---
+
+## 2.3 Proyectos en Jira: Creación y Personalización
+
+En Jira, un proyecto es un espacio de trabajo donde se agrupan todas las incidencias relacionadas. Cada proyecto es único y puede ser configurado según las necesidades específicas del equipo o empresa.
+
+### Tipos de Proyectos
+- **Proyecto de Software**: Diseñado para equipos de desarrollo de software, con opciones de configuración para flujos de trabajo de **Scrum** o **Kanban**.
+- **Proyecto de Gestión de Servicios**: Ideal para equipos de soporte y gestión de incidencias.
+- **Proyecto de Negocios**: Ofrece configuraciones para proyectos empresariales no relacionados con TI, como marketing o recursos humanos.
+
+### Configuración de un Proyecto en Jira
+Al crear un proyecto en Jira, se configuran elementos clave como:
+- **Flujo de Trabajo**: Define los pasos que sigue una incidencia desde su creación hasta su resolución.
+- **Esquemas de Pantalla**: Controla qué información es visible en cada pantalla de la incidencia.
+- **Esquema de Permisos**: Determina qué acciones pueden realizar los usuarios dentro del proyecto.
+
+---
+
+## 2.4 Dashboards (Cuadros de Mando) en Jira
+
+Los **dashboards** en Jira ofrecen una vista personalizada de la información y métricas clave de los proyectos. Son herramientas valiosas para los administradores y equipos, ya que permiten monitorear el progreso, identificar bloqueos y visualizar el rendimiento general.
+
+### Elementos de un Dashboard
+Un dashboard típico en Jira incluye:
+- **Gadgets**: Elementos visuales que muestran datos de interés, como gráficos de tareas completadas, lista de incidencias pendientes, o un gráfico de Burndown para proyectos ágiles.
+- **Filtros**: Permiten restringir la información que se muestra en el dashboard según criterios específicos.
+- **Reportes en Tiempo Real**: Los dashboards pueden configurarse para mostrar reportes que se actualizan automáticamente, proporcionando una visión actualizada de los proyectos.
+
+### Personalización del Dashboard
+Cada usuario puede crear y personalizar su propio dashboard en Jira. Los administradores también pueden crear dashboards compartidos que todos los miembros del equipo puedan ver y utilizar.
+
+#### Ejemplo Práctico: Dashboard en el Proyecto ANC
+Para el proyecto ANC, configuraremos un dashboard que incluye:
+- Un gadget de incidencias abiertas por prioridad para destacar las tareas críticas.
+- Un gráfico de líneas que muestra el progreso semanal de la resolución de incidencias.
+- Un filtro personalizado para ver incidencias de alto impacto en zonas críticas.
+
+---
+
+Este capítulo proporciona una base sólida sobre los elementos esenciales de Jira, necesarios para una gestión eficiente de proyectos. A continuación, en el **Capítulo 3**, veremos cómo configurar y personalizar estos elementos dentro de un proyecto.
+
