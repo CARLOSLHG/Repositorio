@@ -3,7 +3,8 @@
 ## **Datos Personales**
 
 Nombre: Carlos Luis Hernández Gutiérrez  
-Ubicación: Los Navalucillos, Toledo, España
+Ubicación: Los Navalucillos, Toledo
+45130 España
 Email: chcarlos3@gmail.com
 LinkedIn: [Carlos LHG LinkedIn](https://www.linkedin.com/in/carloslhg)  
 Portafolio: (En construcción)
