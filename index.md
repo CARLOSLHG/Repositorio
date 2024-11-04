@@ -31,7 +31,7 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
 7. [PSeint Exercises](https://carloslhg.github.io/repositorio/pseint-exercises/)  
    Lógica de programación aplicada en ejercicios usando PSeint.
-8. [Jira Software Administrator intermedio Guide](https://carloslhg.github.io/repositorio/capacitaciones-JIRA/)  
+8. [Atlassian Products](https://carloslhg.github.io/repositorio/Atlassian/)  
    Una guía paso a paso para la creación de un project-company kanban de telecomunicaciones desde cero.
 
 ---
