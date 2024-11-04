@@ -17,7 +17,7 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
 
 ### **Contenido del Repositorio**
 
-1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html%20css%20projects/)  
+1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html%20css%20projects)  
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
 2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript%20exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
