@@ -15,6 +15,7 @@ Mientras completamos esta sección, puedes explorar las siguientes áreas:
 - **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
 
 ---
+---
 
 [Volver a la Página Principal del Repositorio](../README.md)
 
