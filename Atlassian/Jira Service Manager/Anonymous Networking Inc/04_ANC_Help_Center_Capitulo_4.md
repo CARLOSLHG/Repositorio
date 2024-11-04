@@ -162,7 +162,7 @@ Para una gestión más eficiente y detallada de cada tipo de incidencia, crearem
 ### Paginación
 
 - **Capítulo Anterior**: [Configuración de Usuarios, Roles y Grupos](03_ANC_Help_Center_Capitulo_3.md)
-- **Siguiente Capítulo**: [Configuración Avanzada de Permisos](ANC_Help_Center_Capitulo_5.md)
+- **Siguiente Capítulo**: [Configuración Avanzada de Permisos](05_ANC_Help_Center_Capitulo_5.md)
 
 ---
 
