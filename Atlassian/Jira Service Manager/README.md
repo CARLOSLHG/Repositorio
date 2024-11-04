@@ -1,6 +1,12 @@
-# Anonymous Networking Inc
+# Anonymous Networking Inc - Help Center
 
-**Comienza aquí:** [Introducción al ANC Help Center](./ANC_Help_Center_Introduccion.md)
+Bienvenido al Centro de Ayuda de Anonymous Networking Inc. Este proyecto está diseñado para guiar en la configuración y gestión de Jira Service Manager.
 
-Este proyecto se enfoca en la creación de un centro de ayuda y gestión de incidencias. Aquí encontrarás la introducción y otros contenidos organizados para facilitar el aprendizaje.
+**Comienza aquí:** [Introducción al ANC Help Center](./00_ANC_Help_Center_Introduccion.md)
+
+## Contenidos
+- **Capítulo 1:** Descripción breve del capítulo 1.
+- **Capítulo 2:** Descripción breve del capítulo 2.
+- **Capítulo 3:** Descripción breve del capítulo 3.
+
 
