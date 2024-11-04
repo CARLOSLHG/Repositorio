@@ -17,19 +17,19 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
 
 ### **Contenido del Repositorio**
 
-1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html-css-projects/)  
+1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html%20css%20projects/)  
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
-2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript-exercises/)  
+2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript%20exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
-3. [Node Projects](https://carloslhg.github.io/repositorio/node-projects/)  
+3. [Node Projects](https://carloslhg.github.io/repositorio/node%20projects/)  
    Proyectos en Node que incluyen análisis de datos, scripts y automatizaciones.  
-4. [R Scripts](https://carloslhg.github.io/repositorio/r-scripts/)  
+4. [R Scripts](https://carloslhg.github.io/repositorio/r%20scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
-5. [WordPress Development](https://carloslhg.github.io/repositorio/wordpress-development/)  
+5. [WordPress Development](https://carloslhg.github.io/repositorio/wordpress%20development/)  
    Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
-6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/data-analysis-projects/)  
+6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/data%20analysis%20projects/)  
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
-7. [PSeint Exercises](https://carloslhg.github.io/repositorio/pseint-exercises/)  
+7. [PSeint Exercises](https://carloslhg.github.io/repositorio/pseint%20exercises/)  
    Lógica de programación aplicada en ejercicios usando PSeint.
 8. [Atlassian Products](https://carloslhg.github.io/repositorio/Atlassian/)  
    Una guía paso a paso para la creación de un project-company kanban de telecomunicaciones desde cero.
