@@ -4,8 +4,8 @@ Bienvenido a la sección de proyectos de Atlassian. Aquí encontrarás documenta
 
 ## Contenidos
 
-- **[Jira Software](./Jira%20Software/Anonymous%20Networking%20Inc/README.md)**: Documentación sobre el uso de Jira Software.
-- **[Jira Service Manager](./Jira%20Service%20Manager/Anonymous%20Networking%20Inc/README.md)**: Guías de Jira Service Manager.
+- **[Jira Software](./Jira%20Software/Anonymous%20Networking%20Inc/)**: Documentación sobre el uso de Jira Software.
+- **[Jira Service Manager](./Jira%20Service%20Manager/Anonymous%20Networking%20Inc/)**: Guías de Jira Service Manager.
 
 ## En desarrollo 🚧
 
