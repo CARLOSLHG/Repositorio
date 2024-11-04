@@ -17,19 +17,19 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
 
 ### **Contenido del Repositorio**
 
-1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/html%20css%20projects)  
+1. [HTML & CSS Projects](https://carloslhg.github.io/repositorio/HTML%20&%20CSS%20Projects)  
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
-2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/javascript%20exercises/)  
+2. [JavaScript Exercises](https://carloslhg.github.io/repositorio/JavaScript%20Exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
-3. [Node Projects](https://carloslhg.github.io/repositorio/node%20projects/)  
+3. [Node Projects](https://carloslhg.github.io/repositorio/Node/)  
    Proyectos en Node que incluyen análisis de datos, scripts y automatizaciones.  
-4. [R Scripts](https://carloslhg.github.io/repositorio/r%20scripts/)  
+4. [R Scripts](https://carloslhg.github.io/repositorio/R%20Scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
-5. [WordPress Development](https://carloslhg.github.io/repositorio/wordpress%20development/)  
+5. [WordPress Development](https://carloslhg.github.io/repositorio/Wordpress%20Development/)  
    Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
-6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/data%20analysis%20projects/)  
+6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/Data%20Analysis%20Projects/)  
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
-7. [PSeint Exercises](https://carloslhg.github.io/repositorio/pseint%20exercises/)  
+7. [PSeint Exercises](https://carloslhg.github.io/repositorio/Pseint%20Exercises/)  
    Lógica de programación aplicada en ejercicios usando PSeint.
 8. [Atlassian Products](https://carloslhg.github.io/repositorio/Atlassian/)  
    Una guía paso a paso para la creación de un project-company kanban de telecomunicaciones desde cero.
