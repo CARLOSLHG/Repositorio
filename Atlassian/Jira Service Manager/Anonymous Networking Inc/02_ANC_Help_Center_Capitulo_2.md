@@ -70,7 +70,7 @@ Para el **ANC Help Center**, recomendamos seleccionar **Atención al Cliente** d
 
 ## Paginación
 
-- **Capítulo Anterior:** [Configuración Inicial del Proyecto](ANC_Help_Center_Capitulo_1.md)
-- **Siguiente Capítulo:** [Configuración de Usuarios, Roles y Grupos](ANC_Help_Center_Capitulo_3.md)
+- **Capítulo Anterior:** [Configuración Inicial del Proyecto](01_ANC_Help_Center_Capitulo_1.md)
+- **Siguiente Capítulo:** [Configuración de Usuarios, Roles y Grupos](03_ANC_Help_Center_Capitulo_3.md)
 
 ---

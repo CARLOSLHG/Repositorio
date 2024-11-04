@@ -123,8 +123,8 @@ La siguiente tabla muestra una lista completa de permisos que puedes encontrar e
 
 ### **Paginación**
 
-- **Capítulo Anterior:** [Repaso del Administrator Hub y Acceso a Jira Service Management](ANC_Help_Center_Capitulo_2.md)
-- **Siguiente Capítulo:** [Configuración de Incidencias y Flujos de Trabajo](ANC_Help_Center_Capitulo_4.md)
+- **Capítulo Anterior:** [Repaso del Administrator Hub y Acceso a Jira Service Management](02_ANC_Help_Center_Capitulo_2.md)
+- **Siguiente Capítulo:** [Configuración de Incidencias y Flujos de Trabajo](04_ANC_Help_Center_Capitulo_4.md)
 
 ---
 

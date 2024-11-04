@@ -33,6 +33,6 @@ Este proyecto, además de mejorar la experiencia del cliente y optimizar los pro
 
 ## Navegación
 
-- **[Siguiente capítulo: Configuración Inicial del Proyecto](ANC_Help_Center_Capitulo_1.md)**
+- **[Siguiente capítulo: Configuración Inicial del Proyecto](01_ANC_Help_Center_Capitulo_1.md)**
 
 ---

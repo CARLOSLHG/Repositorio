@@ -45,7 +45,7 @@ Al finalizar este proyecto, los usuarios contarán con una base sólida para ges
 
 ## Navegación
 
-- **[Capítulo Anterior: Introducción](ANC_Help_Center_Introduccion.md)**
-- **[Siguiente capítulo: Repaso del Administrator Hub y JSM](ANC_Help_Center_Capitulo_2.md)**
+- **[Capítulo Anterior: Introducción](index.md)**
+- **[Siguiente capítulo: Repaso del Administrator Hub y JSM](02_ANC_Help_Center_Capitulo_2.md)**
 
 ---
