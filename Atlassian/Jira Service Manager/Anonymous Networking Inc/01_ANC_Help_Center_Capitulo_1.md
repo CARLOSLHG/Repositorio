@@ -46,6 +46,6 @@ Al finalizar este proyecto, los usuarios contarán con una base sólida para ges
 ## Navegación
 
 - **[Capítulo Anterior: Introducción](index.md)**
-- **[Siguiente capítulo: Repaso del Administrator Hub y JSM](02_ANC_Help_Center_Capitulo_2.md)**
+- **[Siguiente capítulo: Configuración Inicial del Proyecto en Jira Service Management](02_ANC_Help_Center_Capitulo_2.md)**
 
 ---
