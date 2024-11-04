@@ -161,9 +161,9 @@ Para una gestión más eficiente y detallada de cada tipo de incidencia, crearem
 
 ### Paginación
 
-- **Capítulo Anterior**: [Configuración de Usuarios, Roles y Grupos](ANC_Help_Center_Capitulo_3.md)
+- **Capítulo Anterior**: [Configuración de Usuarios, Roles y Grupos](03_ANC_Help_Center_Capitulo_3.md)
 - **Siguiente Capítulo**: [Configuración Avanzada de Permisos](ANC_Help_Center_Capitulo_5.md)
 
 ---
 
-[Volver al repositorio principal](https://github.com/carloslhg/repositorio)
+[Volver al repositorio principal](https://carloslhg.github.io/repositorio)
