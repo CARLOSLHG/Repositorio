@@ -29,7 +29,7 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
    Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
 6. [Data Analysis Projects](https://carloslhg.github.io/repositorio/Data%20Analysis%20Projects/)  
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
-7. [PSeint Exercises](https://carloslhg.github.io/repositorio/Pseint%20Exercises/)  
+7. [PSeint Exercises](https://carloslhg.github.io/repositorio/PSeint%20Exercises/)  
    Lógica de programación aplicada en ejercicios usando PSeint.
 8. [Atlassian Products](https://carloslhg.github.io/repositorio/Atlassian/)  
    Una guía paso a paso para la creación de un project-company kanban de telecomunicaciones desde cero.
