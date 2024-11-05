@@ -1,11 +1,11 @@
-# **Carlos LHG \- Portafolio y Proyectos de Programación**
+# **Carlos LHG - Portafolio y Proyectos de Programación**
 
 ## **Datos Personales**
 
 Nombre: Carlos Luis Hernández Gutiérrez  
-Ubicación: Los Navalucillos, Toledo
-45130 España
-Email: chcarlos3@gmail.com
+Ubicación: Los Navalucillos, Toledo  
+45130 España  
+Email: chcarlos3@gmail.com  
 LinkedIn: [Carlos LHG LinkedIn](https://www.linkedin.com/in/carloslhg)  
 Portafolio: (En construcción)
 
@@ -21,8 +21,8 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
    Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
 2. [JavaScript Exercises](https://carloslhg.github.io/Repositorio/JavaScript%20Exercises/)  
    Scripts y soluciones para los ejercicios en JavaScript.  
-3. [Node Projects](https://carloslhg.github.io/Repositorio/Node/)  
-   Proyectos en Node que incluyen análisis de datos, scripts y automatizaciones.  
+3. [React & Node.js Projects](https://carloslhg.github.io/Repositorio/React%20&%20Node.js%20Projects/)  
+   Proyectos en React y Node.js, incluyendo generadores de prompts para DALL-E y MidJourney.  
 4. [R Scripts](https://carloslhg.github.io/Repositorio/R%20Scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
 5. [WordPress Development](https://carloslhg.github.io/Repositorio/Wordpress%20Development/)  
@@ -53,6 +53,6 @@ Cada directorio incluye un archivo README.md propio con instrucciones específic
 
 ## **Contacto**
 
-Si deseas ponerte en contacto conmigo para consultas o colaboraciones, no dudes en escribirme a: mi correo eléctronico
+Si deseas ponerte en contacto conmigo para consultas o colaboraciones, no dudes en escribirme a: mi correo electrónico.
 
-¡Gracias por visitar mi repositorio\!  
+¡Gracias por visitar mi repositorio!
