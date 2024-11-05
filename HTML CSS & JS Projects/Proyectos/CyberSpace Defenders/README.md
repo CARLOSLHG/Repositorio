@@ -40,4 +40,4 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ---
 
-[Volver al Menú Principal de Proyectos](../)
+[Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
