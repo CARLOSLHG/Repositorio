@@ -20,7 +20,7 @@ Estamos trabjando en las siguientes áreas:
 
 Proyectos:
 
-- [Carbón Academy](https://carloslhg.github.io/repositorio/WordPress%20Development/Proyectos/Carbon%20Academy)
+- [Carbón Academy](./Proyectos/Carbon%20Academy)
 
 ---
 
