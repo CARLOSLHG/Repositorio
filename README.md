@@ -25,7 +25,7 @@ Este repositorio contiene una colección de mis proyectos y ejercicios realizado
    Proyectos en React y Node.js, incluyendo generadores de prompts para DALL-E y MidJourney.  
 4. [R Scripts](https://carloslhg.github.io/Repositorio/R%20Scripts/)  
    Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
-5. [WordPress Development](https://carloslhg.github.io/Repositorio/Wordpress%20Development/)  
+5. [WordPress Development](https://carloslhg.github.io/Repositorio/WordPress%20Development/)  
    Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
 6. [Data Analysis Projects](https://carloslhg.github.io/Repositorio/Data%20Analysis%20Projects/)  
    Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
