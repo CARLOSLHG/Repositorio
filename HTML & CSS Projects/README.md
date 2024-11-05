@@ -15,7 +15,13 @@ Estamos trabjando en las siguientes áreas:
 - **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
 
 ---
+
+## Contenido en desarrollo
+
+Proyectos:
+
+- [Carbón Academy](./Proyectos/Carbon%20Academy/README.md)
+
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
-
+[Volver a la Página Principal del Repositorio](.../README.md)
