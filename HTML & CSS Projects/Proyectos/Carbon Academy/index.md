@@ -1,6 +1,6 @@
 # Proyecto Web: "Academia Carbón Company"
 
-[Carbón Academy](https://carloslhg.github.io/repositorio/HTML%20&%20CSS%20Projects/Proyectos/Carbon%20Academy/index.html)
+[Carbón Academy](./Carbon%20Academy)
 
 ## **1\. Informe del Proyecto**
 
@@ -58,11 +58,6 @@ El script es fácil de entender y eficiente, utilizando eventos de JavaScript co
 ## **5\. Conclusión**
 
 El proyecto web **Carbón Company** fue desarrollado con un enfoque en la enseñanza, la presentación  interactiva y visual de las técnicas de dibujo al carboncillo. Mediante la combinación de **HTML**, **CSS** y **JavaScript**, se logró una página web visualmente atractiva que permite a los usuarios navegar entre secciones que lo lleven a una toma de decisión. El uso de html, css y javascript también asegura que la página sea responsive, accesible y fácil de mantener.
-
-
-
-
-
 
 
 
