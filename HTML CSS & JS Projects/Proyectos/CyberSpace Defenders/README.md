@@ -15,7 +15,7 @@ La misión es sencilla: el jugador debe destruir asteroides que contienen amenaz
 
 Cada asteroide que se destruye contribuye a la seguridad del espacio digital, ayudando a los jugadores a comprender de manera divertida cómo funciona la protección en el mundo de la ciberseguridad.
 
-El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repelidas, tambien cuenta con un contador de asteroides que se superan.
+El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repelidas, tambien cuenta con un contador de asteroides que se superan sin chocar.
 
 ## Tecnologías Utilizadas
 
@@ -24,8 +24,8 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ## Instrucciones de Juego
 
-1. Usa las flechas del teclado para mover la nave.
-2. Dispara a los asteroides presionando la barra espaciadora para eliminarlos antes de que lleguen a tu nave.
+1. Usa el mouse para mover la nave.
+2. Dispara a los asteroides presionando el boton izquierdo del mouse para eliminarlos antes de que lleguen a tu nave.
 3. Cada asteroide destruido aumenta tu puntuación y representa una amenaza de ciberseguridad menos en el universo.
 
 ## Características del Proyecto
