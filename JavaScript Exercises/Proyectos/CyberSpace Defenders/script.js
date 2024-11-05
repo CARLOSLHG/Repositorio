@@ -216,7 +216,7 @@
             gameOverMessage.innerHTML = `
                 <h1 style="color: #F3F3F3;">¡Gracias por participar!</h1>
                 <div class="buttons-container">
-                    <button id="restart-button">Volver a CyberSTARS</button>
+                    <button id="restart-button">Volver</button>
                     <button id="restart-game-button">Reiniciar Juego</button>
                 </div>
             `;
@@ -226,7 +226,7 @@
             gameContainer.addEventListener('click', function(event) {
                 if (event.target && event.target.id === 'restart-button') {
                     sessionStorage.removeItem('accesoPermitido');
-                    window.location.href = 'https://test3.futuremarketing.es/inicio/';
+                    window.location.href = 'https://carloslhg.github.io/repositorio/JavaScript%20Exercises/';
                 }
                 if (event.target && event.target.id === 'restart-game-button') {
                     resetGame();
