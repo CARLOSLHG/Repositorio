@@ -19,7 +19,6 @@ Estamos trabjando en las siguientes áreas:
 ## Contenido en desarrollo
 
 Proyectos:
-
 - **Análisis de datos con RStudio**: [Cyclistic Bike Shared](./Proyectos/Cyclitic/)
 
 
