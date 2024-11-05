@@ -15,6 +15,8 @@ La misión es sencilla: el jugador debe destruir asteroides que contienen amenaz
 
 Cada asteroide que se destruye contribuye a la seguridad del espacio digital, ayudando a los jugadores a comprender de manera divertida cómo funciona la protección en el mundo de la ciberseguridad.
 
+El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repelidas, tambien cuenta con un contador de asteroides que se superan.
+
 ## Tecnologías Utilizadas
 
 - **HTML** y **CSS** para la estructura y el diseño.
