@@ -15,6 +15,15 @@ Estamos trabjando en las siguientes áreas:
 - **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
 
 ---
+
+## Contenido en desarrollo
+
+Proyectos:
+
+- **Análisis de datos con RStudio**: [Cyclistic Bike Shared](./Proyectos/Cyclitic/)
+
+
+---
 ---
 
 [Volver a la Página Principal del Repositorio](../README.md)
