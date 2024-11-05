@@ -113,7 +113,7 @@
 
             const missileInterval = setInterval(() => {
                 const missileRect = missile.getBoundingClientRect();
-                missile.style.left = `${missileRect.left + 12}px`; // Incrementa la posición del misil
+                missile.style.left = `${missileRect.left + 25}px`; // Incrementa la posición del misil
 
                 // Verificar colisiones con "cyberattacks"
                 const cyberAttacks = document.querySelectorAll('.cyber-attack');
