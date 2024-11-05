@@ -1,58 +1,67 @@
-# **Carlos LHG - Portafolio y Proyectos de Programación**
+# Carlos Luis Hernández Gutiérrez - Portafolio de Proyectos y Experiencia Profesional
 
-## **Datos Personales**
-
-Nombre: Carlos Luis Hernández Gutiérrez  
-Ubicación: Los Navalucillos, Toledo  
-45130 España  
-Email: chcarlos3@gmail.com  
-LinkedIn: [Carlos LHG LinkedIn](https://www.linkedin.com/in/carloslhg)  
-Portafolio: (En construcción)
+Bienvenido a mi portafolio. Soy un profesional especializado en administración de Jira, diseño web, análisis de datos, y desarrollo de aplicaciones interactivas. A continuación, encontrarás una visión general de mis proyectos y experiencia técnica en múltiples áreas.
 
 ---
 
-## **Descripción**
+## Datos de Contacto
 
-Este repositorio contiene una colección de mis proyectos y ejercicios realizados en los campos de desarrollo web, análisis de datos y programación. En cada directorio podrás encontrar los archivos relevantes, incluyendo código fuente, documentación y ejemplos.
-
-### **Contenido del Repositorio**
-
-1. [HTML CSS & JS Projects](https://carloslhg.github.io/Repositorio/HTML%20CSS%20&%20JS%20Projects)  
-   Colección de ejercicios y proyectos de diseño web utilizando HTML y CSS.  
-2. [JavaScript Exercises](https://carloslhg.github.io/Repositorio/JavaScript%20Exercises/)  
-   Scripts y soluciones para los ejercicios en JavaScript.  
-3. [React & Node.js Projects](https://carloslhg.github.io/Repositorio/React%20&%20Node.js%20Projects/)  
-   Proyectos en React y Node.js, incluyendo generadores de prompts para DALL-E y MidJourney.  
-4. [R Scripts](https://carloslhg.github.io/Repositorio/R%20Scripts/)  
-   Ejercicios y proyectos realizados en R para análisis de datos y visualizaciones.  
-5. [WordPress Development](https://carloslhg.github.io/Repositorio/WordPress%20Development/)  
-   Ejemplos de proyectos y soluciones en WordPress para desarrollo web.  
-6. [Data Analysis Projects](https://carloslhg.github.io/Repositorio/Data%20Analysis%20Projects/)  
-   Proyectos de análisis de datos utilizando herramientas como Excel, SQL, R y Tableau.  
-7. [PSeint Exercises](https://carloslhg.github.io/Repositorio/PSeint%20Exercises/)  
-   Lógica de programación aplicada en ejercicios usando PSeint.
-8. [Atlassian Products](https://carloslhg.github.io/Repositorio/Atlassian/)  
-   Una guía paso a paso para la creación de un project-company kanban de telecomunicaciones desde cero.
+- **Ubicación**: Los Navalucillos, Toledo, España
+- **Email**: chcarlos3@gmail.com
+- **LinkedIn**: [Carlos LHG en LinkedIn](https://www.linkedin.com/in/carloslhg)
+- **Portafolio en desarrollo**: [Visitar Portafolio en línea](https://carloslhg.github.io/Repositorio)
 
 ---
 
-## **Instrucciones de Uso**
+## Experiencia Técnica y Proyectos
 
-Cada directorio incluye un archivo README.md propio con instrucciones específicas para ejecutar el código o seguir los ejercicios. Por favor, revisa cada uno para más detalles.
+### 1. **Proyectos de Atlassian Jira y Confluence**
+   - **Capacitaciones y Soporte**: Experiencia en capacitación de clientes en Jira y Confluence, creación de guías detalladas para usuarios intermedios y avanzados.
+   - **Implementaciones avanzadas**: Configuración y personalización de Jira para distintas empresas, con enfoque en Jira Software y Jira Service Management.
+   - **Proyectos Ficticios de Estudio**: Desarrollo de proyectos prácticos y capacitaciones en Atlassian, incluyendo configuraciones de seguridad, flujo de trabajo, dashboards, y reportes automatizados.
+
+   [Explorar proyectos en Jira y Confluence](./Atlassian)
+
+### 2. **Desarrollo y Personalización en WordPress**
+   - **Proyectos WordPress**: Creación de sitios con optimización para SEO, y desarrollos personalizados mediante Elementor, WooCommerce, y plugins de seguridad.
+   - **Proyectos actuales**: Desarrollo de la **CyberAcademy** para enseñar ciberseguridad a niños y adolescentes. El sitio incluye un mini-juego interactivo, una mascota virtual y múltiples secciones educativas.
+   
+   [Explorar proyectos en WordPress](./WordPress%20Development)
+
+### 3. **HTML, CSS & JavaScript**
+   - **Portafolio de Proyectos Web**: Incluye aplicaciones y juegos interactivos en JavaScript, desarrollo de interfaces con HTML5 y CSS3, y prácticas de diseño responsive.
+   - **Proyectos destacados**: CyberSpace Defenders, una aplicación educativa que simula la defensa contra amenazas cibernéticas, y el proyecto "Carbon Company," una academia virtual para enseñar dibujo al carboncillo.
+   
+   [Explorar proyectos en HTML, CSS y JS](./HTML%20CSS%20&%20JS%20Projects)
+
+### 4. **Análisis de Datos y Visualización**
+   - **Herramientas**: SQL, R, Tableau, Excel y Google BigQuery.
+   - **Proyectos de Análisis**: Investigación de datos de comportamiento de usuarios de **Cyclistic Bike Share Inc.** para proponer estrategias de conversión, y creación de dashboards con métricas clave para diversas industrias.
+   
+   [Explorar proyectos de análisis de datos](./Data%20Analysis%20Projects)
+
+### 5. **React & Node.js**
+   - **Desarrollo de Generadores de Prompts**: Herramientas en React para generación de prompts para aplicaciones como **DALL-E** y **MidJourney**. Estas aplicaciones permiten a los usuarios crear prompts personalizados para generación de imágenes.
+   - **Proyectos actuales**: DALL-E Prompt Generator y Midjourney Prompt Generator.
+   
+   [Explorar proyectos en React y Node.js](./React%20&%20Node.js%20Projects)
 
 ---
 
-## **Tecnologías Utilizadas**
+## Tecnologías y Herramientas
 
-* Lenguajes: HTML, CSS, JavaScript, Python, R, PHP.  
-* Herramientas: Git, Git Bash, RStudio, Atlassian (Jira, Confluence), WordPress.  
-* Frameworks: Bootstrap, React (en progreso).  
-* Bases de Datos: SQL, Google BigQuery.
+- **Lenguajes**: HTML, CSS, JavaScript, Python, R, PHP.
+- **Frameworks y Herramientas**: React, Node.js, WordPress, Bootstrap.
+- **Bases de Datos**: SQL, Google BigQuery.
+- **Entornos y Plataformas**: RStudio, GitHub, Kaggle, Google Data Studio.
+- **Certificaciones**: [Ver Certificaciones en LinkedIn](https://www.linkedin.com/in/carloslhg)
 
 ---
 
-## **Contacto**
+## CV Completo y Contacto
 
-Si deseas ponerte en contacto conmigo para consultas o colaboraciones, no dudes en escribirme a: mi correo electrónico.
+Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV completo aquí](./About/Container/cv-carloslhg-20241101-ver_1_0.pdf) o visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg). Si tienes consultas o propuestas de colaboración, ¡no dudes en contactarme!
+
+---
 
 ¡Gracias por visitar mi repositorio!
