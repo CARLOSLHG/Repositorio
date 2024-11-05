@@ -20,7 +20,7 @@ Estamos trabajando en las siguientes áreas:
 
 Proyectos:
 
-- **Página web educativa**: [CyberAcademy](./Proyectos/CyberSTARS/)  
+- **Página web educativa**: [CyberSTARS](./Proyectos/CyberSTARS/)  
 
 ---
 
