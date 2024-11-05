@@ -8,14 +8,20 @@ Agradecemos tu paciencia mientras trabajamos para proporcionar una experiencia c
 
 ## Contenido a desarrollar
 
-Estamos trabjando en las siguientes áreas:
+Estamos trabajando en las siguientes áreas:
 
-- **Documentación general**: Este espacio contendrá toda la documentación y las guías de usuario necesarias.
-- **Proyectos**: Aquí encontrarás los proyectos relacionados con nuestras implementaciones y casos de estudio.
-- **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
+- **Documentación general**: Este espacio contendrá toda la documentación y guías de usuario necesarias para cada proyecto de WordPress.
+- **Proyectos**: Aquí encontrarás los proyectos desarrollados en WordPress, incluyendo descripciones detalladas y casos de estudio.
+- **Recursos adicionales**: Pronto incluiremos enlaces y recursos útiles que te ayudarán a aprovechar al máximo estos proyectos de WordPress.
 
 ---
+
+## Contenido en desarrollo
+
+Proyectos:
+
+- **Página web educativa**: [CyberAcademy](https://test3.futuremarketing.es)  
+
 ---
 
 [Volver a la Página Principal del Repositorio](../README.md)
-
