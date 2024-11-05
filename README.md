@@ -24,7 +24,7 @@ Bienvenido a mi portafolio. Soy un profesional especializado en administración 
 
 ### 2. **Desarrollo y Personalización en WordPress**
    - **Proyectos WordPress**: Creación de sitios con optimización para SEO, y desarrollos personalizados mediante Elementor, WooCommerce, y plugins de seguridad.
-   - **Proyectos actuales**: Desarrollo de la **CyberAcademy** para enseñar ciberseguridad a niños y adolescentes. El sitio incluye un mini-juego interactivo, una mascota virtual y múltiples secciones educativas.
+   - **Proyectos actuales**: Desarrollo de la **CyberSTARS** para enseñar ciberseguridad a niños y adolescentes. El sitio incluye un mini-juego interactivo, una mascota virtual y múltiples secciones educativas.
    
    [Explorar proyectos en WordPress](./WordPress%20Development)
 
