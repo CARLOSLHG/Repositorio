@@ -1,0 +1,783 @@
+/* Estilos Generales Todas las paginas */
+
+* {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    padding-top: 50px;
+    padding-bottom: 50px;    
+}
+
+body, header, main, footer {    
+    display: block;
+    justify-content: center;
+    font-family: poppins;
+    text-align: center;
+    width: 100%;
+    max-width: 1440px; 
+    padding: 0 auto;
+    margin: 0 auto;     
+}
+
+body {
+    background-color: lightgray;
+    box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+#box-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:0;
+    background-color: #c5c5c5;
+    width: 280px;
+    height: 200px;
+    text-align: center;
+    padding: 0;
+    z-index: 1000;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 160px;
+    justify-content: center;
+    text-align: center;
+    padding: 0 auto;
+    z-index: 1000;
+}
+
+#nav {
+    display: flex;
+    justify-content: flex-end;
+    font-size-adjust: none;
+    height: 70px;
+    align-items: center;
+    text-align: right;
+    background-color: #f4f4f4;
+    padding: 10px;    
+}
+
+#nav a {
+    font-family: Indie Flower;
+    font-size: 20px;
+    text-align: right;
+    padding: 10px 20px;
+    background-color: #333333;
+    color: #fff;
+    text-decoration: none;
+    border:3px solid #ffffff;        
+}
+
+#nav a:hover {
+    background-color: #c5c5c5;
+    border:3px solid #333333;
+    color: #333;
+}
+
+#nav li {
+    display: inline;
+    float: right;
+    list-style: none;
+    align-items: center;     
+}
+
+main {
+    display: flex;
+    justify-content: flex-start;
+    background-color: white;  
+    flex-direction: column; 
+    min-height: 600px;
+    width: 100%;    
+}
+
+p { 
+    font-family: "Poiret One", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    text-indent: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 50px;
+    text-align: center;
+    padding: inherit;
+    padding-top: 20px;
+    margin-left: 150px;    
+}
+
+h2 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 38px;
+    text-align: left;
+    padding: inherit;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+#top-boton a {
+    font-family: Indie Flower;
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 20px;    
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border:3px solid #ffffff;         
+}
+
+#top-boton a:hover {
+    background-color: #c5c5c5;
+    border:3px solid #333;
+    color: #333;
+}
+
+#top-boton {
+    display: inline-block;
+    margin-top: auto;
+    padding-bottom: 50px;
+}
+
+.contratar a {
+    font-family: Indie Flower;
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 20px;    
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border:3px solid #ffffff;         
+}
+
+.contratar a:hover {
+    background-color: #c5c5c5;
+    border:3px solid #333;
+    color: #333;
+}
+
+.contratar {      
+    margin-top: auto;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+
+#separate-box-1 {
+    height: 100px;    
+}
+
+#separate-box-bottom {
+    height: 100px;
+}
+
+footer p {
+    font-size: 20px;
+    color: white;
+}
+
+footer {    
+    background-color: #333;
+    padding: 10px 0 10px 0;
+    margin: 0 auto;    
+    height: 100px;
+    box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.3); 
+}
+
+/* Pagina Principal */
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-color: #c5c5c5;
+    background-image: url("../img/ojos_v5.webp");
+    background-size: 90%;
+    background-position: right;
+    background-position-x: 250;
+    background-repeat: no-repeat;    
+    z-index: 100;
+}
+
+#bienvenida {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#bienvenida::Before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;  
+    background-color: #fff;
+    background-image: url("../img/carbon4.jpg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;    
+    margin: 0, auto; 
+    filter: blur(3px);
+    z-index: -1;
+}
+
+#introduccion1 {
+    display: flex;
+    position: fixed;
+    margin: 10px;
+}
+
+#introduccion {
+    padding: 0;
+    margin: 0;
+}
+
+.bienvenida {
+    text-align: left;
+    width: 100%;
+    max-width: 1140px;   
+    background-color: #fff;
+    background-image: url("../img/carbon4.jpg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;    
+    margin: 0, auto;       
+}
+
+#bienvenida h1 {
+    text-align: left;
+    font-family: "Indie Flower";
+    margin: 0 0 20px 20px;
+    padding-bottom: 100px;
+    text-shadow: 2px 2px 5px rgba(255, 247, 247, 0.5);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 90px;
+    color: #333;      
+}
+
+#bienvenida h3 {
+    text-align: left;
+    font-family: "Poiret One";
+    font-weight: bolder;
+    padding: 100px 0 0 0;
+    font-size: 50px;
+    color:#5f675f;
+    margin: 0 0 0 20px;    
+}
+
+.container-index {
+    display: flex;    
+    max-width: 1140px;  
+    margin: 0, auto;   
+    padding: 0, auto;    
+}
+
+.bienv {
+    display: flex;
+    object-position: center;
+    height: 440px;
+    width: 100%;     
+}
+
+.bienv-box-1 {
+    width: 100%;    
+}
+
+.bienv-box-1 h2 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 38px;
+    text-align: right;
+    padding: inherit;
+}
+
+.bienv-box-1 p {
+    color: #333;
+    font-size: 30px;
+    text-align: right;
+    padding-top: 53px;
+}
+
+.bienv-box-2 img {    
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+.bienv-col-der {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    float: left;
+    background-color: white;
+}
+
+.bienv-col-der h2 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 38px;
+    text-align: left;
+    padding: 20px;
+}
+
+.bienv-col-der span {
+    color: #333;
+    font-size: 20px;
+    text-align: left;
+    padding: 20px;
+}
+
+.bienv-col-izq {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 50%;    
+    float: right;
+    padding: 25px;
+    background-color: antiquewhite;
+}
+
+.seccion-2 {
+    display: flex;
+    object-position: center;
+    height: auto;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.seccion-2-col-izq {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 50%; 
+    height: auto;
+    float: right;
+    padding: 25px;
+    background-color: white;
+}
+
+.seccion-2-col-izq-box-1 {
+    width: 100%;  
+}
+
+.seccion-2-col-der-box-1 h2 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 38px;
+    text-align: left;
+    padding: inherit;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+.seccion-2-col-der-box-2 p {
+    color: #333;
+    font-size: 30px;
+    text-align: left;
+    padding-top: 20px;
+    margin-left: 20px;
+    width: 100%;  
+}
+
+.seccion-2-col-der {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    float: left;
+    background-color: antiquewhite;
+}
+
+.seccion-2-col-der-box-1 {
+    font-family: "Poiret One";
+    color: #333;
+    font-size: 38px;
+    text-align: right;
+    padding: inherit;
+}
+
+.seccion-2-col-der-box-2 {
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+.seccion-2-col-izq-box-1 img  {    
+    width: 90%;
+    margin: 0;
+    padding: 10px;
+}
+
+
+/*Pagina Cursos */
+
+.cursos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto; 
+    width: auto;
+    background-color: #c5c5c5;
+    background-image: url("../img/cursos_v2.webp");
+    background-size: 100%;
+    background-position: 80px -120px;
+    background-repeat: no-repeat;           
+}
+
+#cursos div {
+    max-width: 1140px;  
+    margin: 0 auto;
+    padding: 25px 10px 200px 10px;
+}
+
+.cursos-precios {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-top: 100PX;
+    padding-bottom: 100PX;    
+}
+
+.cursos-precios img {
+    margin: 50px;
+    width: 50%;
+    
+}
+
+.curso-col-1 {
+    flex: 1;    
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 33%;
+    height: auto;
+    border: 1px solid #333;
+    border-radius: 25px;    
+}
+
+.cursos-precios h2 {
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    list-style: none;
+}
+
+.cursos-precios ol {
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    list-style: none;
+}
+
+.cursos-precios li {
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    list-style: none;
+}
+
+.cursos-precios span {
+    float: left;
+    position: relative;
+    text-align: left;    
+    padding: 20px;
+    margin-left: 0;
+    font-size: 25px;    
+    list-style: none;
+}
+
+.curso-col-2 {
+    flex: 1;    
+    margin-right: 20px;
+    width: 33%;
+    height: auto;
+    border: 1px solid #333;
+    border-radius: 25px;    
+}
+
+.curso-col-3 {
+    flex: 1;    
+    margin-right: 20px;
+    width: 33%;
+    height: auto;
+    border: 1px solid #333;
+    border-radius: 25px;    
+}
+
+#contratar a {
+    font-family: Indie Flower;
+    font-size: 20px;
+    display: inline-block;
+    align-items: baseline;
+    text-align: center;
+    padding: 10px 20px;    
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border:3px solid #ffffff;         
+}
+
+#contratar a:hover {
+    background-color: #c5c5c5;
+    border:3px solid #333;
+    color: #333;
+}
+
+#contratar {
+    display: inline-block;
+    margin-top: auto;
+    padding-bottom: 20px;
+}
+
+/*Pagina Tecnicas */
+
+.tecnicas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto; 
+    width: auto;
+    background-color: #c5c5c5;
+    background-image: url("../img/tecnica_v3.webp");
+    background-size: 100%;
+    background-position: bottom right;    
+    background-repeat: no-repeat;           
+}
+
+#tecnicas div {
+    max-width: 1140px;  
+    margin: 0 auto;
+    padding: 0 10px 100px 10px;
+}
+
+.seccion-1 {
+    display: inline-flex;
+    flex-direction: row;
+    background-color: antiquewhite;
+    width: 100%;
+    height: auto; 
+    margin-top: 100px;
+}
+
+.seccion-1 p {
+    padding: 30px;
+}
+
+.seccion-1-col-1 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;
+}
+
+.seccion-1-col-1 img {
+    width: 50%;
+}
+
+.seccion-1-col-1 h2 {
+    text-align: center;
+}
+
+.seccion-1-col-2 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;    
+}
+
+.seccion-1-col-2 img {
+    width: 50%;
+}
+
+.seccion-1-col-2 h2 {
+    text-align: center;
+}
+
+.seccion-1-col-3 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;    
+}
+
+.seccion-1-col-3 img {
+    width: 50%;
+}
+
+.seccion-1-col-3 h2 {
+    text-align: center;
+}
+
+.seccion-1-col-4 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;    
+}
+
+.seccion-1-col-4 img {
+    width: 50%;
+}
+
+.seccion-1-col-4 h2 {
+    text-align: center;
+}
+
+.seccion-1-col-5 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;    
+}
+
+.seccion-1-col-5 img {
+    width: 50%;
+}
+
+.seccion-1-col-5 h2 {
+    text-align: center;
+}
+
+.seccion-1-col-6 {
+    display: block;    
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    height: 300pz;
+    background-color: white;    
+}
+
+.seccion-1-col-6 img {
+    width: 50%;
+}
+
+.seccion-1-col-6 h2 {
+    text-align: center;
+}
+
+/*Pagina Galeria */
+
+.galeria {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto; 
+    width: auto;
+    background-color: #c5c5c5;
+    background-image: url("../img/galeria_v3.webp");
+    background-size: 100%;
+    background-position: 250px -330px;    
+    background-repeat: no-repeat;           
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(100px, auto);
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.grid img {
+    width: 100%;
+    height: auto;    
+}
+
+.galeria-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+/*Pagina Contactanos */
+
+.contactanos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto; 
+    width: auto;
+    background-color: #c5c5c5;
+    background-image: url("../img/contactanos_v2.webp");
+    background-size: 100%;
+    background-position: 150px -40px;
+    background-repeat: no-repeat;           
+}
+
+#contacto {
+    background-color: #f4f4f4;
+    padding: 50px 50px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.contact-form button:hover {
+    background-color: #555;
+}
+
+.contact-form {
+    font-size: 20px;    
+}
+
+
+
+
+
