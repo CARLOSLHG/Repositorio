@@ -20,7 +20,7 @@ Estamos trabajando en las siguientes áreas:
 
 Proyectos:
 
-- **Página web educativa**: [CyberAcademy](https://test3.futuremarketing.es)  
+- **Página web educativa**: [CyberAcademy](./Proyectos/CyberSTARS/)  
 
 ---
 
