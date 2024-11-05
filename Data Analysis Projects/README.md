@@ -17,5 +17,5 @@ Estamos trabjando en las siguientes áreas:
 ---
 ---
 
-[Volver a la Página Principal del Repositorio](../README)
+[Volver a la Página Principal del Repositorio](../README.md)
 
