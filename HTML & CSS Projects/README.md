@@ -20,7 +20,7 @@ Estamos trabjando en las siguientes áreas:
 
 Proyectos:
 
-- [Carbón Academy](./Proyectos/Carbon%20Academy/README.md)
+- [Carbón Academy](./Proyectos/Carbon%20Academy/README)
 
 ---
 

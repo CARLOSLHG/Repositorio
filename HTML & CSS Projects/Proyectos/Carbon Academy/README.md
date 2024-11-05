@@ -1,6 +1,6 @@
 # Proyecto Web: "Academia Carbón Company"
 
-[Carbón Academy](https://carloslhg.github.io/repositorio/HTML%20CSS%20Projects/Proyectos/Carbon%20Academy/index.html)
+[Carbón Academy](https://carloslhg.github.io/repositorio/HTML%20&%20CSS%20Projects/Proyectos/Carbon%20Academy/index.html)
 
 ## **1\. Informe del Proyecto**
 
