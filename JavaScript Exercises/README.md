@@ -21,7 +21,7 @@ Estamos trabjando en las siguientes áreas:
 
 Estamos trabjando en:
 
-- **Proyecto**: [CyberSpace Defenders](./CyberSpace%20Defenders/index.md)
+- **Proyecto**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/README.md)
 ---
 
 [Volver a la Página Principal del Repositorio](../README.md)

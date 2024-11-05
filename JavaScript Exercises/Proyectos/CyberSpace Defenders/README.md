@@ -36,7 +36,7 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ## Enlace al Juego
 
-[CyberSpace Defenders - Juega ahora](./CyberSpace%20Defenders/index.html)
+[CyberSpace Defenders - Juega ahora](index.html)
 
 ---
 
