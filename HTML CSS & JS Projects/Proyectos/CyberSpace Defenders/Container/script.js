@@ -226,7 +226,7 @@
             gameContainer.addEventListener('click', function(event) {
                 if (event.target && event.target.id === 'restart-button') {
                     sessionStorage.removeItem('accesoPermitido');
-                    window.location.href = 'https://carloslhg.github.io/Repositorio/HTML%20CSS%20&%20JS%20Projects/CyberSpace%20Defenders/';
+                    window.location.href = 'https://carloslhg.github.io/Repositorio/HTML%20CSS%20&%20JS%20Projects/Proyectos/CyberSpace%20Defenders/';
                 }
                 if (event.target && event.target.id === 'restart-game-button') {
                     resetGame();
