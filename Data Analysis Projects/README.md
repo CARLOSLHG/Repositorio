@@ -6,9 +6,9 @@ Agradecemos tu paciencia mientras trabajamos para proporcionar una experiencia c
 
 ---
 
-## Contenido Provisional
+## Contenido a desarrollar
 
-Mientras completamos esta sección, puedes explorar las siguientes áreas:
+Estamos trabjando en las siguientes áreas:
 
 - **Documentación general**: Este espacio contendrá toda la documentación y las guías de usuario necesarias.
 - **Proyectos**: Aquí encontrarás los proyectos relacionados con nuestras implementaciones y casos de estudio.
@@ -17,5 +17,5 @@ Mientras completamos esta sección, puedes explorar las siguientes áreas:
 ---
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+[Volver a la Página Principal del Repositorio](../README)
 
