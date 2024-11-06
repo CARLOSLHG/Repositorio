@@ -62,7 +62,7 @@ El proyecto web **Carbón Company** fue desarrollado con un enfoque en la enseñ
 
 ## Enlace al sitio
 
-[Carbón Comñany](./Container/)
+[Carbón Company](./Container/)
 
 ---
 
