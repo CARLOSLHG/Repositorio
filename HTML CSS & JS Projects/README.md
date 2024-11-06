@@ -20,7 +20,7 @@ Estamos trabjando en las siguientes áreas:
 
 Proyectos:
 
-- **Página web**: [Carbón Academy](./Proyectos/Carbon%20Academy/)
+- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/)
 - **Juego en Javascript**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/)
 
 ---
