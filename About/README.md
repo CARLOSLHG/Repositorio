@@ -1,4 +1,8 @@
+--
 
+![Foto de Carlos Luis Hernández](./Container/img/0.5x/my-foto@0.5x.png)
+
+---
 ## Sobre Mí
 
 Soy un apasionado del desarrollo tecnológico, con una sólida base en **Publicidad** y experiencia en múltiples áreas de **tecnología y análisis de datos**. Mis raíces están en la creatividad y la comunicación, gracias a mi formación como Técnico Superior en Publicidad, pero he expandido mi carrera hacia la tecnología, abarcando desde la gestión de proyectos en Jira y Confluence hasta el análisis de datos con R y BigQuery. Me considero alguien curioso, siempre buscando aprender y evolucionar en este ámbito tan dinámico. Cada logro y certificación que he obtenido representa mi dedicación y compromiso con mi crecimiento profesional.
