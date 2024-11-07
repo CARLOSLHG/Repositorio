@@ -15,7 +15,7 @@
   </tr>
   <tr>
     <td><strong>Disponibilidad</strong>: Inmediata</td>
-    <td><strong>Cuentas</strong>: USD, Euros, PayPal, Payoneer</td>
+    <td><strong>Cuentas</strong>: USD, Euros, PayPal, Payoneer, Binance</td>
   </tr>
   <tr>
     <td><strong>Modalidades de Trabajo</strong>: Presencial, Remoto, Mixto</td>
