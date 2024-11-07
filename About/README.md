@@ -1,5 +1,3 @@
---
-
 ![Foto de Carlos Luis Hernández](./Container/img/0.5x/my-foto@0.5x.png)
 
 ---
