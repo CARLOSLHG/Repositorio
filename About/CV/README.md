@@ -27,7 +27,7 @@
   </tr>
 </table>
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
