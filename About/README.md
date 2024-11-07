@@ -84,4 +84,4 @@ Mis raíces en publicidad y comunicación me dieron una base sólida para entend
 
 A lo largo de mi trayectoria, he buscado equilibrar la creatividad y la lógica, combinando tecnología con marketing y publicidad. Estoy listo para enfrentar nuevos desafíos y colaborar en proyectos que busquen un impacto positivo en el mundo digital y más allá.
 
-[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV](./CV/) |
