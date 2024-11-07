@@ -35,7 +35,7 @@
 
 Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos** (Atlassian Jira y Confluence), **desarrollo web** (HTML, CSS, JavaScript, WordPress), y **análisis de datos** (SQL, R). Apasionado por la tecnología educativa y la innovación en inteligencia artificial aplicada. Capaz de integrar creatividad y análisis para soluciones efectivas en entornos cambiantes.
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
@@ -67,7 +67,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 
 [🔍 Ver Proyectos de Análisis de Datos](../../Data%20Analysis%20Projects)
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
@@ -78,7 +78,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 - **Herramientas**: Jira (Jira Administrator Cloud), Confluence (Confluence Space Manager), RStudio, GitHub, Tableau, WordPress, Git, WIX, WebsiteX5, Webanimator
 - **Prompts para IA**: ChatGPT, MidJourney, DALL-E, Leonard
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
@@ -87,7 +87,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 - **Técnico Superior en Publicidad**  
   Formación profesional que integra creatividad y comunicación, con un enfoque en estrategias de marketing y campañas visuales.
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
@@ -148,13 +148,13 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
   </tr>
 </table>
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 
 Para más información sobre mis intereses y habilidades, visita [About Me](../).
 
-[Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../) |
 
 ---
 

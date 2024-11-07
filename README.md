@@ -22,31 +22,31 @@
    - **Implementaciones Avanzadas**: Configuración y personalización de Jira, enfocado en Jira Software y Jira Service Management.
    - **Proyectos Ficticios de Estudio**: Desarrollo de proyectos y capacitaciones prácticas en Atlassian.
 
-   [🔍 Explorar proyectos en Jira y Confluence](./Atlassian)
+   [🔍 Explorar proyectos en Jira y Confluence](./Atlassian) |
 
 ### 2. **🌐 Desarrollo y Personalización en WordPress**
    - **Proyectos WordPress**: Creación de sitios optimizados para SEO, con personalizaciones mediante Elementor, WooCommerce y plugins de seguridad.
    - **Proyectos Actuales**: **CyberSTARS**, un sitio educativo para enseñar ciberseguridad a niños con mini-juego interactivo y mascota virtual.
 
-   [🔍 Explorar proyectos en WordPress](./WordPress%20Development)
+   [🔍 Explorar proyectos en WordPress](./WordPress%20Development) |
 
 ### 3. **💻 HTML, CSS & JavaScript**
    - **Portafolio Web**: Aplicaciones y juegos interactivos en JavaScript, interfaces HTML5 y CSS3, diseño responsive.
    - **Proyectos Destacados**: CyberSpace Defenders, una app educativa sobre ciberseguridad, y **Carbon Company**, una academia de dibujo.
 
-   [🔍 Explorar proyectos en HTML, CSS y JS](./HTML%20CSS%20&%20JS%20Projects)
+   [🔍 Explorar proyectos en HTML, CSS y JS](./HTML%20CSS%20&%20JS%20Projects) |
 
 ### 4. **📊 Análisis de Datos y Visualización**
    - **Herramientas**: SQL, R, Tableau, Excel y Google BigQuery.
    - **Proyectos de Análisis**: Estrategias de conversión de usuarios para **Cyclistic Bike Share Inc.** y dashboards para distintas industrias.
 
-   [🔍 Explorar proyectos de análisis de datos](./Data%20Analysis%20Projects)
+   [🔍 Explorar proyectos de análisis de datos](./Data%20Analysis%20Projects) |
 
 ### 5. **⚛️ React & Node.js**
    - **Generadores de Prompts**: Herramientas en React para crear prompts personalizados en DALL-E y MidJourney.
    - **Proyectos Actuales**: DALL-E Prompt Generator y Midjourney Prompt Generator.
 
-   [🔍 Explorar proyectos en React y Node.js](./React%20&%20Node.js%20Projects)
+   [🔍 Explorar proyectos en React y Node.js](./React%20&%20Node.js%20Projects) |
 
 ---
 
@@ -56,13 +56,13 @@
 - **Frameworks y Herramientas**: React, Node.js, WordPress, Bootstrap
 - **Bases de Datos**: SQL, Google BigQuery
 - **Entornos y Plataformas**: RStudio, GitHub, Kaggle, Google Data Studio
-- **Certificaciones**: [Ver Certificaciones en LinkedIn](https://www.linkedin.com/in/carloslhg)
+- **Certificaciones**: [Ver Certificaciones en LinkedIn](https://www.linkedin.com/in/carloslhg) |
 
 ---
 
 ## 📄 CV Completo y Contacto
 
-Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV completo aquí](./About/CV/) o visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg). ¡Estoy abierto a consultas y propuestas de colaboración!
+Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV completo aquí](./About/CV/) | o visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg) |. ¡Estoy abierto a consultas y propuestas de colaboración!
 
 ---
 
