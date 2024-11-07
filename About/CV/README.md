@@ -27,7 +27,7 @@
   </tr>
 </table>
 
-[🔙 Sección Anterior](README.md) | [🔝 Ir al Top](README.md) | [➡️ Siguiente Sección](#-perfil-profesional)
+[Ir al Repositorio Principal](../../)
 
 ---
 
@@ -35,7 +35,7 @@
 
 Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos** (Atlassian Jira y Confluence), **desarrollo web** (HTML, CSS, JavaScript, WordPress), y **análisis de datos** (SQL, R). Apasionado por la tecnología educativa y la innovación en inteligencia artificial aplicada. Capaz de integrar creatividad y análisis para soluciones efectivas en entornos cambiantes.
 
-[🔙 Sección Anterior](#📬-contacto-y-datos-personales) | [🔝 Ir al Top](README.md) | [➡️ Siguiente Sección](#-experiencia-y-proyectos)
+[Ir al Repositorio Principal](../../)
 
 ---
 
@@ -56,8 +56,8 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 
 ### Desarrollo Web y Aplicaciones Interactivas
 - **[CyberSpace Defenders](../../HTML%20CSS%20&%20JS%20Projects/Proyectos/CyberSpace%20Defenders/)**: Juego educativo sobre ciberseguridad, desarrollado en HTML, CSS y JavaScript.
-- **[DALL-E Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/)**: Herramienta interactiva en React para generar prompts personalizados para DALL-E.
-- **[MidJourney Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/)**: Aplicación en React que permite a los usuarios crear prompts específicos para MidJourney.
+- **[DALL-E Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/DALL-E%20Prompt%20Generator/)**: Herramienta interactiva en React para generar prompts personalizados para DALL-E.
+- **[MidJourney Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/MidJourney%20Prompt%20Generator/)**: Aplicación en React que permite a los usuarios crear prompts específicos para MidJourney.
 
 [🔍 Ver Proyectos en React y Node.js](../../React%20&%20Node.js%20Projects)
 
@@ -67,7 +67,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 
 [🔍 Ver Proyectos de Análisis de Datos](../../Data%20Analysis%20Projects)
 
-[🔙 Sección Anterior](#-perfil-profesional) | [🔝 Ir al Top](README.md) | [➡️ Siguiente Sección](#️-habilidades)
+[Ir al Repositorio Principal](../../)
 
 ---
 
@@ -78,7 +78,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 - **Herramientas**: Jira (Jira Administrator Cloud), Confluence (Confluence Space Manager), RStudio, GitHub, Tableau, WordPress, Git, WIX, WebsiteX5, Webanimator
 - **Prompts para IA**: ChatGPT, MidJourney, DALL-E, Leonard
 
-[🔙 Sección Anterior](#-experiencia-y-proyectos) | [🔝 Ir al Top](README.md) | [➡️ Siguiente Sección](#-estudios)
+[Ir al Repositorio Principal](../../)
 
 ---
 
@@ -87,7 +87,7 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 - **Técnico Superior en Publicidad**  
   Formación profesional que integra creatividad y comunicación, con un enfoque en estrategias de marketing y campañas visuales.
 
-[🔙 Sección Anterior](#️-habilidades) | [🔝 Ir al Top](README.md) | [➡️ Siguiente Sección](#-curso-y-certificaciones)
+[Ir al Repositorio Principal](../../)
 
 ---
 
@@ -148,13 +148,13 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
   </tr>
 </table>
 
-[🔙 Sección Anterior](#-estudios) | [🔝 Ir al Top](README.md) | [🔗 Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../)
 
 ---
 
 Para más información sobre mis intereses y habilidades, visita [About Me](../).
 
-[🔙 Sección Anterior](#-curso-y-certificaciones) | [🔝 Ir al Top](README.md) | [🔗 Ir al Repositorio Principal](../../)
+[Ir al Repositorio Principal](../../)
 
 ---
 
