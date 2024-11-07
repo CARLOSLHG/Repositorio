@@ -10,7 +10,7 @@
 - **✉️ Email**: chcarlos3@gmail.com
 - **🔗 LinkedIn**: [Carlos LHG en LinkedIn](https://www.linkedin.com/in/carloslhg)
 - **🛠️ Portafolio en desarrollo**: [Visitar Portafolio en línea](https://carloslhg.github.io/Repositorio)
-- **👤 Más sobre mí**: [About Me](./About)
+- **👤 Sobre mí**: [About Me](./About)
 - **👤 Curriculum Vitae**: [Visita mi CV aqui](./About/CV/)
 
 ---
