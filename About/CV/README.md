@@ -56,8 +56,8 @@ Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos
 
 ### Desarrollo Web y Aplicaciones Interactivas
 - **[CyberSpace Defenders](../../HTML%20CSS%20&%20JS%20Projects/Proyectos/CyberSpace%20Defenders/)**: Juego educativo sobre ciberseguridad, desarrollado en HTML, CSS y JavaScript.
-- **[DALL-E Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/DALL-E%20Prompt%20Generator/)**: Herramienta interactiva en React para generar prompts personalizados para DALL-E.
-- **[MidJourney Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/MidJourney%20Prompt%20Generator/)**: Aplicación en React que permite a los usuarios crear prompts específicos para MidJourney.
+- **[DALL-E Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/)**: Herramienta interactiva en React para generar prompts personalizados para DALL-E.
+- **[MidJourney Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/)**: Aplicación en React que permite a los usuarios crear prompts específicos para MidJourney.
 
 [🔍 Ver Proyectos en React y Node.js](../../React%20&%20Node.js%20Projects)
 
