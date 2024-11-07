@@ -7,11 +7,11 @@
 <table>
   <tr>
     <td><strong>Nacionalidad</strong>: Venezolana</td>
-    <td><strong>Dirección</strong>: Los Navalucillos, 45130, Toledo, España</td>
+    <td><strong>Dirección</strong>: Los Navalucillos, Toledo, España</td>
   </tr>
   <tr>
     <td><strong>Email</strong>: chcarlos3@gmail.com</td>
-    <td><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/carloslhg">Carlos LHG en LinkedIn</a></td>
+    <td><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/carloslhg">CarlosLHG</a></td>
   </tr>
   <tr>
     <td><strong>Disponibilidad</strong>: Inmediata</td>
