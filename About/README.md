@@ -30,7 +30,7 @@ Mi perfil profesional abarca una combinación de **habilidades técnicas** y **c
 
 ## Gustos e intereses
 
-Mis intereses personales y profesionales están alineados con mi amor por la **tecnología y la creatividad**. Disfruto experimentando con nuevas herramientas de diseño y explorando las posibilidades de la inteligencia artificial. Me interesa el ámbito de la ciberseguridad y la educación, lo que me llevó a desarrollar proyectos como **CyberSpace Defenders** y **CyberSTARS** para enseñar ciberseguridad de manera lúdica. Además, el análisis de datos y la visualización me fascinan, ya que representan una forma poderosa de contar historias y comunicar información de manera accesible y visual.
+Mis intereses personales y profesionales están alineados con mi amor por la **tecnología y la creatividad**. Disfruto explorando nuevas herramientas de diseño y las posibilidades de la inteligencia artificial. Además, tengo un gran interés por el cine, la gastronomía española, la lectura de ciencia ficción en formato digital y la ciberseguridad. Estos intereses se reflejan en proyectos como **CyberSpace Defenders** y **CyberSTARS**, donde busco enseñar ciberseguridad de manera lúdica. También me fascinan el análisis de datos y la visualización, formas poderosas de contar historias y comunicar información de manera accesible y visual.
 
 [Volver a Talentos y habilidades](#talentos-y-habilidades) | [Ir a Experiencia profesional](#experiencia-profesional) | [Ir al Repositorio](../)
 
