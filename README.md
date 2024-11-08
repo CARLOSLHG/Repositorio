@@ -7,10 +7,11 @@
 
 ## 📬 Datos de Contacto
 
-- **📍 Ubicación**: Los Navalucillos, Toledo, España
+- **📍 Ubicación**: España
 - **✉️ Email**: chcarlos3@gmail.com
-- **🔗 LinkedIn**: [Carlos LHG en LinkedIn](https://www.linkedin.com/in/carloslhg)
-- **🛠️ Portafolio en desarrollo**: [Visitar Portafolio en línea](https://carloslhg.github.io/Repositorio)
+- **🔗 LinkedIn**: [Carlos LHG en LinkedIn]
+(https://www.linkedin.com/in/carloslhg)
+- **🛠️ Portafolio en línea**: [(en desarrollo)](#)
 - **👤 Sobre mí**: [About Me](./About)
 - **👤 Curriculum Vitae**: [Visita mi CV aqui](./About/CV/)
 

@@ -1,4 +1,4 @@
-## 📄 Carlos Luis Hernández Gutiérrez
+# 📄 Carlos Luis Hernández Gutiérrez
 # Curriculum Vitae
 
 ---
@@ -11,7 +11,7 @@
 <table>
   <tr>
     <td><strong>Nacionalidad</strong>: Venezolana</td>
-    <td><strong>Dirección</strong>: Los Navalucillos, Toledo, España</td>
+    <td><strong>Dirección</strong>: España</td>
   </tr>
   <tr>
     <td><strong>Email</strong>: chcarlos3@gmail.com</td>
