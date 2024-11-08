@@ -112,6 +112,7 @@ Para ajustar las prioridades en función de los SLA, configuraremos un script en
    } else {
        issue.setPriority("Baja")
    }
+   ```
 
 3. **Prueba y Publicación del Script**:
    - Realiza pruebas para asegurar que el script asigna correctamente la prioridad en función de la combinación de **impacto** y **urgencia**.

@@ -102,7 +102,7 @@ para gestionar incidencias internas y externas.
 ### Paginación
 
 - **Paso Anterior**: [Acceso a Jira](Paso-1.md)
-- **Siguiente Paso**: [Creación de Campos Personalizados](Paso-3.md)
+- **Siguiente Paso**: [Configuración Inicial del Help Center](Paso-3.md)
 
 ---
 
