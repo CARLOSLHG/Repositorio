@@ -18,16 +18,20 @@
     <td><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/carloslhg">CarlosLHG</a></td>
   </tr>
   <tr>
-    <td><strong>Disponibilidad</strong>: Inmediata</td>
-    <td><strong>Cuentas</strong>: USD, Euros, PayPal, Payoneer, Binance</td>
+    <td><strong>Idiomas</strong>: Español (Nativo), Inglés (B2)</td>
+    <td><strong>Discord</strong>: CaLuHeGu#7034</td>
   </tr>
   <tr>
-    <td><strong>Modalidades de Trabajo</strong>: Presencial, Remoto, Mixto</td>
-    <td><strong>Permiso de Trabajo</strong>: Sí</td>
-  </tr>
-  <tr>
-    <td><strong>Carnet de Conducir</strong>: No</td>
     <td><strong>Website</strong>: En Construcción</td>
+    <td><strong>Disponibilidad</strong>: Inmediata</td>
+  </tr>
+  <tr>
+    <td><strong>Cuentas</strong>: USD, Euros, PayPal, Payoneer, Binance</td>
+    <td><strong>Modalidades de Trabajo</strong>: Presencial, Remoto, Mixto</td>
+  </tr>
+  <tr>
+    <td><strong>Permiso de Trabajo</strong>: Sí</td>
+    <td><strong>Carnet de Conducir</strong>: No</td>
   </tr>
 </table>
 
