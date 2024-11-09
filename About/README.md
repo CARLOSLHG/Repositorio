@@ -1,10 +1,10 @@
 ![Photo of Carlos Luis Hernández](./Container/img/0.5x/my-foto@0.5x.png)
 
-[Español](./about-me-es.md)
+
 
 ---
 
-## About Me
+## About Me | [Versión Español](./about-me-es.md)
 
 I am passionate about technological development, with a solid foundation in **Advertising** and experience across multiple areas of **technology and data analysis**. My roots lie in creativity and communication, thanks to my background as a Higher Technician in Advertising, but I have expanded my career into technology, from project management in Jira and Confluence to data analysis with R and BigQuery. I am curious, always seeking to learn and evolve in this dynamic field. Every achievement and certification I've obtained represents my dedication and commitment to professional growth.
 
