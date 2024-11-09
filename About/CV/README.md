@@ -1,7 +1,7 @@
 # 📄 Carlos Luis Hernández Gutiérrez - Curriculum Vitae
 
 ---
-[Go to Main Repository](../../) | [CV en Español](./CV-es.md)
+[Go to Portfolio & Projects](../../) | [CV en Español](./CV-es.md)
 
 ## 📬 Contact and Personal Information
 
@@ -215,7 +215,7 @@ Venezuela, On-site | **1994-1995**
 
 For more information about my skills and interests, visit [About Me](../).
 
-[Go to Main Repository](../../) |
+[Go to Portfolio & Projects](../../) |
 
 ---
 
