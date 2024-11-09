@@ -12,7 +12,7 @@
 - **🔗 LinkedIn**: [Carlos LHG en LinkedIn](https://www.linkedin.com/in/carloslhg)
 - **🛠️ Portafolio en línea**: [(en desarrollo)](#)
 - **👤 Sobre mí**: [About Me](./About)
-- **👤 Curriculum Vitae**: [Visita mi CV aqui](./About/CV/)
+- **👤 Curriculum Vitae**: [English](./About/CV/README.md) |  [Español](./About/CV/CV-es.md)
 
 ---
 

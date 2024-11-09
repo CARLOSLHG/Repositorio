@@ -101,9 +101,10 @@ para gestionar incidencias internas y externas.
 
 ### Paginación
 
-- **Paso Anterior**: [Acceso a Jira](Paso-1.md)
-- **Siguiente Paso**: [Configuración Inicial del Help Center](Paso-3.md)
+- **Capítulo Anterior**: [Acceso a Jira](01_ANC_Help_Center_Capitulo_1.md)
+- **Siguiente Capítulo**: [Configuración de Usuarios, Grupos y Permisos](03_ANC_Help_Center_Capitulo_3.md)
 
 ---
 
 [Volver al repositorio principal](https://carloslhg.github.io/Repositorio)
+

@@ -1,169 +1,222 @@
-# 📄 Carlos Luis Hernández Gutiérrez
-# Curriculum Vitae
+# 📄 Carlos Luis Hernández Gutiérrez - Curriculum Vitae
 
 ---
+[Go to Main Repository](../../) | [CV en Español](./CV-es.md)
 
-![Foto de Carlos Luis Hernández](../Container/img/0.5x/my-foto@0.5x.png)
-
----
-## 📬 Contacto y Datos Personales
+## 📬 Contact and Personal Information
 
 <table>
   <tr>
-    <td><strong>Nacionalidad</strong>: Venezolana</td>
-    <td><strong>Dirección</strong>: España</td>
+    <td><strong>📍 Location</strong></td>
+    <td>Madrid, Spain</td>
   </tr>
   <tr>
-    <td><strong>Email</strong>: chcarlos3@gmail.com</td>
-    <td><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/carloslhg">CarlosLHG</a></td>
+    <td><strong>✉️ Email</strong></td>
+    <td>chcarlos3@gmail.com</td>
   </tr>
   <tr>
-    <td><strong>Idiomas</strong>: Español (Nativo), Inglés (B2)</td>
-    <td><strong>Discord</strong>: CaLuHeGu#7034</td>
+    <td><strong>📞 Phone</strong></td>
+    <td>+34-678875064</td>
   </tr>
   <tr>
-    <td><strong>Website</strong>: En Construcción</td>
-    <td><strong>Disponibilidad</strong>: Inmediata</td>
+    <td><strong>🔗 LinkedIn</strong></td>
+    <td><a href="https://linkedin.com/in/carloslhg">linkedin.com/in/carloslhg</a></td>
   </tr>
   <tr>
-    <td><strong>Cuentas</strong>: USD, Euros, PayPal, Payoneer, Binance</td>
-    <td><strong>Modalidades de Trabajo</strong>: Presencial, Remoto, Mixto</td>
+    <td><strong>🐙 GitHub</strong></td>
+    <td><a href="https://carloslhg.github.io/Repositorio">carloslhg.github.io/Repositorio</a></td>
   </tr>
   <tr>
-    <td><strong>Permiso de Trabajo</strong>: Sí</td>
-    <td><strong>Carnet de Conducir</strong>: No</td>
+    <td><strong>🌐 Languages</strong></td>
+    <td>English, Spanish</td>
   </tr>
 </table>
 
-[Ir al Repositorio Principal](../../) |
+---
+
+## 🧑‍💼 Professional Profile
+
+Consultant specializing in Atlassian technologies and web development with expertise in UX/UI design and cloud systems management. My experience includes Jira implementations, technical training, and interface development that optimize communication and performance across teams in sectors such as education, technology, and public administration. Bilingual in Spanish and English, I am highly adaptable to technological environments with a strong commitment to continuous learning.
 
 ---
 
-## 🧑‍💼 Perfil Profesional
+## 💼 Work Experience
 
-Profesional en **Publicidad** con sólida experiencia en **gestión de proyectos** (Atlassian Jira y Confluence), **desarrollo web** (HTML, CSS, JavaScript, WordPress), y **análisis de datos** (SQL, R). Apasionado por la tecnología educativa y la innovación en inteligencia artificial aplicada. Capaz de integrar creatividad y análisis para soluciones efectivas en entornos cambiantes.
-
-[Ir al Repositorio Principal](../../) |
-
----
-
-## 💼 Experiencia y Proyectos
-
-### Gestión de Proyectos con Atlassian
-- Capacitación y soporte en Jira y Confluence para usuarios de todos los niveles.
-- Implementaciones avanzadas de Jira Software y Jira Service Management.
-
-[🔍 Ver Proyectos en Jira y Confluence](../../Atlassian)
-
-### Desarrollo Web en WordPress
-- **[CyberSTARS](../../WordPress%20Development/Proyectos/CyberSTARS/)**: Sitio educativo sobre ciberseguridad, desarrollado en WordPress con mini-juego interactivo y mascota virtual.
-- **[Carbon Company](../../HTML%20CSS%20&%20JS%20Projects/Proyectos/Carbon%20Company/)**: Academia de dibujo interactiva, construida en HTML, CSS y JavaScript.
-
-[🔍 Ver Proyectos en WordPress](../../WordPress%20Development)  
-[🔍 Ver Proyectos en HTML, CSS y JS](../../HTML%20CSS%20&%20JS%20Projects)
-
-### Desarrollo Web y Aplicaciones Interactivas
-- **[CyberSpace Defenders](../../HTML%20CSS%20&%20JS%20Projects/Proyectos/CyberSpace%20Defenders/)**: Juego educativo sobre ciberseguridad, desarrollado en HTML, CSS y JavaScript.
-- **[DALL-E Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/DALL-E%20Prompt%20Generator/)**: Herramienta interactiva en React para generar prompts personalizados para DALL-E.
-- **[MidJourney Prompt Generator](../../React%20&%20Node.js%20Projects/Proyectos/MidJourney%20Prompt%20Generator/)**: Aplicación en React que permite a los usuarios crear prompts específicos para MidJourney.
-
-[🔍 Ver Proyectos en React y Node.js](../../React%20&%20Node.js%20Projects)
-
-### Análisis de Datos
-- Análisis y visualización de datos en SQL, R, Tableau y Google BigQuery.
-- Proyectos con insights y dashboards para Cyclistic Bike Share Inc. y otros.
-
-[🔍 Ver Proyectos de Análisis de Datos](../../Data%20Analysis%20Projects)
-
-[Ir al Repositorio Principal](../../) |
+### S4E, Platinum Solution Partner of Atlassian & Select Partner of AWS  
+**Atlassian Consultant and Trainer**  
+Chile, Remote | **2023-2024 (Temporary Contract)**  
+**Responsibilities**:
+- Provided specialized training in Jira Software, Jira Service Manager, and Confluence for strategic clients.
+- Conducted workshops for technical and administrative teams, improving the usage of management platforms across tech companies.
+  
+**Achievements**:
+- Earned certifications in key project management tools, including Organization and User Management Administration.
+- Successfully trained leading organizations, such as **GTD Chile, ALMA Observatory (the world’s largest astronomical project), Universidad de Chile, Laboratorios Saval, UST, Metso**, and **S4E**.
+- Developed a customized training methodology, significantly increasing Atlassian adoption and enhancing support and project management teams' efficiency.
 
 ---
 
-## 🛠️ Habilidades
+### S4E, Platinum Solution Partner of Atlassian & Select Partner of AWS  
+**Web Designer, UX/UI**  
+Chile, Remote | **2021-2023 (Freelance)**  
+**Responsibilities**:
+- Designed and maintained WordPress websites to enhance S4E’s online visibility and client communication.
+- Implemented direct communication solutions via JIRA Software and worked with IaaS, PaaS, and SaaS systems.
 
-- **Lenguajes**: HTML, CSS, JavaScript, Python, R, PHP
-- **Bases de Datos**: SQL, Google BigQuery
-- **Herramientas**: Jira (Jira Administrator Cloud), Confluence (Confluence Space Manager), RStudio, GitHub, Tableau, WordPress, Git, WIX, WebsiteX5, Webanimator
-- **Prompts para IA**: ChatGPT, MidJourney, DALL-E, Leonard
-
-[Ir al Repositorio Principal](../../) |
-
----
-
-## 📚 Estudios
-
-- **Técnico Superior en Publicidad**  
-  Formación profesional que integra creatividad y comunicación, con un enfoque en estrategias de marketing y campañas visuales.
-
-[Ir al Repositorio Principal](../../) |
+**Achievements**:
+- Improved S4E’s online presence, attracting a broader client portfolio and facilitating scalable communication solutions.
+- Specialized in cloud service integration, enhancing scalability and cross-team communication.
 
 ---
 
-## 🏆 Curso y Certificaciones
+### Sky Corporation Import & Export  
+**Webmaster**  
+USA, Remote | **2018-2021 (Freelance)**  
+**Responsibilities**:
+- UX/UI design, including web development and implementation in HTML, CSS, and JavaScript.
+
+**Achievements**:
+- Achieved a 60% increase in quote requests after optimizing the **Scotsmanlatam.com** website for Latin America and the Caribbean.
+- Gained expertise in responsive web design, enhancing user experience and mobile accessibility.
+
+---
+
+### Freelance  
+**Graphic Designer and Advertiser**  
+Venezuela, On-site | **2015-2018**  
+**Responsibilities**:
+- Worked in graphic design, digital illustration, and 3D animation, developing brand identity and logos.
+
+**Achievements**:
+- Created effective branding for multiple companies, consolidating visual design skills and basic programming languages, such as HTML and PHP.
+
+---
+
+### Suministro Tocoma CA  
+**Executive Vice President - Sales**  
+Venezuela, On-site | **2005-2014**  
+**Responsibilities**:
+- Managed client communication, supplier relationships, and workflow optimization using databases in Microsoft Access.
+
+**Achievements**:
+- Established international partnerships with **Scotsman Ice System, EverPure, and Osram**, maintaining a steady flow of requests.
+- Implemented databases for sales and logistics management, enhancing operational efficiency.
+
+---
+
+### Consorcio Dravica - Caruachi Hydroelectric Project  
+**Engineering Assistant**  
+Venezuela, On-site | **1998-2005 (Temporary Contract)**  
+**Responsibilities**:
+- Established quality controls for custom fabrication, analyzed blueprints, and estimated material needs.
+
+**Achievements**:
+- Over seven years, implemented controls across various departments (carpentry, construction, costing, and estimates), optimizing manufacturing processes and quality control.
+
+---
+
+### TVGuayana - Private Television Channel  
+**Teleprompter Operator**  
+Venezuela, On-site | **1996-1998**  
+**Responsibilities**:
+- Managed the display of texts, graphics, and 3D animations on screen during live broadcasts.
+
+**Achievements**:
+- Acquired programming skills in languages such as COBOL and Pascal and contributed to 3D designs and animations for live productions.
+
+---
+
+### New Art Publicidad  
+**Lead Graphic Designer**  
+Venezuela, On-site | **1995-1996**  
+**Responsibilities**:
+- Designed marketing strategies and visual campaigns, leading the creation of corporate identity for local companies.
+
+**Achievements**:
+- Developed the corporate image for **EMBolsa**, establishing its brand presence in the plastics market.
+
+---
+
+### Tipografía Ordaz  
+**Draftsman - Intern**  
+Venezuela, On-site | **1994-1995**  
+**Responsibilities**:
+- Created large-format commercial advertising banners, gaining exposure in advertising and design.
+
+**Achievements**:
+- Created various advertising banners, launching my career in advertising and graphic design.
+
+---
+
+## 📚 Education
+
+- **Higher Technician in Advertising**
+
+---
+
+## 🏆 Courses and Certifications
 
 <table>
   <tr>
-    <td>1. <strong>Diseño Web:</strong> HTML, CSS, JavaScript, WordPress</td>
-    <td>2. <strong>Google Data Analytics Professional Certificate</strong></td>
+    <td><strong>Web Design:</strong> HTML, CSS, JavaScript, WordPress</td>
+    <td><strong>Google Data Analytics Professional Certificate</strong></td>
   </tr>
   <tr>
-    <td>3. <strong>Atlassian Certified Jira Administrator for Cloud</strong></td>
-    <td>4. <strong>Atlassian Certified Expert</strong></td>
+    <td><strong>Atlassian Certified Jira Administrator for Cloud</strong></td>
+    <td><strong>Atlassian Certified Expert</strong></td>
   </tr>
   <tr>
-    <td>5. <strong>Jira Service Management Fundamentals Badge</strong></td>
-    <td>6. <strong>Confluence Fundamentals Badge</strong></td>
+    <td><strong>Jira Service Management Fundamentals Badge</strong></td>
+    <td><strong>Confluence Fundamentals Badge</strong></td>
   </tr>
   <tr>
-    <td>7. <strong>Setting up ITSM Projects in Jira Service Management</strong></td>
-    <td>8. <strong>Atlassian Pro Skills Badge: Confluence Space Administration</strong></td>
+    <td><strong>Setting up ITSM Projects in Jira Service Management</strong></td>
+    <td><strong>Atlassian Pro Skills Badge: Confluence Space Administration</strong></td>
   </tr>
   <tr>
-    <td>9. <strong>Atlassian Certified in Managing Jira Projects for Cloud</strong></td>
-    <td>10. <strong>Atlassian Certified Cloud Organization Admin</strong></td>
+    <td><strong>Atlassian Certified in Managing Jira Projects for Cloud</strong></td>
+    <td><strong>Atlassian Certified Cloud Organization Admin</strong></td>
   </tr>
   <tr>
-    <td>11. <strong>Confluence Quickstart: New to Cloud Badge</strong></td>
-    <td>12. <strong>JQL for Admins</strong></td>
+    <td><strong>Confluence Quickstart: New to Cloud Badge</strong></td>
+    <td><strong>JQL for Admins</strong></td>
   </tr>
   <tr>
-    <td>13. <strong>Jira Fundamentals Badge</strong></td>
-    <td>14. <strong>Lifelong Learning by CertiProf</strong></td>
+    <td><strong>Jira Fundamentals Badge</strong></td>
+    <td><strong>Lifelong Learning by CertiProf</strong></td>
   </tr>
   <tr>
-    <td>15. <strong>Introduction to Cybersecurity by Cisco</strong></td>
-    <td>16. <strong>Fundamentals of Cloud Architecture</strong></td>
+    <td><strong>Introduction to Cybersecurity by Cisco</strong></td>
+    <td><strong>Fundamentals of Cloud Architecture</strong></td>
   </tr>
   <tr>
-    <td>17. <strong>Data Analysis with R Programming by Google</strong></td>
-    <td>18. <strong>Share Data Through the Art of Visualization by Google</strong></td>
+    <td><strong>Data Analysis with R Programming by Google</strong></td>
+    <td><strong>Share Data Through the Art of Visualization by Google</strong></td>
   </tr>
   <tr>
-    <td>19. <strong>Analyze Data to Answer Questions by Google</strong></td>
-    <td>20. <strong>Prepare Data for Exploration by Google</strong></td>
+    <td><strong>Analyze Data to Answer Questions by Google</strong></td>
+    <td><strong>Prepare Data for Exploration by Google</strong></td>
   </tr>
   <tr>
-    <td>21. <strong>Process Data from Dirty to Clean by Google</strong></td>
-    <td>22. <strong>Ask Questions to Make Data-Driven Decisions by Google</strong></td>
+    <td><strong>Process Data from Dirty to Clean by Google</strong></td>
+    <td><strong>Ask Questions to Make Data-Driven Decisions by Google</strong></td>
   </tr>
   <tr>
-    <td>23. <strong>Foundations: Data, Data, Everywhere by Google</strong></td>
-    <td>24. <strong>Certificate of Completion by Digital Cloud Training</strong></td>
-  </tr>
-  <tr>
-    <td>25. <strong>Google Data Analytics Specialized Program</strong></td>
-    <td></td>
+    <td><strong>Foundations: Data, Data, Everywhere by Google</strong></td>
+    <td><strong>Certificate of Completion by Digital Cloud Training</strong></td>
   </tr>
 </table>
 
-[Ir al Repositorio Principal](../../) |
+---
+
+[View my LinkedIn Certificates](https://linkedin.com/in/carloslhg) |
 
 ---
 
-Para más información sobre mis intereses y habilidades, visita [About Me](../).
+For more information about my skills and interests, visit [About Me](../).
 
-[Ir al Repositorio Principal](../../) |
+[Go to Main Repository](../../) |
 
 ---
 
-🙏 ¡Gracias por revisar mi CV!
+🙏 Thank you for reviewing my CV!

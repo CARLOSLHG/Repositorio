@@ -55,7 +55,7 @@ El objetivo de este paso es guiar al usuario para que acceda correctamente a su 
 
 ### Paginación
 
-- **Siguiente Paso**: [CCreación del Proyecto](Paso-2.md)
+- **Siguiente Paso**: [Creación del Proyecto](02_ANC_Help_Center_Capitulo_2.md)
 
 ---
 
