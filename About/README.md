@@ -1,89 +1,92 @@
-![Foto de Carlos Luis Hernández](./Container/img/0.5x/my-foto@0.5x.png)
+![Photo of Carlos Luis Hernández](./Container/img/0.5x/my-foto@0.5x.png)
 
----
-## Sobre Mí
-
-Soy un apasionado del desarrollo tecnológico, con una sólida base en **Publicidad** y experiencia en múltiples áreas de **tecnología y análisis de datos**. Mis raíces están en la creatividad y la comunicación, gracias a mi formación como Técnico Superior en Publicidad, pero he expandido mi carrera hacia la tecnología, abarcando desde la gestión de proyectos en Jira y Confluence hasta el análisis de datos con R y BigQuery. Me considero alguien curioso, siempre buscando aprender y evolucionar en este ámbito tan dinámico. Cada logro y certificación que he obtenido representa mi dedicación y compromiso con mi crecimiento profesional.
-
-[Ir a Aspiraciones](#aspiraciones) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Español](./about-me-es.md)
 
 ---
 
-## Aspiraciones
+## About Me
 
-Mis aspiraciones están guiadas por un deseo de contribuir a proyectos innovadores y transformar los datos y la tecnología en herramientas de impacto. Aspiro a continuar desarrollando mi conocimiento en **inteligencia artificial** y **generación de prompts**, campos en los que ya he comenzado a trabajar con herramientas como DALL-E y MidJourney. Además, estoy enfocado en fortalecer mis habilidades en análisis de datos, con el objetivo de poder asesorar a empresas para tomar decisiones más informadas y basadas en evidencias. Me visualizo liderando proyectos que combinen creatividad y análisis, transformando desafíos en soluciones estratégicas que beneficien a diversas industrias.
+I am passionate about technological development, with a solid foundation in **Advertising** and experience across multiple areas of **technology and data analysis**. My roots lie in creativity and communication, thanks to my background as a Higher Technician in Advertising, but I have expanded my career into technology, from project management in Jira and Confluence to data analysis with R and BigQuery. I am curious, always seeking to learn and evolve in this dynamic field. Every achievement and certification I've obtained represents my dedication and commitment to professional growth.
 
-[Volver a Inicio](#sobre-mí) | [Ir a Talentos y habilidades](#talentos-y-habilidades) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
-
----
-
-## Talentos y habilidades
-
-Mi perfil profesional abarca una combinación de **habilidades técnicas** y **creatividad**. Algunos de mis talentos y habilidades incluyen:
-
-- **Desarrollo web**: Con conocimiento avanzado en HTML, CSS y JavaScript, he trabajado en proyectos que van desde la creación de juegos educativos hasta la construcción de portafolios interactivos y sitios educativos.
-- **Gestión en Atlassian**: Soy un experto en el uso de Jira y Confluence para optimizar procesos empresariales, con certificaciones que demuestran mi habilidad para administrar, configurar y personalizar estas herramientas según las necesidades de cada equipo.
-- **Análisis de datos**: Con certificaciones de Google en análisis de datos y experiencia en R y SQL, soy capaz de organizar, limpiar y visualizar datos para responder a preguntas clave en distintos contextos de negocio.
-- **Generación de prompts e IA**: He desarrollado herramientas y plataformas que permiten a los usuarios generar prompts personalizados para inteligencia artificial, facilitando el proceso de creación de imágenes en DALL-E y MidJourney.
-- **Publicidad y comunicación**: Mi base en publicidad me permite crear campañas y contenidos visuales efectivos, uniendo el análisis de datos y el marketing digital para maximizar la conexión con el público.
-
-[Volver a Aspiraciones](#aspiraciones) | [Ir a Gustos e intereses](#gustos-e-intereses) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Go to Aspirations](#aspirations) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
 
 ---
 
-## Gustos e intereses
+## Aspirations
 
-Mis intereses personales y profesionales están alineados con mi amor por la **tecnología y la creatividad**. Disfruto explorando nuevas herramientas de diseño y las posibilidades de la inteligencia artificial. Además, tengo un gran interés por el cine, la gastronomía española, la lectura de ciencia ficción en formato digital y la ciberseguridad. Estos intereses se reflejan en proyectos como **CyberSpace Defenders** y **CyberSTARS**, donde busco enseñar ciberseguridad de manera lúdica. También me fascinan el análisis de datos y la visualización, formas poderosas de contar historias y comunicar información de manera accesible y visual.
+My aspirations are guided by a desire to contribute to innovative projects and transform data and technology into impactful tools. I aim to continue expanding my knowledge in **artificial intelligence** and **prompt generation**, fields in which I have started working with tools like DALL-E and MidJourney. Additionally, I am focused on strengthening my data analysis skills, with the goal of advising companies to make more informed, evidence-based decisions. I envision myself leading projects that combine creativity and analysis, turning challenges into strategic solutions that benefit various industries.
 
-[Volver a Talentos y habilidades](#talentos-y-habilidades) | [Ir a Experiencia profesional](#experiencia-profesional) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
-
----
-
-## Experiencia profesional
-
-Mi experiencia abarca una variedad de proyectos y roles que incluyen:
-
-- **Desarrollo de plataformas educativas**: Creación de sitios interactivos y juegos educativos como **CyberSTARS** y el juego **CyberSpace Defenders** en JavaScript.
-- **Generación de prompts y herramientas de IA**: Creación de generadores de prompts para DALL-E y MidJourney, aplicando conocimientos de React y Node.js para experiencias personalizadas.
-- **Análisis de datos para Cyclistic**: Análisis exhaustivo de datos de comportamiento de usuarios de Cyclistic, utilizando R y BigQuery para insights y recomendaciones de conversión.
-- **Gestión en Atlassian**: Desarrollo de guías y capacitaciones en Jira y Confluence para optimizar flujos de trabajo y mejorar la comunicación organizacional.
-
-[Volver a Gustos e intereses](#gustos-e-intereses) | [Ir a Logros y certificaciones](#logros-y-certificaciones) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Back to Start](#about-me) | [Go to Skills and Talents](#skills-and-talents) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
 
 ---
 
-## Logros y certificaciones
+## Skills and Talents
 
-Hasta la fecha, he completado 24 certificaciones, destacando:
+My professional profile encompasses a combination of **technical skills** and **creativity**. Some of my key talents and skills include:
 
-- **Certificación de Google en Análisis de Datos**
-- **Certificaciones Atlassian**: Jira Administrator for Cloud, ITSM y Confluence
-- **Certificación en Arquitectura Cloud**
+- **Web Development**: With advanced knowledge in HTML, CSS, and JavaScript, I have worked on projects ranging from educational games to interactive portfolios and educational websites.
+- **Atlassian Management**: I am an expert in using Jira and Confluence to optimize business processes, with certifications demonstrating my ability to manage, configure, and customize these tools based on team needs.
+- **Data Analysis**: With Google certifications in data analysis and experience in R and SQL, I am capable of organizing, cleaning, and visualizing data to answer key business questions.
+- **AI Prompt Generation**: I have developed tools and platforms that allow users to generate personalized prompts for artificial intelligence, facilitating the image creation process in DALL-E and MidJourney.
+- **Advertising and Communication**: My background in advertising enables me to create effective campaigns and visual content, combining data analysis and digital marketing to maximize audience engagement.
 
-Cada certificación refuerza mi compromiso con la mejora continua y mi deseo de ofrecer valor a los equipos y proyectos en los que participo.
-
-[Volver a Experiencia profesional](#experiencia-profesional) | [Ir a Personalidad y valores](#personalidad-y-valores) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
-
----
-
-## Personalidad y valores
-
-Soy una persona **analítica y comprometida** con la mejora constante. Creo en el trabajo en equipo y en la comunicación efectiva, valores que aplico en cada proyecto. Mi perfil combina creatividad y análisis, abordando cada desafío con un enfoque abierto y flexible.
-
-[Volver a Logros y certificaciones](#logros-y-certificaciones) | [Ir a Raíces y formación](#raíces-y-formación) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Back to Aspirations](#aspirations) | [Go to Interests](#interests) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
 
 ---
 
-## Raíces y formación
+## Interests
 
-Mis raíces en publicidad y comunicación me dieron una base sólida para entender a los consumidores y comunicar eficazmente. Al integrar esta formación con habilidades en desarrollo y análisis de datos, creo soluciones innovadoras y alineadas con los objetivos de negocio y del mercado actual.
+My personal and professional interests are aligned with my love for **technology and creativity**. I enjoy exploring new design tools and the possibilities of artificial intelligence. Additionally, I have a keen interest in cinema, Spanish gastronomy, reading science fiction in digital format, and cybersecurity. These interests are reflected in projects such as **CyberSpace Defenders** and **CyberSTARS**, where I aim to teach cybersecurity in a playful way. I am also fascinated by data analysis and visualization as powerful ways to tell stories and communicate information in an accessible, visual manner.
 
-[Volver a Personalidad y valores](#personalidad-y-valores) | [Ir a Conclusión](#conclusión) | [Ir al Repositorio](../) | [Ver mi CV](./CV/)
+[Back to Skills and Talents](#skills-and-talents) | [Go to Professional Experience](#professional-experience) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
 
 ---
 
-## Conclusión
+## Professional Experience
 
-A lo largo de mi trayectoria, he buscado equilibrar la creatividad y la lógica, combinando tecnología con marketing y publicidad. Estoy listo para enfrentar nuevos desafíos y colaborar en proyectos que busquen un impacto positivo en el mundo digital y más allá.
+My experience spans a variety of projects and roles that include:
 
-[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV](./CV/) |
+- **Development of Educational Platforms**: Creation of interactive sites and educational games like **CyberSTARS** and the game **CyberSpace Defenders** in JavaScript.
+- **Prompt Generation and AI Tools**: Development of prompt generators for DALL-E and MidJourney, applying React and Node.js for personalized experiences.
+- **Data Analysis for Cyclistic**: Comprehensive analysis of user behavior data for Cyclistic, using R and BigQuery for insights and conversion strategy recommendations.
+- **Atlassian Management**: Development of guides and training in Jira and Confluence to optimize workflows and improve organizational communication.
+
+[Back to Interests](#interests) | [Go to Achievements and Certifications](#achievements-and-certifications) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
+
+---
+
+## Achievements and Certifications
+
+To date, I have completed 24 certifications, including:
+
+- **Google Data Analytics Certification**
+- **Atlassian Certifications**: Jira Administrator for Cloud, ITSM, and Confluence
+- **Cloud Architecture Certification**
+
+Each certification reinforces my commitment to continuous improvement and my desire to add value to the teams and projects in which I participate.
+
+[Back to Professional Experience](#professional-experience) | [Go to Values](#values) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
+
+---
+
+## Values
+
+I am an **analytical and committed** person, dedicated to continuous improvement. I believe in teamwork and effective communication, values I strive to apply in every project. My profile combines creativity and analysis, approaching each challenge with an open and flexible mindset.
+
+[Back to Achievements and Certifications](#achievements-and-certifications) | [Go to Roots and Education](#roots-and-education) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
+
+---
+
+## Roots and Education
+
+My background in advertising and communication has provided me with a strong foundation to understand consumer needs and communicate effectively. By integrating this background with skills in development and data analysis, I create solutions that are not only innovative but also aligned with business goals and current market expectations.
+
+[Back to Values](#values) | [Go to Conclusion](#conclusion) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
+
+---
+
+## Conclusion
+
+Throughout my career, I have sought to balance creativity and logic, combining technology with marketing and advertising. I am ready to face new challenges and collaborate on projects that aim to make a positive impact in the digital world and beyond.
+
+[Back to Top](#about-me) | [Go to Portfolio & Projects](../) | [View my CV](./CV/)
