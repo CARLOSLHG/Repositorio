@@ -1,6 +1,7 @@
 ## 🚀 Carlos Luis Hernández Gutiérrez
 # Proyectos y Experiencia Profesional
 [English version >>](./)
+
 ¡Bienvenido a mi portafolio! Soy un profesional especializado en administración de **Jira**, diseño web, análisis de datos y desarrollo de aplicaciones interactivas. Aquí encontrarás un resumen de mis proyectos y experiencia técnica en diversas áreas.
 
 ---
