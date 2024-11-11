@@ -1,7 +1,7 @@
 # Resumen de Sitio Web: S4E
 
-[Visitar el sitio web s4e.cl](https://www.s4e.cl)
-[Visitar el sitio web s4e.pe](https://www.s4e.pe)
+- [Visitar el sitio web s4e.cl](https://www.s4e.cl)
+- [Visitar el sitio web s4e.pe](https://www.s4e.pe)
 
 ---
 
@@ -25,8 +25,8 @@ El sitio web de **S4E** representa a una empresa de expertos en herramientas tec
 
 ## Enlace al sitio
 
-[S4E.cl](https://s4e.cl)
-[S4E.pe](https://s4e.pe)
+- [S4E.cl](https://s4e.cl)
+- [S4E.pe](https://s4e.pe)
 
 ---
 
