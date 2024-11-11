@@ -21,6 +21,7 @@ Estamos trabjando en las siguientes áreas:
 Proyectos:
 
 - **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/)
+- **Página web**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
 - **Juego en Javascript**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/)
 
 ---

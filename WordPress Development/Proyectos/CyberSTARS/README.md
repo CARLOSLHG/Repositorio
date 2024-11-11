@@ -42,3 +42,11 @@ La plataforma se financia a través de un sistema de patrocinio en Patreon, perm
 ## **7. Conclusión**
 
 CyberSTARS representa un enfoque educativo innovador que combina la tecnología y la gamificación para enseñar conceptos de ciberseguridad y tecnología a las nuevas generaciones. Con su sistema de patrocinio, el proyecto asegura que la educación sea accesible, y con su diseño amigable, asegura que el aprendizaje sea tan efectivo como divertido.
+
+## Enlace al sitio
+
+[CyberSTARS Academy](https://test3.futuremarketing.es)
+
+---
+
+[Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
