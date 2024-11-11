@@ -4,6 +4,9 @@ let currentIndex = 0;
 async function fetchImages() {
     try {
         const response = await fetch('images.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
         images = data.images;
         showImage();
@@ -11,6 +14,7 @@ async function fetchImages() {
         console.error("Error loading images:", error);
     }
 }
+
 
 function showImage() {
     const imageElement = document.getElementById("slider-image");
