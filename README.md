@@ -2,7 +2,7 @@
 # Projects and Professional Experience
 [Ir a la versión en Español >>](./README-es.md)
 
-Welcome to my portfolio! I am a professional specializing in **Jira administration**, web design, data analysis, and interactive application development. Here, you’ll find an overview of my projects and technical experience across various fields.
+Welcome to my portfolio! I am a professional specializing in **Jira administration**, **web design**, **Data Analysis**, and **Interactive application development**. Here, you’ll find an overview of my projects and technical experience across various fields.
 
 ---
 
