@@ -1,0 +1,17 @@
+.slider {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+#slider-image {
+    width: 100%;
+    height: auto;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
