@@ -1,11 +1,11 @@
-// Inicializamos las variables
+// Inicializamos las variables necesarias
 let images = [];          // Array donde se almacenarán las URLs de las imágenes
 let currentIndex = 0;      // Índice actual de la imagen mostrada en el slider
 
 // Función para cargar las imágenes desde el archivo JSON
 async function fetchImages() {
     try {
-        // Solicitamos el archivo images.json
+        // Solicitamos el archivo images.json desde el mismo directorio
         const response = await fetch('images.json');
         
         // Verificamos si la respuesta fue exitosa
@@ -13,16 +13,19 @@ async function fetchImages() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        // Convertimos la respuesta en formato JSON
+        // Convertimos la respuesta a JSON
         const data = await response.json();
         
-        // Guardamos las URLs de las imágenes en el array images
+        // Guardamos las URLs de las imágenes en el array 'images'
         images = data.images;
-        
+
+        // Verificamos que las imágenes se hayan cargado
+        console.log("Images loaded:", images);
+
         // Mostramos la primera imagen del slider
         showImage();
     } catch (error) {
-        // Mostramos cualquier error en la consola
+        // Si hay algún error, lo mostramos en la consola
         console.error("Error loading images:", error);
     }
 }
@@ -30,7 +33,7 @@ async function fetchImages() {
 // Función para mostrar la imagen actual en el slider
 function showImage() {
     const imageElement = document.getElementById("slider-image");
-    
+
     // Verificamos que haya imágenes cargadas antes de intentar mostrar una
     if (images.length > 0) {
         imageElement.src = images[currentIndex];
@@ -41,17 +44,17 @@ function showImage() {
 
 // Función para mostrar la siguiente imagen
 function nextImage() {
-    // Actualizamos el índice de la imagen a la siguiente, y si es el último, volvemos al inicio
+    // Actualizamos el índice de la imagen a la siguiente; si es el último, volvemos al inicio
     currentIndex = (currentIndex + 1) % images.length;
     showImage();
 }
 
 // Función para mostrar la imagen anterior
 function prevImage() {
-    // Actualizamos el índice de la imagen a la anterior, y si es la primera, volvemos al final
+    // Actualizamos el índice de la imagen a la anterior; si es la primera, volvemos al final
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     showImage();
 }
 
-// Cargamos las imágenes cuando la página haya terminado de cargar
+// Cargamos las imágenes cuando la página termine de cargar
 window.onload = fetchImages;
