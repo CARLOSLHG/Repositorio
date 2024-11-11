@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,6 @@
     <button onclick="prevImage()">Previous</button>
     <button onclick="nextImage()">Next</button>
 
-    <script src="slider.js"></script>
+<script src="slider.js"></script>
 </body>
 </html>
