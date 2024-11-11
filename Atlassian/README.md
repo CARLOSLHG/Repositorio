@@ -1,4 +1,4 @@
-# Atlassian Projects
+# Proyectos Atlassian
 
 Bienvenido a la sección de proyectos de Atlassian. Aquí encontrarás documentación y ejemplos de uso relacionados con las herramientas Atlassian.
 
