@@ -1,0 +1,5 @@
+# Image Slider
+
+Hemos creado un slider de imágenes simple. Haz clic en el siguiente enlace para verlo en acción:
+
+[Ver slider de imágenes](./Container/)
