@@ -93,7 +93,7 @@ Venezuela, On-site | **2015-2018**
 ---
 
 ### Suministro Tocoma CA  
-**Executive Vice President - Sales**  
+**Sales management**  
 Venezuela, On-site | **2005-2014**  
 **Responsibilities**:
 - Managed client communication, supplier relationships, and workflow optimization using databases in Microsoft Access.

@@ -92,7 +92,7 @@ Venezuela, Modalidad Presencial | **2015-2018**
 ---
 
 ### Suministro Tocoma CA  
-**Vicepresidente Ejecutivo - Ventas**  
+**Ejecutivo de ventas**  
 Venezuela, Modalidad Presencial | **2005-2014**  
 **Responsabilidades**:
 - Gestioné la comunicación con clientes y proveedores, y optimicé flujos de trabajo mediante bases de datos en Microsoft Access.
