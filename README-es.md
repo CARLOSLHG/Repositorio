@@ -1,5 +1,5 @@
 ## 🚀 Carlos Luis Hernández Gutiérrez
-# Proyectos y Experiencia Profesional
+# Ejemplos de Proyectos y Experiencia Profesional
 [English version >>](./)
 
 ¡Bienvenido a mi portafolio! Soy un profesional especializado en **Administración de Jira**, **Diseño Web**, **Análisis de Datos** y **Desarrollo de aplicaciones interactivas**. Aquí encontrarás un resumen de mis proyectos y experiencia técnica en diversas áreas.
@@ -17,7 +17,7 @@
 
 ---
 
-## 💼 Experiencia Técnica y Proyectos
+## 💼 Experiencia Técnica y Ejemplos de Proyectos
 
 ### 1. **📝 Proyectos de Atlassian Jira y Confluence**
    - **Capacitaciones y Soporte**: Experiencia en capacitación de clientes en Jira y Confluence, con guías detalladas para usuarios intermedios y avanzados.

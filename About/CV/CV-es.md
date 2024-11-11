@@ -1,7 +1,7 @@
 # 📄 Carlos Luis Hernández Gutiérrez - Curriculum Vitae
 
 ---
-[Ir a Portafolio y Proyectos](../../) | [English version](./README.md)
+[Ir a Portafolio y Ejemplos de Proyectos](../../) | [English version](./README.md)
 ## 📬 Contacto y Datos Personales
 
 <table>
@@ -214,7 +214,7 @@ Venezuela, Modalidad Presencial | **1994-1995**
 
 Para más información sobre mis intereses y habilidades, visita [About Me](../).
 
-[Ir a Portafolio y Proyectos](../../) |
+[Ir a Portafolio y Ejemplos de Proyectos](../../) |
 
 ---
 
