@@ -1,38 +1,37 @@
-# Resumen UX | UI: Scotsman Latam
+# UX | UI Summary: Scotsman Latam
 
-[Visitar el sitio web](https://www.scotsmanlatam.com)
-
----
-
-## **1. Visión General de UX**
-
-El sitio web de **Scotsman Latam** proporciona una experiencia de usuario enfocada en la claridad y accesibilidad para usuarios en sectores de hostelería, restaurantes y comercio. La estructura de la página está diseñada para facilitar la navegación, con acceso rápido a productos, servicios y contacto.
-
-### **Aspectos Clave de UX**
-
-- **Navegación Intuitiva**: La barra de navegación está claramente estructurada, permitiendo a los usuarios encontrar secciones principales sin esfuerzo.
-- **Jerarquía de Información**: El contenido está organizado de manera que los productos y servicios destacados son fáciles de identificar.
-- **Optimización para Conversión**: La presencia de formularios de contacto y enlaces a soporte directo promueve la conversión y facilita la comunicación.
-
-## **2. Análisis UI**
-
-El diseño visual del sitio sigue un enfoque minimalista, utilizando elementos que refuerzan la identidad profesional de la marca y priorizan la información.
-
-### **Elementos Clave de UI**
-
-- **Uso de Colores Corporativos**: Predominan los tonos de azul y gris, generando una sensación de profesionalismo y confianza.
-- **Tipografía Clara y Legible**: Fuentes sans-serif que facilitan la lectura de contenido técnico y comercial.
-- **Imágenes de Producto**: Las imágenes están bien posicionadas, con efectos sutiles que mejoran la visualización sin saturar el diseño.
-- **Diseño Responsivo**: La interfaz se adapta adecuadamente a dispositivos móviles, asegurando una experiencia consistente en diferentes tamaños de pantalla.
+[Versión en español](README-es.md) | [Visit the website](https://www.scotsmanlatam.com)
 
 ---
 
-## Enlace al sitio
+## **1. UX Overview**
 
-[Visitar el sitio web](https://www.scotsmanlatam.com)
+The **Scotsman Latam** website provides a user experience focused on clarity and accessibility for users in the hospitality, restaurant, and retail sectors. The page structure is designed to facilitate navigation, with quick access to products, services, and contact options.
+
+### **Key UX Aspects**
+
+- **Intuitive Navigation**: The navigation bar is clearly structured, allowing users to effortlessly find main sections.
+- **Information Hierarchy**: Content is organized so that featured products and services are easy to identify.
+- **Conversion Optimization**: The presence of contact forms and direct support links promotes conversion and facilitates communication.
+
+## **2. UI Analysis**
+
+The visual design of the site follows a minimalist approach, using elements that reinforce the brand's professional identity and prioritize information.
+
+### **Key UI Elements**
+
+- **Use of Corporate Colors**: Blue and gray tones dominate, creating a sense of professionalism and trust.
+- **Clear and Readable Typography**: Sans-serif fonts facilitate the reading of technical and commercial content.
+- **Product Images**: Images are well-positioned, with subtle effects that enhance visualization without overwhelming the design.
+- **Responsive Design**: The interface adapts well to mobile devices, ensuring a consistent experience across different screen sizes.
 
 ---
 
-[Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
+## Website Link
 
+[Versión en español](README-es.md) | [Visit the website](https://www.scotsmanlatam.com)
 
+---
+
+[Return to the Main Project Menu](https://carloslhg.github.io/Repositorio/)
+"""
