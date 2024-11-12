@@ -1,29 +1,33 @@
 # React & Node.js Projects 🚧
 
-¡Bienvenido a la sección de **React & Node.js Projects**! Aquí se encuentran proyectos desarrollados en **React** y **Node.js** orientados a la generación de prompts para modelos de IA. Esta área está en constante evolución para incluir más proyectos y funcionalidades avanzadas.
+---
+[Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
+---
 
-Agradecemos tu paciencia mientras continuamos mejorando esta sección.
+Welcome to the **React & Node.js Projects** section! Here you’ll find projects developed with **React** and **Node.js** focused on prompt generation for AI models. This area is constantly evolving to include more projects and advanced functionalities.
+
+We appreciate your patience as we continue to enhance this section.
 
 ---
 
-## Contenido a desarrollar
+## Content in Progress
 
-Estamos trabajando en las siguientes áreas:
+We are working on the following areas:
 
-- **Documentación detallada**: Cada proyecto incluirá guías completas para la instalación y uso.
-- **Proyectos de IA y Generación de Prompts**: Proyectos que muestran cómo interactuar con modelos generativos.
-- **Recursos adicionales**: Enlaces y herramientas útiles para profundizar en el desarrollo con React y Node.js.
-
----
-
-## Proyectos en desarrollo
-
-- **DALL-E Prompt Generator**: [Ver proyecto](https://carloslhg.github.io/dall-e-prompt-generator)
-   - Una aplicación en React para la creación de prompts personalizados para el modelo DALL-E, con interfaz intuitiva y opciones avanzadas de personalización.
-
-- **MidJourney Prompt Generator**: [Ver proyecto](https://carloslhg.github.io/midjourney-prompt-generator)
-   - Herramienta en React diseñada para facilitar la creación de prompts para MidJourney, incluyendo estilos y configuraciones visuales personalizadas.
+- **Detailed Documentation**: Each project will include complete guides for installation and usage.
+- **AI and Prompt Generation Projects**: Projects showcasing how to interact with generative models.
+- **Additional Resources**: Useful links and tools to deepen your development with React and Node.js.
 
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+## Projects in Development
+
+- **DALL-E Prompt Generator**: [View Project](https://carloslhg.github.io/dall-e-prompt-generator)
+   - A React application for creating customized prompts for the DALL-E model, featuring an intuitive interface and advanced customization options.
+
+- **MidJourney Prompt Generator**: [View Project](https://carloslhg.github.io/midjourney-prompt-generator)
+   - A React tool designed to simplify prompt creation for MidJourney, including personalized style and visual settings.
+
+---
+
+[Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
