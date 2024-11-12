@@ -15,7 +15,7 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 - **🔗 LinkedIn**: [Carlos LHG on LinkedIn](https://www.linkedin.com/in/carloslhg)
 - **🛠️ Online Portfolio**: [(under development)](#)
 - **👤 About Me**: [About Me](./About)
-- **👤 Curriculum Vitae**: [English](./About/CV/README.md) |  [Español](./About/CV/CV-es.md)
+- **👤 Curriculum Vitae**: [English](./About/CV/README.md) - [Español](./About/CV/CV-es.md)
 
 ---
 
