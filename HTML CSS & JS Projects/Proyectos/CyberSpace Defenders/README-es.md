@@ -1,7 +1,7 @@
 
 # CyberSpace Defenders
 
-[English version](./Container/) | [Ir al sitio del juego](./Container/)
+[English version](README.md) | [Ir al sitio del juego](./Container/)
 
 **CyberSpace Defenders** es un juego educativo desarrollado en JavaScript para enseñar conceptos de ciberseguridad de manera entretenida a niños de entre 8 y 16 años. En este juego, los jugadores controlan una nave espacial cuya misión es proteger el universo digital eliminando asteroides que representan amenazas cibernéticas.
 
@@ -38,7 +38,7 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ## Enlace al Juego
 
-[CyberSpace Defenders - Juega ahora](./Container/)
+[English version](README.md) | [Ir al sitio del juego](./Container/)
 
 ---
 
