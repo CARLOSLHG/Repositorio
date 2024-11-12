@@ -1,4 +1,3 @@
-
 // Función para mostrar el formulario
 function mostrarFormulario() {
     document.getElementById('formulario-section').classList.remove('hidden');
@@ -28,10 +27,93 @@ function cargarTabla() {
         row.insertCell(1).textContent = fila[1];
         row.insertCell(2).textContent = fila[2];
         row.insertCell(3).textContent = fila[3];
+
+        // Crear celdas para los iconos de ver y descargar
+        const actionsCell = row.insertCell(4);
+        actionsCell.classList.add("actions-cell");
+
+        // Icono para ver la solicitud
+        const viewIcon = document.createElement("span");
+        viewIcon.innerHTML = "👁️";
+        viewIcon.classList.add("icon");
+        viewIcon.title = "Ver Solicitud";
+        viewIcon.onclick = () => verSolicitud(fila);
+        actionsCell.appendChild(viewIcon);
+
+        // Icono para descargar la solicitud
+        const downloadIcon = document.createElement("span");
+        downloadIcon.innerHTML = "⬇️";
+        downloadIcon.classList.add("icon");
+        downloadIcon.title = "Descargar Solicitud";
+        downloadIcon.onclick = () => descargarSolicitud(fila);
+        actionsCell.appendChild(downloadIcon);
     });
 
     // Actualiza el contador de solicitudes
     document.getElementById('contadorSolicitudes').textContent = datos.length;
+}
+
+// Función para ver una solicitud en el navegador
+function verSolicitud(fila) {
+    const nombreDestinatario = fila[0];
+    const empresa = fila[1];
+    const direccionEmpresa = fila[2];
+    const puesto = fila[3];
+
+    const carta = `
+Carta de Presentación
+
+Carlos Luis Hernández Gutiérrez
+Madrid, España
+Tel: 687875064
+Email: chcarlos3@gmail.com
+LinkedIn: www.linkedin.com/in/carloslhg
+
+Fecha: [Fecha]
+Para: ${nombreDestinatario}
+Empresa: ${empresa}
+Dirección: ${direccionEmpresa}
+
+Estimado/a ${nombreDestinatario}:
+
+Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
+`;
+
+    alert(carta);
+}
+
+// Función para descargar una solicitud
+function descargarSolicitud(fila) {
+    const nombreDestinatario = fila[0];
+    const empresa = fila[1];
+    const direccionEmpresa = fila[2];
+    const puesto = fila[3];
+
+    const carta = `
+Carta de Presentación
+
+Carlos Luis Hernández Gutiérrez
+Madrid, España
+Tel: 687875064
+Email: chcarlos3@gmail.com
+LinkedIn: www.linkedin.com/in/carloslhg
+
+Fecha: [Fecha]
+Para: ${nombreDestinatario}
+Empresa: ${empresa}
+Dirección: ${direccionEmpresa}
+
+Estimado/a ${nombreDestinatario}:
+
+Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
+`;
+
+    const blob = new Blob([carta], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = `Carta_${nombreDestinatario}.txt`;
+    downloadLink.click();
 }
 
 // Función para generar la carta de presentación y guardar en localStorage
@@ -64,11 +146,8 @@ Es un placer dirigirme a usted para expresar mi interés en la posición de ${pu
 `;
 
     if (formato === 'pdf') {
-        // Usa jsPDF para crear un archivo PDF enriquecido
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
-
-        // Añadir estilos personalizados
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(18);
         pdf.text("Carta de Presentación", 10, 20);
@@ -98,10 +177,8 @@ Es un placer dirigirme a usted para expresar mi interés en la posición de ${pu
         pdf.text(`Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}.`, 10, 155, { maxWidth: 180 });
         pdf.text(`Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...`, 10, 165, { maxWidth: 180 });
 
-        // Guardar el archivo PDF
         pdf.save("cartaPresentacion.pdf");
     } else {
-        // Crea el archivo en formato de texto para los demás tipos (txt, md)
         const blob = new Blob([carta], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const downloadLink = document.getElementById('downloadLink');
@@ -109,11 +186,9 @@ Es un placer dirigirme a usted para expresar mi interés en la posición de ${pu
         downloadLink.classList.remove('hidden');
     }
 
-    // Guardar los datos en localStorage sin descargar automáticamente el archivo CSV
     const datos = [nombreDestinatario, empresa, direccionEmpresa, puesto];
     guardarEnLocalStorage(datos);
 
-    // Pregunta al usuario si desea descargar el archivo CSV
     const descargarCsv = confirm("¿Desea descargar el archivo CSV con las solicitudes acumuladas?");
     if (descargarCsv) {
         descargarCSV();
@@ -122,14 +197,9 @@ Es un placer dirigirme a usted para expresar mi interés en la posición de ${pu
 
 // Función para almacenar datos en localStorage
 function guardarEnLocalStorage(datos) {
-    // Recupera datos existentes de localStorage
     let acumulado = localStorage.getItem("solicitudes");
     acumulado = acumulado ? JSON.parse(acumulado) : [];
-
-    // Agrega la nueva entrada
     acumulado.push(datos);
-
-    // Guarda la nueva lista en localStorage
     localStorage.setItem("solicitudes", JSON.stringify(acumulado));
 }
 
@@ -138,15 +208,12 @@ function descargarCSV() {
     let acumulado = localStorage.getItem("solicitudes");
     acumulado = acumulado ? JSON.parse(acumulado) : [];
 
-    // Crea el contenido del CSV
-    const encabezados = "Nombre del destinatario,Empresa,Dirección de la empresa,Puesto al que aplica\n";
-    const contenidoCSV = acumulado.map(fila => fila.join(",")).join("\n");
+    const encabezados = "Nombre del destinatario,Empresa,Dirección de la empresa,Puesto al que aplica\\n";
+    const contenidoCSV = acumulado.map(fila => fila.join(",")).join("\\n");
 
-    // Genera el archivo CSV para descarga
     const csvBlob = new Blob([encabezados + contenidoCSV], { type: 'text/csv' });
     const csvUrl = URL.createObjectURL(csvBlob);
 
-    // Crea el enlace de descarga
     const hiddenLink = document.createElement('a');
     hiddenLink.href = csvUrl;
     hiddenLink.download = 'basededatos.csv';
