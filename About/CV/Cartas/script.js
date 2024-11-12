@@ -21,7 +21,6 @@ function cargarTabla() {
     let datos = localStorage.getItem("solicitudes");
     datos = datos ? JSON.parse(datos) : [];
 
-    // Llenado de la tabla con los datos almacenados
     datos.forEach((fila, index) => {
         const row = tablaCuerpo.insertRow(index);
         row.insertCell(0).textContent = fila[0];
@@ -56,11 +55,12 @@ function generarPDFConEstilo(estilo, nombreDestinatario, empresa, direccionEmpre
     const pdf = new jsPDF();
 
     const encabezado = `Carlos Luis Hernández Gutiérrez\nMadrid, España\nTel: 687875064\nEmail: chcarlos3@gmail.com`;
-    const saludo = `Estimado/a ${nombreDestinatario},\n\n`;
+    const saludo = `Estimado/a ${nombreDestinatario},`;
     const introduccion = `Me dirijo a usted para expresar mi interés en la posición de ${puesto} en ${empresa}.`;
     const resumenProfesional = `
 Profesional en consultoría tecnológica con experiencia en plataformas Atlassian, gestión de proyectos y desarrollo de sistemas en la nube.
-Certificado en Google Data Analytics y administración de Jira para Cloud.`;
+Certificado en Google Data Analytics y administración de Jira para Cloud.
+    `;
     const experienciaCompetencias = `
 Experiencia en:
 - Gestión de proyectos en Atlassian (Jira y Confluence).
@@ -68,50 +68,71 @@ Experiencia en:
 - Análisis de datos con R y BigQuery.
     `;
     const cierre = `Atentamente,\nCarlos Luis Hernández Gutiérrez`;
-    const cuerpoCarta = `${saludo}\n${introduccion}\n\n${resumenProfesional}\n\n${experienciaCompetencias}\n\n${cierre}`;
 
     switch (estilo) {
         case 'modelo1':
-            pdf.setFillColor(33, 150, 243);
-            pdf.rect(0, 0, pdf.internal.pageSize.width, 20, 'F');
-            pdf.setTextColor(0, 0, 0);
+            pdf.setFont("helvetica", "bold");
             pdf.setFontSize(18);
-            pdf.text(encabezado, 10, 30);
+            pdf.setTextColor(33, 150, 243);
+            pdf.text("Carta de Presentación", 10, 20);
+
             pdf.setFontSize(12);
-            pdf.text(cuerpoCarta, 10, 50, { maxWidth: 180 });
+            pdf.setTextColor(0, 0, 0);
+            pdf.text(encabezado, 10, 30);
+            pdf.text(saludo, 10, 50);
+            pdf.text(introduccion, 10, 60);
+            pdf.text(resumenProfesional, 10, 70);
+            pdf.text(experienciaCompetencias, 10, 90);
+            pdf.text(cierre, 10, 120);
             break;
 
         case 'modelo2':
-            pdf.setTextColor(0, 0, 0);
+            pdf.setFont("helvetica", "normal");
             pdf.setFontSize(18);
+            pdf.setTextColor(0, 0, 0);
             pdf.text(encabezado, 10, 20);
-            pdf.setDrawColor(200, 200, 200);
             pdf.line(10, 30, pdf.internal.pageSize.width - 10, 30);
+
             pdf.setFontSize(12);
-            pdf.text(cuerpoCarta, 10, 40, { maxWidth: 180 });
+            pdf.text(saludo, 10, 40);
+            pdf.text(introduccion, 10, 50);
+            pdf.text(resumenProfesional, 10, 60);
+            pdf.text(experienciaCompetencias, 10, 80);
+            pdf.text(cierre, 10, 110);
             break;
 
         case 'modelo3':
             pdf.setFillColor(0, 102, 204);
             pdf.rect(0, 0, pdf.internal.pageSize.width, 25, 'F');
-            pdf.setTextColor(255, 255, 255);
+            pdf.setFont("helvetica", "bold");
             pdf.setFontSize(20);
-            pdf.text("Carta de presentación", 10, 15);
-            pdf.setTextColor(0, 0, 0);
-            pdf.setFontSize(18);
-            pdf.text(encabezado, 10, 40);
+            pdf.setTextColor(255, 255, 255);
+            pdf.text("Carta de Presentación", 10, 15);
+
             pdf.setFontSize(12);
-            pdf.text(cuerpoCarta, 10, 60, { maxWidth: 180 });
+            pdf.setTextColor(0, 0, 0);
+            pdf.text(encabezado, 10, 40);
+            pdf.text(saludo, 10, 55);
+            pdf.text(introduccion, 10, 65);
+            pdf.text(resumenProfesional, 10, 75);
+            pdf.text(experienciaCompetencias, 10, 95);
+            pdf.text(cierre, 10, 125);
             break;
 
         case 'modelo4':
-            pdf.setTextColor(0, 0, 0);
-            pdf.setFontSize(18);
-            pdf.text(encabezado, 10, 20);
+            pdf.setFont("helvetica", "italic");
             pdf.setFontSize(14);
-            pdf.text("CARTA DE PRESENTACIÓN", 10, 40);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text("CARTA DE PRESENTACIÓN", 10, 20);
+
+            pdf.setFont("helvetica", "normal");
             pdf.setFontSize(12);
-            pdf.text(cuerpoCarta, 10, 50, { maxWidth: 180 });
+            pdf.text(encabezado, 10, 30);
+            pdf.text(saludo, 10, 45);
+            pdf.text(introduccion, 10, 55);
+            pdf.text(resumenProfesional, 10, 65);
+            pdf.text(experienciaCompetencias, 10, 85);
+            pdf.text(cierre, 10, 115);
             break;
 
         default:
