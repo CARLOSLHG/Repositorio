@@ -54,7 +54,7 @@
 ---
 
 ---
-[English version](README-es.md) | [Regresar el Menú del Repositorio](../README.md)
+[English version](./) | [Regresar el Menú del Repositorio](../README.md)
 ---
 
 Bienvenido a la sección de proyectos de Atlassian. Aquí encontrarás documentación y ejemplos de uso relacionados con las herramientas Atlassian.
