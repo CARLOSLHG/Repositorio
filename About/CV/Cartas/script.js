@@ -1,3 +1,4 @@
+
 // Función para mostrar el formulario
 function mostrarFormulario() {
     document.getElementById('formulario-section').classList.remove('hidden');
@@ -28,11 +29,9 @@ function cargarTabla() {
         row.insertCell(2).textContent = fila[2];
         row.insertCell(3).textContent = fila[3];
 
-        // Crear celdas para los iconos de ver y descargar
         const actionsCell = row.insertCell(4);
         actionsCell.classList.add("actions-cell");
 
-        // Icono para ver la solicitud
         const viewIcon = document.createElement("span");
         viewIcon.innerHTML = "👁️";
         viewIcon.classList.add("icon");
@@ -40,7 +39,6 @@ function cargarTabla() {
         viewIcon.onclick = () => verSolicitud(fila);
         actionsCell.appendChild(viewIcon);
 
-        // Icono para descargar la solicitud
         const downloadIcon = document.createElement("span");
         downloadIcon.innerHTML = "⬇️";
         downloadIcon.classList.add("icon");
@@ -49,173 +47,103 @@ function cargarTabla() {
         actionsCell.appendChild(downloadIcon);
     });
 
-    // Actualiza el contador de solicitudes
     document.getElementById('contadorSolicitudes').textContent = datos.length;
 }
 
-// Función para ver una solicitud en el navegador
-function verSolicitud(fila) {
-    const nombreDestinatario = fila[0];
-    const empresa = fila[1];
-    const direccionEmpresa = fila[2];
-    const puesto = fila[3];
+// Función para generar la carta con el estilo seleccionado y contenido predefinido
+function generarPDFConEstilo(estilo, nombreDestinatario, empresa, direccionEmpresa, puesto) {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
 
-    const carta = `
-Carta de Presentación
+    const encabezado = `Carlos Luis Hernández Gutiérrez\nMadrid, España\nTel: 687875064\nEmail: chcarlos3@gmail.com`;
+    const saludo = `Estimado/a ${nombreDestinatario},\n\n`;
+    const introduccion = `Me dirijo a usted para expresar mi interés en la posición de ${puesto} en ${empresa}.`;
+    const resumenProfesional = `
+Profesional en consultoría tecnológica con experiencia en plataformas Atlassian, gestión de proyectos y desarrollo de sistemas en la nube.
+Certificado en Google Data Analytics y administración de Jira para Cloud.`;
+    const experienciaCompetencias = `
+Experiencia en:
+- Gestión de proyectos en Atlassian (Jira y Confluence).
+- Desarrollo web con HTML, CSS y JavaScript.
+- Análisis de datos con R y BigQuery.
+    `;
+    const cierre = `Atentamente,\nCarlos Luis Hernández Gutiérrez`;
+    const cuerpoCarta = `${saludo}\n${introduccion}\n\n${resumenProfesional}\n\n${experienciaCompetencias}\n\n${cierre}`;
 
-Carlos Luis Hernández Gutiérrez
-Madrid, España
-Tel: 687875064
-Email: chcarlos3@gmail.com
-LinkedIn: www.linkedin.com/in/carloslhg
+    switch (estilo) {
+        case 'modelo1':
+            pdf.setFillColor(33, 150, 243);
+            pdf.rect(0, 0, pdf.internal.pageSize.width, 20, 'F');
+            pdf.setTextColor(0, 0, 0);
+            pdf.setFontSize(18);
+            pdf.text(encabezado, 10, 30);
+            pdf.setFontSize(12);
+            pdf.text(cuerpoCarta, 10, 50, { maxWidth: 180 });
+            break;
 
-Fecha: [Fecha]
-Para: ${nombreDestinatario}
-Empresa: ${empresa}
-Dirección: ${direccionEmpresa}
+        case 'modelo2':
+            pdf.setTextColor(0, 0, 0);
+            pdf.setFontSize(18);
+            pdf.text(encabezado, 10, 20);
+            pdf.setDrawColor(200, 200, 200);
+            pdf.line(10, 30, pdf.internal.pageSize.width - 10, 30);
+            pdf.setFontSize(12);
+            pdf.text(cuerpoCarta, 10, 40, { maxWidth: 180 });
+            break;
 
-Estimado/a ${nombreDestinatario}:
+        case 'modelo3':
+            pdf.setFillColor(0, 102, 204);
+            pdf.rect(0, 0, pdf.internal.pageSize.width, 25, 'F');
+            pdf.setTextColor(255, 255, 255);
+            pdf.setFontSize(20);
+            pdf.text("Carta de presentación", 10, 15);
+            pdf.setTextColor(0, 0, 0);
+            pdf.setFontSize(18);
+            pdf.text(encabezado, 10, 40);
+            pdf.setFontSize(12);
+            pdf.text(cuerpoCarta, 10, 60, { maxWidth: 180 });
+            break;
 
-Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
-`;
+        case 'modelo4':
+            pdf.setTextColor(0, 0, 0);
+            pdf.setFontSize(18);
+            pdf.text(encabezado, 10, 20);
+            pdf.setFontSize(14);
+            pdf.text("CARTA DE PRESENTACIÓN", 10, 40);
+            pdf.setFontSize(12);
+            pdf.text(cuerpoCarta, 10, 50, { maxWidth: 180 });
+            break;
 
-    alert(carta);
+        default:
+            pdf.text("Estilo no válido", 10, 10);
+            break;
+    }
+
+    pdf.save("cartaPresentacion.pdf");
 }
 
-// Función para descargar una solicitud
-function descargarSolicitud(fila) {
-    const nombreDestinatario = fila[0];
-    const empresa = fila[1];
-    const direccionEmpresa = fila[2];
-    const puesto = fila[3];
-
-    const carta = `
-Carta de Presentación
-
-Carlos Luis Hernández Gutiérrez
-Madrid, España
-Tel: 687875064
-Email: chcarlos3@gmail.com
-LinkedIn: www.linkedin.com/in/carloslhg
-
-Fecha: [Fecha]
-Para: ${nombreDestinatario}
-Empresa: ${empresa}
-Dirección: ${direccionEmpresa}
-
-Estimado/a ${nombreDestinatario}:
-
-Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
-`;
-
-    const blob = new Blob([carta], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const downloadLink = document.createElement('a');
-    downloadLink.href = url;
-    downloadLink.download = `Carta_${nombreDestinatario}.txt`;
-    downloadLink.click();
-}
-
-// Función para generar la carta de presentación y guardar en localStorage
+// Función principal de generación de la carta
 function generarCarta() {
-    // Obtiene los datos del formulario
-    const nombreDestinatario = document.getElementById('nombreDestinatario').value;
-    const empresa = document.getElementById('empresa').value;
-    const direccionEmpresa = document.getElementById('direccionEmpresa').value;
-    const puesto = document.getElementById('puesto').value;
+    const nombreDestinatario = document.getElementById('nombreDestinatario').value || "Reclutador";
+    const empresa = document.getElementById('empresa').value || "la empresa";
+    const direccionEmpresa = document.getElementById('direccionEmpresa').value || "dirección de la empresa";
+    const puesto = document.getElementById('puesto').value || "posición deseada";
     const formato = document.getElementById('formato').value;
-
-    // Genera el contenido de la carta
-    const carta = `
-Carta de Presentación
-
-Carlos Luis Hernández Gutiérrez
-Madrid, España
-Tel: 687875064
-Email: chcarlos3@gmail.com
-LinkedIn: www.linkedin.com/in/carloslhg
-
-Fecha: [Fecha]
-Para: ${nombreDestinatario}
-Empresa: ${empresa}
-Dirección: ${direccionEmpresa}
-
-Estimado/a ${nombreDestinatario}:
-
-Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
-`;
+    const estilo = document.getElementById('estilo').value;
 
     if (formato === 'pdf') {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(18);
-        pdf.text("Carta de Presentación", 10, 20);
-
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(12);
-        pdf.text("Carlos Luis Hernández Gutiérrez", 10, 30);
-        pdf.text("Madrid, España", 10, 40);
-        pdf.text("Tel: 687875064", 10, 50);
-        pdf.text("Email: chcarlos3@gmail.com", 10, 60);
-        pdf.text("LinkedIn: www.linkedin.com/in/carloslhg", 10, 70);
-
-        pdf.setFontSize(14);
-        pdf.text("Detalles de la Carta", 10, 85);
-
-        pdf.setFontSize(12);
-        pdf.text(`Fecha: [Fecha]`, 10, 95);
-        pdf.text(`Para: ${nombreDestinatario}`, 10, 105);
-        pdf.text(`Empresa: ${empresa}`, 10, 115);
-        pdf.text(`Dirección: ${direccionEmpresa}`, 10, 125);
-
-        pdf.setFont("helvetica", "italic");
-        pdf.setFontSize(12);
-        pdf.text(`Estimado/a ${nombreDestinatario},`, 10, 145);
-
-        pdf.setFont("helvetica", "normal");
-        pdf.text(`Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}.`, 10, 155, { maxWidth: 180 });
-        pdf.text(`Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...`, 10, 165, { maxWidth: 180 });
-
-        pdf.save("cartaPresentacion.pdf");
+        generarPDFConEstilo(estilo, nombreDestinatario, empresa, direccionEmpresa, puesto);
     } else {
+        const carta = `
+        Carta de Presentación\n\n
+        ${nombreDestinatario}\n${puesto}\n${empresa}\n${direccionEmpresa}\n\n
+        Estimado/a ${nombreDestinatario},\n\n
+        ${resumenProfesional}
+        `;
         const blob = new Blob([carta], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const downloadLink = document.getElementById('downloadLink');
         downloadLink.innerHTML = `<a href="${url}" download="cartaPresentacion.${formato}">Descargar Carta en ${formato.toUpperCase()}</a>`;
         downloadLink.classList.remove('hidden');
     }
-
-    const datos = [nombreDestinatario, empresa, direccionEmpresa, puesto];
-    guardarEnLocalStorage(datos);
-
-    const descargarCsv = confirm("¿Desea descargar el archivo CSV con las solicitudes acumuladas?");
-    if (descargarCsv) {
-        descargarCSV();
-    }
-}
-
-// Función para almacenar datos en localStorage
-function guardarEnLocalStorage(datos) {
-    let acumulado = localStorage.getItem("solicitudes");
-    acumulado = acumulado ? JSON.parse(acumulado) : [];
-    acumulado.push(datos);
-    localStorage.setItem("solicitudes", JSON.stringify(acumulado));
-}
-
-// Función para descargar el archivo CSV con datos acumulados
-function descargarCSV() {
-    let acumulado = localStorage.getItem("solicitudes");
-    acumulado = acumulado ? JSON.parse(acumulado) : [];
-
-    const encabezados = "Nombre del destinatario,Empresa,Dirección de la empresa,Puesto al que aplica\\n";
-    const contenidoCSV = acumulado.map(fila => fila.join(",")).join("\\n");
-
-    const csvBlob = new Blob([encabezados + contenidoCSV], { type: 'text/csv' });
-    const csvUrl = URL.createObjectURL(csvBlob);
-
-    const hiddenLink = document.createElement('a');
-    hiddenLink.href = csvUrl;
-    hiddenLink.download = 'basededatos.csv';
-    hiddenLink.click();
 }

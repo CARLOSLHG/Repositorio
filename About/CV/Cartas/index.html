@@ -43,6 +43,14 @@
                 <option value="txt">Texto (.txt)</option>
             </select>
 
+            <label for="estilo">Estilo de la carta:</label>
+            <select id="estilo" name="estilo" required>
+                <option value="modelo1">Modelo 1</option>
+                <option value="modelo2">Modelo 2</option>
+                <option value="modelo3">Modelo 3</option>
+                <option value="modelo4">Modelo 4</option>
+            </select>
+
             <button type="button" onclick="generarCarta()">Generar Carta</button>
         </form>
         <div id="downloadLink" class="hidden"></div>
@@ -59,12 +67,13 @@
                     <th>Empresa</th>
                     <th>Dirección de la empresa</th>
                     <th>Puesto</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
     </section>
 
-    <script src="script.js"></script>
+    <script src="script_with_template_and_styles.js"></script>
 </body>
 </html>

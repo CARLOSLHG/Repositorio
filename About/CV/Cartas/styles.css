@@ -80,6 +80,7 @@ body {
 .styled-form label {
     font-weight: bold;
     color: #333;
+    margin-top: 10px;
 }
 
 .styled-form input, 
@@ -93,9 +94,9 @@ body {
 
 .styled-form button {
     margin-top: 20px;
-    padding: 15px;
+    padding: 12px;
     width: 100%;
-    background-color: #28a745;
+    background-color: #007bff;
     border: none;
     color: #fff;
     font-size: 1.1em;
@@ -106,7 +107,7 @@ body {
 }
 
 .styled-form button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
 /* Table styling */
@@ -116,28 +117,49 @@ body {
     margin-top: 20px;
 }
 
-table {
+#tablaSolicitudes {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     background-color: #ffffff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+#tablaSolicitudes th, 
+#tablaSolicitudes td {
+    padding: 12px;
     text-align: left;
 }
 
-th, td {
-    padding: 12px;
+#tablaSolicitudes th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
 }
 
-thead {
-    background-color: #f1f1f1;
-    font-weight: bold;
+#tablaSolicitudes tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Styles for action icons in the table */
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.icon:hover {
+    color: #007bff;
 }
 
 /* Responsive Design */
