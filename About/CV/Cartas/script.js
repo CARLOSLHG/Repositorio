@@ -12,31 +12,29 @@ function mostrarTabla() {
     cargarTabla();
 }
 
-// Función para cargar la tabla desde el CSV y actualizar el total
+// Función para cargar la tabla desde localStorage y actualizar el total
 function cargarTabla() {
     const tablaCuerpo = document.querySelector('#tablaSolicitudes tbody');
     tablaCuerpo.innerHTML = '';  // Limpia la tabla
 
-    // Simulación de datos (aquí los cargarías desde el CSV en un entorno real)
-    const datos = [
-        { nombre: "Ana Pérez", empresa: "Tech Solutions", direccion: "Calle Falsa 123", puesto: "Analista" },
-        { nombre: "Luis García", empresa: "Innova Labs", direccion: "Av. Principal 456", puesto: "Desarrollador" }
-    ];
+    // Cargar datos acumulados de localStorage
+    let datos = localStorage.getItem("solicitudes");
+    datos = datos ? JSON.parse(datos) : [];
 
-    // Llenado de la tabla con datos simulados
+    // Llenado de la tabla con los datos almacenados
     datos.forEach((fila, index) => {
         const row = tablaCuerpo.insertRow(index);
-        row.insertCell(0).textContent = fila.nombre;
-        row.insertCell(1).textContent = fila.empresa;
-        row.insertCell(2).textContent = fila.direccion;
-        row.insertCell(3).textContent = fila.puesto;
+        row.insertCell(0).textContent = fila[0];
+        row.insertCell(1).textContent = fila[1];
+        row.insertCell(2).textContent = fila[2];
+        row.insertCell(3).textContent = fila[3];
     });
 
     // Actualiza el contador de solicitudes
     document.getElementById('contadorSolicitudes').textContent = datos.length;
 }
 
-// Función para generar la carta de presentación
+// Función para generar la carta de presentación y guardar en CSV o PDF
 function generarCarta() {
     // Obtiene los datos del formulario
     const nombreDestinatario = document.getElementById('nombreDestinatario').value;
@@ -47,47 +45,65 @@ function generarCarta() {
 
     // Genera el contenido de la carta
     const carta = `
-# Carta de Presentación
+Carta de Presentación
 
-**Carlos Luis Hernández Gutiérrez**  
-Madrid, España  
-Tel: 687875064  
-Email: chcarlos3@gmail.com  
-LinkedIn: [www.linkedin.com/in/carloslhg](https://linkedin.com/in/carloslhg)
+Carlos Luis Hernández Gutiérrez
+Madrid, España
+Tel: 687875064
+Email: chcarlos3@gmail.com
+LinkedIn: www.linkedin.com/in/carloslhg
 
----
+Fecha: [Fecha]
+Para: ${nombreDestinatario}
+Empresa: ${empresa}
+Dirección: ${direccionEmpresa}
 
-**Fecha**: [Fecha]  
-**Para**: ${nombreDestinatario}  
-**Empresa**: ${empresa}  
-**Dirección**: ${direccionEmpresa}
+Estimado/a ${nombreDestinatario}:
 
----
-
-## Estimado/a ${nombreDestinatario}:
-
-Es un placer dirigirme a usted para expresar mi interés en la posición de **${puesto}** en **${empresa}**. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian, junto con mis competencias en diseño UX/UI y desarrollo de sistemas en la nube...
+Es un placer dirigirme a usted para expresar mi interés en la posición de ${puesto} en ${empresa}. Mi trayectoria en consultoría tecnológica y especialización en las plataformas de Atlassian...
 `;
 
-    // Crea el archivo en el formato seleccionado
-    const blob = new Blob([carta], { type: formato === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'text/plain' });
-    const url = URL.createObjectURL(blob);
+    if (formato === 'pdf') {
+        // Usa jsPDF para crear un archivo PDF
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        pdf.text(carta, 10, 10);
+        pdf.save("cartaPresentacion.pdf");
+    } else {
+        // Crea el archivo en formato de texto para los demás tipos (txt, md, yxy)
+        const blob = new Blob([carta], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const downloadLink = document.getElementById('downloadLink');
+        downloadLink.innerHTML = `<a href="${url}" download="cartaPresentacion.${formato}">Descargar Carta en ${formato.toUpperCase()}</a>`;
+        downloadLink.classList.remove('hidden');
+    }
 
-    // Muestra el enlace de descarga
-    const downloadLink = document.getElementById('downloadLink');
-    downloadLink.innerHTML = `<a href="${url}" download="cartaPresentacion.${formato}">Descargar Carta en ${formato.toUpperCase()}</a>`;
-    downloadLink.classList.remove('hidden');
-
-    // Guarda los datos en el archivo CSV
-    const datos = `${nombreDestinatario},${empresa},${direccionEmpresa},${puesto}\n`;
+    // Guarda los datos en el archivo CSV con acumulación
+    const datos = [nombreDestinatario, empresa, direccionEmpresa, puesto];
     guardarEnCSV(datos);
 }
 
-// Función para guardar datos en el archivo CSV
+// Función para almacenar datos en localStorage y descargar el archivo acumulado
 function guardarEnCSV(datos) {
-    const csvBlob = new Blob([datos], { type: 'text/csv' });
-    const csvUrl = URL.createObjectURL(csvBlob);
+    // Recupera datos existentes de localStorage
+    let acumulado = localStorage.getItem("solicitudes");
+    acumulado = acumulado ? JSON.parse(acumulado) : [];
 
+    // Agrega la nueva entrada
+    acumulado.push(datos);
+
+    // Guarda la nueva lista en localStorage
+    localStorage.setItem("solicitudes", JSON.stringify(acumulado));
+
+    // Crea el contenido del CSV
+    const encabezados = "Nombre del destinatario,Empresa,Dirección de la empresa,Puesto al que aplica\n";
+    const contenidoCSV = acumulado.map(fila => fila.join(",")).join("\n");
+
+    // Genera el archivo CSV para descarga
+    const csvBlob = new Blob([encabezados + contenidoCSV], { type: 'text/csv' });
+    const csvUrl = URL.createObjectURL(csvBlob);
+    
+    // Crea el enlace de descarga
     const hiddenLink = document.createElement('a');
     hiddenLink.href = csvUrl;
     hiddenLink.download = 'basededatos.csv';

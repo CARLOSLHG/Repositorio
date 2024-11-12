@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,9 +16,9 @@
     </header>
 
     <!-- Sección del formulario -->
-    <section id="formulario-section" class="hidden">
+    <section id="formulario-section" class="hidden form-container">
         <h2>Formulario para Carta de Presentación</h2>
-        <form id="cartaForm">
+        <form id="cartaForm" class="styled-form">
             <label for="nombreDestinatario">Nombre del destinatario:</label>
             <input type="text" id="nombreDestinatario" name="nombreDestinatario" required>
 
@@ -36,7 +35,6 @@
             <select id="formato" name="formato" required>
                 <option value="md">Markdown (.md)</option>
                 <option value="docx">Word (.docx)</option>
-                <option value="yxy">YXY (.yxy)</option>
                 <option value="pdf">PDF (.pdf)</option>
                 <option value="txt">Texto (.txt)</option>
             </select>
@@ -63,6 +61,8 @@
         </table>
     </section>
 
-    <script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
