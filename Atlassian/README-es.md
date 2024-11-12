@@ -2,7 +2,7 @@
 ---
 <div style="text-align: center;">
   <table style="margin: auto; border-collapse: collapse;">
-    <tr style="background-color: #f2f2f2;">
+    <tr>
       <td style="padding: 10px; text-align: center;">
         <a href="https://cp.certmetrics.com/atlassian/en/public/badge/c?id=AT00235075&ccat=62&date=2024-2-8">
           <img src="./Container/bdg_ace_emeritus.png" alt="ACE-Emeritus" width="25%">
@@ -25,7 +25,7 @@
         <a href="https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=52&date=2023-11-13"><em>Cloud Organization Admin</em></a>
       </td>
     </tr>
-    <tr style="background-color: #ffffff;">
+    <tr>
       <td style="padding: 10px; text-align: center;">
         <a href="https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=30&date=2023-12-12">
           <img src="./Container/bdg_acp-620.png" alt="MJP-For-Cloud" width="25%">
