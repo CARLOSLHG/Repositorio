@@ -1,29 +1,33 @@
-# HTML, CSS y Javascript
+# HTML, CSS, and Javascript
 
-¡Bienvenido! Esta sección del repositorio está en construcción. Actualmente, estamos desarrollando contenido y funcionalidades, por lo que algunas áreas pueden no estar completas o en proceso de actualización.
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+---
 
-Agradecemos tu paciencia mientras trabajamos para proporcionar una experiencia completa y detallada.
+Welcome! This section of the repository is under construction. We are currently developing content and functionalities, so some areas may be incomplete or in the process of being updated.
+
+We appreciate your patience as we work to provide a complete and detailed experience.
 
 ---
 
-## Contenido a desarrollar
+## Content in Development
 
-Estamos trabajando en las siguientes áreas:
+We are working on the following areas:
 
-- **Documentación general**: Este espacio contendrá toda la documentación y las guías de usuario necesarias.
-- **Proyectos**: Aquí encontrarás los proyectos relacionados con nuestras implementaciones y casos de estudio.
-- **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
-
----
-
-## Ejemplos de Proyectos
-
-Proyectos:
-
-- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/)
-- **Página web**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
-- **Juego en Javascript**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/)
+- **General Documentation**: This space will contain all necessary documentation and user guides.
+- **Projects**: Here you will find projects related to our implementations and case studies.
+- **Additional Resources**: Soon, we will include links and additional resources to help you make the most of the projects in this repository.
 
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+## Project Examples
+
+Projects Examples:
+
+- **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/)
+- **Web Page**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
+- **Javascript Game**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/)
+
+---
+
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+---

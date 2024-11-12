@@ -1,52 +1,53 @@
-# Proyecto Web: "CyberSTARS"
+# Web Project: "CyberSTARS"
 
-[Visita el sitio web](https://test3.futuremarketing.es)
+[Leer en Español](./README-es.md) | [Visit the website](https://test3.futuremarketing.es)
 
-## **1. Descripción del Proyecto**
+## **1. Project Description**
 
-**CyberSTARS** es una academia en línea innovadora que tiene como objetivo enseñar a niños y jóvenes entre 8 y 16 años los principios de ciberseguridad y tecnologías emergentes. Esta plataforma educativa está diseñada con un enfoque moderno e interactivo, adaptado para una audiencia joven. La misión de CyberSTARS es proporcionar un entorno seguro y atractivo donde los estudiantes puedan explorar temas esenciales de ciberseguridad y otras habilidades tecnológicas para prepararse ante los desafíos digitales.
+**CyberSTARS** is an innovative online academy aimed at teaching children and young people aged 8 to 16 the principles of cybersecurity and emerging technologies. This educational platform is designed with a modern and interactive approach, tailored to a young audience. CyberSTARS' mission is to provide a safe and engaging environment where students can explore essential cybersecurity topics and other tech skills to prepare for digital challenges.
 
-## **2. Diseño y Experiencia de Usuario (UX)**
+## **2. Design and User Experience (UX)**
 
-El sitio web de **CyberSTARS** utiliza una estética juvenil y tecnología moderna para captar la atención de los jóvenes:
+The **CyberSTARS** website uses a youthful aesthetic and modern technology to capture the attention of young users:
 
-- **Paleta de Colores**: Combinación de tonos como morado vibrante, azul cielo, amarillo cálido y naranja brillante que refuerzan la identidad visual y captan la atención del público objetivo.
-- **Interactividad y Navegación**: El sitio cuenta con una estructura simple que facilita la navegación entre secciones clave como la academia, cursos, blog, y patrocinio.
-- **Mascota Virtual**: Un pequeño robot que guía a los usuarios a través de los cursos y proporciona explicaciones amigables sobre los conceptos de ciberseguridad.
+- **Color Palette**: A combination of vibrant purple, sky blue, warm yellow, and bright orange reinforces the visual identity and grabs the target audience's attention.
+- **Interactivity and Navigation**: The site has a simple structure that facilitates navigation between key sections such as academy, courses, blog, and sponsorship.
+- **Virtual Mascot**: A small robot guides users through the courses and provides friendly explanations about cybersecurity concepts.
 
-## **3. Funcionalidades y Componentes Clave**
+## **3. Key Functionalities and Components**
 
-- **Sistema de Cursos Interactivos**: Ofrece módulos didácticos y actividades prácticas diseñadas para enseñar de forma atractiva y educativa.
-- **Juego de Defensa Cibernética**: Un mini-juego en el que los usuarios se defienden de amenazas cibernéticas, ayudando a consolidar su aprendizaje mediante gamificación.
-- **Modelo de Patrocinio vía Patreon**: CyberSTARS emplea un sistema de patrocinio innovador que permite que los cursos sean gratuitos para los estudiantes, eliminando barreras económicas y fomentando la inclusión.
+- **Interactive Course System**: Offers educational modules and practical activities designed to teach in an engaging and educational way.
+- **Cyber Defense Game**: A mini-game in which users defend against cyber threats, helping reinforce learning through gamification.
+- **Sponsorship Model via Patreon**: CyberSTARS uses an innovative sponsorship system that allows the courses to be free for students, removing economic barriers and promoting inclusivity.
 
-## **4. Contenido de los Cursos**
+## **4. Course Content**
 
-1. **Introducción a la Ciberseguridad**: Los estudiantes aprenden a proteger su información en línea y a navegar de forma segura.
-2. **Introducción a la Inteligencia Artificial**: Curso que explora el uso de asistentes virtuales y cómo interactuar con tecnologías de IA en la vida diaria.
-3. **Robótica con Technic LEGO Powered Up**: Los estudiantes descubren principios de robótica mientras construyen y programan robots usando piezas de LEGO.
+1. **Introduction to Cybersecurity**: Students learn how to protect their online information and navigate safely.
+2. **Introduction to Artificial Intelligence**: A course that explores the use of virtual assistants and how to interact with AI technologies in daily life.
+3. **Robotics with Technic LEGO Powered Up**: Students discover robotics principles while building and programming robots using LEGO pieces.
 
-Cada curso está diseñado para ser accesible y entretenido, con módulos prácticos y quizzes que refuerzan el aprendizaje.
+Each course is designed to be accessible and entertaining, with practical modules and quizzes that reinforce learning.
 
-## **5. Estrategia de Patrocinio**
+## **5. Sponsorship Strategy**
 
-La plataforma se financia a través de un sistema de patrocinio en Patreon, permitiendo que los estudiantes accedan a los cursos sin costo. Este modelo de colaboración no solo respalda el proyecto económicamente, sino que también crea una comunidad de patrocinadores comprometidos en promover la educación de calidad en tecnología y ciberseguridad.
+The platform is funded through a Patreon sponsorship system, allowing students to access courses at no cost. This collaborative model not only supports the project financially but also creates a community of sponsors committed to promoting quality education in technology and cybersecurity.
 
-## **6. Tecnologías Utilizadas**
+## **6. Technologies Used**
 
-- **Plataforma**: WordPress
-- **Diseño**: CSS personalizado y ajustes de temas
-- **Plugins**: Sensei para la gestión de cursos y H5P para contenidos interactivos
-- **Herramientas de Seguridad**: Plugins de ciberseguridad para proteger la información de los estudiantes y del sitio
+- **Platform**: WordPress
+- **Design**: Custom CSS and theme adjustments
+- **Plugins**: Sensei for course management and H5P for interactive content
+- **Security Tools**: Cybersecurity plugins to protect student and site information
 
-## **7. Conclusión**
+## **7. Conclusion**
 
-CyberSTARS representa un enfoque educativo innovador que combina la tecnología y la gamificación para enseñar conceptos de ciberseguridad y tecnología a las nuevas generaciones. Con su sistema de patrocinio, el proyecto asegura que la educación sea accesible, y con su diseño amigable, asegura que el aprendizaje sea tan efectivo como divertido.
+CyberSTARS represents an innovative educational approach that combines technology and gamification to teach cybersecurity and technology concepts to new generations. With its sponsorship system, the project ensures that education is accessible, and with its user-friendly design, it ensures that learning is both effective and fun.
 
-## Enlace al sitio
+## Website Link
 
-[CyberSTARS Academy](https://test3.futuremarketing.es)
+[Leer en Español](./README-es.md) | [Visit the website](https://test3.futuremarketing.es)
 
 ---
 
-[Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
+[Return to the Main Project Examples Menu](https://carloslhg.github.io/Repositorio/)
+"""

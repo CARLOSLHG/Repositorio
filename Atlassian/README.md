@@ -1,16 +1,20 @@
-# Proyectos Atlassian
+# Atlassian Projects
+---
+[Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
+---
 
-Bienvenido a la sección de proyectos de Atlassian. Aquí encontrarás documentación y ejemplos de uso relacionados con las herramientas Atlassian.
+Welcome to the Atlassian projects section. Here you will find documentation and usage examples related to Atlassian tools.
 
-## Contenidos
+## Contents
 
-- **[Jira Software](./Jira%20Software/Anonymous%20Networking%20Inc/)**: Documentación sobre el uso de Jira Software.
-- **[Jira Service Manager](./Jira%20Service%20Manager/)**: Guías de Jira Service Manager.
+- **[Jira Software](./Jira%20Software/Anonymous%20Networking%20Inc/)**: Documentation on using Jira Software.
+- **[Jira Service Manager](./Jira%20Service%20Manager/)**: Guides for Jira Service Manager.
 
-## En desarrollo 🚧
+## Under Development 🚧
 
-Algunos proyectos y documentos están en desarrollo y pueden estar sujetos a cambios.
+Some projects and documents are under development and may be subject to change.
 
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+[Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
+---
