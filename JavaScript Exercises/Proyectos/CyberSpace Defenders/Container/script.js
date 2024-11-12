@@ -11,7 +11,7 @@
         let asteroidGenerationInterval; // Guardar el intervalo de generación de asteroides
 
         // Añadir música al juego
-        const audio = new Audio('http://test3.futuremarketing.es/wp-content/uploads/2024/10/byte-blast-8-bit-arcade-music-background-music-for-video-24-second-208776.mp3');
+        const audio = new Audio('./mp3/sound.mp3');
         audio.loop = true;
         audio.volume = 0.1;
         audio.play(); // La música comienza encendida
@@ -96,7 +96,7 @@
             if (gameOver) return;
 
             const missile = document.createElement('img');
-            missile.src = 'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-142.png';
+            missile.src = './img/missil.png';
             missile.classList.add('missile');
 
             const spaceshipRect = spaceship.getBoundingClientRect();
@@ -113,13 +113,13 @@
 
             const missileInterval = setInterval(() => {
                 const missileRect = missile.getBoundingClientRect();
-                missile.style.left = `${missileRect.left + 12}px`; // Incrementa la posición del misil
+                missile.style.left = `${missileRect.left + 100}px`; // Incrementa la posición del misil
 
                 // Verificar colisiones con "cyberattacks"
                 const cyberAttacks = document.querySelectorAll('.cyber-attack');
                 cyberAttacks.forEach(cyber => {
                     if (isCollision(missile, cyber) && !cyber.classList.contains('destroyed')) {
-                        cyber.src = 'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-143.png';
+                        cyber.src = './img/exploit.png';
                         cyber.classList.add('destroyed');
                         setTimeout(() => cyber.remove(), 500); // Eliminar después de mostrar la imagen destruida
 
@@ -153,10 +153,16 @@
             asteroid.src = src;
             asteroid.classList.add('asteroid');
 
+            // Condición especial para `rock-13.png`
+            if (src.includes('rock-13.png')) {
+                asteroid.style.bottom = '0px'; // Fija en la parte inferior de la pantalla
+            } else {
+
             const bottomPosition = isBottom ? 0 : Math.floor(Math.random() * 80) + 10;
             asteroid.style.bottom = `${bottomPosition}%`;
+            }
             asteroid.style.right = '-100px';
-
+            
             gameContainer.appendChild(asteroid);
 
             const asteroidSpeed = Math.random() * 3 + 3; // Aumentado ligeramente la velocidad
@@ -226,7 +232,7 @@
             gameContainer.addEventListener('click', function(event) {
                 if (event.target && event.target.id === 'restart-button') {
                     sessionStorage.removeItem('accesoPermitido');
-                    window.location.href = 'https://carloslhg.github.io/repositorio/JavaScript%20Exercises/';
+                    window.location.href = 'https://carloslhg.github.io/Repositorio/JavaScript%20Exercises/';
                 }
                 if (event.target && event.target.id === 'restart-game-button') {
                     resetGame();
@@ -278,16 +284,28 @@
         // Iniciar la creación de asteroides y cyberattacks al cargar la página
         function startAsteroids() {
             const asteroidImages = [
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-114.png',
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-113.png',
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-112.png',
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-111.png'
+                './img/rock-1.png',
+                './img/rock-2.png',
+                './img/rock-3.png',
+                './img/rock-4.png',
+                './img/rock-5.png',
+                './img/rock-6.png',
+                './img/rock-7.png',
+                './img/rock-8.png',
+                './img/rock-9.png',
+                './img/rock-10.png',
+                './img/rock-11.png',
+                './img/rock-12.png',
+                './img/rock-13.png'                
             ];
 
             const cyberAttackImages = [
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-139.png',
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-138.png',
-                'http://test3.futuremarketing.es/wp-content/uploads/2024/10/Recurso-137.png'
+                './img/aster-1.png',
+                './img/aster-2.png',
+                './img/aster-3.png',
+                './img/aster-4.png',
+                './img/aster-5.png',
+                './img/aster-6.png'
             ];
 
             asteroidGenerationInterval = setInterval(() => {
@@ -306,4 +324,3 @@
 
         startAsteroids(); // Inicia la generación de asteroides y ataques
     })();
-
