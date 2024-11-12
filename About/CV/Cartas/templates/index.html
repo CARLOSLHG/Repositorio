@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Cartas de Presentación</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Generador de Cartas de Presentación</h1>
+        <p>Complete los datos para generar su carta personalizada</p>
+    </header>
+
+    <section class="form-container">
+        <form action="/generate_pdf" method="post">
+            <!-- Información del remitente -->
+            <label for="nombreRemitente">Nombre y Apellido del remitente:</label>
+            <input type="text" id="nombreRemitente" name="nombreRemitente" required>
+
+            <!-- Información adicional del destinatario y contexto -->
+            <label for="sector">Sector del destinatario:</label>
+            <input type="text" id="sector" name="sector" required>
+
+            <label for="areaConocimiento">Áreas de conocimiento del remitente:</label>
+            <input type="text" id="areaConocimiento" name="areaConocimiento" required>
+
+            <label for="experiencia">Años de experiencia:</label>
+            <input type="number" id="experiencia" name="experiencia" required>
+
+            <label for="areaInteres">Áreas de interés específicas:</label>
+            <input type="text" id="areaInteres" name="areaInteres" required>
+
+            <button type="submit">Generar Carta en PDF</button>
+        </form>
+    </section>
+</body>
+</html>
