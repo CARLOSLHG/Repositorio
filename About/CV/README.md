@@ -70,7 +70,7 @@ Chile, Remote | **2021-2023 (Freelance)**
 ---
 
 ### Sky Corporation Import & Export  
-**Webmaster**  
+**Webmaster, Web Designer, UX | UI**  
 USA, Remote | **2018-2021 (Freelance)**  
 **Responsibilities**:
 - UX/UI design, including web development and implementation in HTML, CSS, and JavaScript.
@@ -82,7 +82,7 @@ USA, Remote | **2018-2021 (Freelance)**
 ---
 
 ### Freelance  
-**Graphic Designer and Advertiser**  
+**Graphic and Advertising Designer**  
 Venezuela, On-site | **2015-2018**  
 **Responsibilities**:
 - Worked in graphic design, digital illustration, and 3D animation, developing brand identity and logos.
@@ -93,7 +93,7 @@ Venezuela, On-site | **2015-2018**
 ---
 
 ### Suministro Tocoma CA  
-**Sales management**  
+**Sales Executive**  
 Venezuela, On-site | **2005-2014**  
 **Responsibilities**:
 - Managed client communication, supplier relationships, and workflow optimization using databases in Microsoft Access.
@@ -105,7 +105,7 @@ Venezuela, On-site | **2005-2014**
 ---
 
 ### Consorcio Dravica - Caruachi Hydroelectric Project  
-**Engineering Assistant**  
+**IT Technician**  
 Venezuela, On-site | **1998-2005 (Temporary Contract)**  
 **Responsibilities**:
 - Established quality controls for custom fabrication, analyzed blueprints, and estimated material needs.
@@ -127,7 +127,7 @@ Venezuela, On-site | **1996-1998**
 ---
 
 ### New Art Publicidad  
-**Lead Graphic Designer**  
+**Graphic Design Supervisor**  
 Venezuela, On-site | **1995-1996**  
 **Responsibilities**:
 - Designed marketing strategies and visual campaigns, leading the creation of corporate identity for local companies.
@@ -138,7 +138,7 @@ Venezuela, On-site | **1995-1996**
 ---
 
 ### Tipografía Ordaz  
-**Draftsman - Intern**  
+**Graphic Design Trainee**  
 Venezuela, On-site | **1994-1995**  
 **Responsibilities**:
 - Created large-format commercial advertising banners, gaining exposure in advertising and design.

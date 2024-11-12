@@ -69,7 +69,7 @@ Chile, Modalidad Remota | **2021-2023 (Contrato Freelance)**
 ---
 
 ### Sky Corporation Import & Export  
-**Webmaster**  
+**Webmaster, Diseñador Web, UX | UI**  
 EEUU, Modalidad Remota | **2018-2021 (Contrato Freelance)**  
 **Responsabilidades**:
 - Trabajé en UX/UI para la maquetación e implementación de sitios web con HTML, CSS y JavaScript.
@@ -104,7 +104,7 @@ Venezuela, Modalidad Presencial | **2005-2014**
 ---
 
 ### Consorcio Dravica - Hidroeléctrica Caruachi  
-**Auxiliar de Ingeniería**  
+**Técnico informático**  
 Venezuela, Modalidad Presencial | **1998-2005 (Contrato Temporal)**  
 **Responsabilidades**:
 - Establecí controles de fabricación de piezas, analicé planos y realicé estimaciones de materiales para el proyecto hidroeléctrico.
@@ -126,7 +126,7 @@ Venezuela, Modalidad Presencial | **1996-1998**
 ---
 
 ### New Art Publicidad  
-**Diseñador Gráfico Principal**  
+**Jefe de diseño gráfico**  
 Venezuela, Modalidad Presencial | **1995-1996**  
 **Responsabilidades**:
 - Diseñé estrategias de marketing y campañas visuales, liderando la creación de identidad corporativa para empresas locales.
