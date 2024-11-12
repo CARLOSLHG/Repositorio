@@ -1,7 +1,10 @@
 # 📄 Carlos Luis Hernández Gutiérrez - Curriculum Vitae
 
 ---
+
 [Go to Portfolio & Project Examples](../../) | [CV en Español](./CV-es.md)
+
+---
 
 ## 📬 Contact and Personal Information
 

@@ -68,7 +68,10 @@ Welcome to the Atlassian projects section. Here you will find documentation and 
 
 Some projects and documents are under development and may be subject to change.
 
+
+
 ---
 
 [Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
+
 ---

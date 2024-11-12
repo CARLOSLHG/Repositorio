@@ -69,5 +69,7 @@ Bienvenido a la sección de proyectos de Atlassian. Aquí encontrarás documenta
 Algunos proyectos y documentos están en desarrollo y pueden estar sujetos a cambios.
 
 ---
+
 [English version](README-es.md) | [Regresar el Menú del Repositorio](../README.md)
+
 ---

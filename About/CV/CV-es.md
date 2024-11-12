@@ -1,7 +1,11 @@
 # 📄 Carlos Luis Hernández Gutiérrez - Curriculum Vitae
 
 ---
+
 [Ir a Portafolio y Ejemplos de Proyectos](../../) | [English version](./README.md)
+
+---
+
 ## 📬 Contacto y Datos Personales
 
 <table>
