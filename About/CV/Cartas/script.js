@@ -34,7 +34,7 @@ function cargarTabla() {
     document.getElementById('contadorSolicitudes').textContent = datos.length;
 }
 
-// Función para generar la carta de presentación y guardar en CSV o PDF
+// Función para generar la carta de presentación y guardar en localStorage
 function generarCarta() {
     // Obtiene los datos del formulario
     const nombreDestinatario = document.getElementById('nombreDestinatario').value;
@@ -109,13 +109,19 @@ Es un placer dirigirme a usted para expresar mi interés en la posición de ${pu
         downloadLink.classList.remove('hidden');
     }
 
-    // Guarda los datos en el archivo CSV con acumulación
+    // Guardar los datos en localStorage sin descargar automáticamente el archivo CSV
     const datos = [nombreDestinatario, empresa, direccionEmpresa, puesto];
-    guardarEnCSV(datos);
+    guardarEnLocalStorage(datos);
+
+    // Pregunta al usuario si desea descargar el archivo CSV
+    const descargarCsv = confirm("¿Desea descargar el archivo CSV con las solicitudes acumuladas?");
+    if (descargarCsv) {
+        descargarCSV();
+    }
 }
 
-// Función para almacenar datos en localStorage y descargar el archivo acumulado
-function guardarEnCSV(datos) {
+// Función para almacenar datos en localStorage
+function guardarEnLocalStorage(datos) {
     // Recupera datos existentes de localStorage
     let acumulado = localStorage.getItem("solicitudes");
     acumulado = acumulado ? JSON.parse(acumulado) : [];
@@ -125,6 +131,12 @@ function guardarEnCSV(datos) {
 
     // Guarda la nueva lista en localStorage
     localStorage.setItem("solicitudes", JSON.stringify(acumulado));
+}
+
+// Función para descargar el archivo CSV con datos acumulados
+function descargarCSV() {
+    let acumulado = localStorage.getItem("solicitudes");
+    acumulado = acumulado ? JSON.parse(acumulado) : [];
 
     // Crea el contenido del CSV
     const encabezados = "Nombre del destinatario,Empresa,Dirección de la empresa,Puesto al que aplica\n";
@@ -133,7 +145,7 @@ function guardarEnCSV(datos) {
     // Genera el archivo CSV para descarga
     const csvBlob = new Blob([encabezados + contenidoCSV], { type: 'text/csv' });
     const csvUrl = URL.createObjectURL(csvBlob);
-    
+
     // Crea el enlace de descarga
     const hiddenLink = document.createElement('a');
     hiddenLink.href = csvUrl;
