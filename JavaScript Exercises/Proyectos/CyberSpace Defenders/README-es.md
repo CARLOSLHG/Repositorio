@@ -2,7 +2,7 @@
 # CyberSpace Defenders
 
 ---
-[English version](README-es.md) | [Regresar al Repositorio](../README.md)
+[English version](README.md) | [Regresar al Repositorio](../)
 
 ---
 
@@ -45,4 +45,4 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ---
 
-[English version](README-es.md) | [Regresar al Repositorio](../README.md)
+[English version](README.md) | [Regresar al Repositorio](../)
