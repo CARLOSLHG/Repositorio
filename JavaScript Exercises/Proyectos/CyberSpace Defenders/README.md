@@ -1,6 +1,6 @@
 # CyberSpace Defenders
 ---
-[Leer en Español](README-es.md) | [Return to Main Page](../../../README.md)
+[Leer en Español](README-es.md) | [Return to Main Page](../../../README.md) | [Play Now](./Container/index.html)
 
 ---
 
@@ -39,7 +39,7 @@ The game measures time in light years and effectiveness in the number of threats
 
 ## Game Link
 
-[CyberSpace Defenders - Play Now](./Container/index.html)
+[Play Now](./Container/index.html)
 
 ---
 
