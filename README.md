@@ -57,7 +57,7 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
    - **Async/Await and Promises**: Exercises on handling asynchronous JavaScript, with practical examples.
    - **API Handling**: Practices for working with external APIs, making requests, and manipulating received data.
 
-   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/README-en.md) |
+   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
 
 
 ---
