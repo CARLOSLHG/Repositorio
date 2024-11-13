@@ -1,28 +1,25 @@
-# En Desarrollo 🚧
+# JavaScript Exercises
 
-¡Bienvenido! Esta sección del repositorio está en construcción. Actualmente, estamos desarrollando contenido y funcionalidades, por lo que algunas áreas pueden no estar completas o en proceso de actualización.
+Welcome! This section of the repository is under construction. We are currently developing content and features, so some areas may be incomplete or in the process of being updated.
 
-Agradecemos tu paciencia mientras trabajamos para proporcionar una experiencia completa y detallada.
-
----
-
-## Contenido a desarrollar
-
-Estamos trabjando en las siguientes áreas:
-
-- **Documentación general**: Este espacio contendrá toda la documentación y las guías de usuario necesarias.
-- **Proyectos**: Aquí encontrarás los proyectos relacionados con nuestras implementaciones y casos de estudio.
-- **Recursos adicionales**: Pronto incluiremos enlaces y recursos adicionales que te ayudarán a aprovechar al máximo los proyectos de este repositorio.
+We appreciate your patience as we work to provide a complete and detailed experience.
 
 ---
 
+## Content in Development
 
-## Contenido en curso
+We are working on the following areas:
 
-Estamos trabjando en:
+- **General Documentation**: This section will contain all necessary documentation and user guides.
+- **Projects**: Here, you will find projects related to our implementations and case studies.
+- **Additional Resources**: We will soon include links and additional resources to help you make the most of the projects in this repository.
 
-- **Proyecto**: []()
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+## Project Examples
 
+[CyberSpace Defenders - Play Now](./Container/index.html)
+
+---
+
+[Back to Main Project Menu](../)
