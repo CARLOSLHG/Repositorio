@@ -1,6 +1,6 @@
 # CyberSpace Defenders
 ---
-[Leer en Español](README-es.md) | [Return to the Repository Main Page](../)
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../../../README.md)
 
 ---
 
@@ -43,6 +43,6 @@ The game measures time in light years and effectiveness in the number of threats
 
 ---
 
-[Leer en Español](README-es.md) | [Return to the Repository Main Page](../)
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../../../README.md)
 
 ---
