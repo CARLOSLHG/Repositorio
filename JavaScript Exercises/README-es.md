@@ -23,5 +23,7 @@ Estamos trabjando en las siguientes áreas:
 
 ---
 
-[Volver al Menú Principal de Proyectos](../)
+[English version](/JavaScript%20Exercises/README.md) | [Regresar al Repositorio](../) |
+
+---
 

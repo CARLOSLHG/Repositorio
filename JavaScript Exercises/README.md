@@ -18,8 +18,10 @@ We are working on the following areas:
 
 ## Project Examples
 
-[CyberSpace Defenders - Play Now](./Container/)
+[CyberSpace Defenders - Play Now](./Proyectos/CyberSpace%20Defenders/Container/index.html)
 
 ---
 
-[Back to Main Project Menu](../)
+[Leer en Español](/JavaScript%20Exercises/README-es.md) | [Back to Main Project Menu](../) |
+
+---
