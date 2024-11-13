@@ -1,4 +1,4 @@
-# React & Node.js Projects 🚧
+# React & Node.js Projects
 
 ¡Bienvenido a la sección de **React & Node.js Projects**! Aquí se encuentran proyectos desarrollados en **React** y **Node.js** orientados a la generación de prompts para modelos de IA. Esta área está en constante evolución para incluir más proyectos y funcionalidades avanzadas.
 

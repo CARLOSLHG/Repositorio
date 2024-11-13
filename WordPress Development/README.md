@@ -1,4 +1,4 @@
-# En Desarrollo 🚧
+# WordPress Development
 
 ¡Bienvenido! Esta sección del repositorio está en construcción. Actualmente, estamos desarrollando contenido y funcionalidades, por lo que algunas áreas pueden no estar completas o en proceso de actualización.
 

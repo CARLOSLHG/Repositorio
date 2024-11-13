@@ -1,4 +1,4 @@
-# React & Node.js Projects 🚧
+# React & Node.js Projects
 
 ---
 [Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
