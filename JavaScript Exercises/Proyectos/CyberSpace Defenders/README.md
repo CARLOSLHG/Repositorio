@@ -27,8 +27,8 @@ The game measures time in light years and effectiveness in the number of threats
 
 ## Game Instructions
 
-1. Use the arrow keys to move the spaceship.
-2. Shoot asteroids by pressing the space bar to eliminate them before they reach your ship.
+1. Use the mouse to move the spaceship.
+2. Shoot the asteroids by pressing the left mouse button to eliminate them before they reach your spaceship.
 3. Each asteroid destroyed increases your score and represents one less cybersecurity threat in the universe.
 
 ## Project Features

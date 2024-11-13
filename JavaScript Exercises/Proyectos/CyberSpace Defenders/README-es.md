@@ -29,8 +29,8 @@ El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repeli
 
 ## Instrucciones de Juego
 
-1. Usa las flechas del teclado para mover la nave.
-2. Dispara a los asteroides presionando la barra espaciadora para eliminarlos antes de que lleguen a tu nave.
+1. Usa el ratón para mover la nave.
+2. Dispara a los asteroides presionando el botón izquierdo del ratón para eliminarlos antes de que lleguen a tu nave.
 3. Cada asteroide destruido aumenta tu puntuación y representa una amenaza de ciberseguridad menos en el universo.
 
 ## Características del Proyecto
