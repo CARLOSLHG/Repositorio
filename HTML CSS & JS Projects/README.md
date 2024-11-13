@@ -25,7 +25,7 @@ Projects Examples:
 
 - **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/)
 - **Web Page**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
-- **Javascript Game**: [CyberSpace Defenders](./Proyectos/CyberSpace%20Defenders/)
+
 
 ---
 

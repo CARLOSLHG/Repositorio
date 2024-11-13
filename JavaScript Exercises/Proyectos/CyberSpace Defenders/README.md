@@ -1,4 +1,8 @@
 # CyberSpace Defenders
+---
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+
+---
 
 **CyberSpace Defenders** is an educational game developed in JavaScript to teach cybersecurity concepts in an entertaining way to children between 8 and 16 years old. In this game, players control a spaceship whose mission is to protect the digital universe by eliminating asteroids that represent cyber threats.
 
@@ -39,4 +43,6 @@ The game measures time in light years and effectiveness in the number of threats
 
 ---
 
-[Back to Main Project Menu](../)
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+
+---
