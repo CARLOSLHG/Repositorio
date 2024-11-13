@@ -19,7 +19,7 @@ Estamos trabjando en las siguientes áreas:
 
 ## Ejemplos de proyectos
 
-[CyberSpace Defenders - Juega ahora](./Container/index.html)
+[CyberSpace Defenders - Juega ahora](./Container/)
 
 ---
 

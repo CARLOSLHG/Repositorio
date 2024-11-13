@@ -18,7 +18,7 @@ We are working on the following areas:
 
 ## Project Examples
 
-[CyberSpace Defenders - Play Now](./Container/index.html)
+[CyberSpace Defenders - Play Now](./Container/)
 
 ---
 
