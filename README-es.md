@@ -13,7 +13,6 @@
 - **📍 Ubicación**: España
 - **✉️ Email**: chcarlos3@gmail.com
 - **🔗 LinkedIn**: [Carlos LHG en LinkedIn](https://www.linkedin.com/in/carloslhg)
-- **🛠️ Portafolio en línea**: [(en desarrollo)](#)
 - **👤 Sobre mí**: [About Me](./About)
 - **👤 Curriculum Vitae**: [English](./About/CV/README.md) - [Español](./About/CV/CV-es.md)
 
