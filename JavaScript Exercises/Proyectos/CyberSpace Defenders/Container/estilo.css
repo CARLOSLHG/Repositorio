@@ -136,7 +136,7 @@ body, html {
     transform: translateX(-50%);
     font-size: 3.5vw;
     font-weight: bold;
-    color: #FF3B3F;
+    color: #ffffff;
     text-transform: uppercase;
     white-space: nowrap;
     z-index: 25; /* Incrementado el z-index para que esté encima de otros elementos */
