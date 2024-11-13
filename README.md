@@ -52,6 +52,14 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 
    [🔍 Explore Project Examples in React and Node.js](./React%20&%20Node.js%20Projects) |
 
+### 6. **🛠️ Advanced JavaScript**
+   - **Object-Oriented Programming (OOP)**: Exercises to apply OOP concepts in JavaScript.
+   - **Async/Await and Promises**: Exercises on handling asynchronous JavaScript, with practical examples.
+   - **API Handling**: Practices for working with external APIs, making requests, and manipulating received data.
+
+   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/README-en.md) |
+
+
 ---
 
 ## 🛠️ Technologies and Tools
