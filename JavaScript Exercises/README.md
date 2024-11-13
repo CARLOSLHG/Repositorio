@@ -22,6 +22,6 @@ We are working on the following areas:
 
 ---
 
-[Leer en Español](/JavaScript%20Exercises/README-es.md) | [Back to Main Project Menu](../) |
+[Leer en Español](README-es.md) | [Back to Main Project Menu](../) |
 
 ---

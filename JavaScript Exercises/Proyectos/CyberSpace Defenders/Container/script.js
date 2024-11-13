@@ -232,7 +232,7 @@
             gameContainer.addEventListener('click', function(event) {
                 if (event.target && event.target.id === 'restart-button') {
                     sessionStorage.removeItem('accesoPermitido');
-                    window.location.href = './';
+                    window.location.href = '../README.md';
                 }
                 if (event.target && event.target.id === 'restart-game-button') {
                     resetGame();

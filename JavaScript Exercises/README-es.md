@@ -23,7 +23,7 @@ Estamos trabjando en las siguientes áreas:
 
 ---
 
-[English version](/JavaScript%20Exercises/README.md) | [Regresar al Repositorio](../) |
+[English version](/README.md) | [Regresar al Repositorio](../) |
 
 ---
 
