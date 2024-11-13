@@ -30,7 +30,7 @@ body, html {
 }
 
 #background {
-    background: url('./img/space.png') repeat-x;
+    background: url('./img/space1.png') repeat-x;
     background-size: cover;
     width: 200%;
     height: 100%;
