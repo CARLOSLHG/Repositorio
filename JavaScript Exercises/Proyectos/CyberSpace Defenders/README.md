@@ -1,43 +1,42 @@
-
 # CyberSpace Defenders
 
-**CyberSpace Defenders** es un juego educativo desarrollado en JavaScript para enseñar conceptos de ciberseguridad de manera entretenida a niños de entre 8 y 16 años. En este juego, los jugadores controlan una nave espacial cuya misión es proteger el universo digital eliminando asteroides que representan amenazas cibernéticas.
+**CyberSpace Defenders** is an educational game developed in JavaScript to teach cybersecurity concepts in an entertaining way to children between 8 and 16 years old. In this game, players control a spaceship whose mission is to protect the digital universe by eliminating asteroids that represent cyber threats.
 
-## Objetivo del Juego
+## Game Objective
 
-La misión es sencilla: el jugador debe destruir asteroides que contienen amenazas de ciberseguridad, como:
-- **Vírus**
+The mission is simple: the player must destroy asteroids that contain cybersecurity threats, such as:
+- **Virus**
 - **DDoS**
-- **Phishing** 
+- **Phishing**
 - **Malware**
 - **Ransomware**
 - **Spyware**
 
-Cada asteroide que se destruye contribuye a la seguridad del espacio digital, ayudando a los jugadores a comprender de manera divertida cómo funciona la protección en el mundo de la ciberseguridad.
+Each asteroid destroyed contributes to the security of digital space, helping players understand, in a fun way, how protection works in the cybersecurity world.
 
-El juego mide el tiempo en años luz y la efectividad en Nro. de amenazas repelidas, tambien cuenta con un contador de asteroides que se superan.
+The game measures time in light years and effectiveness in the number of threats repelled. It also has a counter for the asteroids that are surpassed.
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-- **HTML** y **CSS** para la estructura y el diseño.
-- **JavaScript** para la lógica del juego y las interacciones.
+- **HTML** and **CSS** for structure and design.
+- **JavaScript** for game logic and interactions.
 
-## Instrucciones de Juego
+## Game Instructions
 
-1. Usa las flechas del teclado para mover la nave.
-2. Dispara a los asteroides presionando la barra espaciadora para eliminarlos antes de que lleguen a tu nave.
-3. Cada asteroide destruido aumenta tu puntuación y representa una amenaza de ciberseguridad menos en el universo.
+1. Use the arrow keys to move the spaceship.
+2. Shoot asteroids by pressing the space bar to eliminate them before they reach your ship.
+3. Each asteroid destroyed increases your score and represents one less cybersecurity threat in the universe.
 
-## Características del Proyecto
+## Project Features
 
-- Diseñado para ser intuitivo y accesible para niños.
-- Combina diversión y aprendizaje sobre ciberseguridad.
-- Expone a los jugadores a términos clave de seguridad en línea mientras juegan.
+- Designed to be intuitive and accessible for children.
+- Combines fun with cybersecurity learning.
+- Exposes players to key online security terms as they play.
 
-## Enlace al Juego
+## Game Link
 
-[CyberSpace Defenders - Juega ahora](./Container/)
+[CyberSpace Defenders - Play Now](./Container/index.html)
 
 ---
 
-[Volver al Menú Principal de Proyectos](../)
+[Back to Main Project Menu](../)
