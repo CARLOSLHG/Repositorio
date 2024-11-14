@@ -1,7 +1,6 @@
-
 # CyberSpace Defenders
-
 ---
+
 [English version](README.md) | [Regresar al Repositorio](../../../README.md) | [Ir al Juego](./Container/index.html)
 
 ---

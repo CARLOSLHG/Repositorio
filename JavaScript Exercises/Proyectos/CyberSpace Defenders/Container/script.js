@@ -38,7 +38,7 @@
         const cyberattackCounter = document.getElementById('cyberattack-counter');
         cyberattackCounter.textContent = `Ataques repelidos: ${cyberattackCount}`;
 
-        // Incrementar la distancia recorrida cada segundo
+        // Incrementar la Distancia recorrida cada segundo
         let distanceInterval;
         function startDistanceCounter() {
             distanceInterval = setInterval(() => {
