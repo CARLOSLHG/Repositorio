@@ -44,7 +44,7 @@
             distanceInterval = setInterval(() => {
                 if (!gameOver) {
                     lightYears += 1;
-                    distanceCounter.textContent = `Años Luz de distancia: ${lightYears}`;
+                    distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
                 }
             }, 1000);
         }
@@ -124,7 +124,7 @@
                         setTimeout(() => cyber.remove(), 500); // Eliminar después de mostrar la imagen destruida
 
                         cyberattackCount += 1;
-                        cyberattackCounter.textContent = `Ataques repelidos: ${cyberattackCount}`;
+                        cyberattackCounter.textContent = `Nro. de Amenazas Neutralizadas: ${cyberattackCount}`;
 
                         clearInterval(missileInterval);
                         missile.remove();
@@ -171,7 +171,7 @@
             // Actualizar el contador de asteroides cuando un asteroide pasa la nave
             asteroid.addEventListener('animationend', () => {
                 asteroidCount += 1;
-                asteroidCounter.textContent = `Número de asteroides: ${asteroidCount}`;
+                asteroidCounter.textContent = `Paquetes Basura: ${asteroidCount}`;
                 asteroid.remove();
             });
 
