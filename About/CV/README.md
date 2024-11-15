@@ -79,7 +79,7 @@ USA, Remote | **2018-2021 (Freelance)**
 - UX/UI design, including web development and implementation in HTML, CSS, and JavaScript.
 
 **Achievements**:
-- Achieved a 60% increase in quote requests after optimizing the **Scotsmanlatam.com** website for Latin America and the Caribbean.
+- I successfully increased online quote requests by 60% after optimizing the **Scotsmanlatam.com** website for Latin America and the Caribbean.
 - Gained expertise in responsive web design, enhancing user experience and mobile accessibility.
 
 ---
