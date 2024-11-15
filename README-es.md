@@ -56,7 +56,7 @@
    - **Async/Await y Promesas**: Ejercicios sobre el manejo de asincronía en JavaScript, con ejemplos prácticos.
    - **Manejo de APIs**: Prácticas para trabajar con APIs externas, realizar peticiones y manipular datos recibidos.
 
-   [🔍 Explorar proyectos en JavaScript](./JavaScript%20Exercises/) |
+   [🔍 Explorar proyectos en JavaScript](./JavaScript%20Exercises/README-es.md) |
 
 ---
 
