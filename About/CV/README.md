@@ -8,7 +8,7 @@
 - **GitHub:** [Repository](https://carloslhg.github.io/Repositorio)  
 - **Location:** Madrid, Spain (with full geographic mobility)
 
-| [Español](CV-es.md) |
+| [Español](CV-es.md) | [Project Examples](../../README.md) |
 
 ## Professional Summary
 Consultant in Atlassian technologies and web development specialist with experience in UX/UI design and cloud systems administration. My background includes projects in Jira implementation, technical training, and interface development to optimize communication and team performance in sectors such as education, research, technology, and pharmaceuticals. Bilingual (Spanish and English), highly adaptable to technological environments, and committed to continuous learning.
