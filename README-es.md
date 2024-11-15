@@ -49,14 +49,14 @@
    - **Generadores de Prompts**: Herramientas en React para crear prompts personalizados en DALL-E y MidJourney.
    - **Proyectos Actuales**: DALL-E Prompt Generator y Midjourney Prompt Generator.
 
-   [🔍 Explorar proyectos en React y Node.js](./React%20&%20Node.js%20Projects) |
+   [🔍 Explorar proyectos en React y Node.js](/React%20&%20Node.js%20Projects/README.md) |
 
 ### 6. **🛠️ JavaScript Avanzado**
    - **Programación Orientada a Objetos (OOP)**: Ejercicios para aplicar conceptos de OOP en JavaScript.
    - **Async/Await y Promesas**: Ejercicios sobre el manejo de asincronía en JavaScript, con ejemplos prácticos.
    - **Manejo de APIs**: Prácticas para trabajar con APIs externas, realizar peticiones y manipular datos recibidos.
 
-   [🔍 Explorar proyectos en JavaScript](./JavaScript%20Exercises/README-es) |
+   [🔍 Explorar proyectos en JavaScript](/JavaScript%20Exercises/README-es.md) |
 
 ---
 
