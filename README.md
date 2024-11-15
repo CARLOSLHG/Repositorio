@@ -49,14 +49,14 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
    - **Prompt Generators**: Tools in React to create customized prompts in DALL-E and MidJourney.
    - **Current Projects**: DALL-E Prompt Generator and Midjourney Prompt Generator.
 
-   [🔍 Explore Project Examples in React and Node.js](./React%20&%20Node.js%20Projects) |
+   [🔍 Explore Project Examples in React and Node.js](/React%20&%20Node.js%20Projects/README.md) |
 
 ### 6. **🛠️ Advanced JavaScript**
    - **Object-Oriented Programming (OOP)**: Exercises to apply OOP concepts in JavaScript.
    - **Async/Await and Promises**: Exercises on handling asynchronous JavaScript, with practical examples.
    - **API Handling**: Practices for working with external APIs, making requests, and manipulating received data.
 
-   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
+   [🔍 Explore JavaScript Projects](/JavaScript%20Exercises/README.md) |
 
 
 ---
