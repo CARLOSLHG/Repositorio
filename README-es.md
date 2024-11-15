@@ -1,7 +1,11 @@
 ## 🚀 Carlos Luis Hernández Gutiérrez
+
 # Ejemplos de Proyectos y Experiencia Profesional
----
+
+
+
 [English version >>](/README.md) | [Regresar a  LinkeDIn](https://www.linkedin.com/in/carloslhg)
+
 ---
 
 ¡Bienvenido a mi portafolio! Soy un profesional especializado en **Administración de Jira**, **Diseño Web**, **Análisis de Datos** y **Desarrollo de aplicaciones interactivas**. Aquí encontrarás un resumen de mis proyectos y experiencia técnica en diversas áreas.
