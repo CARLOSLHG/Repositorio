@@ -40,18 +40,6 @@ body, html {
     left: 0;
 }
 
-#background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(51, 51, 51, 0.25); /* Color #333 con 25% de opacidad */
-    z-index: 1; /* Asegúrate de que esté sobre el fondo pero debajo del contenido */
-    pointer-events: none; /* Permite que los clics pasen a los elementos debajo */
-}
-
 .asteroid {
     position: absolute;
     width: 8.4vw;
