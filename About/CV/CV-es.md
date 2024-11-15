@@ -79,7 +79,7 @@ EEUU, Modalidad Remota | **2018-2021 (Contrato Freelance)**
 - Trabajé en UX/UI para la maquetación e implementación de sitios web con HTML, CSS y JavaScript.
   
 **Logros**:
-- Se logró aumentar las solicitudes de presupuestos en linea en un 60% tras optimizar el portal web de **Scotsmanlatam.com** para Latinoamérica y el Caribe.
+- Logré aumentar las solicitudes de presupuestos en linea en un 60% tras optimizar el portal web de **Scotsmanlatam.com** para Latinoamérica y el Caribe.
 - Adquirí una especialización en diseño web responsivo, mejorando la experiencia de usuario y el acceso en dispositivos móviles.
 
 ---
