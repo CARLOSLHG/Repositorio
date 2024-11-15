@@ -25,38 +25,38 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
    - **Advanced Implementations**: Configuration and customization of Jira, focused on Jira Software and Jira Service Management.
    - **Study Projects**: Development of practical projects and training sessions in Atlassian.
 
-   [🔍 Explore Project Examples in Jira and Confluence](./Atlassian) |
+   [🔍 Explore Project Examples in Jira and Confluence](./Atlassian/) |
 
 ### 2. **🌐 WordPress Development and Customization**
    - **WordPress Projects**: Creation of SEO-optimized sites, with customizations using Elementor, WooCommerce, and security plugins.
    - **Current Projects**: **CyberSTARS**, an educational site to teach cybersecurity to children with an interactive mini-game and virtual mascot.
 
-   [🔍 Explore Project Examples in WordPress](./WordPress%20Development) |
+   [🔍 Explore Project Examples in WordPress](./WordPress%20Development/) |
 
 ### 3. **💻 HTML, CSS & JavaScript**
    - **Web Portfolio**: Interactive applications and games in JavaScript, HTML5 and CSS3 interfaces, and responsive design.
    - **Highlighted Projects**: CyberSpace Defenders, an educational app on cybersecurity, and **Carbon Company**, a drawing academy.
 
-   [🔍 Explore Project Examples in HTML, CSS, and JS](./HTML%20CSS%20&%20JS%20Projects) |
+   [🔍 Explore Project Examples in HTML, CSS, and JS](./HTML%20CSS%20&%20JS%20Projects/) |
 
 ### 4. **📊 Data Analysis and Visualization**
    - **Tools**: SQL, R, Tableau, Excel, and Google BigQuery.
    - **Data Analysis Projects**: User conversion strategies for **Cyclistic Bike Share Inc.** and dashboards for various industries.
 
-   [🔍 Explore data analysis Project Examples](./Data%20Analysis%20Projects) |
+   [🔍 Explore data analysis Project Examples](./Data%20Analysis%20Projects/) |
 
 ### 5. **⚛️ React & Node.js**
    - **Prompt Generators**: Tools in React to create customized prompts in DALL-E and MidJourney.
    - **Current Projects**: DALL-E Prompt Generator and Midjourney Prompt Generator.
 
-   [🔍 Explore Project Examples in React and Node.js](./React%20&%20Node.js%20Projects/README.md) |
+   [🔍 Explore Project Examples in React and Node.js](./React%20&%20Node.js%20Projects/) |
 
 ### 6. **🛠️ Advanced JavaScript**
    - **Object-Oriented Programming (OOP)**: Exercises to apply OOP concepts in JavaScript.
    - **Async/Await and Promises**: Exercises on handling asynchronous JavaScript, with practical examples.
    - **API Handling**: Practices for working with external APIs, making requests, and manipulating received data.
 
-   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/README.md) |
+   [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
 
 
 ---

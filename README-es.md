@@ -31,19 +31,19 @@
    - **Proyectos WordPress**: Creación de sitios optimizados para SEO, con personalizaciones mediante Elementor, WooCommerce y plugins de seguridad.
    - **Proyectos Actuales**: **CyberSTARS**, un sitio educativo para enseñar ciberseguridad a niños con mini-juego interactivo y mascota virtual.
 
-   [🔍 Explorar proyectos en WordPress](./WordPress%20Development) |
+   [🔍 Explorar proyectos en WordPress](./WordPress%20Development/) |
 
 ### 3. **💻 HTML, CSS & JavaScript**
    - **Portafolio Web**: Aplicaciones y juegos interactivos en JavaScript, interfaces HTML5 y CSS3, diseño responsive.
    - **Proyectos Destacados**: CyberSpace Defenders, una app educativa sobre ciberseguridad, y **Carbon Company**, una academia de dibujo.
 
-   [🔍 Explorar proyectos en HTML, CSS y JS](./HTML%20CSS%20&%20JS%20Projects) |
+   [🔍 Explorar proyectos en HTML, CSS y JS](./HTML%20CSS%20&%20JS%20Projects/) |
 
 ### 4. **📊 Análisis de Datos y Visualización**
    - **Herramientas**: SQL, R, Tableau, Excel y Google BigQuery.
    - **Proyectos de Análisis**: Estrategias de conversión de usuarios para **Cyclistic Bike Share Inc.** y dashboards para distintas industrias.
 
-   [🔍 Explorar proyectos de análisis de datos](./Data%20Analysis%20Projects) |
+   [🔍 Explorar proyectos de análisis de datos](./Data%20Analysis%20Projects/) |
 
 ### 5. **⚛️ React & Node.js**
    - **Generadores de Prompts**: Herramientas en React para crear prompts personalizados en DALL-E y MidJourney.
