@@ -6,7 +6,9 @@
 - **Correo electrónico:** chcarlos3@gmail.com  
 - **LinkedIn:** [Carlos Hernández](https://linkedin.com/in/carloslhg)  
 - **GitHub:** [Repositorio](https://carloslhg.github.io/Repositorio)  
-- **Ubicación:** Madrid, España (con total movilidad geográfica)  
+- **Ubicación:** Madrid, España (con total movilidad geográfica)
+
+ [English](README.md) | [Repositorio de Proyectos](https://carloslhg.github.io/Repositorio/README-es.md)
 
 ## Resumen Profesional
 Consultor en tecnologías Atlassian y especialista en desarrollo web con experiencia en diseño UX/UI y administración de sistemas en la nube. Mi trayectoria incluye proyectos de implementación de Jira, capacitación técnica y desarrollo de interfaces que optimizan la comunicación y el rendimiento de equipos en sectores como educación, investigación, tecnología y farmacéutica. Bilingüe (español e inglés), con alta adaptabilidad a entornos tecnológicos y comprometido con el aprendizaje continuo.
