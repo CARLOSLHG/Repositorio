@@ -1,6 +1,6 @@
 ## Jira Software
 
-# Administrador de Proyectos 
+# Administrador de Proyectos DataCenter
 
 # EJERCICIOS
 
@@ -356,3 +356,14 @@ Por otro lado, cada vez que una hipótesis cambia a “Validada”, se disparar�
 3. **Intentar cerrar la hipótesis** con un usuario que no pertenezca a “Investigador Senior” para confirmar que no tiene permiso.  
 4. **Cerrar la hipótesis** como “Investigador Senior”. Comprueba que el correo llega con la información inteligente (placeholders correctos).
 
+
+## Fe Errata
+
+debido a que la plataforma de Atlassian cambia constantemente, algunos menus y accesos podrian estar cambiados.
+
+
+---
+
+[Leer en Ingles](README.md) | [Regresar al Repositorio](../README.md)
+
+---
