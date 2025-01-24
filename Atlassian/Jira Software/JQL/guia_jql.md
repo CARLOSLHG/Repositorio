@@ -73,3 +73,6 @@ project IN ("Alpha", "Beta") AND priority = "Blocker"
 - Usa funciones dinámicas para búsquedas automatizadas.
 - Combina condiciones con operadores lógicos (`AND`, `OR`) para mayor precisión.
 - Integra JQL en dashboards y filtros guardados para reportes dinámicos.
+
+---
+| [Regresar](./README.md) |
