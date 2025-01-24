@@ -8,9 +8,8 @@
 - **[Tabla 5: Tabla de PostFunciones (Post-functions)](./PostFunciones.md)**
 - **[Tabla 6: JQL (Jira Query Language)](./JQL.md)**
 - **[Tabla 7: Campos Inteligentes (SmartValues)](./SmartValues.md)**
----
 
-## **Notas y Recomendaciones Finales**
+## Notas y Recomendaciones Finales
 
 * **Propiedades de Workflow (Properties)**:
 
