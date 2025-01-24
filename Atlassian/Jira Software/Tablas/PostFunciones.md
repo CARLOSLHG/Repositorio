@@ -2,6 +2,7 @@
 
 Las **Post-functions** se ejecutan después de que se cumple la validación y se confirma la transición. Permiten acciones como actualizar campos, asignar la incidencia, disparar notificaciones, crear subtareas, etc.
 
+
 | Nombre (Postfunction) | Descripción | Sintaxis / Configuración | Ejemplo |
 | ----- | ----- | ----- | ----- |
 | **Assign to Reporter** | Asigna automáticamente la incidencia al usuario que la creó (reportero). | \- Seleccionar “Assign to reporter” en la configuración de la transición. | Al pasar de “Formulada” a “En Análisis”, la incidencia se reasigna al reportero para que haga la investigación inicial. |
