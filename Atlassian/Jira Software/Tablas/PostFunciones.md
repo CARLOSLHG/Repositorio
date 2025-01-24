@@ -10,7 +10,7 @@ Las **Post-functions** se ejecutan después de que se cumple la validación y se
 | **Trigger a Webhook** | Dispara un webhook (URL externa) para integrarse con otros sistemas tras la transición. | \- Seleccionar “Trigger Webhook”. \- Introducir la URL del servicio externo y los datos a enviar (headers, payload). | Se notifica a una API externa que la “Hipótesis” cambió de estado, pasando datos como `issue.key`, `issue.status`, etc. |
 | **Create Subtask** | Crea automáticamente una subtarea (o varias) al completar la transición. | \- Añadir “Create Subtask” y detallar el tipo de subtarea, el resumen y cualquier otro campo requerido. | Al pasar de “Formulada” a “En Análisis”, se genera una subtarea “Análisis de Factores Externos” que debe revisar otro integrante del equipo. |
 | **Send Custom Email** (legacy) | Envía un correo personalizado (si existe un plugin o la versión de Jira lo permite) tras la transición. | \- Configurar la dirección o grupo destinatario. \- Definir el asunto y cuerpo del mensaje. \- (A veces requiere apps adicionales, ej. “Jira Suite Utilities”). | Al validar una hipótesis, se envía un correo a “investigadores@empresa.com” con un asunto y cuerpo explicando los pasos siguientes. |
----
+
 
 ### **Notas Relevantes**
 
