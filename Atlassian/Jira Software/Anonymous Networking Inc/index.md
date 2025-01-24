@@ -1,3 +1,5 @@
+
+## Proyecto en desarrollo
 # Introducción
 
 Bienvenido a este libro electrónico, una guía exhaustiva y práctica para comprender y dominar Jira Software Cloud. Diseñado pensando en administradores de proyectos, ingenieros de TI y todos aquellos que buscan implementar sistemas eficientes de gestión en sus organizaciones, este libro es más que un manual técnico: es un recurso que ofrece un enfoque práctico, orientado a resultados, y centrado en los casos de uso reales que enfrentan las empresas hoy en día.
