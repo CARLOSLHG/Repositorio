@@ -2,14 +2,14 @@ Guía de JQL (Jira Query Language)
 
 ## Introducción
 
-JQL (Jira Query Language) es una herramienta poderosa dentro de Jira que permite realizar búsquedas avanzadas para encontrar y analizar información clave. Su flexibilidad permite a los equipos filtrar y gestionar incidencias con precisión, adaptándose a las necesidades específicas de cada proyecto.
+JQL (Jira Query Language) es una herramienta poderosa dentro de Jira que permite realizar búsquedas avanzadas para encontrar y analizar información clave. Su flexibilidad permite a los equipos filtrar y gestionar incidencias (issues) con precisión, adaptándose a las necesidades específicas de cada proyecto.
 
 ---
 
 ## Estructura Básica de JQL
 
 JQL utiliza una estructura lógica basada en:
-- **Campo**: Propiedad de una incidencia (e.g., `status`, `assignee`, `priority`).
+- **Campo**: Propiedad de una incidencia (issue) (e.g., `status`, `assignee`, `priority`).
 - **Operador**: Determina la relación (e.g., `=`, `!=`, `>`, `<`).
 - **Valor**: Es el término de búsqueda (e.g., "Open", "High", "John Doe").
 
@@ -17,7 +17,7 @@ JQL utiliza una estructura lógica basada en:
 ```
 status = "Open"
 ```
-Este query devuelve todas las incidencias que están abiertas.
+Este query devuelve todas las incidencias (issues) que están abiertas.
 
 ---
 
@@ -25,7 +25,7 @@ Este query devuelve todas las incidencias que están abiertas.
 
 1. **Campos**: Atributos estándar y personalizados de las incidencias.
 2. **Operadores**: Incluyen `=`, `!=`, `>`, `<`, `IN`, `NOT IN`, `~`, etc.
-3. **Palabras clave**: Como `ORDER BY`, `AND`, `OR`, `NOT` para combinar y ordenar resultados.
+3. **Palabras clave (Keywords)**: Como `ORDER BY`, `AND`, `OR`, `NOT` para combinar y ordenar resultados.
 4. **Funciones**: Como `startOfDay()`, `endOfWeek()`, `membersOf()`, útiles para búsquedas dinámicas.
 
 ---
