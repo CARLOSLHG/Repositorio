@@ -26,5 +26,7 @@ Las **Post-functions** se ejecutan después de que se cumple la validación y se
 
   * En la interfaz de **Workflow** → **Transitions**, encontrarás pestañas separadas para **Conditions**, **Validators** y **Post Functions**.  
   * Cada condición, validación o postfunction suele presentar un formulario o lista de parámetros.
+
 ---
+| [Regresar](./README.md) |
 

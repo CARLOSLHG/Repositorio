@@ -21,4 +21,6 @@ Estos triggers son especialmente relevantes cuando configuras **Automations** (R
   * También puedes combinar triggers con **Conditions** (condiciones) y **Validators** en la propia regla de Automation, para afinar las circunstancias en que se ejecuta la acción.  
 * **Secuencia**:  
   * Después de un trigger, puedes encadenar acciones como enviar un correo, actualizar un campo, hacer un comentario, crear subtareas, etc.
+
 ---
+| [Regresar](./README.md) |

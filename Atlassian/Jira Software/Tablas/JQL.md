@@ -22,4 +22,6 @@
 * **Uso de comillas**: Para nombres con espacios o caracteres especiales, utiliza comillas dobles. Ejemplo: `status = "In Progress"`.  
 * **Date Formats (Formatos de fecha)**: Dependiendo de la configuración de Jira, el formato `YYYY/MM/DD` podría variar. A menudo funciona también `YYYY-MM-DD`.  
 * **Funciones Relativas**: Jira ofrece funciones como `-7d` (7 días atrás), `-1w` (1 semana atrás), `-1M` (1 mes atrás), y otras, para filtrar de forma relativa al momento actual.
+
 ---
+| [Regresar](./README.md) |

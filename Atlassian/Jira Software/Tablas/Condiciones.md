@@ -9,4 +9,6 @@ Estos criterios determinan si una transición (cambio de estado) está disponibl
 | **Field Value** | La transición aparece solo si un campo tiene un valor específico o cumple ciertas condiciones (igual, no vacío, etc.). | \- Seleccionar “Value Field” (u opción similar). \- Configurar la condición (p. ej. “El campo Teoría de Base no está vacío”). | Si “Teoría de Base” está vacío, la transición no se muestra. |
 | **Permission** | Exige que el usuario tenga un permiso concreto (p. ej., ‘Edit Issues’) para ver o ejecutar la transición. | \- Seleccionar “Permission Condition” en la configuración. \- Indicar el permiso requerido (ej. ‘Edit Issues’). | Si el usuario no tiene el permiso “Edit Issues”, no podrá ver la transición. |
 | **Sub-Task Blocking** | La transición aparece solo si las subtareas están en un estado particular (p. ej. todas resueltas). | \- Seleccionar “Sub-Task Blocking Condition”. \- Indicar que las subtareas deben estar en “Done” (o un estado similar). | “Cerrar Hipótesis” solo se muestra si las subtareas de análisis están completas (Done). |
+
 ---
+| [Regresar](./README.md) |

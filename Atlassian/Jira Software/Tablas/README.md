@@ -21,3 +21,5 @@
   * La sintaxis puede variar dependiendo de la versión de Jira Data Center y de la configuración (en ocasiones, se requiere la notación `{{issue.fields.customfield_10001.value}}` o similar).  
   * Para asegurarte de la referencia exacta, revisa la documentación oficial de Atlassian o la opción “Use smart values” en el panel de configuración de la regla.
 
+---
+| [Regresar](./README.md) |

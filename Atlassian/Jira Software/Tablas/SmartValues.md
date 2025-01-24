@@ -18,3 +18,4 @@ Estos **smart values (valores inteligentes)** se utilizan en reglas de automatiz
 *(Recuerda que si tienes campos personalizados con nombres no estándar, puedes usar `{{issue.fields["NombreExactoDelCampo"]}}` o el `customfield_XXXXX` correspondiente.)*
 
 ---
+| [Regresar](./README.md) |
