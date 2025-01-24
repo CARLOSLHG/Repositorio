@@ -24,12 +24,12 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 
 ## 💼 Technical Experience and Project Examples
 
-### 1. **📝 Atlassian Jira and Confluence Projects**
+### 1. **📝 Atlassian Products**
    - **Training and Support**: Experience in providing client training on Jira and Confluence with detailed guides for intermediate and advanced users.
    - **Advanced Implementations**: Configuration and customization of Jira, focused on Jira Software and Jira Service Management.
    - **Study Projects**: Development of practical projects and training sessions in Atlassian.
 
-   [🔍 Explore Project Examples in Jira and Confluence](./Atlassian/) |
+   [🔍 Explore project examples and addons in Atlassian products](./Atlassian/) |
 
 ### 2. **🌐 WordPress Development and Customization**
    - **WordPress Projects**: Creation of SEO-optimized sites, with customizations using Elementor, WooCommerce, and security plugins.

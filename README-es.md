@@ -24,12 +24,12 @@
 
 ## 💼 Experiencia Técnica y Ejemplos de Proyectos
 
-### 1. **📝 Proyectos de Atlassian Jira y Confluence**
+### 1. **📝 Productos Atlassian**
    - **Capacitaciones y Soporte**: Experiencia en capacitación de clientes en Jira y Confluence, con guías detalladas para usuarios intermedios y avanzados.
    - **Implementaciones Avanzadas**: Configuración y personalización de Jira, enfocado en Jira Software y Jira Service Management.
    - **Proyectos Ficticios de Estudio**: Desarrollo de proyectos y capacitaciones prácticas en Atlassian.
 
-   [🔍 Explorar proyectos en Jira y Confluence](./Atlassian/README-es) |
+   [🔍 Explorar proyectos y complementos de los productos Atlassian](./Atlassian/README-es) |
 
 ### 2. **🌐 Desarrollo y Personalización en WordPress**
    - **Proyectos WordPress**: Creación de sitios optimizados para SEO, con personalizaciones mediante Elementor, WooCommerce y plugins de seguridad.
