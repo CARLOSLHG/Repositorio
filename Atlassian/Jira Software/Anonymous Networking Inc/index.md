@@ -103,5 +103,5 @@ Prepárate para sumergirte en una experiencia práctica y detallada. ¡Comencemo
 
 
 ---
-| [Regresar](./README.md) |
+| [Regresar](../README.md) |
 

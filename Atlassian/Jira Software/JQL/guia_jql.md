@@ -75,4 +75,4 @@ project IN ("Alpha", "Beta") AND priority = "Blocker"
 - Integra JQL en dashboards y filtros guardados para reportes dinámicos.
 
 ---
-| [Regresar](./README.md) |
+| [Regresar](../README.md) |
