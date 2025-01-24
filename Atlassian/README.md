@@ -61,7 +61,7 @@ Welcome to the Atlassian projects section. Here you will find documentation and 
 
 ## Contents
 
-- **[Jira Software](./Jira%20Software/Anonymous%20Networking%20Inc/)**: Documentation on using Jira Software.
+- **[Jira Software](./Jira%20Software/)**: Documentation on using Jira Software.
 - **[Jira Service Manager](./Jira%20Service%20Manager/)**: Guides for Jira Service Manager.
 
 ## Under Development 🚧
