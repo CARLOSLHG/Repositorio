@@ -3,8 +3,7 @@
 # Administrador de Proyectos DataCenter
 
 # EJERCICIOS
-
-## 
+---
 
 ## **Ejercicio 1 (Nivel Básico): Creación y Configuración de un Proyecto en Jira Software Data Center**
 
@@ -38,6 +37,8 @@ Crear un proyecto de Jira Software Data Center con una configuración mínima pa
    * Verifica que esté habilitado un único esquema de pantallas (usualmente el “Default Screen Scheme”).  
 5. **Validar el proyecto**  
    * Crea una incidencia de prueba y verifica que puedas moverla a través de los estados “To Do”, “In Progress” y “Done”.
+
+---
 
 ## **Ejercicio 2 (Nivel Intermedio): Creación y Asignación de Tipos de Incidencia (Issue Types) y Esquema de Tipos de Incidencia**
 
@@ -91,6 +92,7 @@ Configurar y asignar **nuevos tipos de incidencia** (“Hipótesis” y “Obser
    * Ve al proyecto.  
    * Crea una incidencia de prueba y asegúrate de que los tipos “Hipótesis” y “Observación” aparezcan en el menú desplegable.  
    * Verifica que puedas asignar y guardar correctamente ambos tipos.
+---
 
 ## **Ejercicio 3 (Nivel Intermedio): Creación y Asignación de Pantallas (Screens) y Esquemas de Pantallas a un Proyecto**
 
@@ -159,6 +161,7 @@ Crear pantallas y asignarlas mediante esquemas (screen schemes) para que, al cre
    * Edita la misma incidencia y verifica que aparezca la pantalla “Investigación Edit Screen”.  
    * Visualiza la incidencia y confirma que se muestre la pantalla “Investigación View Screen”.  
    * Realiza la misma prueba con el tipo “Observación”.
+---
 
 ## **Ejercicio 4 (Nivel Intermedio-Avanzado): Creación de Campos Personalizados y Asignación a Pantallas**
 
@@ -207,6 +210,7 @@ Crear campos personalizados (Custom Fields) y agregarlos a las pantallas (“Cre
    * Edita la incidencia y revisa que dichos campos aparezcan en la pantalla de edición.  
    * Repite el proceso para “Observación” (con “Contexto de Observación” y “Conclusiones Preliminares”).  
    * Visualiza cada incidencia y confirma que los campos estén accesibles en la pantalla de visualización.
+---
 
 ## **Ejercicio 5 (Nivel Avanzado): Creación y Asignación de Workflows Personalizados a un Proyecto**
 
@@ -263,6 +267,7 @@ Configurar **workflows (flujos de trabajo)** separados para “Hipótesis” y �
    * Regresa al proyecto y crea un nuevo “Hipótesis”. Verifica que aparezcan los estados “Formulada”, “En Análisis”, “Validada”, “Refutada” en el panel de la incidencia.  
    * Realiza las transiciones para confirmar que funcionan y que los estados cambian correctamente.  
    * Repite con una “Observación”, comprobando sus estados y transiciones únicas.
+---
 
 ## **Ejercicio 6 (Nivel Experto): Creación de Roles, Propiedades y Automatización con Envío de Emails**
 
