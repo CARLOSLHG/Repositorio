@@ -9,8 +9,8 @@ Bienvenido a la sección de proyectos de jira Software. Aquí encontrarás docum
 
 ## Contenidos
 
-- **[Ejercicios Administrador de Proyectos](./Jira%20Software/Ejecicios%20NAdministrador%20de%20Proyectos/)**: Ejercicios prácticos.
-- **[Proyecto Anonimous Networking](./Jira%20Software/Anonymous%20Networking%20Inc/)**: Creación de un proyecto para una empresa de telecomunicaciones.
+- **[Ejercicios Administrador de Proyectos](./Ejercicios%20Project%20Administrator/)**: Ejercicios prácticos.
+- **[Proyecto Anonimous Networking](./Anonymous%20Networking%20Inc/)**: Creación de un proyecto para una empresa de telecomunicaciones.
 
 
 ## En desarrollo 🚧
