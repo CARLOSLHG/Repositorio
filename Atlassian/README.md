@@ -1,4 +1,7 @@
-# Atlassian Projects
+# Atlassian Products
+---
+
+## My Certifications
 ---
 <div style="text-align: center;">
   <table style="margin: auto; border-collapse: collapse;">
