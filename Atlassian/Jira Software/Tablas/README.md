@@ -14,6 +14,7 @@ Estas propiedades se añaden generalmente en la configuración de una transició
 | `jira.i18n.title` | Personaliza el título que aparece en la transición. Se usa para localización (traducciones) o para personalizar el texto que se muestra. | Nombre de la propiedad: `jira.i18n.title` Valor: `texto` | **Propiedad:** `jira.i18n.title` **Valor:** `transition.close.hypothesis.title` (Podrías vincularlo con un archivo de traducciones para que muestre el texto “Cerrar Hipótesis” en diferentes idiomas, dependiendo la config. de Jira). |
 | `jira.i18n.description` | Permite describir la transición (o estado) de forma más extensa, también para localización. | Nombre de la propiedad: `jira.i18n.description` Valor: `texto` | **Propiedad:** `jira.i18n.description` **Valor:** `transition.close.hypothesis.desc` La descripción podría verse como "Use esta transición para finalizar la hipótesis", en la interfaz según el idioma configurado. |
 | `jira.permission.comment.user.inrole` | Limita la capacidad de añadir comentarios a los usuarios que pertenecen a un rol determinado. | Nombre de la propiedad: `jira.permission.comment.user.inrole`Valor: `<NombreRol>` | **Propiedad:** `jira.permission.comment.user.inrole` **Valor:** `Analista de Observaciones` Solo quienes tengan el rol *Analista de Observaciones* podrán comentar la incidencia. |
+
 ---
 
 ## **Tabla 2: Triggers**
