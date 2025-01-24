@@ -45,4 +45,6 @@ Crear campos personalizados (Custom Fields) y agregarlos a las pantallas (“Cre
    * Edita la incidencia y revisa que dichos campos aparezcan en la pantalla de edición.  
    * Repite el proceso para “Observación” (con “Contexto de Observación” y “Conclusiones Preliminares”).  
    * Visualiza cada incidencia y confirma que los campos estén accesibles en la pantalla de visualización.
+
 ---
+| [Regresar](./README.md) |

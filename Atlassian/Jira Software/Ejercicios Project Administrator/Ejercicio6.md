@@ -89,3 +89,6 @@ Por otro lado, cada vez que una hipótesis cambia a “Validada”, se disparar�
 2. **Cambiar los estados** hasta llegar a “Validada”. Verifica que, tras la transición, se asigne automáticamente y la resolución se actualice.  
 3. **Intentar cerrar la hipótesis** con un usuario que no pertenezca a “Investigador Senior” para confirmar que no tiene permiso.  
 4. **Cerrar la hipótesis** como “Investigador Senior”. Comprueba que el correo llega con la información inteligente (placeholders correctos).
+
+---
+| [Regresar](./README.md) |

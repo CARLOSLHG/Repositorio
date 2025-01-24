@@ -50,4 +50,6 @@ Configurar y asignar **nuevos tipos de incidencia** (“Hipótesis” y “Obser
    * Ve al proyecto.  
    * Crea una incidencia de prueba y asegúrate de que los tipos “Hipótesis” y “Observación” aparezcan en el menú desplegable.  
    * Verifica que puedas asignar y guardar correctamente ambos tipos.
+
 ---
+| [Regresar](./README.md) |

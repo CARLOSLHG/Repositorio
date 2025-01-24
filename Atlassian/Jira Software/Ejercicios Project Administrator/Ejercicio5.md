@@ -53,4 +53,6 @@ Configurar **workflows (flujos de trabajo)** separados para “Hipótesis” y �
    * Regresa al proyecto y crea un nuevo “Hipótesis”. Verifica que aparezcan los estados “Formulada”, “En Análisis”, “Validada”, “Refutada” en el panel de la incidencia.  
    * Realiza las transiciones para confirmar que funcionan y que los estados cambian correctamente.  
    * Repite con una “Observación”, comprobando sus estados y transiciones únicas.
+
 ---
+| [Regresar](./README.md) |

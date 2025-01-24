@@ -65,4 +65,6 @@ Crear pantallas y asignarlas mediante esquemas (screen schemes) para que, al cre
    * Edita la misma incidencia y verifica que aparezca la pantalla “Investigación Edit Screen”.  
    * Visualiza la incidencia y confirma que se muestre la pantalla “Investigación View Screen”.  
    * Realiza la misma prueba con el tipo “Observación”.
+
 ---
+| [Regresar](./README.md) |
