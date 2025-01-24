@@ -61,10 +61,11 @@ Welcome to the Atlassian projects section. Here you will find documentation and 
 
 ## Contents
 
-- **[Jira Software](./Jira%20Software/)**: Documentation on using Jira Software.
-- **[Jira Service Manager](./Jira%20Service%20Manager/)**: Guides for Jira Service Manager.
+- **[Jira Software](./Jira%20Software/)**: Documentation about using Jira Software.
+- **[JQL Guide (Jira Query Language)](./Jira%20Software/JQL/guia_jql)**: JQL Guide.
+- **[Jira Service Manager](./Jira%20Service%20Manager/)**: Jira Service Manager Guides.
 
-## Under Development 🚧
+## Under development 🚧
 
 Some projects and documents are under development and may be subject to change.
 
