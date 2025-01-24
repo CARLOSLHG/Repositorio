@@ -81,7 +81,7 @@ For more details on my experience and certifications, see my [full CV here](./Ab
 
 ---
 
-🙏 ### Thank You for Visiting My Repository!
+### 🙏 Thank You for Visiting My Repository!
 
 If you'd like to buy me a coffee for my work and motivate me to create more useful content, please click the button below:
 

@@ -51,7 +51,7 @@ CyberSTARS representa un enfoque educativo innovador que combina la tecnología 
 
 [Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
 
-🙏 ### ¡Gracias por visitar mi repositorio!
+### 🙏 ¡Gracias por visitar mi repositorio!
 
 Si quieres invitarme un café por mi trabajo, y asi motivarme a subir más cosas útiles, haz clic en el botón:
 

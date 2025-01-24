@@ -32,7 +32,7 @@ El sitio web de **S4E** representa a una empresa de expertos en herramientas tec
 
 [Volver al Menú Principal de Proyectos](https://carloslhg.github.io/Repositorio/)
 
-🙏 ### ¡Gracias por visitar mi repositorio!
+### 🙏 ¡Gracias por visitar mi repositorio!
 
 Si quieres invitarme un café por mi trabajo, y asi motivarme a subir más cosas útiles, haz clic en el botón:
 

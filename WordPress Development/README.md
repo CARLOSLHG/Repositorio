@@ -27,7 +27,7 @@ Proyectos:
 
 [Volver a la Página Principal del Repositorio](../README.md)
 
-🙏 ### ¡Gracias por visitar mi repositorio!
+### 🙏 ¡Gracias por visitar mi repositorio!
 
 Si quieres invitarme un café por mi trabajo, y asi motivarme a subir más cosas útiles, haz clic en el botón:
 

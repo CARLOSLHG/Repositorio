@@ -80,7 +80,7 @@ Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV compl
 
 ---
 
-🙏 ### ¡Gracias por visitar mi repositorio!
+### 🙏 ¡Gracias por visitar mi repositorio!
 
 Si quieres invitarme un café por mi trabajo, y asi motivarme a subir más cosas útiles, haz clic en el botón:
 

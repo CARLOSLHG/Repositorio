@@ -32,7 +32,7 @@ Projects Examples:
 [Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
 ---
 
-🙏 ### Thank You for Visiting My Repository!
+### 🙏 Thank You for Visiting My Repository!
 
 If you'd like to buy me a coffee for my work and motivate me to create more useful content, please click the button below:
 

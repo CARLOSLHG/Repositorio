@@ -31,7 +31,7 @@ Proyectos:
 [English version](README-es.md) | [Regresar al Repositorio](../README.md)
 ---
 
-🙏 ### ¡Gracias por visitar mi repositorio!
+### 🙏 ¡Gracias por visitar mi repositorio!
 
 Si quieres invitarme un café por mi trabajo, y asi motivarme a subir más cosas útiles, haz clic en el botón:
 
