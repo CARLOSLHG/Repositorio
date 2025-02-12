@@ -1,4 +1,4 @@
-# Ejercicios para Capacitación en JIRA
+# Ejercicios para Usuarios JIRA
 
 ---
 
