@@ -14,7 +14,7 @@ Este documento contiene 5 ejercicios para Administradores de JIRA, organizados d
 ## Ejercicio 1: Configuración Inicial y Personalización de la Instancia JIRA
 
 **Subtítulo:**  
-Ejercicio 1 para Administradores de JIRA
+Nivel Básico
 
 **Título:**  
 Configuración Inicial y Personalización de la Instancia
@@ -60,7 +60,7 @@ Como nuevo Administrador de JIRA, Ana ha sido designada para configurar la insta
 ## Ejercicio 2: Gestión Global de Usuarios y Grupos
 
 **Subtítulo:**  
-Ejercicio 2 para Administradores de JIRA
+Nivel Intermedio
 
 **Título:**  
 Administración Global de Usuarios y Grupos
@@ -106,7 +106,7 @@ Carlos, como Administrador Global, debe organizar a los empleados de la organiza
 ## Ejercicio 3: Configuración de Seguridad y Autenticación Global
 
 **Subtítulo:**  
-Ejercicio 3 para Administradores de JIRA
+Nivel Intermedio
 
 **Título:**  
 Configuración de Seguridad y Autenticación (SSO, MFA)
@@ -154,7 +154,7 @@ Sofía, Administradora Global, debe reforzar la seguridad de la instancia JIRA c
 ## Ejercicio 4: Configuración de Correos Salientes y Notificaciones Globales
 
 **Subtítulo:**  
-Ejercicio 4 para Administradores de JIRA
+Nivel Avanzado
 
 **Título:**  
 Configuración del Servidor de Correo y Notificaciones Globales
@@ -201,7 +201,7 @@ Diego, Administrador Global, debe configurar el servidor de correo saliente para
 ## Ejercicio 5: Gestión de Licencias, Facturación y Actualizaciones de la Instancia
 
 **Subtítulo:**  
-Ejercicio 5 para Administradores de JIRA
+Nivel Avanzado
 
 **Título:**  
 Administración de Licencias, Facturación y Actualizaciones de la Plataforma
@@ -248,7 +248,7 @@ Mariana, Administradora Global, es responsable de gestionar las licencias, la fa
 ## Ejercicio 6: Integración Compleja de JIRA con Sistemas Externos Mediante API y Webhooks
 
 **Subtítulo:**  
-Ejercicio 6
+Nivel experto
 
 **Título:**  
 Automatización de Flujos de Trabajo en JIRA Integrando CI/CD mediante Webhooks y la API REST – Ejemplo Real en Sandbox sin Costos
@@ -358,7 +358,7 @@ El equipo de DevOps de “Innovatech” utiliza un sistema de CI/CD (por ejemplo
 ## Ejercicio 7: Desarrollo y Despliegue de un Plugin Personalizado para JIRA con Atlassian Connect
 
 **Subtítulo:**  
-Ejercicio 7
+Nivel Experto
 
 **Título:**  
 Creación de un Plugin Personalizado para Extender Funcionalidades de JIRA

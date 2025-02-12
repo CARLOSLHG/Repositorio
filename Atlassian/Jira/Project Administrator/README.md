@@ -14,7 +14,7 @@ Este documento contiene 5 ejercicios diseñados específicamente para administra
 ## Ejercicio 1: Creación y Configuración Inicial de un Proyecto en JIRA
 
 **Subtítulo:**  
-Ejercicio 1 para Administradores de Proyectos
+Nivel Básico
 
 **Título:**  
 Creación y Configuración Inicial de un Proyecto
@@ -60,7 +60,7 @@ Laura, administradora de proyectos, ha recibido la tarea de crear un nuevo proye
 ## Ejercicio 2: Gestión de Usuarios y Roles en un Proyecto
 
 **Subtítulo:**  
-Ejercicio 2 para Administradores de Proyectos
+Nivel Intermedio
 
 **Título:**  
 Gestión de Usuarios y Asignación de Roles
@@ -104,7 +104,7 @@ Carlos, administrador de proyectos, debe configurar el acceso a un proyecto asig
 ## Ejercicio 3: Configuración de Permisos y Esquemas de Seguridad
 
 **Subtítulo:**  
-Ejercicio 3 para Administradores de Proyectos
+Nivel Intermedio
 
 **Título:**  
 Personalización de Permisos y Esquemas de Seguridad
@@ -147,7 +147,7 @@ David, administrador de proyectos, debe asegurar que la información sensible de
 ## Ejercicio 4: Creación y Configuración de Dashboards y Reportes Personalizados
 
 **Subtítulo:**  
-Ejercicio 4 para Administradores de Proyectos
+Nivel Avanzado
 
 **Título:**  
 Diseño de Dashboards y Reportes para Monitoreo del Proyecto
@@ -191,7 +191,7 @@ María, administradora de proyectos, necesita crear un dashboard que permita mon
 ## Ejercicio 5: Automatización y Configuración de Notificaciones Avanzadas
 
 **Subtítulo:**  
-Ejercicio 5 para Administradores de Proyectos
+Nivel Experto
 
 **Título:**  
 Implementación de Notificaciones y Reglas de Automatización Avanzadas
