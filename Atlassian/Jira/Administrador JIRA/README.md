@@ -1,4 +1,4 @@
-# Ejercicios para Administradores de JIRA (Instancia Global)
+# Ejercicios para Administradores de JIRA
 
 Este documento contiene 5 ejercicios para Administradores de JIRA, organizados de menor a mayor complejidad. Cada ejercicio sigue la siguiente estructura:
 

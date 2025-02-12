@@ -239,7 +239,7 @@ debido a que la plataforma de Atlassian cambia constantemente, algunos menus y a
 
 
 ---
-| [Regresar](./README.md) |
+| [Regresar](../README.md) |
 
 
 ### 🙏 ¡Gracias por visitar mi repositorio!
