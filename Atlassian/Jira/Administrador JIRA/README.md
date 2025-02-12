@@ -1,4 +1,4 @@
-# Ejercicios para Administradores de JIRA (Menor a Mayor Complejidad)
+# Ejercicios para Administradores de JIRA
 
 Este documento contiene 5 ejercicios para administradores de JIRA, organizados de menor a mayor complejidad. Cada ejercicio sigue la estructura:
 
