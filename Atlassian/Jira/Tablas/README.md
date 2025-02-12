@@ -22,7 +22,7 @@
   * Para asegurarte de la referencia exacta, revisa la documentación oficial de Atlassian o la opción “Use smart values” en el panel de configuración de la regla.
 
 ---
-| [Regresar](././README.md) |
+| [Regresar](../README.md) |
 
 ### 🙏 ¡Gracias por visitar mi repositorio!
 
