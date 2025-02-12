@@ -10,6 +10,8 @@ Bienvenido a la sección de Confluence. Aquí encontrarás documentación y ejem
 
 ## Contenidos
 
+- **[Ejercicios Confluence](./Ejercicios/)**: Ejercicios Confluence.
+
 
 ## En desarrollo 🚧
 
