@@ -67,8 +67,8 @@ Welcome to the Atlassian projects section. Here you will find documentation and 
 - **[Jira](./Jira/)**: Documentation on using Jira.
 - **[JQL Guide (Jira Query Language)](./Jira/JQL/guia_jql)**: JQL Guide.
 - **[Jira Service Manager](./Jira%20Service%20Manager/)**: Jira Service Manager Guides.
-- **[Confluence](#)**: Managing space and pages in Confluence.
-- **[Bitbucket](#)**: Bitbucket usage and integration with Jira.
+- **[Confluence](./Confluence/)**: Managing space and pages in Confluence.
+- **[Bitbucket](./Bitbucket/)**: Bitbucket usage and integration with Jira.
 
 ## Under development 🚧
 
