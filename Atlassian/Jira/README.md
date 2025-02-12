@@ -9,6 +9,7 @@ Bienvenido a la sección de proyectos de jira Software. Aquí encontrarás docum
 
 ## Contenidos
 
+- **[Ejercicios JIRA usuarios](./Ejercicios/)**: Ejercicios JIRA usuarios.
 - **[Ejercicios Administrador de Proyectos](./Ejercicios%20Project%20Administrator/)**: Ejercicios prácticos.
 - **[Tablas de Referencia](./Tablas/)**: Tablas de referencia de JIRA.
 - **[Proyecto Anonimous Networking](./Anonymous%20Networking%20Inc/)**: Creación de un proyecto para una empresa de telecomunicaciones.
