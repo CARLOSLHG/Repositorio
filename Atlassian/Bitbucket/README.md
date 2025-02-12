@@ -10,7 +10,7 @@ Bienvenido a la sección de Bitbucket. Aquí encontrarás documentación y ejemp
 
 ## Contenidos
 
-- **[Ejercicios Bitbusket](./Ejercicios/)**: Ejercicios Bitbucket.
+- **[Ejercicios Bitbucket](./Ejercicios/)**: Ejercicios Bitbucket.
 
 ## En desarrollo 🚧
 
