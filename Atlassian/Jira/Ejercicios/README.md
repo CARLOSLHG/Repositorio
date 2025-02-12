@@ -1,13 +1,5 @@
 # Ejercicios para Capacitación en JIRA
 
-Este documento contiene 7 ejercicios orientados a usuarios y colaboradores de JIRA, organizados de menor a mayor complejidad. Cada ejercicio incluye los siguientes apartados:  
-- **Subtítulo**  
-- **Título**  
-- **Caso Hipotético**  
-- **Objetivos**  
-- **Plan de Acción**  
-- **Resolución Paso a Paso**
-
 ---
 
 ## Ejercicio Básico 1: Familiarizándose con la Interfaz de JIRA

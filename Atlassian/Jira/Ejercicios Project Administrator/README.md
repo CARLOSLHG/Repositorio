@@ -1,4 +1,3 @@
-```markdown
 # Ejercicios para Administradores de Proyectos en JIRA
 
 Este documento contiene 5 ejercicios diseñados específicamente para administradores de proyectos en JIRA. Cada ejercicio sigue la siguiente estructura:
