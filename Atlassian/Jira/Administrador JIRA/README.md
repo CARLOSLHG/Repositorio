@@ -14,7 +14,7 @@ Este documento contiene 5 ejercicios para Administradores de JIRA, organizados d
 ## Ejercicio 1: Configuración Inicial y Personalización de la Instancia JIRA
 
 **Subtítulo:**  
-Ejercicio Básico 1 para Administradores de JIRA
+Ejercicio 1 para Administradores de JIRA
 
 **Título:**  
 Configuración Inicial y Personalización de la Instancia
@@ -60,7 +60,7 @@ Como nuevo Administrador de JIRA, Ana ha sido designada para configurar la insta
 ## Ejercicio 2: Gestión Global de Usuarios y Grupos
 
 **Subtítulo:**  
-Ejercicio Básico-Intermedio 2 para Administradores de JIRA
+Ejercicio 2 para Administradores de JIRA
 
 **Título:**  
 Administración Global de Usuarios y Grupos
@@ -106,7 +106,7 @@ Carlos, como Administrador Global, debe organizar a los empleados de la organiza
 ## Ejercicio 3: Configuración de Seguridad y Autenticación Global
 
 **Subtítulo:**  
-Ejercicio Intermedio 3 para Administradores de JIRA
+Ejercicio 3 para Administradores de JIRA
 
 **Título:**  
 Configuración de Seguridad y Autenticación (SSO, MFA)
@@ -154,7 +154,7 @@ Sofía, Administradora Global, debe reforzar la seguridad de la instancia JIRA c
 ## Ejercicio 4: Configuración de Correos Salientes y Notificaciones Globales
 
 **Subtítulo:**  
-Ejercicio Intermedio-Avanzado 4 para Administradores de JIRA
+Ejercicio 4 para Administradores de JIRA
 
 **Título:**  
 Configuración del Servidor de Correo y Notificaciones Globales
@@ -201,7 +201,7 @@ Diego, Administrador Global, debe configurar el servidor de correo saliente para
 ## Ejercicio 5: Gestión de Licencias, Facturación y Actualizaciones de la Instancia
 
 **Subtítulo:**  
-Ejercicio Avanzado 5 para Administradores de JIRA
+Ejercicio 5 para Administradores de JIRA
 
 **Título:**  
 Administración de Licencias, Facturación y Actualizaciones de la Plataforma
@@ -242,6 +242,214 @@ Mariana, Administradora Global, es responsable de gestionar las licencias, la fa
 5. **Implementación y Verificación:**  
    - Aplica la actualización en la instancia global siguiendo las guías de Atlassian.  
    - Verifica que la actualización se haya realizado sin incidencias y que la facturación y licencias se mantengan correctamente.
+
+---
+
+## Ejercicio 6: Integración Compleja de JIRA con Sistemas Externos Mediante API y Webhooks
+
+**Subtítulo:**  
+Ejercicio 6
+
+**Título:**  
+Automatización de Flujos de Trabajo en JIRA Integrando CI/CD mediante Webhooks y la API REST – Ejemplo Real en Sandbox sin Costos
+
+**Caso Hipotético:**  
+El equipo de DevOps de “Innovatech” utiliza un sistema de CI/CD (por ejemplo, Jenkins) para compilar y probar aplicaciones. Al finalizar una build, se debe notificar a JIRA para actualizar el estado de un issue: en caso de build exitosa, el issue pasa a `En Revisión`, y en caso de fallo, a `Error en Build`. Esta integración se realiza mediante un webhook y un script intermedio que utiliza la API REST de JIRA.
+
+**Objetivos:**  
+- Configurar webhooks en una instancia sandbox gratuita de Atlassian Cloud.  
+- Desarrollar un script intermedio (por ejemplo, en Python con Flask) que reciba el payload y actúe según el resultado.  
+- Invocar la API REST de JIRA para actualizar el estado del issue.  
+- Realizar pruebas sin incurrir en costos adicionales.
+
+**Plan de Acción:**  
+1. Configurar una instancia sandbox gratuita de Atlassian Cloud y crear un proyecto de prueba.  
+2. Configurar un webhook en JIRA que apunte a un endpoint de prueba.  
+3. Desarrollar y ejecutar un script en Python (Flask) que reciba el payload y llame a la API REST de JIRA.  
+4. Simular el envío de payloads desde el sistema CI/CD (usando herramientas como Postman o cURL).  
+5. Verificar la actualización del issue en JIRA y ajustar la integración si es necesario.
+
+**Resolución Paso a Paso:**
+
+1. **Configuración de la Instancia Sandbox:**  
+   - Visita [JIRA Software Free](https://www.atlassian.com/software/jira/free) y regístrate para obtener una cuenta gratuita.  
+   - Durante el proceso, elige un nombre para la instancia (por ejemplo, `tusandbox.atlassian.net`).  
+   - Crea un nuevo proyecto de prueba y anota el **Issue Key** de un issue de ejemplo (por ejemplo, `SANDBOX-1`).
+
+2. **Creación y Configuración del Webhook en JIRA:**  
+   - Inicia sesión como administrador y haz clic en el ícono de **Configuración** > **Sistema**.  
+   - En el menú lateral, selecciona **Webhooks** y haz clic en **Crear Webhook**.  
+   - Asigna el nombre “CI/CD Sandbox Webhook”.  
+   - En el campo **URL**, ingresa el endpoint de prueba (por ejemplo, utilizando [Webhook.site](https://webhook.site) o una URL pública obtenida con ngrok).  
+   - Selecciona los eventos necesarios o configura el webhook para que reciba llamadas desde el sistema CI/CD.  
+   - Guarda el webhook.
+
+3. **Desarrollo del Script Intermedio con Flask:**  
+   - Instala Python (3.7 o superior) y ejecuta:
+     ```bash
+     pip install flask requests
+     ```
+   - Crea un archivo llamado `app.py` y copia el siguiente código (reemplaza las variables con tus datos):
+     ```python
+     from flask import Flask, request, jsonify
+     import requests
+
+     app = Flask(__name__)
+
+     # Configuración de la instancia JIRA Sandbox
+     JIRA_DOMAIN = "tusandbox.atlassian.net"
+     JIRA_USER = "tu_email@dominio.com"  # Tu email de Atlassian
+     API_TOKEN = "tu_api_token"          # API Token generado en Atlassian
+
+     def transition_issue(issue_key, transition_id):
+         url = f"https://{JIRA_DOMAIN}/rest/api/3/issue/{issue_key}/transitions"
+         headers = {"Content-Type": "application/json"}
+         auth = (JIRA_USER, API_TOKEN)
+         payload = {"transition": {"id": transition_id}}
+         response = requests.post(url, json=payload, headers=headers, auth=auth)
+         return response.status_code, response.json()
+
+     @app.route('/webhook', methods=['POST'])
+     def webhook_handler():
+         data = request.get_json()
+         if not data:
+             return jsonify({"error": "No se recibió payload JSON"}), 400
+
+         issue_key = data.get('issue_key')
+         build_result = data.get('build_result')
+
+         if not issue_key or not build_result:
+             return jsonify({"error": "Faltan campos obligatorios"}), 400
+
+         # Ejemplo de IDs de transición:
+         # "31" para "En Revisión" (build exitosa) y "41" para "Error en Build" (build fallida)
+         transition_id = "31" if build_result.lower() == "success" else "41"
+
+         status, resp = transition_issue(issue_key, transition_id)
+         return jsonify({"status": status, "response": resp})
+
+     if __name__ == '__main__':
+         app.run(port=5000, debug=True)
+     ```
+   - Ejecuta el script:
+     ```bash
+     python app.py
+     ```
+   - Si necesitas exponer el servidor local, utiliza ngrok:
+     ```bash
+     ngrok http 5000
+     ```
+
+4. **Simulación del Evento CI/CD:**  
+   - Utiliza cURL o Postman para enviar un payload de prueba. Ejemplo con cURL para un build exitoso:
+     ```bash
+     curl -X POST <TU_ENDPOINT_PUBLICO>/webhook \
+     -H "Content-Type: application/json" \
+     -d '{"issue_key": "SANDBOX-1", "build_result": "success"}'
+     ```
+   - Para simular un fallo, cambia `"build_result": "failure"`.
+
+5. **Verificación en JIRA y Ajustes:**  
+   - Inicia sesión en tu instancia sandbox y verifica que el issue `SANDBOX-1` haya transitado al estado `En Revisión` (si el build fue exitoso) o a `Error en Build` (si falló).  
+   - Revisa los logs del script Flask para asegurarte de que no existan errores y realiza ajustes si es necesario.
+
+---
+
+## Ejercicio 7: Desarrollo y Despliegue de un Plugin Personalizado para JIRA con Atlassian Connect
+
+**Subtítulo:**  
+Ejercicio 7
+
+**Título:**  
+Creación de un Plugin Personalizado para Extender Funcionalidades de JIRA
+
+**Caso Hipotético:**  
+El equipo de innovación de la empresa “TechForward” necesita agregar funcionalidades específicas a JIRA que no están disponibles por defecto. Se requiere desarrollar un plugin personalizado que, por ejemplo, permita visualizar métricas avanzadas de gestión de issues en un panel integrado. La solución se desarrollará utilizando Atlassian Connect en una instancia sandbox sin costos.
+
+**Objetivos:**  
+- Comprender el desarrollo de aplicaciones complementarias (add-ons) para JIRA mediante Atlassian Connect.  
+- Crear y configurar el archivo de manifiesto (descriptor) del plugin.  
+- Desarrollar una aplicación web sencilla (por ejemplo, en Node.js) que se integre en JIRA.  
+- Probar y desplegar la aplicación en un entorno sandbox utilizando herramientas gratuitas como ngrok.
+
+**Plan de Acción:**  
+1. Crear una cuenta de desarrollador en Atlassian y configurar una instancia sandbox.  
+2. Inicializar un proyecto de Atlassian Connect (usando Node.js y Express).  
+3. Configurar el descriptor del plugin (`atlassian-connect.json`).  
+4. Desarrollar una página web simple que muestre las métricas (puede ser estática o simulada).  
+5. Exponer la aplicación mediante ngrok para integrarla en la instancia de JIRA.  
+6. Instalar el plugin en JIRA y verificar su funcionamiento.
+
+**Resolución Paso a Paso:**
+
+1. **Registro y Configuración de la Instancia de Desarrollador:**  
+   - Regístrate en el [Portal de Desarrolladores de Atlassian](https://developer.atlassian.com).  
+   - Obtén acceso a una instancia sandbox gratuita de JIRA si aún no la tienes.
+
+2. **Inicialización del Proyecto con Atlassian Connect Express:**  
+   - Instala Node.js (versión 10 o superior).  
+   - Instala Atlassian Connect Express (ACE) globalmente:
+     ```bash
+     npm install -g atlas-connect
+     ```
+   - Crea un nuevo proyecto:
+     ```bash
+     atlas-connect new my-jira-plugin
+     cd my-jira-plugin
+     npm install
+     ```
+
+3. **Configuración del Descriptor del Plugin:**  
+   - Abre el archivo `atlassian-connect.json` generado.  
+   - Actualiza la información básica (nombre, descripción, URL base, etc.).  
+   - Define un módulo para el panel de administración o gadget. Por ejemplo:
+     ```json
+     {
+       "modules": {
+         "webPanels": [
+           {
+             "key": "advanced-metrics-panel",
+             "url": "/metrics",
+             "location": "atl.jira.view.issue.left.context",
+             "weight": 100
+           }
+         ]
+       }
+     }
+     ```
+   - Guarda los cambios.
+
+4. **Desarrollo de la Página de Métricas:**  
+   - En el directorio del proyecto, crea una ruta en el servidor Express para atender la URL `/metrics`.  
+   - En el archivo de rutas (por ejemplo, `routes/index.js`), añade:
+     ```javascript
+     router.get('/metrics', function(req, res) {
+       res.send('<h1>Métricas Avanzadas de JIRA</h1><p>Aquí se mostrarán las estadísticas de gestión de issues.</p>');
+     });
+     ```
+   - Esto simulará el panel de métricas.
+
+5. **Exposición de la Aplicación con ngrok:**  
+   - Inicia el servidor:
+     ```bash
+     npm start
+     ```
+   - En otra terminal, ejecuta:
+     ```bash
+     ngrok http 3000
+     ```
+   - Copia la URL pública que ngrok genera (por ejemplo, `https://abcd1234.ngrok.io`).
+
+6. **Instalación del Plugin en JIRA:**  
+   - Modifica el descriptor `atlassian-connect.json` para que la propiedad `baseUrl` apunte a la URL pública de ngrok.  
+   - En tu instancia sandbox de JIRA, como administrador, ve a **Manage apps** y selecciona **Upload app**.  
+   - Ingresa la URL pública del descriptor (por ejemplo, `https://abcd1234.ngrok.io/atlassian-connect.json`).  
+   - JIRA instalará el plugin y el nuevo panel debería aparecer en las páginas de issue (según la configuración del módulo).
+
+7. **Prueba y Verificación:**  
+   - Navega a un issue en JIRA y verifica que el panel “Métricas Avanzadas de JIRA” se muestre en la ubicación configurada.  
+   - Revisa que el contenido (la página sencilla con las métricas) se cargue correctamente.  
+   - Si es necesario, realiza ajustes en el código y reinicia el servidor para validar los cambios.
 
 ---
 
