@@ -2,7 +2,7 @@
 
 ---
 
-## Ejercicio Básico 1: Familiarizándose con la Interfaz de JIRA
+## Ejercicio 1: Familiarizándose con la Interfaz de JIRA
 
 **Subtítulo:**  
 Ejercicio 1
@@ -49,7 +49,7 @@ María acaba de unirse al equipo y recibe acceso a JIRA. Su primer reto es conoc
 
 ---
 
-## Ejercicio Básico-Intermedio 2: Creación y Gestión de un Issue para Reportar un Bug
+## Ejercicio 2: Creación y Gestión de un Issue para Reportar un Bug
 
 **Subtítulo:**  
 Ejercicio 2
@@ -98,7 +98,7 @@ Carlos, miembro del equipo de soporte, recibe un reporte de error en la funciona
 
 ---
 
-## Ejercicio Intermedio 3: Búsqueda Avanzada de Issues con JQL
+## Ejercicio 3: Búsqueda Avanzada de Issues con JQL
 
 **Subtítulo:**  
 Ejercicio 3
@@ -148,7 +148,7 @@ Sofía, gerente de proyecto, necesita obtener un informe de todos los issues del
 
 ---
 
-## Ejercicio Intermedio-Avanzado 4: Configuración de un Workflow Personalizado para Proceso de Aprobación
+## Ejercicio 4: Configuración de un Workflow Personalizado para Proceso de Aprobación
 
 **Subtítulo:**  
 Ejercicio 4
@@ -210,7 +210,7 @@ Luis, responsable del área de proyectos, ha detectado que para tareas críticas
 
 ---
 
-## Ejercicio Avanzado 5: Automatización para Gestión Proactiva de Tareas
+## Ejercicio 5: Automatización para Gestión Proactiva de Tareas
 
 **Subtítulo:**  
 Ejercicio 5
