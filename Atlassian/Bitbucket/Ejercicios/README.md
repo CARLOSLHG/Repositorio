@@ -1,20 +1,11 @@
 # Ejercicios para Bitbucket
 
-Este documento contiene 7 ejercicios para Bitbucket. Cada ejercicio sigue la siguiente estructura:
-
-- **Subtítulo**
-- **Título**
-- **Caso Hipotético**
-- **Objetivos**
-- **Plan de Acción**
-- **Resolución Paso a Paso**
-
 ---
 
 ## Ejercicio 1: Exploración de la Interfaz de Bitbucket
 
-**Subtítulo:**  
-Nivel Básico
+**Nivel:**  
+Básico
 
 **Título:**  
 Navegación e Interfaz de Bitbucket
@@ -53,8 +44,8 @@ Juan, un nuevo desarrollador, acaba de recibir acceso a Bitbucket. Su primer ret
 
 ## Ejercicio 2: Creación y Configuración de un Repositorio
 
-**Subtítulo:**  
-Nivel Básico-Intermedio
+**Nivel:**  
+Básico-Intermedio
 
 **Título:**  
 Creación y Configuración Inicial de un Repositorio en Bitbucket
@@ -94,8 +85,8 @@ María debe iniciar un nuevo proyecto y, para ello, crear un repositorio en Bitb
 
 ## Ejercicio 3: Gestión de Ramas y Pull Requests
 
-**Subtítulo:**  
-Nivel Intermedio
+**Nivel:**  
+Intermedio
 
 **Título:**  
 Creación y Gestión de Ramas y Pull Requests
@@ -137,8 +128,8 @@ Carlos está trabajando en una nueva funcionalidad para un proyecto. Debe crear 
 
 ## Ejercicio 4: Configuración de Bitbucket Pipelines
 
-**Subtítulo:**  
-Nivel Intermedio-Avanzado
+**Nivel:**  
+Intermedio-Avanzado
 
 **Título:**  
 Implementación de Bitbucket Pipelines para Integración Continua
@@ -189,8 +180,8 @@ El equipo de DevOps requiere automatizar la ejecución de pruebas y despliegues 
 
 ## Ejercicio 5: Automatización y Uso de Webhooks en Bitbucket
 
-**Subtítulo:**  
-Nivel Avanzado
+**Nivel:**  
+Avanzado
 
 **Título:**  
 Configuración de Webhooks para Automatización Externa
@@ -230,8 +221,8 @@ El administrador del repositorio necesita configurar un webhook que notifique a 
 
 ## Ejercicio 6: Integración de Bitbucket con Jira
 
-**Subtítulo:**  
-Nivel Avanzado-Experto
+**Nivel:**  
+Avanzado-Experto
 
 **Título:**  
 Vinculación de Commits y Pull Requests con Issues en Jira
@@ -269,8 +260,8 @@ El equipo de desarrollo necesita que cada commit y Pull Request en Bitbucket se 
 
 ## Ejercicio 7: Configuración Avanzada y Seguridad en Bitbucket
 
-**Subtítulo:**  
-Nivel Experto
+**Nivel:**  
+Experto
 
 **Título:**  
 Implementación de Configuraciones Avanzadas y Medidas de Seguridad
@@ -311,7 +302,12 @@ El administrador de Bitbucket debe asegurar la integridad y seguridad de los rep
 
 ---
 
-[Regresar el Menú del Repositorio](../README.md)
+## Fe Errata
+
+debido a que la plataforma de Atlassian cambia constantemente, algunos menus y accesos podrian estar cambiados.
+
+---
+| [Regresar](../README.md) |
 
 ---
 

@@ -4,8 +4,8 @@
 
 ## Ejercicio 1: Familiarizándose con la Interfaz de JIRA
 
-**Subtítulo:**  
-Nivel Básico
+**Nivel:**  
+Básico
 
 **Título:**  
 Exploración Inicial y Navegación en la Interfaz de JIRA
@@ -51,8 +51,8 @@ María acaba de unirse al equipo y recibe acceso a JIRA. Su primer reto es conoc
 
 ## Ejercicio 2: Creación y Gestión de un Issue para Reportar un Bug
 
-**Subtítulo:**  
-Nivel Intermdio
+**Nivel:**  
+Intermdio
 
 **Título:**  
 Registro Detallado de un Bug en JIRA
@@ -100,8 +100,8 @@ Carlos, miembro del equipo de soporte, recibe un reporte de error en la funciona
 
 ## Ejercicio 3: Búsqueda Avanzada de Issues con JQL
 
-**Subtítulo:**  
-Nivel Intermedio
+**Nivel:**  
+Intermedio
 
 **Título:**  
 Generación de Reporte Personalizado Utilizando JQL en JIRA
@@ -150,8 +150,8 @@ Sofía, gerente de proyecto, necesita obtener un informe de todos los issues del
 
 ## Ejercicio 4: Configuración de un Workflow Personalizado para Proceso de Aprobación
 
-**Subtítulo:**  
-Nivel Avanzado
+**Nivel:**  
+Avanzado
 
 **Título:**  
 Diseño y Configuración de un Workflow con Estado de Aprobación
@@ -212,8 +212,8 @@ Luis, responsable del área de proyectos, ha detectado que para tareas críticas
 
 ## Ejercicio 5: Automatización para Gestión Proactiva de Tareas
 
-**Subtítulo:**  
-Nivel Experto
+**Nivel:**  
+Experto
 
 **Título:**  
 Implementación de Reglas de Automatización para Tareas Inactivas
@@ -260,8 +260,117 @@ El equipo de desarrollo ha notado que algunas tareas permanecen sin actualizar d
    - Activa la regla y realiza pruebas (puedes actualizar manualmente algunos issues para simular la inactividad).  
    - Revisa los logs de ejecución para confirmar el funcionamiento correcto.
 
+---
+
+## Ejercicio 6: Creación y Optimización de Dashboards Personalizados
+
+**Nivel:**  
+Avanzado
+
+**Título:**  
+Creación y Optimización de Dashboards Personalizados con Filtros Avanzados
+
+**Caso Hipotético:**  
+El gerente de proyecto, Sofía, necesita un dashboard personalizado que muestre un resumen en tiempo real de las incidencias del proyecto. Ella requiere usar filtros avanzados (mediante JQL) para filtrar issues por estado, prioridad y fecha de actualización, y añadir gadgets que presenten gráficos y listas de tareas asignadas. Este dashboard le permitirá monitorear de manera eficiente el progreso del equipo.
+
+**Objetivos:**  
+- Dominar la creación de filtros avanzados con JQL.  
+- Configurar un dashboard personalizado que incluya gadgets relevantes.  
+- Compartir el dashboard con el equipo para mejorar la colaboración y el seguimiento de incidencias.
+
+**Plan de Acción:**  
+1. Crear un filtro avanzado utilizando JQL que seleccione incidencias clave.  
+2. Guardar el filtro y usarlo como fuente para un gadget.  
+3. Crear un dashboard personalizado y añadir gadgets que muestren datos (gráficos, listas de issues, etc.).  
+4. Ajustar los parámetros y la disposición de los gadgets para maximizar la claridad de la información.  
+5. Compartir el dashboard con el equipo y solicitar feedback para futuras mejoras.
+
+**Resolución Paso a Paso:**
+
+1. **Creación del Filtro Avanzado:**  
+   - Inicia sesión en JIRA y accede a la sección de búsqueda de issues.  
+   - Cambia a la vista JQL y escribe una consulta avanzada, por ejemplo:
+     ```jql
+     project = "Innovatech" AND status in ("To Do", "In Progress", "Blocked") AND priority = High AND updated >= -3d
+     ```
+   - Ejecuta la consulta y, si los resultados son los esperados, guarda el filtro con un nombre descriptivo (por ejemplo, "Incidencias Críticas Recientes").
+
+2. **Creación del Dashboard:**  
+   - Navega a la sección **Dashboards** y selecciona **Crear Dashboard**.  
+   - Asigna un nombre al dashboard (por ejemplo, "Monitoreo Proyecto Innovatech") y define los permisos de visualización.
+
+3. **Añadir Gadgets al Dashboard:**  
+   - Haz clic en **Añadir Gadget**.  
+   - Selecciona gadgets como "Filter Results", "Pie Chart" y "Two Dimensional Filter Statistics".  
+   - Configura cada gadget seleccionando el filtro previamente guardado y ajustando los parámetros (por ejemplo, campo de agrupación, número de resultados).
+
+4. **Optimización y Personalización:**  
+   - Ajusta el diseño del dashboard para que los gadgets se dispongan de manera clara y ordenada.  
+   - Prueba diferentes configuraciones hasta que la visualización sea óptima.
+
+5. **Compartir y Revisar:**  
+   - Utiliza la opción de **Compartir Dashboard** para dar acceso al equipo.  
+   - Solicita feedback a los compañeros y realiza ajustes según sea necesario.
 
 ---
+
+## Ejercicio 7: Configuración de Suscripciones y Notificaciones Avanzadas
+
+**Nivel:**  
+Experto
+
+**Título:**  
+Implementación de Suscripciones y Notificaciones Personalizadas para Incidencias Críticas
+
+**Caso Hipotético:**  
+Luis, un analista de soporte en JIRA, necesita estar al tanto de cualquier cambio en incidencias críticas del proyecto. Para ello, debe configurar una suscripción a un filtro avanzado que le envíe notificaciones automáticas cada vez que se actualice una incidencia con prioridad alta y sin actividad reciente. Esto le permitirá responder rápidamente a situaciones urgentes.
+
+**Objetivos:**  
+- Configurar un filtro avanzado con JQL que identifique incidencias críticas.  
+- Crear una suscripción para recibir notificaciones automáticas por correo electrónico basadas en ese filtro.  
+- Personalizar el contenido de las notificaciones para que incluyan información clave de la incidencia.
+
+**Plan de Acción:**  
+1. Crear y guardar un filtro avanzado que identifique incidencias críticas (por ejemplo, de alta prioridad y sin actualización en 2 días).  
+2. Configurar la suscripción al filtro para que se envíe un correo electrónico con los resultados del filtro en intervalos definidos.  
+3. Personalizar el mensaje de notificación, si la plataforma lo permite, para resaltar los detalles críticos.  
+4. Realizar una prueba para confirmar que se reciben las notificaciones correctamente.  
+5. Ajustar la configuración según el feedback recibido y las necesidades del equipo.
+
+**Resolución Paso a Paso:**
+
+1. **Creación del Filtro Avanzado:**  
+   - Inicia sesión en JIRA y dirígete a la sección de búsqueda avanzada.  
+   - Cambia a la vista JQL y escribe una consulta similar a:
+     ```jql
+     project = "Innovatech" AND priority = High AND updated <= -2d
+     ```
+   - Ejecuta la consulta y, una vez que los resultados sean correctos, guarda el filtro con un nombre identificativo (por ejemplo, "Incidencias Críticas Sin Actualización").
+
+2. **Configuración de la Suscripción:**  
+   - Accede al filtro guardado y selecciona la opción **Suscribirse**.  
+   - Configura la frecuencia de la suscripción (por ejemplo, diaria o cada pocas horas) y asegúrate de que el correo electrónico asociado sea correcto.
+
+3. **Personalización de Notificaciones:**  
+   - Revisa las opciones de personalización disponibles para el correo (si aplica) y configura un asunto y mensaje que resuman la situación (por ejemplo, "Alerta: Incidencias Críticas Pendientes de Actualización").
+   - Incluye detalles relevantes como la cantidad de incidencias y enlaces directos al filtro.
+
+4. **Prueba y Validación:**  
+   - Realiza una prueba modificando temporalmente una incidencia para activar la condición del filtro.  
+   - Confirma que se recibe el correo de notificación y que la información incluida es precisa.
+
+5. **Ajustes Finales:**  
+   - Si es necesario, ajusta la consulta, la frecuencia o la personalización del correo.  
+   - Comunica a los miembros del equipo el funcionamiento de la suscripción para que puedan aprovechar la herramienta.
+
+---
+
+## Fe Errata
+
+debido a que la plataforma de Atlassian cambia constantemente, algunos menus y accesos podrian estar cambiados.
+
+---
+
 | [Regresar](../README.md) |
 
 

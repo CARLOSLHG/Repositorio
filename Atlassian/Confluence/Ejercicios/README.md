@@ -1,20 +1,11 @@
 # Ejercicios para Confluence (Administración y Uso)
 
-Este documento contiene 5 ejercicios para Confluence. Cada ejercicio sigue la siguiente estructura:
-
-- **Subtítulo**
-- **Título**
-- **Caso Hipotético**
-- **Objetivos**
-- **Plan de Acción**
-- **Resolución Paso a Paso**
-
 ---
 
 ## Ejercicio 1: Exploración y Creación de Páginas Básicas en Confluence
 
-**Subtítulo:**  
-Nivel Básico
+**Nivel:**  
+Básico
 
 **Título:**  
 Exploración de la Interfaz y Creación de una Página Básica
@@ -57,8 +48,8 @@ María es nueva en la organización y debe crear su primera página de documenta
 
 ## Ejercicio 2: Uso de Plantillas y Formateo de Contenido en Confluence
 
-**Subtítulo:**  
-Nivel Básico-Intermedio
+**Nivel:**  
+Básico-Intermedio
 
 **Título:**  
 Creación de Páginas con Plantillas y Ajuste de Formatos
@@ -100,8 +91,8 @@ Carlos debe crear una página de proyecto utilizando una plantilla predefinida e
 
 ## Ejercicio 3: Colaboración y Gestión de Comentarios en Confluence
 
-**Subtítulo:**  
-Nivel Intermedio
+**Nivel:**  
+Intermedio
 
 **Título:**  
 Colaboración en Tiempo Real y Gestión de Comentarios
@@ -143,8 +134,8 @@ Ana y Luis trabajan juntos en la actualización de una guía de procesos en Conf
 
 ## Ejercicio 4: Configuración de Espacios y Permisos en Confluence
 
-**Subtítulo:**  
-Nivel Intermedio-Avanzado
+**Nivel:**  
+Intermedio-Avanzado
 
 **Título:**  
 Creación y Configuración de Espacios con Permisos Personalizados
@@ -186,8 +177,8 @@ El administrador de Confluence, Juan, debe crear un espacio específico para el 
 
 ## Ejercicio 5: Personalización Avanzada y Uso de Macros en Confluence
 
-**Subtítulo:**  
-Nivel Avanzado
+**Nivel:**  
+Avanzado
 
 **Título:**  
 Implementación de Macros Avanzadas y Personalización de Contenido
@@ -229,9 +220,13 @@ El equipo de TI necesita crear una página interactiva en Confluence que integre
 
 ---
 
-[Regresar el Menú del Repositorio](../README.md)
+## Fe Errata
+
+debido a que la plataforma de Atlassian cambia constantemente, algunos menus y accesos podrian estar cambiados.
 
 ---
+| [Regresar](../README.md) |
+
 
 ### 🙏 ¡Gracias por visitar mi repositorio!
 

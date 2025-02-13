@@ -1,21 +1,11 @@
-```markdown
 # Ejercicios para Compass
-
-Este documento contiene 7 ejercicios para Compass, organizados de menor a mayor complejidad. Cada ejercicio está enfocado en un escenario que evoluciona a lo largo de la serie. Cada ejercicio sigue la siguiente estructura:
-
-- **Subtítulo**
-- **Título**
-- **Caso Hipotético**
-- **Objetivos**
-- **Plan de Acción**
-- **Resolución Paso a Paso**
 
 ---
 
 ## Ejercicio 1: Exploración de la Interfaz y Configuración Inicial
 
-**Subtítulo:**  
-Nivel Básico
+**Nivel:**  
+Básico
 
 **Título:**  
 Exploración y Configuración Inicial de Compass
@@ -53,8 +43,8 @@ El equipo de "Innovatech" ha adquirido Compass para gestionar la arquitectura y 
 
 ## Ejercicio 2: Creación y Organización de Componentes
 
-**Subtítulo:**  
-Nivel Básico-Intermedio
+**Nivel:**  
+Básico-Intermedio
 
 **Título:**  
 Registro y Organización de Componentes en Compass
@@ -94,8 +84,8 @@ Siguiendo el proceso de adopción de Compass, Ana debe crear los primeros compon
 
 ## Ejercicio 3: Configuración de Metadatos y Relaciones entre Componentes
 
-**Subtítulo:**  
-Nivel Intermedio
+**Nivel:**  
+Intermedio
 
 **Título:**  
 Definición de Metadatos y Vinculación de Componentes
@@ -134,8 +124,8 @@ Ahora que el equipo ha registrado varios componentes, Ana debe agregar metadatos
 
 ## Ejercicio 4: Integración con Repositorios y Herramientas Externas
 
-**Subtítulo:**  
-Nivel Intermedio-Avanzado
+**Nivel:**  
+Intermedio-Avanzado
 
 **Título:**  
 Vinculación de Componentes con Repositorios de Código y Herramientas Externas
@@ -175,8 +165,8 @@ El equipo de Innovatech decide integrar Compass con sus repositorios de código 
 
 ## Ejercicio 5: Creación de Dashboards y Reportes Personalizados
 
-**Subtítulo:**  
-Nivel Avanzado
+**Nivel:**  
+Avanzado
 
 **Título:**  
 Diseño de Dashboards y Reportes para el Seguimiento de Componentes
@@ -218,8 +208,8 @@ Para facilitar el monitoreo del estado y el rendimiento de la arquitectura, el e
 
 ## Ejercicio 6: Automatización de Flujos de Trabajo y Gobernanza de Componentes
 
-**Subtítulo:**  
-Nivel Avanzado-Experto
+**Nivel:**  
+Avanzado-Experto
 
 **Título:**  
 Implementación de Reglas de Automatización para la Gobernanza de Componentes
@@ -262,8 +252,8 @@ Innovatech requiere que ciertos procesos relacionados con la actualización de c
 
 ## Ejercicio 7: Integración Completa con Atlassian y Herramientas de Monitoreo
 
-**Subtítulo:**  
-Nivel Experto
+**Nivel:**  
+Experto
 
 **Título:**  
 Integración de Compass con Jira, Bitbucket y Herramientas de Monitoreo
@@ -305,9 +295,13 @@ Para lograr una visión holística del producto, Innovatech quiere integrar Comp
 
 ---
 
-[Regresar el Menú del Repositorio](../README.md)
+## Fe Errata
+
+debido a que la plataforma de Atlassian cambia constantemente, algunos menus y accesos podrian estar cambiados.
 
 ---
+| [Regresar](../README.md) |
+
 
 ### 🙏 ¡Gracias por visitar mi repositorio!
 
