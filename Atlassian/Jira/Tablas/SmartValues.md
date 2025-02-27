@@ -4,7 +4,7 @@ Estos **smart values (valores inteligentes)** se utilizan en reglas de automatiz
 
 | Nombre | Descripción | Sintaxis | Ejemplo |
 | ----- | ----- | ----- | ----- |
-| issue.key | Devuelve la clave (identificador) de la incidencia. | ( ```{{issue.key}}``` ) | **Uso en correo:** “La incidencia {{issue.key}} se ha cerrado”. Si la clave es INV-123, se mostrará “La incidencia INV-123 se ha cerrado”. |
+| issue.key | Devuelve la clave (identificador) de la incidencia. | ( <pre>´´´{{issue.key}}´´´</pre> | **Uso en correo:** “La incidencia {{issue.key}} se ha cerrado”. Si la clave es INV-123, se mostrará “La incidencia INV-123 se ha cerrado”. |
 | issue.summary | Devuelve el resumen (título) de la incidencia. | (´´´{{issue.summary}}´´´) | **Uso en correo:** “Título: {{issue.summary}}”. Si el resumen es “Analizar hipótesis inicial”, se mostrará “Título: Analizar hipótesis inicial”. |
 | issue.description | Muestra la descripción completa de la incidencia. | {{issue.description}} | **Uso en correo:** “Descripción: {{issue.description}}”. Incluye todo el texto que el usuario haya escrito al crear la incidencia. |
 | issue.fields<nombreDelCampo> | Retorna el valor de un campo personalizado. | {{issue.fields.customfield_XXXXX}} *(o usando el nombre si Jira lo soporta)* | **Uso en correo:** Teoría de Base: {{issue.fields.Teoría de Base}} Si el campo se llama con un ID customfield_10002, usarías {{issue.fields.customfield_10002}}. |
