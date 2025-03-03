@@ -2,21 +2,12 @@
 # Carlos Luis Hernández Gutiérrez
 
 ### Información de contacto:
-- **Teléfono:** +34 687 875 064  
-- **Correo electrónico:** chcarlos3@gmail.com  
-- **LinkedIn:** [Carlos Hernández](https://linkedin.com/in/carloslhg)  
-- **GitHub:** [Repositorio](https://carloslhg.github.io/Repositorio)  
-- **Ubicación:** Madrid, España (con total movilidad geográfica)
+- 📞 +34 687 875 064
+- 📧 chcarlos3@gmail.com
+- 🔗 [LinkedIn](https://linkedin.com/in/carloslhg)
+- 📍 Madrid, España (con total movilidad geográfica)
 
  [English](./) | [Repositorio de Proyectos](../../README-es.md)
-
-# Carlos Luis Hernández Gutiérrez
-
-## Información de contacto
-- 📞 +34 687 875 064  
-- 📧 chcarlos3@gmail.com  
-- 🔗 [LinkedIn](https://linkedin.com/in/carloslhg)  
-- 📍 Madrid, España (con total movilidad geográfica)
 
 ---
 
