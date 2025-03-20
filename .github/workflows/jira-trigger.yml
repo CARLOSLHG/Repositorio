@@ -1,0 +1,18 @@
+name: Jira Triggered Workflow
+
+on: 
+  repository_dispatch:
+    types: [jira-ready-for-deploy]
+
+jobs:
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejemplo de ejecución
+        run: |
+          echo "Activado desde Jira: ${{ github.event.client_payload.issue_key }}"
+          echo "Resumen: ${{ github.event.client_payload.summmary }}"
+          echo "Actualizado por: ${{ github.event.client_payload.updated_by }}"
