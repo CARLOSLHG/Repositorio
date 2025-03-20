@@ -13,33 +13,17 @@
     <h1>Reportar un Issue a Jira</h1>
     <p>Usa este formulario para reportar un problema directamente en Jira.</p>
 
-    <!-- Botón para abrir el Issue Collector -->
-    <button id="openJiraForm">Reportar un Issue</button>
+    <script type="text/javascript" src="https://s4e-training.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/xghl7j/b/9/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=b5fad200"></script>
 
-    <!-- Código del Issue Collector de Jira en JavaScript -->
-    <script type="text/javascript">
-        jQuery.ajax({
-            url: "https://s4e-training.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/xgh17j/b/9/b0105d975e95f243230a22972a71a/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-embededjs.js?locale=en-US&collectorId=b5fad200",
-            type: "get",
-            cache: true,
-            dataType: "script"
-        });
+    <script type="text/javascript">window.ATL_JQ_PAGE_PROPS =  {
+	"triggerFunction": function(showCollectorDialog) {
+		//Requires that jQuery is available! 
+		jQuery("#myCustomTrigger").click(function(e) {
+			e.preventDefault();
+			showCollectorDialog();
+		});
+	}};</script>
 
-        window.ATL_JQ_PAGE_PROPS = {
-            "triggerFunction": function(showCollectorDialog) {
-                jQuery("#openJiraForm").click(function(e) {
-                    e.preventDefault();
-                    showCollectorDialog();
-                });
-            }
-        };
-    </script>
-
-    <!-- 🔹 Alternativa: Usar iframe si el script de Jira está bloqueado por CORS -->
-    <h2>Si el botón no funciona, usa el siguiente formulario:</h2>
-    <iframe src="https://s4e-training.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/xgh17j/b/9/b0105d975e95f243230a22972a71a/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-embededjs.js?locale=en-US&collectorId=b5fad200"
-            width="100%" height="600" style="border:none;">
-    </iframe>
 
 </body>
 </html>
