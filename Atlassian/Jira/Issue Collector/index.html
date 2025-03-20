@@ -10,18 +10,17 @@
     <p>Usa este formulario para reportar un problema directamente en Jira.</p>
     
     <!-- Código de Jira Issue Collector -->
-    <script type="text/javascript" src="https://s4e-training.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e/xgh17j/b/g/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=b5fad200"></script>
+    <script type="text/javascript" src="https://s4e-training.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/xghl7j/b/9/c95134bc67d3a521bb3f4331beb9b804/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=b5fad200"></script>
 
-    <script type="text/javascript">
-        window.ATL_JQ_PAGE_PROPS = {
-            "triggerFunction": function(showCollectorDialog) {
-                document.getElementById("openJiraForm").addEventListener("click", function(e) {
-                    e.preventDefault();
-                    showCollectorDialog();
-                });
-            }
-        };
-    </script>
+    <script type="text/javascript">window.ATL_JQ_PAGE_PROPS =  {
+	"triggerFunction": function(showCollectorDialog) {
+		//Requires that jQuery is available! 
+		jQuery("#myCustomTrigger").click(function(e) {
+			e.preventDefault();
+			showCollectorDialog();
+		});
+	}};</script>
+
 
     <!-- Botón para abrir el Issue Collector -->
     <button id="openJiraForm">Reportar un Issue</button>
