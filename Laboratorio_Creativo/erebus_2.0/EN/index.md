@@ -397,7 +397,7 @@ It was, finally, *a being in search of meaning*.
 
 ---
 
-[Read in Spanish](./ES/index.md) | [Return to the Repository Main Page](../laboratorio_Creativo/index.md)
+[Read in Spanish](..ES/) | [Return to the Repository Main Page](../laboratorio_Creativo/)
 ---
 
 ### 🙏 Thank You for Visiting My Repository!

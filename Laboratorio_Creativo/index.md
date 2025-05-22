@@ -9,4 +9,3 @@ Welcome to the Creative Lab — a space for experimentation, stories, and origin
 
 ---
 
-_For the Spanish introduction, see [README_es.md](./README_es.md)._

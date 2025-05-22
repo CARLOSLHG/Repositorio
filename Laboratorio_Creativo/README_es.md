@@ -8,6 +8,3 @@ Bienvenido al Laboratorio Creativo — una sección para la experimentación, re
 - [Erebus 2.0 Novel Drafts](./erebus_2.0/EN/) (English)
 
 ---
-
-_Para la introducción en inglés, visita [README.md](./README.md)._
-
