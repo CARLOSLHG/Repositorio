@@ -1,0 +1,19 @@
+==============================
+ OPTIMIZADOR DE CHROME - CHANGELOG
+==============================
+
+Versión 2.0 - 02/05/2025
+------------------------------
+✔ Inicio automático sin uso de .bat, mediante acceso directo en carpeta de inicio (commonstartup).
+✔ Se reemplazó el ícono del instalador por uno personalizado estilo Atlassian.
+✔ Se eliminó la dependencia del archivo launch_mem_watcher.bat.
+✔ Se actualizó el archivo README.txt para reflejar todos los cambios.
+✔ Mejoras generales en el archivo de instalación setup.iss (estructura más limpia y profesional).
+✔ Primer compilador final estable para distribución.
+
+Versión 1.0 - 01/05/2025
+------------------------------
+✔ Implementación de app.exe con interfaz gráfica para limpieza y verificación.
+✔ Creación de mem_watcher.exe para monitorear RAM y lanzar la app.
+✔ Automatización básica mediante .bat opcional.
+✔ Generación del primer instalador funcional.
