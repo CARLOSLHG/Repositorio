@@ -4,8 +4,8 @@ Bienvenido al Laboratorio Creativo — una sección para la experimentación, re
 
 ## Secciones
 
-- [Erebus 2.0 Borrador de novela](../erebus_2.0/ES/README.md) (Español)
-- [Erebus 2.0 Novel Drafts](../erebus_2.0/EN/README.md) (English)
+- [Erebus 2.0 Borrador de novela](./erebus_2.0/ES/) (Español)
+- [Erebus 2.0 Novel Drafts](./erebus_2.0/EN/) (English)
 
 ---
 
