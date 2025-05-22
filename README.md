@@ -60,7 +60,7 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 
    [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
 
-## 🧪 Creative Lab / Laboratorio Creativo
+## 🧪 Creative Lab
 - **Explore my creative fiction, story drafts, prompts, and experimental projects:**
 - **Erebus 2.0** – English Draft
 - **Erebus 2.0** – Borrador en Español

@@ -60,7 +60,7 @@
 
    [🔍 Explorar proyectos en JavaScript](./JavaScript%20Exercises/README-es) |
 
-## 🧪 Laboratorio Creativo / Creative Lab
+## 🧪 Laboratorio Creativo
 
   📖 **¡Nuevo!** Te invito a leer mi último ensayo de ciencia ficción especulativa:  
   _Erebus 2.0_ — Un relato distópico que explora el futuro de la IAG, la resistencia humana y la última esperanza para la libertad.
