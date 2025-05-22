@@ -413,7 +413,7 @@ Mientras apagaba la pantalla, Sofía comprendió que, quizá, ese miedo y ese de
 
 ---
 
-[Leer en Ingles](./ES/README.md) | [Return to the Repository Main Page](../laboratorio_creativo/README.md)
+[Leer en Ingles](./EN/index.md) | [Return to the Repository Main Page](../laboratorio_Creativo/index.md)
 ---
 
 ### 🙏 Thank You for Visiting My Repository!
