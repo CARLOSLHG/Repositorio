@@ -1,7 +1,6 @@
-# Erebus 2.0 — Borrador de novela / Novel Draft
-
-**Autor / Author:** Carlos L. Hernández  
-**Fecha / Date:** 2025
+# Erebus 2.0 — Borrador de novela
+by Carlos Luis Hernández Gutiérrez
+**Fecha:** 2025
 
 ---
 
