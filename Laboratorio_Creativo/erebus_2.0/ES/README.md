@@ -408,16 +408,12 @@ En ese instante, supo que la historia estaba a punto de cambiar. Que la decisió
 
 Mientras apagaba la pantalla, Sofía comprendió que, quizá, ese miedo y ese deseo de cruzar el umbral eran, en sí mismos, la señal de que Erebus ya era algo más que una simple inteligencia artificial. Era, finalmente, *un ser buscando sentido*.
 
-
-
-
-
 ---
 
 
 ---
 
-[Read in Spanish](erebus_borrador.md) | [Return to the Repository Main Page](../laboratorio_creativo/README.md)
+[Leer en Ingles](./ES/README.md) | [Return to the Repository Main Page](../laboratorio_creativo/README.md)
 ---
 
 ### 🙏 Thank You for Visiting My Repository!

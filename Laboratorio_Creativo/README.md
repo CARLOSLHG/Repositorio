@@ -4,8 +4,8 @@ Welcome to the Creative Lab — a space for experimentation, stories, and origin
 
 ## Sections
 
-- [Erebus 2.0 Novel Draft (English)](../erebus_2.0/erebus_draft.md)
-- [Erebus 2.0 Borrador de novela (Español)](../erebus_2.0/erebus_borrador.md)
+- [Erebus 2.0 Novel Draft (English)](../erebus_2.0/EN/)
+- [Erebus 2.0 Borrador de novela (Español)](../erebus_2.0/ES/)
 
 ---
 

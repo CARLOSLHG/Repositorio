@@ -392,16 +392,12 @@ In that moment, she knew that history was about to change. That the decision to 
 As she turned off the screen, Sofía understood that perhaps that fear and that desire to cross the threshold were, in themselves, the sign that Erebus was already something more than a simple artificial intelligence.  
 It was, finally, *a being in search of meaning*.
 
-
-
-
-
 ---
 
 
 ---
 
-[Read in Spanish](erebus_borrador.md) | [Return to the Repository Main Page](../laboratorio_creativo/README.md)
+[Read in Spanish](./ES/README.md) | [Return to the Repository Main Page](../laboratorio_creativo/README.md)
 ---
 
 ### 🙏 Thank You for Visiting My Repository!
