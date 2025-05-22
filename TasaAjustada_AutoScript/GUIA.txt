@@ -1,0 +1,46 @@
+GUÍA RÁPIDA - TasaAjustadaPayoneer_AutoScript
+
+1. En tu Google Sheets, crea 3 hojas: Tasa, Histórico, 2025 Ingresos vs Gastos.
+2. Pega el contenido de `Tasa.gs` en el editor de Apps Script.
+3. Configura un activador diario entre 15:00 y 16:00 que ejecute `guardarTasaCambio`.
+4. Asegúrate de que la celda D1 contenga la fórmula con IMPORTJSON para obtener la tasa actual.
+5. Usa el botón "Guardar tasa del mes" para registrar meses anteriores manualmente.
+6. Ejecuta `interpolarTasaDesdeHojaTasa` una vez para cargar datos ya existentes.
+
+Este sistema automatiza la asignación mensual de la tasa ajustada en tus hojas financieras.
+
+
+------------------------
+ACTIVADOR AUTOMÁTICO
+------------------------
+
+1. Abre el editor de Apps Script en tu hoja de cálculo (Extensiones → Apps Script).
+2. Ve a la pestaña 'Reloj' o 'Activadores' (ícono de reloj a la izquierda).
+3. Haz clic en "+ Añadir Activador" (botón inferior derecha).
+4. Selecciona la función: `guardarTasaCambio`.
+5. Tipo de evento: "Temporizador".
+6. Frecuencia: "Día".
+7. Hora: Elige "De 15:00 a 16:00".
+
+Este activador ejecutará automáticamente el script cada día entre las 15:00 y 16:00. Solo guardará la tasa si es día 30 o último del mes.
+
+------------------------
+COMBINACIÓN DE SCRIPTS
+------------------------
+
+1. Crea un nuevo proyecto Apps Script en tu hoja de Google Sheets.
+2. Crea dos archivos:
+   - `Tasa.gs`: pega todo el contenido del archivo correspondiente.
+   - `importador.gs`: pega el código que permite usar `=IMPORTJSON(...)` en celdas de la hoja.
+
+3. En la hoja "Tasa", coloca en la celda `D1` la siguiente fórmula:
+   =IMPORTJSON("https://openexchangerates.org/api/latest.json?app_id=TU_APP_ID";"rates.EUR";"noHeaders")
+
+4. Sustituye `TU_APP_ID` por tu API Key válida de Open Exchange Rates.
+5. Asegúrate de tener tus hojas configuradas correctamente:
+   - `Tasa`
+   - `Histórico`
+   - `2025 Ingresos vs Gastos`
+
+¡Listo! El sistema funcionará automáticamente cada mes.
+

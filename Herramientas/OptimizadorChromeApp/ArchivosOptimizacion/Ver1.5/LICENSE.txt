@@ -1,0 +1,11 @@
+LICENCIA GRATUITA DEL USUARIO FINAL
+
+Este software ha sido creado por Carlos Hernández como herramienta gratuita
+para optimizar el uso de memoria y gestión de extensiones en navegadores basados en Chrome.
+
+CONDICIONES DE USO:
+- El software se proporciona "tal cual", sin garantía de ningún tipo.
+- Está permitido su uso, copia y distribución gratuita con fines personales y educativos.
+- No se permite su venta ni modificación sin consentimiento del autor.
+
+DERECHOS DE AUTOR © 2025 Carlos Hernández.

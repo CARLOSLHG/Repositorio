@@ -1,0 +1,58 @@
+CHANGELOG - Optimizador de Chrome
+
+Versión 1.0 - Prototipo inicial
+Fecha: [2025-04]
+
+- Se creó el primer script limpiar_memoria.ps1 para liberar memoria de navegadores.
+- Se desarrolló la primera versión de app.py con interfaz Tkinter.
+- Se incorporó mem_watcher.py para ejecutar automáticamente el script al superar el umbral de RAM.
+- Se creó el instalador básico usando Inno Setup.
+- Se añadieron los archivos PowerShell al paquete manualmente.
+- Primer intento de incluir mem_watcher.exe en el arranque del sistema.
+- Codificación UTF-8 en algunos archivos causó caracteres extraños en consola e instalador.
+
+---
+
+Versión 1.5 - Ajustes y pruebas estructurales
+Fecha: [2025-04/05]
+
+- Estructura reorganizada: se separan src, dist e installer.
+- Se crea app.spec y mem_watcher.spec para usar con PyInstaller.
+- Se prueba el empaquetado como ejecutables portables.
+- Se detecta error de permisos al guardar mem_flag.tmp en Program Files.
+- Se identifican problemas de ejecución automática en shell:startup.
+- Se refactoriza app.py para integrar botón de diagnóstico.
+- Se documentan errores en setup.iss por codificación.
+
+---
+
+Versión 2.0 - Estable y lista para distribución
+Fecha: 03/05/2025
+
+- Codificación corregida en todos los archivos a Windows-1252.
+- setup.iss corregido con escape de caracteres especiales.
+- mem_flag.tmp se traslada a %LOCALAPPDATA% para evitar errores de permisos.
+- Se mejora logging de mem_watcher.py con mensajes más descriptivos.
+- Se mejoró limpiar_memoria.ps1: se añade MaxWorkingSet y control más preciso.
+- Se crean carpetas automáticas de logs y se centraliza el monitoreo.
+- Se genera compilar_todo.bat para automatizar limpieza y compilación completa.
+- Se consolidan app.exe, mem_watcher.exe y scripts en una sola carpeta final.
+- Se eliminan scripts antiguos como copiar_ps1_postbuild.bat y similares.
+- Proyecto validado como versión estable y empaquetado para distribución.
+- Generación de changelog, guía de compilación y README finalizados.
+
+Autor: Carlos
+---
+
+Versión 3.0 - Ajustes finales de interfaz e instalador
+Fecha: 04/05/2025
+
+- Se actualizó el nombre oficial de la aplicación a "Optimizador de Memoria para Chrome".
+- Se actualizó el nombre del archivo instalador a "OptimizadorMemChrome_InstaladorVer3.exe".
+- Se corrigió el archivo setup.iss para mover los scripts PowerShell (limpiar_memoria.ps1 y verificar_extensiones.ps1) a la ruta {app}\_internal.
+- Se solucionó el error en el botón "Diagnóstico del sistema", que mostraba errores por no encontrar los scripts en la ruta esperada.
+- Se eliminó la referencia a "Chappe" en la interfaz y se reemplazó por "Desarrollado por Carlos Hernández - 2025 | Licencia Gratuita".
+- Se creó una versión segura del setup.iss como `setup_corregido.iss` para pruebas antes de reemplazo definitivo.
+- Se mantuvo compatibilidad con iconos de escritorio y arranque automático del monitor de memoria.
+
+Autor: Carlos
