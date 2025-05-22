@@ -61,14 +61,12 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
    [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
 
 ## 🧪 Creative Lab / Laboratorio Creativo
-
 - **Explore my creative fiction, story drafts, prompts, and experimental projects:**
   - [Creative Lab Index](./laboratorio_creativo/README.md)
   - [Erebus 2.0 – English Draft](./erebus_2.0/erebus_draft.md)
   - [Erebus 2.0 – Borrador en Español](./erebus_2.0/erebus_borrador.md)
 
 ## 🛠️ Technologies and Tools
-
 - **Languages**: HTML, CSS, JavaScript, Python, R, PHP
 - **Frameworks and Tools**: React, Node.js, WordPress, Bootstrap
 - **Databases**: SQL, Google BigQuery
@@ -76,7 +74,6 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 - **Certifications**: [View Certifications on LinkedIn](https://www.linkedin.com/in/carloslhg) |
 
 ## 📄 Full CV and Contact
-
 For more details on my experience and certifications, see my [full CV here](./About/CV/) | or visit my [LinkedIn profile](https://www.linkedin.com/in/carloslhg). I’m open to inquiries and collaboration proposals!
 
 ---
