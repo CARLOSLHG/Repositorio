@@ -2,8 +2,6 @@
 
 # Project Examples and Professional Experience
 
-
-
 [Ir a la versión en Español >>](/README-es.md) | [Back to LinkeDin](https://www.linkedin.com/in/carloslhg)
 
 ---
@@ -62,8 +60,12 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 
    [🔍 Explore JavaScript Projects](./JavaScript%20Exercises/) |
 
+## 🧪 Creative Lab / Laboratorio Creativo
 
----
+- **Explore my creative fiction, story drafts, prompts, and experimental projects:**
+  - [Creative Lab Index](./laboratorio_creativo/README.md)
+  - [Erebus 2.0 – English Draft](./erebus_2.0/erebus_draft.md)
+  - [Erebus 2.0 – Borrador en Español](./erebus_2.0/erebus_borrador.md)
 
 ## 🛠️ Technologies and Tools
 
@@ -72,8 +74,6 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 - **Databases**: SQL, Google BigQuery
 - **Environments and Platforms**: RStudio, GitHub, Kaggle, Google Data Studio
 - **Certifications**: [View Certifications on LinkedIn](https://www.linkedin.com/in/carloslhg) |
-
----
 
 ## 📄 Full CV and Contact
 

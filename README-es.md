@@ -2,8 +2,6 @@
 
 # Ejemplos de Proyectos y Experiencia Profesional
 
-
-
 [English version >>](/README.md) | [Regresar a  LinkeDIn](https://www.linkedin.com/in/carloslhg)
 
 ---
@@ -62,20 +60,24 @@
 
    [🔍 Explorar proyectos en JavaScript](./JavaScript%20Exercises/README-es) |
 
----
+## 🧪 Laboratorio Creativo / Creative Lab
+   - **Explora mi ficción creativa, borradores de historias, prompts y proyectos experimentales:**
+
+  📖 **¡Nuevo!** Te invito a leer mi último ensayo de ciencia ficción especulativa:  
+  _Erebus 2.0_ — Un relato distópico que explora el futuro de la IAG, la resistencia humana y la última esperanza para la libertad.
+
+  - [Índice del Laboratorio Creativo](./laboratorio_creativo/README_es.md)
+  - [Erebus 2.0 – Borrador en Español](./erebus_2.0/erebus_borrador.md)
+  - [Erebus 2.0 – English Draft](./erebus_2.0/erebus_draft.md)
 
 ## 🛠️ Tecnologías y Herramientas
-
 - **Lenguajes**: HTML, CSS, JavaScript, Python, R, PHP
 - **Frameworks y Herramientas**: React, Node.js, WordPress, Bootstrap
 - **Bases de Datos**: SQL, Google BigQuery
 - **Entornos y Plataformas**: RStudio, GitHub, Kaggle, Google Data Studio
 - **Certificaciones**: [Ver Certificaciones en LinkedIn](https://www.linkedin.com/in/carloslhg) |
 
----
-
 ## 📄 CV Completo y Contacto
-
 Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV completo aquí](./About/CV/) | o visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg). ¡Estoy abierto a consultas y propuestas de colaboración!
 
 ---
