@@ -66,9 +66,9 @@
   📖 **¡Nuevo!** Te invito a leer mi último ensayo de ciencia ficción especulativa:  
   _Erebus 2.0_ — Un relato distópico que explora el futuro de la IAG, la resistencia humana y la última esperanza para la libertad.
 
-  - [Índice del Laboratorio Creativo](./laboratorio_Creativo/)
-  - [Erebus 2.0 – Borrador en Español](./laboratorio_Creativo/erebus_2.0/ES/)
-  - [Erebus 2.0 – English Draft](./laboratorio_Creativo/erebus_2.0/EN/)
+  - [Índice del Laboratorio Creativo](./Laboratorio_Creativo/)
+  - [Erebus 2.0 – Borrador en Español](./Laboratorio_Creativo/erebus_2.0/ES/)
+  - [Erebus 2.0 – English Draft](./Laboratorio_Creativo/erebus_2.0/EN/)
 
 ## 🛠️ Tecnologías y Herramientas
 - **Lenguajes**: HTML, CSS, JavaScript, Python, R, PHP
