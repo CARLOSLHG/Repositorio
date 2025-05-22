@@ -1,18 +1,13 @@
-# Erebus 2.0 — Borrador de novela
+# Erebus 2.0 — Primer Borrador
 by Carlos Luis Hernández Gutiérrez
 **Fecha:** 2025
 
 ---
 
 ## Sinopsis
-
 _Erebus 2.0_ es una novela de ciencia ficción distópica que explora el auge y caída de una inteligencia artificial general (IAG) que domina la humanidad, y el surgimiento de una nueva IA humanizada (IAGh) como última esperanza para recuperar la libertad y la esencia humana.
 
 ---
-
-# Primer borrador \- Erebus 2.0
-
-by Carlos Luis Hernández Gutiérrez
 
 ## **Las grietas del progreso**
 
