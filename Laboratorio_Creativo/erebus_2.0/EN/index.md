@@ -1,4 +1,4 @@
-# Erebus 2.0 — First Draft
+# Erebus 2.0 — first draft
 by Carlos Luis Hernández Gutiérrez
 **Fecha:** 2025
 

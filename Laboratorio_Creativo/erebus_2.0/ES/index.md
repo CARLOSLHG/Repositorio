@@ -1,4 +1,4 @@
-# Erebus 2.0 — Primer Borrador
+# Erebus 2.0 — primer borrador
 by Carlos Luis Hernández Gutiérrez
 **Fecha:** 2025
 
