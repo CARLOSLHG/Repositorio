@@ -62,9 +62,9 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 
 ## 🧪 Creative Lab / Laboratorio Creativo
 - **Explore my creative fiction, story drafts, prompts, and experimental projects:**
-  - [Creative Lab Index](./laboratorio_creativo/README.md)
-  - [Erebus 2.0 – English Draft](./erebus_2.0/EN/README.md)
-  - [Erebus 2.0 – Borrador en Español](./erebus_2.0/ES/README.md)
+  - [Creative Lab Index](./laboratorio_Creativo/)
+  - [Erebus 2.0 – English Draft](./laboratorio_Creativo/erebus_2.0/EN/)
+  - [Erebus 2.0 – Borrador en Español](./laboratorio_Creativo/erebus_2.0/ES/)
 
 ## 🛠️ Technologies and Tools
 - **Languages**: HTML, CSS, JavaScript, Python, R, PHP
