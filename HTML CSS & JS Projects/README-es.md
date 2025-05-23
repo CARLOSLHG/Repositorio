@@ -29,6 +29,7 @@ Proyectos:
 ---
 
 [English version](./README.md) | [Regresar al Repositorio](../)
+
 ---
 
 ### 🙏 ¡Gracias por visitar mi repositorio!
