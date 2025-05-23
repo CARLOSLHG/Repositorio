@@ -23,7 +23,7 @@ Estamos trabajando en las siguientes áreas:
 
 Proyectos:
 
-- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/README-es.md)
+- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/ES/)
 - **Página web**: [Scotsman Latam](./Proyectos/Scotsmanlatam/README-es.md)
 
 ---
