@@ -26,7 +26,7 @@ We are working on the following areas:
 
 Projects Examples:
 
-- **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/README.md)
+- **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/EN/)
 - **Web Page**: [Scotsman Latam](./Proyectos/Scotsmanlatam/README.md)
 
 ---
