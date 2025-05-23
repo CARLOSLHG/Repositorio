@@ -1,6 +1,6 @@
 # HTML, CSS y Javascript
 ---
-[English version](README-es.md) | [Regresar al Repositorio](../)
+[English version](./README.md) | [Regresar al Repositorio](../)
 ---
 
 ¡Bienvenido! Esta sección del repositorio está en construcción. Actualmente, estamos desarrollando contenido y funcionalidades, por lo que algunas áreas pueden no estar completas o en proceso de actualización.
@@ -23,12 +23,12 @@ Estamos trabajando en las siguientes áreas:
 
 Proyectos:
 
-- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/)
-- **Página web**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
+- **Página web**: [Carbón Company](./Proyectos/Carbon%20Company/README-es.md)
+- **Página web**: [Scotsman Latam](./Proyectos/Scotsmanlatam/README-es.md)
 
 ---
 
-[English version](README-es.md) | [Regresar al Repositorio](../)
+[English version](./README.md) | [Regresar al Repositorio](../)
 ---
 
 ### 🙏 ¡Gracias por visitar mi repositorio!

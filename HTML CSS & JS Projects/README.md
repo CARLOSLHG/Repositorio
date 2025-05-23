@@ -23,8 +23,8 @@ We are working on the following areas:
 
 Projects Examples:
 
-- **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/)
-- **Web Page**: [Scotsman Latam](./Proyectos/Scotsmanlatam/)
+- **Web Page**: [Carbon Company](./Proyectos/Carbon%20Company/README.md)
+- **Web Page**: [Scotsman Latam](./Proyectos/Scotsmanlatam/README.md)
 
 
 ---
