@@ -2,7 +2,7 @@
 ---
 
 ---
-[English version](./) | [Regresar el Menú del Repositorio](../README.md)
+[English version](./) | [Regresar el Menú del Repositorio](../../)
 
 ---
 
@@ -19,7 +19,7 @@ Algunos proyectos y documentos están en desarrollo y pueden estar sujetos a cam
 
 ---
 
-[English version](./) | [Regresar el Menú del Repositorio](../README.md)
+[English version](./) | [Regresar el Menú del Repositorio](../../)
 
 ---
 

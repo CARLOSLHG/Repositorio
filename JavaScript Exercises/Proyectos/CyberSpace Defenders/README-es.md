@@ -2,7 +2,7 @@
 
 ---
 
-[English version](README.md) | [Regresar al Repositorio](../../../README.md) | [Ir al Juego](./Container/index.html)
+[English version](README.md) | [Regresar al Repositorio](../../../) | [Ir al Juego](./Container/index.html)
 
 ---
 
@@ -56,4 +56,4 @@ El juego mide el progreso en:
 
 ---
 
-[English version](README.md) | [Regresar al Repositorio](../../../README.md)
+[English version](README.md) | [Regresar al Repositorio](../../../)

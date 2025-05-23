@@ -2,7 +2,7 @@
 ---
 
 ---
-| [Regresar el Menú del Repositorio](../README.md)
+| [Regresar el Menú del Repositorio](../../)
 
 ---
 
@@ -18,7 +18,7 @@ Algunos proyectos y documentos están en desarrollo y pueden estar sujetos a cam
 
 ---
 
-| [Regresar el Menú del Repositorio](../README.md)
+| [Regresar el Menú del Repositorio](../../)
 
 ---
 

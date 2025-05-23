@@ -2,7 +2,7 @@
 
 ---
 
-[Leer en Español](README-es.md) | [Return to Main Page](../../../README.md) | [Play Now](./Container/index.html)
+[Leer en Español](README-es.md) | [Return to Main Page](../../../) | [Play Now](./Container/index.html)
 
 ---
 
@@ -56,7 +56,7 @@ The game tracks progress in:
 
 ---
 
-[Leer en Español](README-es.md) | [Return to Main Page](../../../README.md)
+[Leer en Español](README-es.md) | [Return to Main Page](../../../)
 
 ---
 

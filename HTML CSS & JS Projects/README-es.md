@@ -1,6 +1,6 @@
 # HTML, CSS y Javascript
 ---
-[English version](README-es.md) | [Regresar al Repositorio](../README.md)
+[English version](README-es.md) | [Regresar al Repositorio](../)
 ---
 
 ¡Bienvenido! Esta sección del repositorio está en construcción. Actualmente, estamos desarrollando contenido y funcionalidades, por lo que algunas áreas pueden no estar completas o en proceso de actualización.
@@ -28,7 +28,7 @@ Proyectos:
 
 ---
 
-[English version](README-es.md) | [Regresar al Repositorio](../README.md)
+[English version](README-es.md) | [Regresar al Repositorio](../)
 ---
 
 ### 🙏 ¡Gracias por visitar mi repositorio!

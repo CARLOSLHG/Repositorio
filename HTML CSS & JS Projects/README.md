@@ -1,6 +1,6 @@
 # HTML, CSS, and Javascript
 ---
-[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../)
 ---
 
 Welcome! This section of the repository is under construction. We are currently developing content and functionalities, so some areas may be incomplete or in the process of being updated.
@@ -29,7 +29,7 @@ Projects Examples:
 
 ---
 
-[Leer en Español](README-es.md) | [Return to the Repository Main Page](../README.md)
+[Leer en Español](README-es.md) | [Return to the Repository Main Page](../)
 ---
 
 ### 🙏 Thank You for Visiting My Repository!
