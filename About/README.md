@@ -3,7 +3,7 @@
 ---
 
 ## About Me
-[Versión en español >>](./)
+[Versión en español >>](./about-me-es.md)
 
 Hi, I’m **Carlos Hernández**—a curious, creative, and passionate technology professional with a background that connects development, project management, data analysis, and hands-on experimentation with emerging artificial intelligence tools.  
 You can explore some of my projects here: [https://carloslhg.github.io/Repositorio](https://carloslhg.github.io/Repositorio).
