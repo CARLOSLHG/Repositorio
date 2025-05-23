@@ -25,6 +25,6 @@ Proyectos:
 
 ---
 
-[Volver a la Página Principal del Repositorio](../README.md)
+[Volver a la Página Principal del Repositorio](../)
 
 ### 🙏 ¡Gracias por visitar mi repositorio!

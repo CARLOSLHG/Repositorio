@@ -22,7 +22,7 @@ Algunos proyectos y documentos están en desarrollo y pueden estar sujetos a cam
 
 ---
 
-[English version](README-es.md) | [Regresar el Menú del Repositorio](../README.md)
+[English version](README-es.md) | [Regresar el Menú del Repositorio](../../)
 
 ---
 
