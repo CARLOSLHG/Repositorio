@@ -1,157 +1,124 @@
+![Foto de Carlos Luis Hernández](./Container/img/0.5x/20241111_My_foto@0.5x.png)
 
 # Carlos Luis Hernández Gutiérrez
 
-### Información de contacto:
-- 📞 +34 687 875 064
-- 📧 chcarlos3@gmail.com
-- 🔗 [LinkedIn](https://linkedin.com/in/carloslhg)
-- 📍 Madrid, España (con total movilidad geográfica)
-
- [English](./) | [Repositorio de Proyectos](../../README-es.md)
+**Madrid, España** | +34 687 875 064 | [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com) | [LinkedIn](https://linkedin.com/in/carloslhg) | [Repositorio GitHub](https://carloslhg.github.io/Repositorio)
 
 ---
 
-## Resumen profesional
-Consultor en tecnologías Atlassian y especialista en desarrollo web con experiencia en diseño de UX/UI y administración de sistemas en la nube. Mi trayectoria incluye proyectos en implementación de Jira, capacitación técnica y desarrollo de interfaces que optimizan la comunicación y el rendimiento de equipos en sectores como la educación, investigación, tecnología y farmacéutica. 
+## Resumen Profesional
 
-Idiomas: Español (nativo) e Inglés (B2), con alta adaptabilidad a entornos tecnológicos y orientado al aprendizaje continuo.
+Consultor en tecnologías Atlassian y especialista en desarrollo web, con experiencia en diseño de UX/UI y administración de sistemas en la nube. Mi trayectoria abarca proyectos de implementación de Jira, capacitación técnica y desarrollo de interfaces para optimizar la comunicación y rendimiento de equipos en sectores como educación, investigación, tecnología y farmacéutica.
 
----
-
-## Experiencia laboral
-
-### Consultor – Atlassian (remoto)  
-📅 2021 - Presente  
-🏢 **Empresa:** S4E Solutions For Everyone - Platinum Partner Atlassian & Select Partner AWS  
-🌎 **País:** Chile  
-
-#### Responsabilidades:
-- Imparto capacitación en Jira Software, Jira Service Manager y Confluence en sectores de telecomunicaciones, educación, farmacéutica e investigación.
-- Dirijo talleres para equipos técnicos y administrativos, mejorando la gestión de plataformas.
-
-#### Resultados:
-- Obtuve certificaciones en herramientas clave de gestión de proyectos.
-- Capacitación en empresas como GTD Chile, ALMA Observatory, Universidad de Chile, Laboratorios Saval, UST, Metso y S4E.
-- Desarrollé una metodología de capacitación personalizada, aumentando la adopción de Atlassian.
+- Idiomas: Español (nativo) | Inglés (B2)
+- Alta adaptabilidad a entornos tecnológicos y orientación al aprendizaje continuo.
 
 ---
 
-### Diseñador Web, UX/UI (remoto)  
-📅 2020 - 2021  
-🏢 **Empresa:** S4E Solutions For Everyone - Platinum Partner Atlassian & Select Partner AWS  
-🌎 **País:** Chile  
+## Experiencia Laboral
 
-#### Responsabilidades:
-- Diseñé y mantuve sitios web en WordPress para mejorar la visibilidad en línea.
-- Implementé soluciones de comunicación en JIRA Software y trabajé con sistemas IaaS, PaaS y SaaS.
+### Consultor Atlassian  
+**S4E Solutions For Everyone** (Platinum Partner Atlassian & Select Partner AWS, Chile) | Remoto | *2021 - Presente*
 
-#### Resultados:
-- Incrementé el posicionamiento SEO y SEM de S4E, aumentando clientes en un 47%.
-- Integré servicios en la nube, mejorando escalabilidad y seguridad.
+- Impartí capacitación especializada en Jira Software, Jira Service Manager y Confluence a clientes de sectores como telecomunicaciones, educación, farmacéutica e investigación.
+- Dirigí talleres técnicos y administrativos, mejorando el uso de plataformas de gestión en empresas tecnológicas.
+- Implementé metodologías de capacitación personalizadas, aumentando la adopción y eficiencia en equipos de soporte y administración de proyectos.
+- Empresas destacadas: GTD Chile, ALMA Observatory, Universidad de Chile, Laboratorios Saval, UST, Metso, S4E.
 
 ---
 
-### Webmaster, Diseñador Web, UX/UI (remoto)  
-📅 2018 - 2020  
-🏢 **Empresa:** Sky Corporation Import & Export  
-🌎 **País:** EE.UU  
+### Diseñador Web, UX/UI  
+**S4E Solutions For Everyone** | Remoto | *2020 - 2021*
 
-#### Responsabilidades:
-- Lideré proyectos de UX/UI y desarrollo web en HTML, CSS y JavaScript.
-
-#### Resultados:
-- Aumenté solicitudes de presupuestos en un 60% optimizando el portal [scotsmanlatam.com](https://scotsmanlatam.com).
-- Mejoré la experiencia de usuario y acceso en móviles con diseño responsivo.
+- Diseño y mantenimiento de sitios web en WordPress para mejorar la visibilidad y comunicación de S4E.
+- Implementación de soluciones de comunicación en Jira Software y sistemas IaaS, PaaS y SaaS.
+- Logro: Incremento del 47% en clientes vía mejora de SEO/SEM; integración de servicios en la nube para escalabilidad y seguridad.
 
 ---
 
-### Diseñador Gráfico y Publicitario (remoto y presencial)  
-📅 2015 - 2018  
-🏢 **Empresa:** Freelance  
-🌎 **País:** Venezuela  
+### Webmaster & UX/UI Designer  
+**Sky Corporation Import & Export** | EEUU | Remoto | *2018 - 2020*
 
-#### Responsabilidades:
-- Diseño gráfico, ilustración digital y animación 3D para marcas y logotipos.
-
-#### Resultados:
-- Creación de identidades de marca combinando diseño visual y programación.
+- Lideré proyectos de UX/UI, diseño e implementación web (HTML, CSS, JavaScript).
+- Optimicé el portal web de [scotsmanlatam.com](https://scotsmanlatam.com) para Latinoamérica y el Caribe (+60% solicitudes online).
+- Mejoré la experiencia de usuario y el acceso móvil mediante diseño responsivo.
 
 ---
 
-### Ejecutivo de Ventas (presencial)  
-📅 2005 - 2015  
-🏢 **Empresa:** Suministros Tocoma CA  
-🌎 **País:** Venezuela  
+### Diseñador Gráfico y Publicitario  
+**Freelance** | Venezuela | Remoto y presencial | *2015 - 2018*
 
-#### Responsabilidades:
-- Gestión de clientes y proveedores, optimización de bases de datos con Microsoft Access.
-
-#### Resultados:
-- Acuerdos de representación exclusivos con multinacionales.
-- Mejora de eficiencia en operaciones de ventas en un 23%.
+- Lideré proyectos de diseño gráfico, ilustración digital y animación 3D.
+- Desarrollé marcas y logotipos combinando herramientas visuales y lenguajes de programación (HTML, PHP).
 
 ---
 
-### Técnico Informático (presencial)  
-📅 1998 - 2005  
-🏢 **Empresa:** Consorcio Dravica - Hidroeléctrica Caruachi  
-🌎 **País:** Venezuela  
+### Ejecutivo de Ventas  
+**Suministros Tocoma CA** | Venezuela | Presencial | *2005 - 2015*
 
-#### Responsabilidades:
-- Implementación de controles de fabricación y estimación de materiales.
-
-#### Resultados:
-- Aumento del 17% en la producción y reducción del 8% en incidencias.
+- Gestión de comunicación con clientes/proveedores y optimización de bases de datos en Access.
+- Logros: Acuerdos de representación exclusivos, implementación de bases de datos que mejoraron la eficiencia logística y ventas (+23%).
 
 ---
 
-### Operador de Teleprompter (presencial)  
-📅 1995 - 1998  
-🏢 **Empresa:** TVGuayana - Canal Privado de Televisión  
-🌎 **País:** Venezuela  
+### Técnico Informático  
+**Consorcio Dravica - Hidroeléctrica Caruachi** | Venezuela | Presencial | *1998 - 2005*
 
-#### Responsabilidades:
-- Manejo de textos, gráficos y animaciones 3D en pantalla.
-
-#### Resultados:
-- Diseño de nuevas animaciones 3D para producciones en vivo.
+- Implementación de controles de fabricación, análisis de planos y estimación de materiales.
+- Resultados: +17% en producción anual, -8% en incidencias.
 
 ---
 
-## Formación
-🎓 **Técnico Superior en Publicidad**  
-📍 **I.U. Nuevas Profesiones**, Caracas, Venezuela (1994)  
+### Operador de Teleprompter  
+**TVGuayana** | Venezuela | Presencial | *1995 - 1998*
+
+- Manejo de textos, gráficos y animaciones 3D en transmisiones en vivo.
+- Diseño de nuevas animaciones 3D para producciones televisivas.
+
+---
+
+## Formación Académica
+
+- **Técnico Superior en Publicidad**  
+  I.U. Nuevas Profesiones, Caracas, Venezuela | 1994
 
 ---
 
 ## Cursos y Certificaciones
-- ✅ **Atlassian Certified Expert**
-- ✅ **Atlassian Certified Cloud Organization Admin Certification**
-- ✅ **Atlassian Certified in Managing Jira Projects for Cloud**
-- ✅ **Google Data Analytics Professional Certificate**
-- ✅ **Data Analysis with R Programming**
-- ✅ **Prompting for Data Driven Solutions**
-- ✅ **Confluence Fundamentals**
-- ✅ **Confluence Space Administration**
-- ✅ **Jira Service Management Fundamentals**
-- ✅ **JQL for Admins**
-- ✅ **Setting up ITSM Projects in Jira Service Management**
-- ✅ **Introduction to Cybersecurity**
-- ✅ **Fundamentos de Arquitectura Cloud**
+
+- Atlassian Certified Expert
+- Atlassian Certified Cloud Organization Admin Certification
+- Atlassian Certified in Managing Jira Projects for Cloud
+- Google Data Analytics Professional Certificate
+- Data Analysis with R Programming
+- Prompting for Data Driven Solutions
+- Confluence Fundamentals / Space Administration
+- Jira Service Management Fundamentals
+- JQL for Admins
+- Setting up ITSM Projects in Jira Service Management
+- Introduction to Cybersecurity
+- Fundamentos de Arquitectura Cloud
 
 ---
 
 ## Idiomas
-- **Español:** nativo
-- **Inglés:** B2
 
----
-
-## Repositorio GitHub
-- 🔗 [CarlosLHG.Github.io/Repositorio](https://CarlosLHG.Github.io/Repositorio)
+- Español: Nativo
+- Inglés: B2
 
 ---
 
 ## Voluntariado
-- 🚑 **Cruz Roja Española**
-- 🤝 **Servicios sociales y cuidado de personas mayores**
+
+- **Cruz Roja Española**  
+- Servicios sociales y cuidado de personas mayores
+
+---
+
+## Contacto
+
+- [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com)
+- [LinkedIn](https://linkedin.com/in/carloslhg)
+- [Repositorio GitHub](https://carloslhg.github.io/Repositorio)
+
+---

@@ -3,89 +3,100 @@
 ---
 
 ## About Me
-[Versión en Español >>](./about-me-es.md)
+[Versión en español >>](./)
 
-I am passionate about technological development, with a solid foundation in **Advertising** and experience across multiple areas of **technology and data analysis**. My roots lie in creativity and communication, thanks to my background as a Higher Technician in Advertising, but I have expanded my career into technology, from project management in Jira and Confluence to data analysis with R and BigQuery. I am curious, always seeking to learn and evolve in this dynamic field. Every achievement and certification I've obtained represents my dedication and commitment to professional growth.
+Hi, I’m **Carlos Hernández**—a curious, creative, and passionate technology professional with a background that connects development, project management, data analysis, and hands-on experimentation with emerging artificial intelligence tools.  
+You can explore some of my projects here: [https://carloslhg.github.io/Repositorio](https://carloslhg.github.io/Repositorio).
 
-[Go to Aspirations](#aspirations) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+In recent months, I have deepened my expertise in **Groovy and ScriptRunner automation**, development of **microservices with Node.js and Python**, advanced management with **Atlassian Compass**, and the creation of custom DevOps environments.  
+I’m passionate about **applied AI**, data visualization, and prompt engineering, as well as creative writing—currently reflected in my dystopian sci-fi novel project ("Erebus 2.0"), which explores the social and ethical impact of general artificial intelligence.
+
+I thrive in collaborative environments, remote or onsite, and I’m motivated by projects where innovation, technology, and creativity combine to create real, transformative value.
 
 ---
 
 ## Aspirations
 
-My aspirations are guided by a desire to contribute to innovative projects and transform data and technology into impactful tools. I aim to continue expanding my knowledge in **artificial intelligence** and **prompt generation**, fields in which I have started working with tools like DALL-E and MidJourney. Additionally, I am focused on strengthening my data analysis skills, with the goal of advising companies to make more informed, evidence-based decisions. I envision myself leading projects that combine creativity and analysis, turning challenges into strategic solutions that benefit various industries.
+I aim to lead and collaborate on multidisciplinary projects that combine creativity, technology, automation, and artificial intelligence to solve real-world problems.  
+My current focus is on:
+- Developing **intelligent microservices** connected to platforms like Jira Service Management and OpenAI.
+- Promoting **DevOps and Compass** adoption to optimize workflows in distributed teams and agile projects.
+- Creating tools to make generative AI accessible for users at all skill levels.
+- Expanding my expertise in **power management and digital efficiency** for remote work environments.
+- Publishing my science fiction novel and developing open educational resources in cybersecurity and data analysis.
 
-[Back to Start](#about-me) | [Go to Skills and Talents](#skills-and-talents) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+[Back to Top](#about-me) | [Go to Skills & Talents](#skills--talents) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)
 
 ---
 
-## Skills and Talents
+## Skills & Talents
 
-My professional profile encompasses a combination of **technical skills** and **creativity**. Some of my key talents and skills include:
+My profile combines **technical expertise, analytical vision, and creativity**. I stand out in:
 
-- **Web Development**: With advanced knowledge in HTML, CSS, and JavaScript, I have worked on projects ranging from educational games to interactive portfolios and educational websites.
-- **Atlassian Management**: I am an expert in using Jira and Confluence to optimize business processes, with certifications demonstrating my ability to manage, configure, and customize these tools based on team needs.
-- **Data Analysis**: With Google certifications in data analysis and experience in R and SQL, I am capable of organizing, cleaning, and visualizing data to answer key business questions.
-- **AI Prompt Generation**: I have developed tools and platforms that allow users to generate personalized prompts for artificial intelligence, facilitating the image creation process in DALL-E and MidJourney.
-- **Advertising and Communication**: My background in advertising enables me to create effective campaigns and visual content, combining data analysis and digital marketing to maximize audience engagement.
+- **Automation & Scripting**: Expert in Groovy (ScriptRunner for Jira), Node.js, Python, and R for integration, automation, and workflow customization.
+- **Web & Microservices Development**: Experience building web applications, RESTful APIs, and microservices for ticketing, analytics, and automatic response generation.
+- **Atlassian Management**: Certified and experienced in Jira Cloud, JSM, Compass, and Confluence. Specialist in migrations, advanced automation, and training design.
+- **Data Analytics & Visualization**: Advanced use of BigQuery, R, and BI tools to transform data into actionable insights, from market research to platform analytics (e.g., Cyclistic).
+- **Power Management & IoT**: Design and implementation of smart energy management and remote monitoring solutions, integrating IoT devices and custom dashboards.
+- **Prompt Engineering & Generative AI**: Development of generators and guides for MidJourney, DALL-E, and Sora—democratizing AI-assisted creativity.
+- **Education & Outreach**: Author of cybersecurity training materials (CyberSpace Defenders, CyberSTARS), instructor in Groovy and DevOps, and mentor in automation and data visualization.
+- **Communication & Creativity**: Background in advertising and storytelling applied to digital marketing, training, and narrative projects.
 
-[Back to Aspirations](#aspirations) | [Go to Interests](#interests) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+[Back to Aspirations](#aspirations) | [Go to Interests](#interests) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)
 
 ---
 
 ## Interests
 
-My personal and professional interests are aligned with my love for **technology and creativity**. I enjoy exploring new design tools and the possibilities of artificial intelligence. Additionally, I have a keen interest in cinema, Spanish gastronomy, reading science fiction in digital format, and cybersecurity. These interests are reflected in projects such as **CyberSpace Defenders** and **CyberSTARS**, where I aim to teach cybersecurity in a playful way. I am also fascinated by data analysis and visualization as powerful ways to tell stories and communicate information in an accessible, visual manner.
-
-[Back to Skills and Talents](#skills-and-talents) | [Go to Professional Experience](#professional-experience) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+- **Technology & Automation**: Always exploring new tools and automation solutions, from custom scripts to low-code/no-code platforms.
+- **Artificial Intelligence**: Deep interest in the future of general and applied AI, generative image and text models, and tech ethics.
+- **Cinema, Gastronomy & Digital Reading**: Fan of auteur cinema, Spanish gastronomy, and reading sci-fi digitally.
+- **Educational Cybersecurity**: Developing gamified projects to teach cybersecurity via games and digital platforms.
+- **Data Visualization & Storytelling**: Turning complex information into accessible visual narratives.
 
 ---
 
 ## Professional Experience
 
-My experience spans a variety of projects and roles that include:
-
-- **Development of Educational Platforms**: Creation of interactive sites and educational games like **CyberSTARS** and the game **CyberSpace Defenders** in JavaScript.
-- **Prompt Generation and AI Tools**: Development of prompt generators for DALL-E and MidJourney, applying React and Node.js for personalized experiences.
-- **Data Analysis for Cyclistic**: Comprehensive analysis of user behavior data for Cyclistic, using R and BigQuery for insights and conversion strategy recommendations.
-- **Atlassian Management**: Development of guides and training in Jira and Confluence to optimize workflows and improve organizational communication.
-
-[Back to Interests](#interests) | [Go to Achievements and Certifications](#achievements-and-certifications) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+- **Educational Platforms & Games**: Creator of **CyberSTARS** and **CyberSpace Defenders**—resources for gamified cybersecurity learning.
+- **Intelligent Microservices**: Developer of IT conversational agents (agente-it-gpt) connected to Jira and OpenAI.
+- **Advanced Atlassian Training**: Designer of training and support materials for Jira, JSM, Compass, and ScriptRunner (including Groovy and DevOps courses).
+- **Atlassian Migration & Automation**: Jira On-Premise deployments, cloud migrations, API integration, and Compass scorecards/dependency management.
+- **Data Science**: Advanced analytics and visualization for projects like **Cyclistic** and energy/IoT management dashboards.
+- **Writer & Science Communicator**: Ongoing sci-fi novel project **Erebus 2.0**, focusing on the dilemmas of AGI and humanity.
 
 ---
 
-## Achievements and Certifications
+## Achievements & Certifications
 
-To date, I have completed 24 certifications, including:
-
-- **Google Data Analytics Certification**
-- **Atlassian Certifications**: Jira Administrator for Cloud, ITSM, and Confluence
-- **Cloud Architecture Certification**
-
-Each certification reinforces my commitment to continuous improvement and my desire to add value to the teams and projects in which I participate.
-
-[Back to Professional Experience](#professional-experience) | [Go to Values](#values) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+- **24+ certifications** in areas such as:
+    - Google Data Analytics Professional
+    - Atlassian Jira Administrator for Cloud, ITSM, and Confluence
+    - Cloud Architecture
+    - Certifications in cybersecurity and DevOps
+- **Awards for educational innovation** in technology training projects.
+- **Open resources published** for developer and data science communities.
 
 ---
 
-## Values
+## Personality & Values
 
-I am an **analytical and committed** person, dedicated to continuous improvement. I believe in teamwork and effective communication, values I strive to apply in every project. My profile combines creativity and analysis, approaching each challenge with an open and flexible mindset.
-
-[Back to Achievements and Certifications](#achievements-and-certifications) | [Go to Roots and Education](#roots-and-education) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+- **Analytical, creative, and resilient**: I enjoy tackling challenges with both logic and creativity, always learning from every experience.
+- **Commitment to continuous improvement**: I strive to deliver extra value, learning and teaching along the way.
+- **Collaboration & empathy**: I work well in teams and believe diverse perspectives drive innovation.
+- **Tech ethics & responsibility**: I advocate for responsible AI and technology use for the greater good.
 
 ---
 
-## Roots and Education
+## Roots & Education
 
-My background in advertising and communication has provided me with a strong foundation to understand consumer needs and communicate effectively. By integrating this background with skills in development and data analysis, I create solutions that are not only innovative but also aligned with business goals and current market expectations.
-
-[Back to Values](#values) | [Go to Conclusion](#conclusion) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+- **Advertising & Communication**: Solid background in effective communication, branding, and storytelling.
+- **Self-learning & Continuous Development**: I’ve integrated technical and human-centered education through courses, certifications, and hands-on practice.
 
 ---
 
 ## Conclusion
 
-Throughout my career, I have sought to balance creativity and logic, combining technology with marketing and advertising. I am ready to face new challenges and collaborate on projects that aim to make a positive impact in the digital world and beyond.
+Throughout my career, I have sought to blend creativity, logic, and technology to drive projects with real impact. Today, I’m ready to face new challenges and contribute to initiatives that shape the digital and social future.
 
-[Back to Top](#about-me) | [Go to Portfolio & Project Examples](../) | [View my CV in English](./CV/) | [View my CV in Spanish](./CV/CV-es.md)
+[Back to Top](#about-me) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)

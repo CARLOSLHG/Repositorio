@@ -1,154 +1,124 @@
+![Photo of Carlos Luis Hernández](./Container/img/0.5x/20241111_My_foto@0.5x.png)
+
 # Carlos Luis Hernández Gutiérrez
 
-## Contact Information
-- 📞 +34 687 875 064  
-- 📬 chcarlos3@gmail.com  
-- 🛡️ [LinkedIn](https://linkedin.com/in/carloslhg)  
-- 📍 Madrid, Spain (fully mobile)
+**Madrid, Spain** | +34 687 875 064 | [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com) | [LinkedIn](https://linkedin.com/in/carloslhg) | [GitHub Repository](https://carloslhg.github.io/Repositorio)
 
 ---
 
 ## Professional Summary
-Atlassian technologies consultant and web development specialist with experience in UX/UI design and cloud systems administration. My career includes projects in Jira implementation, technical training, and interface development that optimize team communication and performance in sectors such as education, research, technology, and pharmaceuticals.
 
-Languages: Spanish (native) and English (B2), highly adaptable to technological environments and continuously learning.
+Consultant in Atlassian technologies and web development specialist with experience in UX/UI design and cloud systems administration. My background includes projects in Jira implementation, technical training, and interface development to optimize communication and team performance in sectors such as education, research, technology, and pharmaceuticals.
+
+- Languages: Spanish (native), English (B2)
+- Highly adaptable to technological environments and committed to continuous learning.
 
 ---
 
 ## Work Experience
 
-### Consultant – Atlassian (remote)  
-📅 2021 - Present  
-🏢 **Company:** S4E Solutions For Everyone - Platinum Partner Atlassian & Select Partner AWS  
-🌎 **Country:** Chile  
+### Atlassian Consultant – Trainer  
+**S4E Solutions for Everyone** (Platinum Partner Atlassian & Select Partner AWS, Chile) | Remote | *2023 – Present*
 
-#### Responsibilities:
-- Provide training on Jira Software, Jira Service Manager, and Confluence in telecommunications, education, pharmaceutical, and research sectors.
-- Lead workshops for technical and administrative teams, improving platform management.
-
-#### Results:
-- Obtained certifications in key project management tools.
-- Provided training for companies like GTD Chile, ALMA Observatory, Universidad de Chile, Laboratorios Saval, UST, Metso, and S4E.
-- Developed a customized training methodology, increasing Atlassian adoption.
+- Conducted specialized training in Jira Software, Jira Service Manager, and Confluence for clients in telecommunications, education, pharmaceuticals, and research sectors.
+- Led workshops for technical and administrative teams, improving the use of management platforms in tech companies.
+- Developed personalized training methodologies, increasing Atlassian platform adoption and enhancing the efficiency of support and project management teams.
+- Companies trained: GTD Chile, ALMA Observatory (the world’s largest astronomical project), University of Chile, Laboratorios Saval, UST, Metso, S4E.
 
 ---
 
-### Web Designer, UX/UI (remote)  
-📅 2020 - 2021  
-🏢 **Company:** S4E Solutions For Everyone - Platinum Partner Atlassian & Select Partner AWS  
-🌎 **Country:** Chile  
+### Web Designer, UX/UI  
+**S4E Solutions for Everyone** | Remote | *2021 – 2023*
 
-#### Responsibilities:
-- Designed and maintained WordPress websites to enhance online visibility.
-- Implemented communication solutions in JIRA Software and worked with IaaS, PaaS, and SaaS systems.
-
-#### Results:
-- Increased S4E's SEO and SEM positioning, raising clients by 47%.
-- Integrated cloud services, improving scalability and security.
+- Designed and maintained WordPress websites to improve S4E’s online visibility and client communication.
+- Implemented communication solutions in Jira Software and worked with IaaS, PaaS, and SaaS systems.
+- Achievements: Improved SEO and SEM positioning for S4E, increasing client numbers by 47%. Integrated cloud services for greater scalability and data security.
 
 ---
 
-### Webmaster, Web Designer, UX/UI (remote)  
-📅 2018 - 2020  
-🏢 **Company:** Sky Corporation Import & Export  
-🌎 **Country:** USA  
+### Webmaster & UX/UI Designer  
+**Sky Corporation Import & Export** | USA | Remote & On-site | *2018 – 2021*
 
-#### Responsibilities:
-- Led UX/UI and web development projects using HTML, CSS, and JavaScript.
-
-#### Results:
-- Increased budget requests by 60% by optimizing the [scotsmanlatam.com](https://scotsmanlatam.com) portal.
-- Improved user experience and mobile access with responsive design.
+- Led the UX/UI project for website design and implementation using HTML, CSS, and JavaScript.
+- Achievements: Increased online quote requests by 60% after optimizing [scotsmanlatam.com](https://scotsmanlatam.com) for Latin America and the Caribbean. Enhanced user experience and mobile access by implementing responsive design.
 
 ---
 
-### Graphic and Advertising Designer (remote & on-site)  
-📅 2015 - 2018  
-🏢 **Company:** Freelance  
-🌎 **Country:** Venezuela  
+### Graphic and Advertising Designer  
+**Freelance** | Venezuela | Remote & On-site | *2015 – 2018*
 
-#### Responsibilities:
-- Graphic design, digital illustration, and 3D animation for brands and logos.
-
-#### Results:
-- Created brand identities combining visual design and programming.
+- Led graphic design, digital illustration, and 3D animation projects, creating brand identities and logos.
+- Achievements: Developed effective brand images for various companies, combining visual design tools and programming languages (HTML, PHP).
 
 ---
 
-### Sales Executive (on-site)  
-📅 2005 - 2015  
-🏢 **Company:** Suministros Tocoma CA  
-🌎 **Country:** Venezuela  
+### Sales Executive  
+**Suministros Tocoma CA** | Venezuela | On-site | *2005 – 2015*
 
-#### Responsibilities:
-- Managed clients and suppliers, optimized databases with Microsoft Access.
-
-#### Results:
-- Secured exclusive representation agreements with multinational companies.
-- Increased sales operation efficiency by 23%.
+- Managed communication with clients and suppliers.  
+- Optimized workflows and databases using Microsoft Access.
+- Achievements: Secured exclusive representation agreements with multinational leaders (Scotsman IceSystem, EverPure, Osram). Implemented databases for logistics management, improving annual sales efficiency by 23%.
 
 ---
 
-### IT Technician (on-site)  
-📅 1998 - 2005  
-🏢 **Company:** Consorcio Dravica - Caruachi Hydroelectric Plant  
-🌎 **Country:** Venezuela  
+### IT Technician  
+**Consorcio Dravica - Caruachi Hydroelectric** | Venezuela | On-site | *1998 – 2005*
 
-#### Responsibilities:
-- Implemented manufacturing controls and material estimation systems.
-
-#### Results:
-- Increased production by 17% and reduced incidents by 8%.
+- Implemented manufacturing controls, analyzed blueprints, and estimated materials for hydroelectric projects.
+- Achievements: Increased production by 17% YoY, reduced incidents by 8% YoY.
 
 ---
 
-### Teleprompter Operator (on-site)  
-📅 1995 - 1998  
-🏢 **Company:** TVGuayana - Private Television Channel  
-🌎 **Country:** Venezuela  
+### Teleprompter Operator  
+**TVGuayana – Private TV Channel** | Venezuela | On-site | *1995 – 1998*
 
-#### Responsibilities:
-- Managed on-screen texts, graphics, and 3D animations.
-
-#### Results:
-- Designed new 3D animations for live productions.
+- Managed on-screen texts, graphics, and 3D animations during live broadcasts.
+- Achievements: Designed new 3D animations for live productions.
 
 ---
 
 ## Education
-🎓 **Higher Technician in Advertising**  
-📍 **I.U. Nuevas Profesiones**, Caracas, Venezuela (1994)  
+
+- **Higher Technician in Advertising**  
+  I.U. Nuevas Profesiones, Caracas, Venezuela | 1994
 
 ---
 
-## Courses & Certifications
-- ✅ **Atlassian Certified Expert**
-- ✅ **Atlassian Certified Cloud Organization Admin Certification**
-- ✅ **Atlassian Certified in Managing Jira Projects for Cloud**
-- ✅ **Google Data Analytics Professional Certificate**
-- ✅ **Data Analysis with R Programming**
-- ✅ **Prompting for Data Driven Solutions**
-- ✅ **Confluence Fundamentals**
-- ✅ **Confluence Space Administration**
-- ✅ **Jira Service Management Fundamentals**
-- ✅ **JQL for Admins**
-- ✅ **Setting up ITSM Projects in Jira Service Management**
-- ✅ **Introduction to Cybersecurity**
-- ✅ **Cloud Architecture Fundamentals**
+## Certifications and Courses
+
+- Atlassian Certified Expert
+- Atlassian Certified Cloud Organization Admin Certification
+- Atlassian Certified in Managing Jira Projects for Cloud
+- Google Data Analytics Professional Certificate
+- Data Analysis with R Programming
+- Prompting for Data Driven Solutions
+- Confluence Fundamentals / Space Administration
+- Jira Service Management Fundamentals
+- JQL for Admins
+- Setting up ITSM Projects in Jira Service Management
+- Introduction to Cybersecurity
+- Fundamentals of Cloud Architecture
 
 ---
 
 ## Languages
-- **Spanish:** Native
-- **English:** B2
+
+- Spanish: Native
+- English: B2
 
 ---
 
-## GitHub Repository
-- 🔗 [CarlosLHG.Github.io/Repositorio](https://CarlosLHG.Github.io/Repositorio)
+## Volunteer Work
+
+- **Spanish Red Cross**  
+  Social services and elderly care
 
 ---
 
-## Volunteering
-- **Spanish Red Cross**
-- **Social services and elderly care**
+## Contact
+
+- [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com)
+- [LinkedIn](https://linkedin.com/in/carloslhg)
+- [GitHub Repository](https://carloslhg.github.io/Repositorio)
+
+---

@@ -1,91 +1,102 @@
 ![Foto de Carlos Luis Hernández](./Container/img/0.5x/20241111_My_foto@0.5x.png)
 
-
 ---
+
 ## Sobre Mí
 [English version >>](./)
 
-Soy un apasionado del desarrollo tecnológico, con una sólida base en **Publicidad** y experiencia en múltiples áreas de **tecnología y análisis de datos**. Mis raíces están en la creatividad y la comunicación, gracias a mi formación como Técnico Superior en Publicidad, pero he expandido mi carrera hacia la tecnología, abarcando desde la gestión de proyectos en Jira y Confluence hasta el análisis de datos con R y BigQuery. Me considero alguien curioso, siempre buscando aprender y evolucionar en este ámbito tan dinámico. Cada logro y certificación que he obtenido representa mi dedicación y compromiso con mi crecimiento profesional.
+Hola, soy **Carlos Hernández**. Soy un profesional curioso, creativo y entusiasta de la tecnología, con una trayectoria que une el desarrollo, la gestión de proyectos, el análisis de datos y la experimentación constante con nuevas herramientas de inteligencia artificial.  
+En mi repositorio personal puedes ver algunos de mis proyectos: [https://carloslhg.github.io/Repositorio](https://carloslhg.github.io/Repositorio).
 
-[Ir a Aspiraciones](#aspiraciones) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
+Durante los últimos meses he profundizado en **automatización con Groovy y ScriptRunner**, desarrollo de **microservicios en Node.js y Python**, gestión avanzada en **Atlassian Compass** y la creación de entornos DevOps personalizados.  
+Me apasiona la **IA aplicada**, la visualización de datos, y la generación de prompts, así como la escritura creativa, reflejada en mi proyecto de novela de ciencia ficción distópica ("Erebus 2.0"), donde exploro el impacto social y ético de la inteligencia artificial general.
+
+Disfruto el trabajo colaborativo, tanto remoto como presencial, y me motiva participar en proyectos donde la innovación, la tecnología y la creatividad se unen para generar valor real y transformador.
 
 ---
 
 ## Aspiraciones
 
-Mis aspiraciones están guiadas por un deseo de contribuir a proyectos innovadores y transformar los datos y la tecnología en herramientas de impacto. Aspiro a continuar desarrollando mi conocimiento en **inteligencia artificial** y **generación de prompts**, campos en los que ya he comenzado a trabajar con herramientas como DALL-E y MidJourney. Además, estoy enfocado en fortalecer mis habilidades en análisis de datos, con el objetivo de poder asesorar a empresas para tomar decisiones más informadas y basadas en evidencias. Me visualizo liderando proyectos que combinen creatividad y análisis, transformando desafíos en soluciones estratégicas que beneficien a diversas industrias.
+Aspiro a liderar y colaborar en proyectos multidisciplinarios que combinen creatividad, tecnología, automatización e inteligencia artificial para resolver problemas reales.  
+Mi enfoque actual está en:
+- Desarrollar **microservicios inteligentes** conectados a plataformas como Jira Service Management y OpenAI.
+- Impulsar la adopción de **DevOps y Compass** para optimizar el trabajo en equipos distribuidos y proyectos ágiles.
+- Crear herramientas que simplifiquen el acceso a la IA generativa para usuarios de todos los niveles.
+- Expandir mi perfil en **power management y eficiencia digital** para entornos remotos.
+- Publicar mi novela de ciencia ficción y desarrollar recursos educativos abiertos en ciberseguridad y análisis de datos.
 
-[Volver a Inicio](#sobre-mí) | [Ir a Talentos y habilidades](#talentos-y-habilidades) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+[Volver a Inicio](#sobre-mí) | [Ir a Talentos y habilidades](#talentos-y-habilidades) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
 
 ---
 
 ## Talentos y habilidades
 
-Mi perfil profesional abarca una combinación de **habilidades técnicas** y **creatividad**. Algunos de mis talentos y habilidades incluyen:
+Mi perfil abarca un equilibrio entre **habilidades técnicas, visión analítica y creatividad**. Destaco especialmente en:
 
-- **Desarrollo web**: Con conocimiento avanzado en HTML, CSS y JavaScript, he trabajado en proyectos que van desde la creación de juegos educativos hasta la construcción de portafolios interactivos y sitios educativos.
-- **Gestión en Atlassian**: Soy un experto en el uso de Jira y Confluence para optimizar procesos empresariales, con certificaciones que demuestran mi habilidad para administrar, configurar y personalizar estas herramientas según las necesidades de cada equipo.
-- **Análisis de datos**: Con certificaciones de Google en análisis de datos y experiencia en R y SQL, soy capaz de organizar, limpiar y visualizar datos para responder a preguntas clave en distintos contextos de negocio.
-- **Generación de prompts e IA**: He desarrollado herramientas y plataformas que permiten a los usuarios generar prompts personalizados para inteligencia artificial, facilitando el proceso de creación de imágenes en DALL-E y MidJourney.
-- **Publicidad y comunicación**: Mi base en publicidad me permite crear campañas y contenidos visuales efectivos, uniendo el análisis de datos y el marketing digital para maximizar la conexión con el público.
+- **Automatización y scripting**: Experto en Groovy (ScriptRunner para Jira), Node.js, Python y R para la integración, automatización y personalización de flujos de trabajo.
+- **Desarrollo web y microservicios**: Implementación de aplicaciones web, APIs RESTful y microservicios para gestión de tickets, análisis y generación automática de respuestas.
+- **Gestión Atlassian**: Certificado y experimentado en Jira Cloud, JSM, Compass y Confluence. Especialista en migraciones, automatización avanzada y diseño de capacitaciones.
+- **Data Analytics y visualización**: Uso profesional de BigQuery, R y herramientas de BI para transformar datos en información accionable, desde estudios de mercado hasta análisis internos de plataformas como Cyclistic.
+- **Power Management & IoT**: Diseño e implementación de soluciones para gestión energética inteligente y monitoreo remoto, integrando dispositivos IoT y dashboards personalizados.
+- **Generación de prompts & IA generativa**: Desarrollo de generadores y guías para MidJourney, DALL-E y Sora, enfocados en democratizar la creatividad asistida por IA.
+- **Educación y divulgación**: Autor de materiales de capacitación en ciberseguridad (CyberSpace Defenders, CyberSTARS), instructivo en Groovy y DevOps, y mentor en automatización y visualización de datos.
+- **Comunicación y creatividad**: Formación y experiencia en publicidad, storytelling y creación de contenidos, aplicados tanto al marketing digital como a proyectos de narrativa y formación.
 
-[Volver a Aspiraciones](#aspiraciones) | [Ir a Gustos e intereses](#gustos-e-intereses) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+[Volver a Aspiraciones](#aspiraciones) | [Ir a Gustos e intereses](#gustos-e-intereses) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
 
 ---
 
 ## Gustos e intereses
 
-Mis intereses personales y profesionales están alineados con mi amor por la **tecnología y la creatividad**. Disfruto explorando nuevas herramientas de diseño y las posibilidades de la inteligencia artificial. Además, tengo un gran interés por el cine, la gastronomía española, la lectura de ciencia ficción en formato digital y la ciberseguridad. Estos intereses se reflejan en proyectos como **CyberSpace Defenders** y **CyberSTARS**, donde busco enseñar ciberseguridad de manera lúdica. También me fascinan el análisis de datos y la visualización, formas poderosas de contar historias y comunicar información de manera accesible y visual.
-
-[Volver a Talentos y habilidades](#talentos-y-habilidades) | [Ir a Experiencia profesional](#experiencia-profesional) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+- **Tecnología y automatización**: Siempre estoy explorando nuevas herramientas y soluciones de automatización, desde scripts personalizados hasta plataformas low-code/no-code.
+- **Inteligencia artificial**: Interesado en el futuro de la IA general y aplicada, generadores de imágenes y texto, y la ética tecnológica.
+- **Cine, gastronomía y lectura digital**: Apasionado del cine de autor, la exploración de la gastronomía local y la lectura de ciencia ficción.
+- **Ciberseguridad educativa**: Desarrollo de proyectos lúdicos para enseñar ciberseguridad a través de juegos y plataformas digitales.
+- **Visualización y narrativas de datos**: Creo que los datos cuentan historias y disfruto transformar información compleja en narrativas visuales accesibles.
 
 ---
 
 ## Experiencia profesional
 
-Mi experiencia abarca una variedad de proyectos y roles que incluyen:
-
-- **Desarrollo de plataformas educativas**: Creación de sitios interactivos y juegos educativos como **CyberSTARS** y el juego **CyberSpace Defenders** en JavaScript.
-- **Generación de prompts y herramientas de IA**: Creación de generadores de prompts para DALL-E y MidJourney, aplicando conocimientos de React y Node.js para experiencias personalizadas.
-- **Análisis de datos para Cyclistic**: Análisis exhaustivo de datos de comportamiento de usuarios de Cyclistic, utilizando R y BigQuery para insights y recomendaciones de conversión.
-- **Gestión en Atlassian**: Desarrollo de guías y capacitaciones en Jira y Confluence para optimizar flujos de trabajo y mejorar la comunicación organizacional.
-
-[Volver a Gustos e intereses](#gustos-e-intereses) | [Ir a Logros y certificaciones](#logros-y-certificaciones) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+- **Desarrollo de plataformas educativas y juegos**: Autor de **CyberSTARS** y **CyberSpace Defenders**, recursos para el aprendizaje gamificado de la ciberseguridad.
+- **Microservicios inteligentes**: Desarrollo de agentes conversacionales IT (agente-it-gpt) conectados a Jira y OpenAI.
+- **Capacitación avanzada en Atlassian**: Diseño de entrenamientos y materiales de apoyo en Jira, JSM, Compass y ScriptRunner (incluyendo cursos en Groovy y DevOps).
+- **Migración y automatización Atlassian**: Implementación de Jira On-Premise, migraciones Cloud, integración con API, gestión de scorecards y dependencias en Compass.
+- **Data Science**: Análisis y visualización avanzada para proyectos como **Cyclistic** y dashboards de gestión energética e IoT.
+- **Escritor y divulgador**: Proyecto de novela de ciencia ficción **Erebus 2.0**, centrada en los dilemas de la IA general y la humanidad.
 
 ---
 
 ## Logros y certificaciones
 
-Hasta la fecha, he completado 24 certificaciones, destacando:
-
-- **Certificación de Google en Análisis de Datos**
-- **Certificaciones Atlassian**: Jira Administrator for Cloud, ITSM y Confluence
-- **Certificación en Arquitectura Cloud**
-
-Cada certificación refuerza mi compromiso con la mejora continua y mi deseo de ofrecer valor a los equipos y proyectos en los que participo.
-
-[Volver a Experiencia profesional](#experiencia-profesional) | [Ir a Personalidad y valores](#personalidad-y-valores) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+- **+24 certificaciones** en áreas como:
+    - Google Data Analytics Professional
+    - Atlassian Jira Administrator for Cloud, ITSM y Confluence
+    - Cloud Architecture
+    - Certificaciones en ciberseguridad y DevOps
+- **Reconocimientos por innovación educativa** en proyectos de capacitación tecnológica.
+- **Publicación de recursos abiertos** para comunidades de desarrollo y análisis de datos.
 
 ---
 
 ## Personalidad y valores
 
-Soy una persona **analítica y comprometida** con la mejora constante. Creo en el trabajo en equipo y en la comunicación efectiva, valores que aplico en cada proyecto. Mi perfil combina creatividad y análisis, abordando cada desafío con un enfoque abierto y flexible.
-
-[Volver a Logros y certificaciones](#logros-y-certificaciones) | [Ir a Raíces y formación](#raíces-y-formación) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+- **Analítico, creativo y resiliente**: Me gusta afrontar desafíos desde la lógica y la creatividad, aprendiendo de cada experiencia.
+- **Compromiso con la mejora continua**: Busco aportar siempre un extra de valor, aprendiendo y enseñando en el camino.
+- **Colaboración y empatía**: Trabajo bien en equipo y creo en la diversidad de perspectivas como motor de la innovación.
+- **Ética y responsabilidad tecnológica**: Defiendo el uso responsable de la IA y la tecnología para el bien común.
 
 ---
 
 ## Raíces y formación
 
-Mis raíces en publicidad y comunicación me dieron una base sólida para entender a los consumidores y comunicar eficazmente. Al integrar esta formación con habilidades en desarrollo y análisis de datos, creo soluciones innovadoras y alineadas con los objetivos de negocio y del mercado actual.
-
-[Volver a Personalidad y valores](#personalidad-y-valores) | [Ir a Conclusión](#conclusión) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+- **Publicidad y comunicación**: Base sólida en comunicación efectiva, branding y narrativa.
+- **Autoformación y aprendizaje continuo**: He integrado formación técnica con una visión humana y estratégica, combinando cursos, certificaciones y experiencias prácticas.
 
 ---
 
 ## Conclusión
 
-A lo largo de mi trayectoria, he buscado equilibrar la creatividad y la lógica, combinando tecnología con marketing y publicidad. Estoy listo para enfrentar nuevos desafíos y colaborar en proyectos que busquen un impacto positivo en el mundo digital y más allá.
+A lo largo de mi trayectoria, he buscado unir creatividad, lógica y tecnología para impulsar proyectos con impacto real. Hoy, estoy listo para enfrentar nuevos retos y contribuir en iniciativas que transformen el futuro digital y social.
 
-[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/) |
+[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
