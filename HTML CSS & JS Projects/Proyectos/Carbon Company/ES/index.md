@@ -32,28 +32,29 @@ En la estructura del sitio, el **HTML** fue utilizado para definir la estructura
 El script es fácil de entender y eficiente, utilizando eventos de JavaScript como `addEventListener` para capturar el clic del usuario y aplicar cambios en el estilo del elemento `body`.
 
 ### **Código JavaScript:**
+```javascript	
+let themeButton = document.querySelector('.cambiarFondo');  
+themeButton.addEventListener('click', cambiarColorFondo);
 
-`let themeButton = document.querySelector('.cambiarFondo');`  
-`themeButton.addEventListener('click', cambiarColorFondo);`
-
-`function cambiarColorFondo() {`  
+function cambiarColorFondo() {  
       
-    `let body = document.querySelector('body');`
+    let body = document.querySelector('body');
 
-    `if (body.style.backgroundColor == 'white') {`  
-        `body.style.backgroundColor = 'lightgray';`  
-    `} else if (body.style.backgroundColor == 'lightgray') {`  
-        `body.style.backgroundColor = '#333';`  
-    `} else {`  
-        `body.style.backgroundColor = 'white';`  
-    `}`  
-`}`
+    if (body.style.backgroundColor == 'white') {  
+        `body.style.backgroundColor = 'lightgray';  
+    } else if (body.style.backgroundColor == 'lightgray') {  
+        `body.style.backgroundColor = '#333';  
+    } else {`  
+        body.style.backgroundColor = 'white';  
+    } 
+}
+```
 
 ### **Explicación del código:**
 
-* **`querySelector`**: Selecciona el botón con la clase `cambiarFondo` para vincularlo con la funcionalidad de cambiar el fondo.  
-* **`addEventListener`**: Se utiliza para escuchar el evento de clic en el botón.  
-* **Función `cambiarColorFondo`**: Cambia el color de fondo del `body` entre tres colores (`white`, `lightgray`, `#333`), alternando cada vez que se hace clic en el botón.
+* **querySelector**: Selecciona el botón con la clase `cambiarFondo` para vincularlo con la funcionalidad de cambiar el fondo.  
+* **addEventListener**: Se utiliza para escuchar el evento de clic en el botón.  
+* **Función cambiarColorFondo**: Cambia el color de fondo del `body` entre tres colores (`white`, `lightgray`, `#333`), alternando cada vez que se hace clic en el botón.
 
 ## **5\. Conclusión**
 
