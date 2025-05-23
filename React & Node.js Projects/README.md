@@ -30,7 +30,7 @@ We are working on the following areas:
 
 ---
 
-[Leer en español](README-es.md) | [Return to the Repository Main Page](../README.md)
+[Leer en español](README-es.md) | [Return to the Repository Main Page](../)
 
 ### 🙏 Thank You for Visiting My Repository!
 
