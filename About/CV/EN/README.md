@@ -1,124 +1,107 @@
-
-
 # Carlos Luis Hernández Gutiérrez
 
-**Madrid, Spain** | +34 687 875 064 | [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com) | [LinkedIn](https://linkedin.com/in/carloslhg) | [GitHub Repository](https://carloslhg.github.io/Repositorio)
+📍 Madrid, Spain  
+📞 +34 687 875 064  
+📧 chcarlos3@gmail.com  
+🔗 [LinkedIn](https://linkedin.com/in/carloslhg)  
+🔗 [GitHub Portfolio](https://carloslhg.github.io/Repositorio)
 
 ---
 
-## Professional Summary
+## 👨‍💻 Professional Summary
 
-Consultant in Atlassian technologies and web development specialist with experience in UX/UI design and cloud systems administration. My background includes projects in Jira implementation, technical training, and interface development to optimize communication and team performance in sectors such as education, research, technology, and pharmaceuticals.
+Atlassian technologies consultant and web development specialist with experience in UX/UI design, process automation, and cloud systems administration. I have led implementation and optimization projects involving Jira Software, Jira Service Management, and Confluence, alongside technical training and the development of user-centered interfaces. 
 
-- Languages: Spanish (native), English (B2)
-- Highly adaptable to technological environments and committed to continuous learning.
-
----
-
-## Work Experience
-
-### Atlassian Consultant – Trainer  
-**S4E Solutions for Everyone** (Platinum Partner Atlassian & Select Partner AWS, Chile) | Remote | *2023 – Present*
-
-- Conducted specialized training in Jira Software, Jira Service Manager, and Confluence for clients in telecommunications, education, pharmaceuticals, and research sectors.
-- Led workshops for technical and administrative teams, improving the use of management platforms in tech companies.
-- Developed personalized training methodologies, increasing Atlassian platform adoption and enhancing the efficiency of support and project management teams.
-- Companies trained: GTD Chile, ALMA Observatory (the world’s largest astronomical project), University of Chile, Laboratorios Saval, UST, Metso, S4E.
+My focus is on improving team collaboration, performance, and operational efficiency through agile methodologies, DevOps practices, and ITSM solutions. I am a native Spanish speaker and fluent in English (B2 level), with a strong commitment to continuous learning.
 
 ---
 
-### Web Designer, UX/UI  
-**S4E Solutions for Everyone** | Remote | *2021 – 2023*
+## 💼 Work Experience
 
-- Designed and maintained WordPress websites to improve S4E’s online visibility and client communication.
-- Implemented communication solutions in Jira Software and worked with IaaS, PaaS, and SaaS systems.
-- Achievements: Improved SEO and SEM positioning for S4E, increasing client numbers by 47%. Integrated cloud services for greater scalability and data security.
+### Atlassian Consultant – Soluciones S4E para todos (Chile, Remote)  
+**2023 - Present**
+- Roles: Consultant, Jira Administrator, Confluence Space Admin, JSM Agent, and Scriptwriter.
+- Conducted technical training for Atlassian tools across telecom, education, pharma, and research sectors.
+- Delivered advanced configurations and personalized support to companies like GTD Chile, ALMA Observatory, University of Chile, Saval, UST, Metso.
 
----
+### Web Designer – Soluciones S4E (Chile, Remote)  
+**2021 - 2023**
+- Managed corporate WordPress websites and integrated cloud communication tools.
+- Improved SEO/SEM visibility, resulting in a 47% increase in customer acquisition.
 
-### Webmaster & UX/UI Designer  
-**Sky Corporation Import & Export** | USA | Remote & On-site | *2018 – 2021*
+### Webmaster – Cielo Corporation Import & Export (USA)  
+**2018 - 2021**
+- Led the UX/UI redesign for [Scotsman Latam](https://scotsmanlatam.com), improving mobile experience and web quote requests by 60%.
 
-- Led the UX/UI project for website design and implementation using HTML, CSS, and JavaScript.
-- Achievements: Increased online quote requests by 60% after optimizing [scotsmanlatam.com](https://scotsmanlatam.com) for Latin America and the Caribbean. Enhanced user experience and mobile access by implementing responsive design.
+### Graphic Designer – Freelance (Venezuela)  
+**2015 - 2018**
+- Led branding and 3D animation projects, combining visual design with web technologies (HTML, PHP).
 
----
+### Sales Executive – Suministros Tocoma CA (Venezuela)  
+**2005 - 2015**
+- Optimized databases and workflows using Microsoft Access.
+- Closed exclusive representation deals with global brands like Scotsman IceSystem, EverPure, Osram.
 
-### Graphic and Advertising Designer  
-**Freelance** | Venezuela | Remote & On-site | *2015 – 2018*
+### IT Technician – Consorcio Dravica (Caruachi Hydroelectric Project, Venezuela)  
+**1998 - 2005**
+- Implemented production control and technical estimations, improving output and reducing incidents.
 
-- Led graphic design, digital illustration, and 3D animation projects, creating brand identities and logos.
-- Achievements: Developed effective brand images for various companies, combining visual design tools and programming languages (HTML, PHP).
-
----
-
-### Sales Executive  
-**Suministros Tocoma CA** | Venezuela | On-site | *2005 – 2015*
-
-- Managed communication with clients and suppliers.  
-- Optimized workflows and databases using Microsoft Access.
-- Achievements: Secured exclusive representation agreements with multinational leaders (Scotsman IceSystem, EverPure, Osram). Implemented databases for logistics management, improving annual sales efficiency by 23%.
-
----
-
-### IT Technician  
-**Consorcio Dravica - Caruachi Hydroelectric** | Venezuela | On-site | *1998 – 2005*
-
-- Implemented manufacturing controls, analyzed blueprints, and estimated materials for hydroelectric projects.
-- Achievements: Increased production by 17% YoY, reduced incidents by 8% YoY.
+### Teleprompter Operator – TVGuayana (Venezuela)  
+**1995 - 1998**
+- Managed on-screen text, graphics, and real-time 3D animations for live shows.
 
 ---
 
-### Teleprompter Operator  
-**TVGuayana – Private TV Channel** | Venezuela | On-site | *1995 – 1998*
+## ❤️ Social Service
 
-- Managed on-screen texts, graphics, and 3D animations during live broadcasts.
-- Achievements: Designed new 3D animations for live productions.
-
----
-
-## Education
-
-- **Higher Technician in Advertising**  
-  I.U. Nuevas Profesiones, Caracas, Venezuela | 1994
+### Volunteer – Spanish Red Cross (Cruz Roja Española)  
+**2024 - Present**  
+- Collaborated in humanitarian aid initiatives and community support programs.  
+- Assisted in digital literacy workshops and contributed to the modernization of internal processes.  
+- Provided support in coordinating local campaigns and logistics for social assistance projects.
 
 ---
 
-## Certifications and Courses
+## 🎓 Education
 
-- Atlassian Certified Expert
-- Atlassian Certified Cloud Organization Admin Certification
-- Atlassian Certified in Managing Jira Projects for Cloud
-- Google Data Analytics Professional Certificate
-- Data Analysis with R Programming
-- Prompting for Data Driven Solutions
-- Confluence Fundamentals / Space Administration
-- Jira Service Management Fundamentals
-- JQL for Admins
-- Setting up ITSM Projects in Jira Service Management
-- Introduction to Cybersecurity
-- Fundamentals of Cloud Architecture
+**Higher Technician in Advertising**  
+UI Nuevas Profesiones, Caracas (1994)
 
 ---
 
-## Languages
+## 🏅 Certifications
 
-- Spanish: Native
-- English: B2
+### Atlassian
+- [Atlassian Certified Expert (ACE)](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=AT00235075)
+- [Cloud Organization Admin](https://cp.certmetrics.com/atlassian/en/public/badge/r?id=262966&date=2024-1-30)
+- [Managing Jira Projects for Cloud](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=52&date=2023-11-13)
+- [Jira Administrator for Cloud](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=30&date=2023-12-12)
+- [Confluence Space Administration](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=26&date=2024-1-24)
+- [Jira Service Management Fundamentals](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=35&date=2024-1-30)
+- Atlassian Certified Expert Emeritus
+- Confluence Fundamentals
+- JQL for Administrators
+- ITSM Project Configuration in Jira Service Management
+
+### Google & Coursera
+- [Google Data Analytics Professional Certificate (Credly)](https://www.credly.com/badges/cbad0341-3222-41a8-ad27-15d5d05f284f/linked_in_profile?trk=public_profile_certification-title)
+
+### Other Technical Courses
+- Data Analysis with R Programming  
+- Driving Data-Driven Solutions  
+- Introduction to Cybersecurity  
+- Cloud Architecture Fundamentals
 
 ---
 
-## Volunteer Work
+## 🌐 Languages
 
-- **Spanish Red Cross**  
-  Social services and elderly care
-
----
-
-## Contact
-
-- [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com)
-- [LinkedIn](https://linkedin.com/in/carloslhg)
-- [GitHub Repository](https://carloslhg.github.io/Repositorio)
+- Spanish: Native  
+- English: B2 (Upper Intermediate)
 
 ---
+
+## 📂 GitHub Portfolio
+
+Browse my projects, scripts, and technical documentation:  
+🔗 [https://carloslhg.github.io/Repositorio](https://carloslhg.github.io/Repositorio)
