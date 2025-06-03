@@ -1,124 +1,108 @@
-
-
 # Carlos Luis Hernández Gutiérrez
 
-**Madrid, España** | +34 687 875 064 | [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com) | [LinkedIn](https://linkedin.com/in/carloslhg) | [Repositorio GitHub](https://carloslhg.github.io/Repositorio)
+📍 Madrid, España  
+📞 +34 687 875 064  
+📧 chcarlos3@gmail.com  
+🔗 [LinkedIn](https://linkedin.com/in/carloslhg)  
+🔗 [GitHub](https://carloslhg.github.io/Repositorio)
 
 ---
 
-## Resumen Profesional
+## 👨‍💻 Perfil Profesional
 
-Consultor en tecnologías Atlassian y especialista en desarrollo web, con experiencia en diseño de UX/UI y administración de sistemas en la nube. Mi trayectoria abarca proyectos de implementación de Jira, capacitación técnica y desarrollo de interfaces para optimizar la comunicación y rendimiento de equipos en sectores como educación, investigación, tecnología y farmacéutica.
+Consultor en tecnologías Atlassian y especialista en desarrollo web, con experiencia en diseño UX/UI, automatización de procesos y administración de sistemas en la nube. He liderado proyectos de implementación y optimización de Jira Software, Jira Service Management y Confluence, así como formación técnica y desarrollo de interfaces centradas en el usuario. 
 
-- Idiomas: Español (nativo) | Inglés (B2)
-- Alta adaptabilidad a entornos tecnológicos y orientación al aprendizaje continuo.
-
----
-
-## Experiencia Laboral
-
-### Consultor Atlassian  
-**S4E Solutions For Everyone** (Platinum Partner Atlassian & Select Partner AWS, Chile) | Remoto | *2021 - Presente*
-
-- Impartí capacitación especializada en Jira Software, Jira Service Manager y Confluence a clientes de sectores como telecomunicaciones, educación, farmacéutica e investigación.
-- Dirigí talleres técnicos y administrativos, mejorando el uso de plataformas de gestión en empresas tecnológicas.
-- Implementé metodologías de capacitación personalizadas, aumentando la adopción y eficiencia en equipos de soporte y administración de proyectos.
-- Empresas destacadas: GTD Chile, ALMA Observatory, Universidad de Chile, Laboratorios Saval, UST, Metso, S4E.
+Mi enfoque se centra en mejorar la colaboración, eficiencia y rendimiento de equipos técnicos y administrativos, aplicando metodologías ágiles, prácticas DevOps e ITSM. Poseo dominio del español (nativo) y nivel B2 de inglés.
 
 ---
 
-### Diseñador Web, UX/UI  
-**S4E Solutions For Everyone** | Remoto | *2020 - 2021*
+## 💼 Experiencia Profesional
 
-- Diseño y mantenimiento de sitios web en WordPress para mejorar la visibilidad y comunicación de S4E.
-- Implementación de soluciones de comunicación en Jira Software y sistemas IaaS, PaaS y SaaS.
-- Logro: Incremento del 47% en clientes vía mejora de SEO/SEM; integración de servicios en la nube para escalabilidad y seguridad.
+### Consultor Atlassian – Soluciones S4E para todos (Chile, remoto)  
+**2023 - Actualidad**
+- Gestión integral como Consultor, Jira Administrator, Confluence Space Admin, Agente JSM y Scriptwriter.
+- Trainings especializados en entornos Atlassian para telecomunicaciones, educación, salud e investigación.
+- Soporte y configuraciones avanzadas para clientes como GTD Chile, ALMA, Universidad de Chile, Saval, UST, Metso.
 
----
+### Diseñador Web – Soluciones S4E (Chile, remoto)  
+**2021 - 2023**
+- Desarrollo y mantenimiento de sitios WordPress y herramientas integradas en la nube.
+- Optimización SEO y SEM que incrementó la captación de clientes en un 47%.
 
-### Webmaster & UX/UI Designer  
-**Sky Corporation Import & Export** | EEUU | Remoto | *2018 - 2020*
+### Webmaster – Cielo Corp. Import & Export (EEUU)  
+**2018 - 2021**
+- Proyecto UX/UI para el sitio de [Scotsman Latam](https://scotsmanlatam.com).
+- Mejora del acceso móvil y aumento del 60% en cotizaciones online.
 
-- Lideré proyectos de UX/UI, diseño e implementación web (HTML, CSS, JavaScript).
-- Optimicé el portal web de [scotsmanlatam.com](https://scotsmanlatam.com) para Latinoamérica y el Caribe (+60% solicitudes online).
-- Mejoré la experiencia de usuario y el acceso móvil mediante diseño responsivo.
+### Diseñador Gráfico – Freelance (Venezuela)  
+**2015 - 2018**
+- Branding, ilustración y animación 3D para empresas locales y regionales.
 
----
+### Ejecutivo de Ventas – Suministros Tocoma CA (Venezuela)  
+**2005 - 2015**
+- Optimización de flujos de trabajo con Microsoft Access.
+- Representación exclusiva de marcas internacionales.
 
-### Diseñador Gráfico y Publicitario  
-**Freelance** | Venezuela | Remoto y presencial | *2015 - 2018*
+### Técnico de TI – Consorcio Dravica (Hidroeléctrica Caruachi, Venezuela)  
+**1998 - 2005**
+- Control de fabricación, planos y estimaciones para proyectos energéticos.
 
-- Lideré proyectos de diseño gráfico, ilustración digital y animación 3D.
-- Desarrollé marcas y logotipos combinando herramientas visuales y lenguajes de programación (HTML, PHP).
-
----
-
-### Ejecutivo de Ventas  
-**Suministros Tocoma CA** | Venezuela | Presencial | *2005 - 2015*
-
-- Gestión de comunicación con clientes/proveedores y optimización de bases de datos en Access.
-- Logros: Acuerdos de representación exclusivos, implementación de bases de datos que mejoraron la eficiencia logística y ventas (+23%).
-
----
-
-### Técnico Informático  
-**Consorcio Dravica - Hidroeléctrica Caruachi** | Venezuela | Presencial | *1998 - 2005*
-
-- Implementación de controles de fabricación, análisis de planos y estimación de materiales.
-- Resultados: +17% en producción anual, -8% en incidencias.
+### Operador de Teleprompter – TVGuayana (Venezuela)  
+**1995 - 1998**
+- Animaciones 3D en tiempo real para transmisiones televisivas.
 
 ---
 
-### Operador de Teleprompter  
-**TVGuayana** | Venezuela | Presencial | *1995 - 1998*
+## ❤️ Servicio Social
 
-- Manejo de textos, gráficos y animaciones 3D en transmisiones en vivo.
-- Diseño de nuevas animaciones 3D para producciones televisivas.
-
----
-
-## Formación Académica
-
-- **Técnico Superior en Publicidad**  
-  I.U. Nuevas Profesiones, Caracas, Venezuela | 1994
+### Voluntario – Cruz Roja Española  
+**2024 - Actualidad**  
+- Colaboración en programas de ayuda humanitaria y apoyo comunitario.  
+- Participación en talleres de alfabetización digital y modernización de procesos internos.  
+- Asistencia en campañas locales y logística de proyectos sociales.
 
 ---
 
-## Cursos y Certificaciones
+## 🎓 Educación
 
-- Atlassian Certified Expert
-- Atlassian Certified Cloud Organization Admin Certification
-- Atlassian Certified in Managing Jira Projects for Cloud
-- Google Data Analytics Professional Certificate
-- Data Analysis with R Programming
-- Prompting for Data Driven Solutions
-- Confluence Fundamentals / Space Administration
-- Jira Service Management Fundamentals
-- JQL for Admins
-- Setting up ITSM Projects in Jira Service Management
-- Introduction to Cybersecurity
-- Fundamentos de Arquitectura Cloud
+**Técnico Superior en Publicidad**  
+UI Nuevas Profesiones, Caracas (1994)
 
 ---
 
-## Idiomas
+## 🏅 Certificaciones Profesionales
 
-- Español: Nativo
-- Inglés: B2
+### Atlassian
+- [Atlassian Certified Expert (ACE)](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=AT00235075)
+- [Cloud Organization Admin](https://cp.certmetrics.com/atlassian/en/public/badge/r?id=262966&date=2024-1-30)
+- [Managing Jira Projects for Cloud](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=52&date=2023-11-13)
+- [Jira Administrator for Cloud](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=30&date=2023-12-12)
+- [Confluence Space Administration](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=26&date=2024-1-24)
+- [Fundamentos de Jira Service Management](https://cp.certmetrics.com/atlassian/en/public/badge/c?id=557058:708d623c-a4cf-448f-900b-27999a96abda&ccat=35&date=2024-1-30)
+- Atlassian Certified Expert Emeritus  
+- Fundamentos de Confluence  
+- JQL para administradores  
+- Configuración de proyectos ITSM en Jira Service Management
+
+### Google & Coursera
+- [Certificado profesional de Google Data Analytics (Credly)](https://www.credly.com/badges/cbad0341-3222-41a8-ad27-15d5d05f284f/linked_in_profile?trk=public_profile_certification-title)
+
+### Otros cursos técnicos
+- Análisis de datos con programación R  
+- Impulsando soluciones basadas en datos  
+- Introducción a la ciberseguridad  
+- Fundamentos de la arquitectura de la nube
 
 ---
 
-## Voluntariado
+## 🌐 Idiomas
 
-- **Cruz Roja Española**  
-- Servicios sociales y cuidado de personas mayores
-
----
-
-## Contacto
-
-- [chcarlos3@gmail.com](mailto:chcarlos3@gmail.com)
-- [LinkedIn](https://linkedin.com/in/carloslhg)
-- [Repositorio GitHub](https://carloslhg.github.io/Repositorio)
+- Español: Nativo  
+- Inglés: B2 (intermedio alto)
 
 ---
+
+## 📂 Repositorio Profesional
+
+Explora mis proyectos, scripts y documentación:  
+🔗 [https://carloslhg.github.io/Repositorio](https://carloslhg.github.io/Repositorio)
