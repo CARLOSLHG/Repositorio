@@ -78,7 +78,7 @@
 - **Certificaciones**: [Ver Certificaciones en LinkedIn](https://www.linkedin.com/in/carloslhg) |
 
 ## 📄 CV Completo y Contacto
-Para más detalles sobre mi experiencia y certificaciones, consulta mi [CV completo aquí](./About/CV/) | o visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg). ¡Estoy abierto a consultas y propuestas de colaboración!
+Para más detalles sobre mi experiencia y certificaciones, visita mi [perfil en LinkedIn](https://www.linkedin.com/in/carloslhg). ¡Estoy abierto a consultas y propuestas de colaboración!
 
 
 ---

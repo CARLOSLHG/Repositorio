@@ -75,7 +75,7 @@ Welcome to my portfolio! I am a professional specializing in **Jira administrati
 - **Certifications**: [View Certifications on LinkedIn](https://www.linkedin.com/in/carloslhg) |
 
 ## 📄 Full CV and Contact
-For more details on my experience and certifications, see my [full CV here](./About/CV/) | or visit my [LinkedIn profile](https://www.linkedin.com/in/carloslhg). I’m open to inquiries and collaboration proposals!
+For more details on my experience and certifications, visit my [LinkedIn profile](https://www.linkedin.com/in/carloslhg). I’m open to inquiries and collaboration proposals!
 
 
 ---
