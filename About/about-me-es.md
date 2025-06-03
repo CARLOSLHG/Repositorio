@@ -25,7 +25,7 @@ Mi enfoque actual está en:
 - Expandir mi perfil en **power management y eficiencia digital** para entornos remotos.
 - Publicar mi novela de ciencia ficción y desarrollar recursos educativos abiertos en ciberseguridad y análisis de datos.
 
-[Volver a Inicio](#sobre-mí) | [Ir a Talentos y habilidades](#talentos-y-habilidades) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
+[Volver a Inicio](#sobre-mí) | [Ir a Talentos y habilidades](#talentos-y-habilidades) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/ES/README.md) | [Ver mi CV (Ingles)](./CV/EN/README.md)
 
 ---
 
@@ -42,7 +42,7 @@ Mi perfil abarca un equilibrio entre **habilidades técnicas, visión analítica
 - **Educación y divulgación**: Autor de materiales de capacitación en ciberseguridad (CyberSpace Defenders, CyberSTARS), instructivo en Groovy y DevOps, y mentor en automatización y visualización de datos.
 - **Comunicación y creatividad**: Formación y experiencia en publicidad, storytelling y creación de contenidos, aplicados tanto al marketing digital como a proyectos de narrativa y formación.
 
-[Volver a Aspiraciones](#aspiraciones) | [Ir a Gustos e intereses](#gustos-e-intereses) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
+[Volver a Aspiraciones](#aspiraciones) | [Ir a Gustos e intereses](#gustos-e-intereses) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/ES/README.md) | [Ver mi CV (Ingles)](./CV/EN/README.md)
 
 ---
 
@@ -99,4 +99,4 @@ Mi perfil abarca un equilibrio entre **habilidades técnicas, visión analítica
 
 A lo largo de mi trayectoria, he buscado unir creatividad, lógica y tecnología para impulsar proyectos con impacto real. Hoy, estoy listo para enfrentar nuevos retos y contribuir en iniciativas que transformen el futuro digital y social.
 
-[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/CV-es.md) | [Ver mi CV (Ingles)](./CV/)
+[Volver arriba](#sobre-mí) | [Ir al Repositorio](../) | [Ver mi CV (Español)](./CV/ES/README.md) | [Ver mi CV (Ingles)](./CV/EN/README.md)

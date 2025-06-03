@@ -25,7 +25,7 @@ My current focus is on:
 - Expanding my expertise in **power management and digital efficiency** for remote work environments.
 - Publishing my science fiction novel and developing open educational resources in cybersecurity and data analysis.
 
-[Back to Top](#about-me) | [Go to Skills & Talents](#skills--talents) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)
+[Back to Top](#about-me) | [Go to Skills & Talents](#skills--talents) | [Go to Repository](../) | [See my CV (Spanish)](./CV/ES/README.md) | [See my CV (English)](./CV/EN/README.md)
 
 ---
 
@@ -42,7 +42,7 @@ My profile combines **technical expertise, analytical vision, and creativity**. 
 - **Education & Outreach**: Author of cybersecurity training materials (CyberSpace Defenders, CyberSTARS), instructor in Groovy and DevOps, and mentor in automation and data visualization.
 - **Communication & Creativity**: Background in advertising and storytelling applied to digital marketing, training, and narrative projects.
 
-[Back to Aspirations](#aspirations) | [Go to Interests](#interests) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)
+[Back to Aspirations](#aspirations) | [Go to Interests](#interests) | [Go to Repository](../) | [See my CV (Spanish)](./CV/ES/README.md) | [See my CV (English)](./CV/EN/README.md)
 
 ---
 
@@ -99,4 +99,4 @@ My profile combines **technical expertise, analytical vision, and creativity**. 
 
 Throughout my career, I have sought to blend creativity, logic, and technology to drive projects with real impact. Today, I’m ready to face new challenges and contribute to initiatives that shape the digital and social future.
 
-[Back to Top](#about-me) | [Go to Repository](../) | [See my CV (Spanish)](./CV/CV-es.md) | [See my CV (English)](./CV/)
+[Back to Top](#about-me) | [Go to Repository](../) | [See my CV (Spanish)](./CV/ES/README.md) | [See my CV (English)](./CV/EN/README.md)
