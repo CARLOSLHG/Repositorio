@@ -348,6 +348,9 @@
                 `;
                 gameContainer.appendChild(gameOverMessage);
 
+                // Mostrar cursor en game over para poder usar botones
+                gameContainer.style.cursor = 'default';
+
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
                     if (event.target && event.target.id === 'exit-button') {
@@ -367,6 +370,8 @@
                     gameOverMessage.remove();
                 }
                 gameOver = false;
+                // Ocultar cursor de nuevo al reiniciar
+                gameContainer.style.cursor = 'none';
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
