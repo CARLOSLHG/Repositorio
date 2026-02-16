@@ -1,4 +1,4 @@
-/* Versión 2.4.0 */
+/* Versión 2.0 */
 body, html {
     margin: 0;
     overflow: hidden;
@@ -32,8 +32,17 @@ body, html {
     -webkit-user-select: none;
 }
 
-#game-container * {
+#game-container *:not(#game-over-message):not(#game-over-message *) {
     cursor: none !important;
+}
+
+#game-over-message,
+#game-over-message * {
+    cursor: default !important;
+}
+
+#game-over-message button {
+    cursor: pointer !important;
 }
 
 #background {

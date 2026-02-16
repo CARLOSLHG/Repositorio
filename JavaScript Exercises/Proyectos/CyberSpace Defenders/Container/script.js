@@ -1,5 +1,5 @@
     (function() {
-        // Versión 2.4.0 - Fix inicio + UI mejorada + Leaderboard
+        // Versión 2.0 - Alias de jugador + Leaderboard
         const playerScreen = document.getElementById('player-screen');
         const playerNameInput = document.getElementById('player-name-input');
         const startGameButton = document.getElementById('start-game-button');
@@ -348,6 +348,9 @@
                 `;
                 gameContainer.appendChild(gameOverMessage);
 
+                // Mostrar cursor en game over para poder usar botones
+                gameContainer.style.cursor = 'default';
+
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
                     if (event.target && event.target.id === 'exit-button') {
@@ -367,6 +370,8 @@
                     gameOverMessage.remove();
                 }
                 gameOver = false;
+                // Ocultar cursor de nuevo al reiniciar
+                gameContainer.style.cursor = 'none';
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
