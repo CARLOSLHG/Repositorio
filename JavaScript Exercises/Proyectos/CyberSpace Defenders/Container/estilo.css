@@ -27,9 +27,13 @@ body, html {
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    cursor: none;
+    cursor: none !important;
     user-select: none;
     -webkit-user-select: none;
+}
+
+#game-container * {
+    cursor: none !important;
 }
 
 #background {
@@ -102,42 +106,48 @@ body, html {
 
 #distance-counter, #asteroid-counter, #cyberattack-counter {
     position: absolute;
-    font-size: 1.3vw;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 0.8vw;
-    border-radius: 5px;
-    line-height: 1.4;
-    word-wrap: break-word;
+    left: 10px;
+    font-size: 0.85vw;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.3vw 0.6vw;
+    border-radius: 4px;
+    line-height: 1.3;
     z-index: 10;
-    max-width: 20vw;
-    margin: 0.5vw;
-    text-align: center;
-    color: #FFFFFF;
+    text-align: left;
+    color: #ccddee;
+    white-space: nowrap;
+    border-left: 2px solid rgba(0, 200, 255, 0.4);
+}
+
+#distance-counter {
+    top: 60px;
+}
+
+#cyberattack-counter {
+    top: 85px;
+}
+
+#asteroid-counter {
+    top: 110px;
 }
 
 @media (max-width: 768px) {
     #distance-counter, #asteroid-counter, #cyberattack-counter {
-        font-size: 3vw;
-        padding: 0.5vw;
-        width: 90%;
-        left: 5%;
-        max-width: none;
-        text-align: center;
+        font-size: 2.2vw;
+        padding: 0.4vw 0.8vw;
+        left: 8px;
     }
 
     #distance-counter {
-        top: 12vh;
-        margin-bottom: 4px;
-    }
-
-    #asteroid-counter {
-        top: 18vh;
-        margin-bottom: 4px;
-        margin-right: 2vw;
+        top: 55px;
     }
 
     #cyberattack-counter {
-        top: 24vh;
+        top: 78px;
+    }
+
+    #asteroid-counter {
+        top: 101px;
     }
 }
 
@@ -227,13 +237,13 @@ body, html {
 
 #scrolling-text {
     position: absolute;
-    bottom: 40px;
+    bottom: 8px;
     left: 0;
     width: 200%;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 3.5vw;
-    color: #FFFFFF;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.3);
     animation: textScroll 40s linear infinite;
 }
 
@@ -262,7 +272,6 @@ body, html {
 #exit-button, #restart-game-button {
     font-size: 1.2em;
     padding: 0.7em 1.8em;
-    cursor: pointer;
     background-color: rgba(30, 58, 95, 0.8);
     color: white;
     border: 1px solid rgba(0, 200, 255, 0.3);
@@ -293,23 +302,6 @@ body, html {
 
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
 @media (min-width: 1024px) {
-    #distance-counter {
-        left: 10px;
-        top: 70px;
-    }
-
-    #cyberattack-counter {
-        left: 50%;
-        transform: translateX(-50%);
-        top: 70px;
-    }
-
-    #asteroid-counter {
-        right: 10px;
-        top: 70px;
-        margin-right: 20px;
-    }
-
     #game-title {
         font-size: 2.8vw;
         text-align: center;
@@ -334,7 +326,6 @@ body, html {
     margin-right: 25px;
     font-size: 0.9em;
     padding: 8px 12px;
-    cursor: pointer;
     background-color: rgba(30, 58, 95, 0.8);
     color: white;
     border: none;
