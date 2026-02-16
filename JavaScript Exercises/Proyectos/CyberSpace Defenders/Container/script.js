@@ -1,33 +1,122 @@
     (function() {
-        // Versión 2.2.1
+        // Versión 2.3.0 - Alias de jugador y Leaderboard
+        const playerScreen = document.getElementById('player-screen');
+        const playerNameInput = document.getElementById('player-name-input');
+        const startGameButton = document.getElementById('start-game-button');
         const gameContainer = document.getElementById('game-container');
         const spaceship = document.getElementById('spaceship');
+        const playerDisplay = document.getElementById('player-display');
+        let playerName = '';
         let gameOver = false;
         let lightYears = 0;
         let asteroidCount = 0;
         let cyberattackCount = 0;
-        let musicPlaying = true; // Iniciar con la música encendida
-        let asteroidIntervals = []; // Guardar intervalos de asteroides para reinicio limpio
-        let asteroidGenerationInterval; // Guardar el intervalo de generación de asteroides
+        let musicPlaying = true;
+        let asteroidIntervals = [];
+        let asteroidGenerationInterval;
+        let gameStartTime = null;
 
-        // Añadir música al juego
-        const audio = new Audio('./mp3/sound.mp3');
-        audio.loop = true;
-        audio.volume = 0.1;
-        audio.play(); // La música comienza encendida
-
-        // Botón para apagar/encender la música
-        const toggleMusicButton = document.getElementById('toggle-music-button');
-        toggleMusicButton.addEventListener('click', () => {
-            if (musicPlaying) {
-                audio.pause();
-                toggleMusicButton.textContent = 'Encender Música';
-            } else {
-                audio.play();
-                toggleMusicButton.textContent = 'Apagar Música';
+        // --- Leaderboard en localStorage ---
+        function getLeaderboard() {
+            try {
+                return JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
+            } catch (e) {
+                return [];
             }
-            musicPlaying = !musicPlaying;
-        });
+        }
+
+        function saveLeaderboard(board) {
+            localStorage.setItem('cyberspace_leaderboard', JSON.stringify(board));
+        }
+
+        function addToLeaderboard(name, threats, time) {
+            const board = getLeaderboard();
+            board.push({ name: name, threats: threats, time: time, date: new Date().toLocaleDateString() });
+            // Ordenar por amenazas neutralizadas (desc), luego por tiempo (desc)
+            board.sort((a, b) => b.threats - a.threats || b.time - a.time);
+            // Mantener solo los 10 mejores
+            if (board.length > 10) board.length = 10;
+            saveLeaderboard(board);
+            return board;
+        }
+
+        function buildLeaderboardHTML(board, currentName, currentThreats, currentTime) {
+            let rows = '';
+            board.forEach((entry, i) => {
+                const isCurrent = (entry.name === currentName && entry.threats === currentThreats && entry.time === currentTime);
+                rows += `<tr class="${isCurrent ? 'current-player' : ''}">
+                    <td>${i + 1}</td>
+                    <td>${entry.name}</td>
+                    <td>${entry.threats}</td>
+                    <td>${entry.time}s</td>
+                    <td>${entry.date}</td>
+                </tr>`;
+            });
+            return `
+                <div id="leaderboard-container">
+                    <h2>Leaderboard</h2>
+                    <table id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Jugador</th>
+                                <th>Amenazas</th>
+                                <th>Tiempo</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // --- Pantalla de inicio: ingreso de alias ---
+        function initPlayerScreen() {
+            playerNameInput.focus();
+
+            function startGame() {
+                const name = playerNameInput.value.trim();
+                if (!name) {
+                    playerNameInput.style.borderColor = '#ff3b3f';
+                    playerNameInput.setAttribute('placeholder', 'Debes ingresar un alias');
+                    playerNameInput.focus();
+                    return;
+                }
+                playerName = name;
+                playerScreen.style.display = 'none';
+                gameContainer.style.display = 'block';
+                playerDisplay.textContent = `Defensor: ${playerName}`;
+                gameStartTime = Date.now();
+                initGame();
+            }
+
+            startGameButton.addEventListener('click', startGame);
+            playerNameInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') startGame();
+            });
+        }
+
+        // --- Inicialización del juego (se ejecuta tras ingresar alias) ---
+        function initGame() {
+            // Añadir música al juego
+            const audio = new Audio('./mp3/sound.mp3');
+            audio.loop = true;
+            audio.volume = 0.1;
+            audio.play();
+
+            // Botón para apagar/encender la música
+            const toggleMusicButton = document.getElementById('toggle-music-button');
+            toggleMusicButton.addEventListener('click', () => {
+                if (musicPlaying) {
+                    audio.pause();
+                    toggleMusicButton.textContent = 'Encender Música';
+                } else {
+                    audio.play();
+                    toggleMusicButton.textContent = 'Apagar Música';
+                }
+                musicPlaying = !musicPlaying;
+            });
 
         const distanceCounter = document.getElementById('distance-counter');
         distanceCounter.textContent = `Años Luz de distancia: ${lightYears}`;
@@ -215,13 +304,21 @@
             });
         }
 
-        // Mostrar mensaje de "Game Over"
+        // Mostrar mensaje de "Game Over" con leaderboard
         function showGameOverMessage() {
+            const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
+            const board = addToLeaderboard(playerName, cyberattackCount, elapsedSeconds);
+            const leaderboardHTML = buildLeaderboardHTML(board, playerName, cyberattackCount, elapsedSeconds);
+
             const gameOverMessage = document.createElement('div');
             gameOverMessage.id = 'game-over-message';
             gameOverMessage.innerHTML = `
-                <h1 style="color: #F3F3F3;">¡Gracias por participar!</h1>
-                <div class="buttons-container">
+                <h1 style="color: #F3F3F3;">¡Gracias por participar, ${playerName}!</h1>
+                <p style="color: #00ffcc; font-size: 0.9em; margin: 0.5em 0;">
+                    Amenazas neutralizadas: <strong>${cyberattackCount}</strong> | Tiempo: <strong>${elapsedSeconds}s</strong>
+                </p>
+                ${leaderboardHTML}
+                <div class="buttons-container" style="margin-top: 1em;">
                     <button id="restart-button">Volver</button>
                     <button id="restart-game-button">Reiniciar Juego</button>
                 </div>
@@ -250,6 +347,7 @@
             lightYears = 0;
             asteroidCount = 0;
             cyberattackCount = 0;
+            gameStartTime = Date.now();
             distanceCounter.textContent = `Años Luz de distancia: ${lightYears}`;
             asteroidCounter.textContent = `Número de asteroides: ${asteroidCount}`;
             cyberattackCounter.textContent = `Ataques repelidos: ${cyberattackCount}`;
@@ -323,4 +421,9 @@
         }
 
         startAsteroids(); // Inicia la generación de asteroides y ataques
+
+        } // fin de initGame
+
+        // Iniciar con la pantalla de ingreso de alias
+        initPlayerScreen();
     })();
