@@ -1,5 +1,5 @@
     (function() {
-        // Versión 2.4.0 - Fix inicio + UI mejorada + Leaderboard
+        // Versión 2.0 - Alias de jugador + Leaderboard
         const playerScreen = document.getElementById('player-screen');
         const playerNameInput = document.getElementById('player-name-input');
         const startGameButton = document.getElementById('start-game-button');
