@@ -319,7 +319,7 @@
                 </p>
                 ${leaderboardHTML}
                 <div class="buttons-container" style="margin-top: 1em;">
-                    <button id="restart-button">Volver</button>
+                    <button id="exit-button">Salir</button>
                     <button id="restart-game-button">Reiniciar Juego</button>
                 </div>
             `;
@@ -327,9 +327,10 @@
 
             // Asignar eventos a los botones con delegación para evitar problemas de eventos inactivos
             gameContainer.addEventListener('click', function(event) {
-                if (event.target && event.target.id === 'restart-button') {
-                    sessionStorage.removeItem('accesoPermitido');
-                    window.location.href = '../';
+                if (event.target && event.target.id === 'exit-button') {
+                    window.close();
+                    // Fallback si el navegador bloquea window.close()
+                    window.location.href = 'about:blank';
                 }
                 if (event.target && event.target.id === 'restart-game-button') {
                     resetGame();

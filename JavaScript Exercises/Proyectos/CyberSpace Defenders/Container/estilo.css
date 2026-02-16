@@ -204,7 +204,7 @@ body, html {
 }
 
 /* Ajustes para botones de reinicio */
-#restart-button, #restart-game-button {
+#exit-button, #restart-game-button {
     font-size: 1.2em;
     padding: 8px 15px;
     cursor: pointer;
@@ -217,7 +217,7 @@ body, html {
     margin: 5px;
 }
 
-#restart-button:hover, #restart-game-button:hover {
+#exit-button:hover, #restart-game-button:hover {
     background-color: rgba(255, 59, 63, 0.8);
 }
 
@@ -247,7 +247,7 @@ body, html {
         white-space: nowrap;
     }
 
-    #restart-button, #restart-game-button {
+    #exit-button, #restart-game-button {
         font-size: 1em;
         padding: 0.8vw;
     }
