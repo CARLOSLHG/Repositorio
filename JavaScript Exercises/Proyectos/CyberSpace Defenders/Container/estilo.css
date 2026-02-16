@@ -204,7 +204,7 @@ body, html {
 }
 
 /* Ajustes para botones de reinicio */
-#restart-button, #restart-game-button {
+#exit-button, #restart-game-button {
     font-size: 1.2em;
     padding: 8px 15px;
     cursor: pointer;
@@ -217,7 +217,7 @@ body, html {
     margin: 5px;
 }
 
-#restart-button:hover, #restart-game-button:hover {
+#exit-button:hover, #restart-game-button:hover {
     background-color: rgba(255, 59, 63, 0.8);
 }
 
@@ -247,7 +247,7 @@ body, html {
         white-space: nowrap;
     }
 
-    #restart-button, #restart-game-button {
+    #exit-button, #restart-game-button {
         font-size: 1em;
         padding: 0.8vw;
     }
@@ -277,4 +277,178 @@ body, html {
 
 #toggle-music-button:hover {
     background-color: rgba(255, 59, 63, 0.8);
+}
+
+/* Pantalla de ingreso de jugador */
+#player-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, #0a1628 0%, #000000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#player-form {
+    text-align: center;
+    padding: 3vw;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    border-radius: 15px;
+    background: rgba(10, 22, 40, 0.9);
+    box-shadow: 0 0 30px rgba(0, 150, 255, 0.2);
+}
+
+#player-form h1 {
+    color: #00c8ff;
+    font-size: 3vw;
+    margin: 0 0 0.5em 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+#player-form p {
+    color: #8899aa;
+    font-size: 1.3vw;
+    margin: 0 0 1.5em 0;
+}
+
+#player-name-input {
+    display: block;
+    width: 80%;
+    margin: 0 auto 1.5em auto;
+    padding: 0.8em 1em;
+    font-size: 1.4vw;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 200, 255, 0.4);
+    border-radius: 8px;
+    color: #00ffcc;
+    outline: none;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 2px;
+}
+
+#player-name-input::placeholder {
+    color: rgba(0, 200, 255, 0.3);
+}
+
+#player-name-input:focus {
+    border-color: #00c8ff;
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+}
+
+#start-game-button {
+    padding: 0.8em 2.5em;
+    font-size: 1.3vw;
+    cursor: pointer;
+    background-color: rgba(0, 150, 255, 0.3);
+    color: #00c8ff;
+    border: 1px solid rgba(0, 200, 255, 0.5);
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+#start-game-button:hover {
+    background-color: rgba(0, 150, 255, 0.6);
+    box-shadow: 0 0 15px rgba(0, 200, 255, 0.4);
+}
+
+/* Display del nombre del jugador en el juego */
+#player-display {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 1.2vw;
+    color: #00ffcc;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.4vw 0.8vw;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    z-index: 10;
+    letter-spacing: 1px;
+}
+
+/* Tabla de leaderboard */
+#leaderboard-container {
+    margin-top: 1em;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+#leaderboard-container h2 {
+    color: #00c8ff;
+    font-size: 1.2em;
+    margin: 0 0 0.5em 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+}
+
+#leaderboard-table thead th {
+    background: rgba(0, 150, 255, 0.25);
+    color: #00c8ff;
+    padding: 0.5em 0.8em;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+    white-space: nowrap;
+}
+
+#leaderboard-table tbody td {
+    padding: 0.4em 0.8em;
+    text-align: center;
+    color: #ccddee;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    white-space: nowrap;
+}
+
+#leaderboard-table tbody tr.current-player {
+    background: rgba(0, 255, 200, 0.12);
+    color: #00ffcc;
+}
+
+#leaderboard-table tbody tr.current-player td {
+    color: #00ffcc;
+    font-weight: bold;
+}
+
+/* Responsive para pantalla de jugador y leaderboard */
+@media (max-width: 768px) {
+    #player-form h1 {
+        font-size: 6vw;
+    }
+
+    #player-form p {
+        font-size: 3.5vw;
+    }
+
+    #player-name-input {
+        font-size: 4vw;
+    }
+
+    #start-game-button {
+        font-size: 3.5vw;
+    }
+
+    #player-display {
+        font-size: 2.5vw;
+    }
+
+    #leaderboard-table {
+        font-size: 2.5vw;
+    }
+
+    #leaderboard-container h2 {
+        font-size: 3.5vw;
+    }
 }
