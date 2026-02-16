@@ -237,13 +237,13 @@ body, html {
 
 #scrolling-text {
     position: absolute;
-    bottom: 40px;
+    bottom: 8px;
     left: 0;
     width: 200%;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 3.5vw;
-    color: #FFFFFF;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.3);
     animation: textScroll 40s linear infinite;
 }
 
