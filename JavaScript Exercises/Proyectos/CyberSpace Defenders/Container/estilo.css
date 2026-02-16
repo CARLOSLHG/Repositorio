@@ -27,6 +27,9 @@ body, html {
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
+    cursor: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #background {
