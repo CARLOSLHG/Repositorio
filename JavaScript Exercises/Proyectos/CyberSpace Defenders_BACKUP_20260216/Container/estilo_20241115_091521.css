@@ -1,0 +1,268 @@
+/* Versión 2.2.1 */
+body, html {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+#spaceship {
+    position: absolute;
+    width: 7vw;
+    max-width: 120px;
+    min-width: 60px;
+    height: auto;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    transition: bottom 0.1s, transform 0.2s ease-in-out;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#background {
+    background: url('./img/cyberspace1.png') repeat-x;
+    background-size: cover;
+    width: 200%;
+    height: 100%;
+    animation: backgroundScroll 20s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.asteroid {
+    position: absolute;
+    width: 8.4vw;
+    max-width: 140px;
+    min-width: 56px;
+    height: auto;
+    animation: moveAsteroid 5s linear forwards;
+}
+
+.cyber-attack {
+    position: absolute;
+    width: 10vw;
+    max-width: 160px;
+    min-width: 70px;
+    height: auto;
+    animation: moveCyberAttack 5s linear forwards;
+    border: 2px solid #FF3B3F;
+    z-index: 15;
+}
+
+.missile {
+    position: absolute;
+    width: 3vw; /* Tamaño reducido del misil */
+    max-width: 50px;
+    min-width: 20px;
+    height: auto;
+    z-index: 20;
+    transition: left 0.1s linear; /* Para que se mueva suavemente */
+}
+
+.destroyed {
+    animation: fadeOut 0.5s forwards;
+    z-index: 15;
+}
+
+/* Animación de desaparición del elemento destruido */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Animación para el movimiento del misil */
+@keyframes moveMissile {
+    from { left: 0; }
+    to { left: 110%; }
+}
+
+#distance-counter, #asteroid-counter, #cyberattack-counter {
+    position: absolute;
+    font-size: 1.3vw;
+    background: rgba(0, 0, 0, 0.8); /* Fondo con opacidad aumentada */
+    padding: 0.8vw;
+    border-radius: 5px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    z-index: 10;
+    max-width: 20vw;
+    margin: 0.5vw;
+    text-align: center;
+    color: #FFFFFF; /* Texto en blanco para mejor visibilidad */
+}
+
+/* Ajustes para dispositivos pequeños y tablets */
+@media (max-width: 768px) {
+    #distance-counter, #asteroid-counter, #cyberattack-counter {
+        font-size: 3vw;
+        padding: 0.5vw;
+        width: 90%;
+        left: 5%;
+        max-width: none;
+        text-align: center;
+    }
+
+    #distance-counter {
+        top: 12vh;
+        margin-bottom: 4px;
+    }
+
+    #asteroid-counter {
+        top: 18vh;
+        margin-bottom: 4px;
+        margin-right: 2vw;
+    }
+
+    #cyberattack-counter {
+        top: 24vh;
+    }
+}
+
+#game-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 25; /* Incrementado el z-index para que esté encima de otros elementos */
+    text-align: center;
+}
+
+#game-over-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5vw;
+    max-width: 60vw;
+    text-align: center;
+    color: #F3F3F3;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2vw;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+#scrolling-text {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 3.5vw;
+    color: #FFFFFF;
+    animation: textScroll 40s linear infinite;
+}
+
+/* Animaciones */
+@keyframes backgroundScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes moveAsteroid {
+    from { right: -100px; }
+    to { right: 110%; }
+}
+
+@keyframes moveCyberAttack {
+    from { right: -100px; }
+    to { right: 110%; }
+}
+
+@keyframes textScroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+}
+
+/* Ajustes para botones de reinicio */
+#restart-button, #restart-game-button {
+    font-size: 1.2em;
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: rgba(30, 58, 95, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    margin: 5px;
+}
+
+#restart-button:hover, #restart-game-button:hover {
+    background-color: rgba(255, 59, 63, 0.8);
+}
+
+/* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
+@media (min-width: 1024px) {
+    #distance-counter {
+        left: 10px;
+        top: 70px;
+    }
+
+    #cyberattack-counter {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 70px;
+    }
+
+    #asteroid-counter {
+        right: 10px;
+        top: 70px;
+        margin-right: 20px;
+    }
+
+    #game-title {
+        font-size: 2.8vw;
+        text-align: center;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    #restart-button, #restart-game-button {
+        font-size: 1em;
+        padding: 0.8vw;
+    }
+
+    #game-over-message h1 {
+        font-size: 1.8em;
+    }
+}
+
+#toggle-music-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin-right: 25px; /* Añadido margen derecho para mejor separación */
+    font-size: 0.9em;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: rgba(30, 58, 95, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    white-space: normal;
+    z-index: 20;
+    max-width: 100px;
+}
+
+#toggle-music-button:hover {
+    background-color: rgba(255, 59, 63, 0.8);
+}
