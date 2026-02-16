@@ -1,4 +1,4 @@
-/* Versión 2.2.1 */
+/* Versión 2.4.0 */
 body, html {
     margin: 0;
     overflow: hidden;
@@ -27,6 +27,9 @@ body, html {
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
+    cursor: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #background {
@@ -47,9 +50,9 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(51, 51, 51, 0.50); /* Color #333 con 50% de opacidad */
-    z-index: 1; /* Asegúrate de que esté sobre el fondo pero debajo del contenido */
-    pointer-events: none; /* Permite que los clics pasen a los elementos debajo */
+    background: rgba(51, 51, 51, 0.50);
+    z-index: 1;
+    pointer-events: none;
 }
 
 .asteroid {
@@ -74,12 +77,12 @@ body, html {
 
 .missile {
     position: absolute;
-    width: 3vw; /* Tamaño reducido del misil */
+    width: 3vw;
     max-width: 50px;
     min-width: 20px;
     height: auto;
     z-index: 20;
-    transition: left 0.1s linear; /* Para que se mueva suavemente */
+    transition: left 0.1s linear;
 }
 
 .destroyed {
@@ -87,13 +90,11 @@ body, html {
     z-index: 15;
 }
 
-/* Animación de desaparición del elemento destruido */
 @keyframes fadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
 }
 
-/* Animación para el movimiento del misil */
 @keyframes moveMissile {
     from { left: 0; }
     to { left: 110%; }
@@ -102,7 +103,7 @@ body, html {
 #distance-counter, #asteroid-counter, #cyberattack-counter {
     position: absolute;
     font-size: 1.3vw;
-    background: rgba(0, 0, 0, 0.8); /* Fondo con opacidad aumentada */
+    background: rgba(0, 0, 0, 0.8);
     padding: 0.8vw;
     border-radius: 5px;
     line-height: 1.4;
@@ -111,10 +112,9 @@ body, html {
     max-width: 20vw;
     margin: 0.5vw;
     text-align: center;
-    color: #FFFFFF; /* Texto en blanco para mejor visibilidad */
+    color: #FFFFFF;
 }
 
-/* Ajustes para dispositivos pequeños y tablets */
 @media (max-width: 768px) {
     #distance-counter, #asteroid-counter, #cyberattack-counter {
         font-size: 3vw;
@@ -151,23 +151,78 @@ body, html {
     color: #ffffff;
     text-transform: uppercase;
     white-space: nowrap;
-    z-index: 25; /* Incrementado el z-index para que esté encima de otros elementos */
+    z-index: 25;
     text-align: center;
 }
 
+/* ===== GAME OVER MESSAGE ===== */
 #game-over-message {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5vw;
-    max-width: 60vw;
+    width: 70vw;
+    max-width: 750px;
     text-align: center;
     color: #F3F3F3;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2vw;
-    border-radius: 10px;
-    z-index: 10;
+    background: rgba(5, 12, 28, 0.94);
+    padding: 2.5vw 3vw;
+    border-radius: 16px;
+    border: 2px solid rgba(0, 200, 255, 0.35);
+    box-shadow: 0 0 50px rgba(0, 120, 255, 0.25);
+    z-index: 30;
+}
+
+#game-over-message h1 {
+    color: #00c8ff;
+    font-size: 2.8vw;
+    margin: 0 0 0.2em 0;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px rgba(0, 200, 255, 0.4);
+}
+
+#game-over-message .player-result {
+    color: #8899aa;
+    font-size: 1.3vw;
+    margin: 0 0 1em 0;
+}
+
+#game-over-message .player-result strong {
+    color: #00ffcc;
+}
+
+/* Stats boxes */
+.stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    margin-bottom: 1.5em;
+}
+
+.stat-box {
+    background: rgba(0, 150, 255, 0.12);
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    border-radius: 12px;
+    padding: 1em 2em;
+    min-width: 12vw;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.8vw;
+    font-weight: bold;
+    color: #00ffcc;
+    text-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9vw;
+    color: #6688aa;
+    margin-top: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #scrolling-text {
@@ -203,22 +258,37 @@ body, html {
     100% { transform: translateX(-200%); }
 }
 
-/* Ajustes para botones de reinicio */
+/* ===== BOTONES DE ACCIÓN ===== */
 #exit-button, #restart-game-button {
     font-size: 1.2em;
-    padding: 8px 15px;
+    padding: 0.7em 1.8em;
     cursor: pointer;
     background-color: rgba(30, 58, 95, 0.8);
     color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s;
     white-space: nowrap;
     margin: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-#exit-button:hover, #restart-game-button:hover {
-    background-color: rgba(255, 59, 63, 0.8);
+#exit-button:hover {
+    background-color: rgba(255, 59, 63, 0.7);
+    border-color: rgba(255, 59, 63, 0.6);
+    box-shadow: 0 0 12px rgba(255, 59, 63, 0.3);
+}
+
+#restart-game-button:hover {
+    background-color: rgba(0, 150, 255, 0.5);
+    border-color: rgba(0, 200, 255, 0.6);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.3);
+}
+
+.buttons-container {
+    margin-top: 1.2em;
 }
 
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
@@ -249,11 +319,11 @@ body, html {
 
     #exit-button, #restart-game-button {
         font-size: 1em;
-        padding: 0.8vw;
+        padding: 0.8vw 1.5vw;
     }
 
     #game-over-message h1 {
-        font-size: 1.8em;
+        font-size: 2.2vw;
     }
 }
 
@@ -261,7 +331,7 @@ body, html {
     position: absolute;
     top: 10px;
     right: 10px;
-    margin-right: 25px; /* Añadido margen derecho para mejor separación */
+    margin-right: 25px;
     font-size: 0.9em;
     padding: 8px 12px;
     cursor: pointer;
@@ -279,153 +349,194 @@ body, html {
     background-color: rgba(255, 59, 63, 0.8);
 }
 
-/* Pantalla de ingreso de jugador */
+/* ===== PANTALLA DE INGRESO DE JUGADOR ===== */
 #player-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse at center, #0a1628 0%, #000000 100%);
+    background: url('./img/cyberspace1.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 100;
 }
 
+#player-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 5, 15, 0.7);
+}
+
 #player-form {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 3vw;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    border-radius: 15px;
-    background: rgba(10, 22, 40, 0.9);
-    box-shadow: 0 0 30px rgba(0, 150, 255, 0.2);
+    padding: 4vw 5vw;
+    border: 2px solid rgba(0, 200, 255, 0.35);
+    border-radius: 20px;
+    background: rgba(5, 15, 30, 0.88);
+    box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
+    min-width: 35vw;
 }
 
 #player-form h1 {
     color: #00c8ff;
-    font-size: 3vw;
-    margin: 0 0 0.5em 0;
+    font-size: 4.5vw;
+    margin: 0 0 0.15em 0;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 25px rgba(0, 200, 255, 0.5);
 }
 
 #player-form p {
-    color: #8899aa;
-    font-size: 1.3vw;
-    margin: 0 0 1.5em 0;
+    color: #7799bb;
+    font-size: 1.5vw;
+    margin: 0 0 1.8em 0;
+    letter-spacing: 1px;
 }
 
 #player-name-input {
     display: block;
-    width: 80%;
-    margin: 0 auto 1.5em auto;
-    padding: 0.8em 1em;
-    font-size: 1.4vw;
+    width: 85%;
+    margin: 0 auto 2em auto;
+    padding: 1em 1.2em;
+    font-size: 2vw;
     text-align: center;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(0, 200, 255, 0.4);
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid rgba(0, 200, 255, 0.35);
+    border-radius: 12px;
     color: #00ffcc;
     outline: none;
     font-family: 'Arial', sans-serif;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    transition: all 0.3s;
 }
 
 #player-name-input::placeholder {
-    color: rgba(0, 200, 255, 0.3);
+    color: rgba(0, 200, 255, 0.25);
+    letter-spacing: 2px;
 }
 
 #player-name-input:focus {
     border-color: #00c8ff;
-    box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.3);
 }
 
 #start-game-button {
-    padding: 0.8em 2.5em;
-    font-size: 1.3vw;
+    padding: 1em 3.5em;
+    font-size: 1.8vw;
     cursor: pointer;
-    background-color: rgba(0, 150, 255, 0.3);
+    background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
-    border: 1px solid rgba(0, 200, 255, 0.5);
-    border-radius: 8px;
+    border: 2px solid rgba(0, 200, 255, 0.5);
+    border-radius: 12px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    font-weight: bold;
     transition: all 0.3s;
+    text-shadow: 0 0 8px rgba(0, 200, 255, 0.3);
 }
 
 #start-game-button:hover {
-    background-color: rgba(0, 150, 255, 0.6);
-    box-shadow: 0 0 15px rgba(0, 200, 255, 0.4);
+    background: linear-gradient(135deg, rgba(0, 120, 230, 0.6), rgba(0, 200, 255, 0.4));
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+    transform: scale(1.03);
 }
 
-/* Display del nombre del jugador en el juego */
+#start-game-button:active {
+    transform: scale(0.98);
+}
+
+/* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-size: 1.2vw;
+    bottom: 12px;
+    left: 12px;
+    font-size: 1.3vw;
     color: #00ffcc;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.4vw 0.8vw;
-    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 0.5vw 1vw;
+    border-radius: 6px;
     border: 1px solid rgba(0, 200, 255, 0.3);
     z-index: 10;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(0, 255, 200, 0.3);
 }
 
-/* Tabla de leaderboard */
+/* ===== LEADERBOARD ===== */
 #leaderboard-container {
-    margin-top: 1em;
-    max-height: 30vh;
+    margin-top: 1.2em;
+    max-height: 28vh;
     overflow-y: auto;
 }
 
 #leaderboard-container h2 {
     color: #00c8ff;
-    font-size: 1.2em;
-    margin: 0 0 0.5em 0;
+    font-size: 1.4em;
+    margin: 0 0 0.6em 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
 }
 
 #leaderboard-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.85em;
+    font-size: 1em;
 }
 
 #leaderboard-table thead th {
-    background: rgba(0, 150, 255, 0.25);
+    background: rgba(0, 120, 200, 0.2);
     color: #00c8ff;
-    padding: 0.5em 0.8em;
+    padding: 0.6em 1em;
     text-align: center;
-    border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+    border-bottom: 2px solid rgba(0, 200, 255, 0.3);
     white-space: nowrap;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #leaderboard-table tbody td {
-    padding: 0.4em 0.8em;
+    padding: 0.5em 1em;
     text-align: center;
-    color: #ccddee;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #aabbcc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     white-space: nowrap;
+    font-size: 0.9em;
+}
+
+#leaderboard-table tbody tr:hover {
+    background: rgba(0, 150, 255, 0.06);
 }
 
 #leaderboard-table tbody tr.current-player {
-    background: rgba(0, 255, 200, 0.12);
-    color: #00ffcc;
+    background: rgba(0, 255, 200, 0.1);
+    border-left: 3px solid #00ffcc;
 }
 
 #leaderboard-table tbody tr.current-player td {
     color: #00ffcc;
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 255, 200, 0.2);
 }
 
-/* Responsive para pantalla de jugador y leaderboard */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+    #player-form {
+        padding: 8vw 6vw;
+        min-width: 80vw;
+    }
+
     #player-form h1 {
-        font-size: 6vw;
+        font-size: 7vw;
     }
 
     #player-form p {
@@ -433,22 +544,64 @@ body, html {
     }
 
     #player-name-input {
-        font-size: 4vw;
+        font-size: 5vw;
+        padding: 0.8em;
     }
 
     #start-game-button {
-        font-size: 3.5vw;
+        font-size: 4vw;
+        padding: 0.8em 2em;
     }
 
     #player-display {
-        font-size: 2.5vw;
+        font-size: 2.8vw;
+    }
+
+    #game-over-message {
+        width: 90vw;
+        padding: 5vw;
+    }
+
+    #game-over-message h1 {
+        font-size: 5vw;
+    }
+
+    #game-over-message .player-result {
+        font-size: 3vw;
+    }
+
+    .stat-value {
+        font-size: 6vw;
+    }
+
+    .stat-label {
+        font-size: 2.2vw;
+    }
+
+    .stat-box {
+        padding: 0.8em 1.2em;
+        min-width: 30vw;
     }
 
     #leaderboard-table {
+        font-size: 2.8vw;
+    }
+
+    #leaderboard-table thead th {
         font-size: 2.5vw;
+        padding: 0.4em 0.5em;
+    }
+
+    #leaderboard-table tbody td {
+        padding: 0.4em 0.5em;
     }
 
     #leaderboard-container h2 {
-        font-size: 3.5vw;
+        font-size: 3.8vw;
+    }
+
+    #exit-button, #restart-game-button {
+        font-size: 3vw;
+        padding: 0.6em 1.2em;
     }
 }
