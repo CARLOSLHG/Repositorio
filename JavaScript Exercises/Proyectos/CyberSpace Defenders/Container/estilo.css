@@ -538,6 +538,14 @@ body, html {
     transform: scale(0.98);
 }
 
+.game-over-reason {
+    color: #ff5555;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 5px 0 10px;
+    text-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+}
+
 .version-info {
     position: absolute;
     bottom: 10px;
