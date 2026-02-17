@@ -311,7 +311,7 @@ body, html {
     text-align: center;
     color: #F3F3F3;
     background: rgba(5, 12, 28, 0.94);
-    padding: 2.5vw 3vw;
+    padding: 1.5vw 2.5vw;
     border-radius: 16px;
     border: 2px solid rgba(0, 200, 255, 0.35);
     box-shadow: 0 0 50px rgba(0, 120, 255, 0.25);
@@ -321,18 +321,18 @@ body, html {
 
 #game-over-message h1 {
     color: #00c8ff;
-    font-size: 2.8vw;
-    margin: 0 0 0.2em 0;
+    font-size: 2.2vw;
+    margin: 0 0 0.15em 0;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-shadow: 0 0 15px rgba(0, 200, 255, 0.4);
     flex-shrink: 0;
 }
 
 #game-over-message .player-result {
     color: #8899aa;
-    font-size: 1.3vw;
-    margin: 0 0 1em 0;
+    font-size: 1.1vw;
+    margin: 0 0 0.6em 0;
     flex-shrink: 0;
 }
 
@@ -349,16 +349,16 @@ body, html {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1.5vw;
-    margin-bottom: 1.5em;
+    gap: 1vw;
+    margin-bottom: 0.8em;
     flex-shrink: 0;
 }
 
 .stat-box {
     background: rgba(0, 150, 255, 0.12);
     border: 1px solid rgba(0, 200, 255, 0.3);
-    border-radius: 12px;
-    padding: 0.8em 1.5em;
+    border-radius: 10px;
+    padding: 0.5em 1.2em;
     min-width: 10vw;
     flex: 1 1 auto;
     max-width: 20vw;
@@ -366,7 +366,7 @@ body, html {
 
 .stat-value {
     display: block;
-    font-size: 2.8vw;
+    font-size: 2.2vw;
     font-weight: bold;
     color: #00ffcc;
     text-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
@@ -374,9 +374,9 @@ body, html {
 
 .stat-label {
     display: block;
-    font-size: 0.9vw;
+    font-size: 0.75vw;
     color: #6688aa;
-    margin-top: 0.3em;
+    margin-top: 0.2em;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -416,15 +416,15 @@ body, html {
 
 /* ===== BOTONES DE ACCIÓN ===== */
 #exit-button, #restart-game-button {
-    font-size: 1.2em;
-    padding: 0.7em 1.8em;
+    font-size: 0.95em;
+    padding: 0.5em 1.4em;
     background-color: rgba(30, 58, 95, 0.8);
     color: white;
     border: 1px solid rgba(0, 200, 255, 0.3);
     border-radius: 8px;
     transition: all 0.3s;
     white-space: nowrap;
-    margin: 5px;
+    margin: 3px;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: bold;
@@ -443,11 +443,11 @@ body, html {
 }
 
 .buttons-container {
-    margin-top: 1.2em;
+    margin-top: 0.6em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5em;
+    gap: 0.4em;
     flex-shrink: 0;
 }
 
@@ -646,31 +646,31 @@ body, html {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 3vw 4vw;
+    padding: 2vw 3vw;
     border: 2px solid rgba(0, 200, 255, 0.35);
     border-radius: 20px;
     background: rgba(5, 15, 30, 0.92);
     box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
     min-width: 40vw;
     max-width: 750px;
-    max-height: 85vh;
+    max-height: 90vh;
     overflow-y: auto;
     box-sizing: border-box;
 }
 
 #pregame-panel h1 {
     color: #00c8ff;
-    font-size: 3vw;
-    margin: 0 0 0.3em 0;
+    font-size: 2.5vw;
+    margin: 0 0 0.2em 0;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
 }
 
 #pregame-panel > p {
     color: #7799bb;
-    font-size: 1.3vw;
-    margin: 0 0 1.2em 0;
+    font-size: 1.1vw;
+    margin: 0 0 0.8em 0;
     letter-spacing: 1px;
 }
 
@@ -679,12 +679,12 @@ body, html {
 }
 
 #pregame-leaderboard {
-    margin-bottom: 1.5em;
+    margin-bottom: 0.8em;
 }
 
 #launch-game-button {
-    padding: 1em 3.5em;
-    font-size: 1.8vw;
+    padding: 0.8em 3em;
+    font-size: 1.5vw;
     cursor: pointer;
     background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
@@ -747,7 +747,7 @@ body, html {
 /* ===== LEADERBOARD ===== */
 #leaderboard-container,
 #leaderboard-placeholder {
-    margin-top: 1.2em;
+    margin-top: 0.6em;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
@@ -755,38 +755,38 @@ body, html {
 
 #leaderboard-container h2 {
     color: #00c8ff;
-    font-size: 1.4em;
-    margin: 0 0 0.6em 0;
+    font-size: 1.1em;
+    margin: 0 0 0.3em 0;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
 }
 
 #leaderboard-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1em;
+    font-size: 0.85em;
 }
 
 #leaderboard-table thead th {
     background: rgba(0, 120, 200, 0.2);
     color: #00c8ff;
-    padding: 0.6em 1em;
+    padding: 0.35em 0.7em;
     text-align: center;
     border-bottom: 2px solid rgba(0, 200, 255, 0.3);
     white-space: nowrap;
-    font-size: 0.85em;
+    font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 #leaderboard-table tbody td {
-    padding: 0.5em 1em;
+    padding: 0.3em 0.7em;
     text-align: center;
     color: #aabbcc;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     white-space: nowrap;
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 #leaderboard-table tbody tr:hover {
@@ -835,53 +835,56 @@ body, html {
 
     #game-over-message {
         width: 92vw;
-        max-height: 88vh;
-        padding: 4vw 3vw;
+        max-height: 92vh;
+        padding: 3vw 2.5vw;
         overflow-y: auto;
         touch-action: pan-y;
     }
 
     #game-over-message h1 {
-        font-size: 5vw;
+        font-size: 4.5vw;
+        margin-bottom: 0.1em;
     }
 
     #game-over-message .player-result {
-        font-size: 3vw;
+        font-size: 2.5vw;
+        margin-bottom: 0.4em;
     }
 
     .stat-value {
-        font-size: 5vw;
+        font-size: 4vw;
     }
 
     .stat-label {
-        font-size: 2vw;
+        font-size: 1.8vw;
     }
 
     .stat-box {
-        padding: 0.6em 1em;
+        padding: 0.4em 0.8em;
         min-width: 25vw;
         max-width: 40vw;
     }
 
     #leaderboard-table {
-        font-size: 2.8vw;
+        font-size: 2.4vw;
     }
 
     #leaderboard-table thead th {
-        font-size: 2.5vw;
-        padding: 0.4em 0.5em;
+        font-size: 2.2vw;
+        padding: 0.25em 0.4em;
     }
 
     #leaderboard-table tbody td {
-        padding: 0.4em 0.5em;
+        padding: 0.2em 0.4em;
     }
 
     #leaderboard-container h2 {
-        font-size: 3.8vw;
+        font-size: 3.2vw;
+        margin-bottom: 0.2em;
     }
 
     #exit-button, #restart-game-button {
-        font-size: 3vw;
-        padding: 0.6em 1.2em;
+        font-size: 2.8vw;
+        padding: 0.5em 1em;
     }
 }
