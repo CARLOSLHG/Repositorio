@@ -69,6 +69,20 @@
                 <div id="missile-bar"></div>
             </div>
         </div>
+
+        <!-- Botón de disparo para móviles (solo visible en touch devices) -->
+        <button id="mobile-fire-button" aria-label="Disparar">
+            <svg viewBox="0 0 80 80" class="fire-icon">
+                <circle cx="40" cy="40" r="36" fill="rgba(255,59,63,0.15)" stroke="#ff3b3f" stroke-width="3"/>
+                <polygon points="40,12 46,30 40,26 34,30" fill="#ff3b3f"/>
+                <polygon points="40,68 34,50 40,54 46,50" fill="#ff3b3f"/>
+                <polygon points="12,40 30,34 26,40 30,46" fill="#ff3b3f"/>
+                <polygon points="68,40 50,46 54,40 50,34" fill="#ff3b3f"/>
+                <circle cx="40" cy="40" r="8" fill="none" stroke="#ff3b3f" stroke-width="2"/>
+                <circle cx="40" cy="40" r="3" fill="#ff3b3f"/>
+            </svg>
+            <span class="fire-label">FIRE</span>
+        </button>
     </div>
 
     <!-- Configuración del leaderboard compartido (JSONBin.io) -->
