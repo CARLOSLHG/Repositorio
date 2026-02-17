@@ -902,7 +902,8 @@
                 updateMissileDisplay();
 
                 spaceship.style.bottom = '50%';
-                spaceship.style.left = '50%';
+                const isMobile = window.innerWidth <= 768;
+                spaceship.style.left = isMobile ? '25%' : '50%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
