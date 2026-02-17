@@ -6,6 +6,8 @@ body, html {
     width: 100vw;
     height: 100vh;
     font-family: 'Arial', sans-serif;
+    touch-action: none;
+    -webkit-touch-callout: none;
 }
 
 #spaceship {
@@ -30,6 +32,8 @@ body, html {
     cursor: none !important;
     user-select: none;
     -webkit-user-select: none;
+    touch-action: none;
+    overscroll-behavior: none;
 }
 
 #game-container *:not(#game-over-message):not(#game-over-message *) {
@@ -218,30 +222,59 @@ body, html {
 }
 
 @media (max-width: 768px) {
+    #game-container {
+        padding: 8px;
+    }
+
+    #game-title {
+        font-size: 3.5vw;
+        top: 4px;
+    }
+
+    #toggle-music-button {
+        top: 4px;
+        right: 4px;
+        margin-right: 0;
+        font-size: 2.5vw;
+        padding: 5px 8px;
+        max-width: 70px;
+    }
+
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
         font-size: 2.2vw;
-        padding: 0.4vw 0.8vw;
-        left: 8px;
+        padding: 2px 6px;
+        left: 4px;
     }
 
     #distance-counter {
-        top: 55px;
+        top: 32px;
     }
 
     #cyberattack-counter {
-        top: 78px;
+        top: 50px;
     }
 
     #asteroid-counter {
-        top: 101px;
+        top: 68px;
     }
 
     #missile-counter {
-        top: 124px;
+        top: 86px;
+    }
+
+    #player-display {
+        bottom: 4px;
+        left: 4px;
+        font-size: 2.5vw;
+        padding: 3px 6px;
     }
 
     .ammo-pack {
-        min-width: 45px;
+        min-width: 40px;
+    }
+
+    #spaceship {
+        min-width: 50px;
     }
 }
 
@@ -800,6 +833,8 @@ body, html {
         width: 92vw;
         max-height: 88vh;
         padding: 4vw 3vw;
+        overflow-y: auto;
+        touch-action: pan-y;
     }
 
     #game-over-message h1 {

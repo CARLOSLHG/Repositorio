@@ -337,33 +337,58 @@
                 }
             });
 
-            // Movimiento táctil para móviles
-            let isDragging = false;
-            let startY = 0;
-            let currentBottom = 0;
+            // --- Controles táctiles para móviles ---
+            const isTouchDevice = 'ontouchstart' in window;
+            let touching = false;
 
-            spaceship.addEventListener('touchstart', function(event) {
-                if (!gameOver && gameStarted) {
-                    isDragging = true;
-                    startY = event.touches[0].clientY;
-                    currentBottom = parseInt(getComputedStyle(spaceship).bottom) || 0;
-                }
-            });
-
-            document.addEventListener('touchmove', function(event) {
-                if (isDragging && !gameOver) {
-                    const containerHeight = gameContainer.clientHeight;
+            if (isTouchDevice) {
+                // Tocar en cualquier parte de la pantalla mueve la nave (Y sigue al dedo)
+                // Auto-fire mientras el dedo esté tocando
+                gameContainer.addEventListener('touchstart', function(event) {
+                    if (gameOver || !gameStarted) return;
+                    // Ignorar toques en botones/overlays
+                    if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                    event.preventDefault();
+                    touching = true;
+                    // Mover nave a la posición del dedo inmediatamente
                     const touchY = event.touches[0].clientY;
-                    const deltaY = startY - touchY;
-                    const newBottom = currentBottom - deltaY;
+                    const containerHeight = gameContainer.clientHeight;
+                    const spaceshipHeight = spaceship.clientHeight;
+                    const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
+                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                }, { passive: false });
 
-                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceship.clientHeight, newBottom))}px`;
-                }
-            });
+                gameContainer.addEventListener('touchmove', function(event) {
+                    if (!touching || gameOver || !gameStarted) return;
+                    event.preventDefault();
+                    const touchY = event.touches[0].clientY;
+                    const containerHeight = gameContainer.clientHeight;
+                    const spaceshipHeight = spaceship.clientHeight;
+                    const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
+                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                }, { passive: false });
 
-            document.addEventListener('touchend', function() {
-                isDragging = false;
-            });
+                gameContainer.addEventListener('touchend', function() {
+                    touching = false;
+                });
+
+                gameContainer.addEventListener('touchcancel', function() {
+                    touching = false;
+                });
+
+                // Auto-fire mientras toca: ráfaga reducida (3 misiles) cada 1.2s
+                const MOBILE_BURST_MAX = 3;
+                touchAutoFireInterval = setInterval(() => {
+                    if (touching && !gameOver && gameStarted && !burstCooldown) {
+                        burstCooldown = true;
+                        const burstCount = Math.min(MOBILE_BURST_MAX, missileCount);
+                        for (let i = 0; i < burstCount; i++) {
+                            setTimeout(() => shootMissile(), i * BURST_DELAY);
+                        }
+                        setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 300);
+                    }
+                }, 1200);
+            }
 
             // Verificación de colisiones (AABB)
             function isCollision(element1, element2) {
@@ -558,15 +583,12 @@
                 setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 300);
             }
 
-            // Disparo con clic: ignorar clicks en botones y overlays
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
-                shootBurst();
-            });
-
-            // Disparo automático en dispositivos táctiles cada segundo
-            if ('ontouchstart' in window) {
-                touchAutoFireInterval = setInterval(shootBurst, 1500);
+            // Disparo con clic: solo en desktop (en móvil se maneja via touch auto-fire)
+            if (!isTouchDevice) {
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
+                    shootBurst();
+                });
             }
 
             // Función para generar un asteroide aleatorio
