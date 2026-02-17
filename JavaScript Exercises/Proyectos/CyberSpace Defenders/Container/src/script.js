@@ -400,8 +400,8 @@
                 }, 30);
             }
 
-            // Ráfaga de misiles (máximo 3 por ráfaga)
-            const BURST_MAX = 3;
+            // Ráfaga de misiles (máximo 5 por ráfaga)
+            const BURST_MAX = 5;
             const BURST_DELAY = 100; // ms entre cada misil de la ráfaga
             let burstCooldown = false;
 
