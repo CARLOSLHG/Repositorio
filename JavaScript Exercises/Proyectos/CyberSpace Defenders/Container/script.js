@@ -235,10 +235,9 @@
             audio.volume = 0.1;
             audio.play().catch(() => {});
 
-            // Botón para apagar/encender la música
+            // Función para alternar música
             const toggleMusicButton = document.getElementById('toggle-music-button');
-            toggleMusicButton.addEventListener('click', (e) => {
-                e.stopPropagation();
+            function toggleMusic() {
                 if (musicPlaying) {
                     audio.pause();
                     toggleMusicButton.textContent = 'Encender Música';
@@ -247,6 +246,19 @@
                     toggleMusicButton.textContent = 'Apagar Música';
                 }
                 musicPlaying = !musicPlaying;
+            }
+
+            // Botón para apagar/encender la música
+            toggleMusicButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMusic();
+            });
+
+            // Tecla M para apagar/encender la música
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'm' || e.key === 'M') {
+                    toggleMusic();
+                }
             });
 
             const distanceCounter = document.getElementById('distance-counter');
@@ -261,13 +273,19 @@
             // Inicializar display de misiles
             updateMissileDisplay();
 
-            // Incrementar la distancia recorrida cada segundo
+            // Incrementar la distancia recorrida cada segundo + chequeo de misiles
             let distanceInterval;
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
                     if (!gameOver) {
                         lightYears += 1;
                         distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
+
+                        // Seguridad: si los misiles llegan a 0, forzar game over
+                        if (missileCount <= 0) {
+                            gameOver = true;
+                            showGameOverMessage('¡Has agotado tus misiles!');
+                        }
                     }
                 }, 1000);
             }
@@ -557,11 +575,10 @@
             }
 
             // Mostrar mensaje de "Game Over" con leaderboard
-            async function showGameOverMessage(reason) {
+            function showGameOverMessage(reason) {
                 const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
-                const board = await addToLeaderboard(playerName, cyberattackCount, elapsedSeconds);
-                const leaderboardHTML = buildLeaderboardHTML(board);
 
+                // Crear el overlay de Game Over INMEDIATAMENTE (sin esperar async)
                 const gameOverMessage = document.createElement('div');
                 gameOverMessage.id = 'game-over-message';
                 gameOverMessage.innerHTML = `
@@ -582,7 +599,7 @@
                             <span class="stat-label">Misiles Restantes</span>
                         </div>
                     </div>
-                    ${leaderboardHTML}
+                    <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
@@ -615,6 +632,20 @@
                         } else if (pwd !== null) {
                             alert('Clave incorrecta');
                         }
+                    }
+                });
+
+                // Cargar leaderboard en segundo plano (no bloquea el UI)
+                addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
+                    const placeholder = document.getElementById('leaderboard-placeholder');
+                    if (placeholder) {
+                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    }
+                }).catch(err => {
+                    console.warn('Error cargando leaderboard:', err);
+                    const placeholder = document.getElementById('leaderboard-placeholder');
+                    if (placeholder) {
+                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
                     }
                 });
             }
