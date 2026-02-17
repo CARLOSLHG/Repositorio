@@ -292,6 +292,18 @@
                         }
                     });
 
+                    // Colisión misil-pack: destruye el pack sin recolectarlo
+                    const ammoPacks = document.querySelectorAll('.ammo-pack');
+                    ammoPacks.forEach(pack => {
+                        if (isCollision(missile, pack) && !pack.classList.contains('destroyed')) {
+                            pack.innerHTML = '<img src="./img/exploit.png" style="width:100%;height:auto;">';
+                            pack.classList.add('destroyed');
+                            setTimeout(() => pack.remove(), 500);
+                            clearInterval(missileInterval);
+                            missile.remove();
+                        }
+                    });
+
                     if (missileRect.left > window.innerWidth) {
                         clearInterval(missileInterval);
                         missile.remove();
@@ -421,7 +433,7 @@
                         clearInterval(collisionCheck);
                         return;
                     }
-                    if (isCollision(spaceship, packEl)) {
+                    if (isCollision(spaceship, packEl) && !packEl.classList.contains('destroyed')) {
                         clearInterval(collisionCheck);
                         missileCount += selected.amount;
                         packsCollected++;
