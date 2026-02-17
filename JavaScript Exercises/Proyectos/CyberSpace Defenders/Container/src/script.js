@@ -259,6 +259,7 @@
         let activeHazards = [];  // asteroides + cyberattacks
         let activePacks = [];
         let gameLoopId = null;
+        let lastFrameTime = 0;
         let distanceInterval = null;
         let touchAutoFireInterval = null;
 
@@ -404,48 +405,61 @@
             }
 
             // ========== GAME LOOP CENTRALIZADO (requestAnimationFrame) ==========
-            // Reemplaza todos los setInterval individuales por entidad.
-            // Un solo loop a ~60fps maneja: movimiento de misiles + todas las colisiones.
+            // Fases separadas: WRITE (mover) → READ (leer rects) → COLLIDE (math pura)
+            // Esto evita layout thrashing (no intercalar writes/reads).
 
-            function gameLoop() {
+            function gameLoop(timestamp) {
                 if (gameOver) {
-                    // Limpiar entidades activas
                     activeMissiles.length = 0;
                     activeHazards.length = 0;
                     activePacks.length = 0;
                     return;
                 }
 
-                const spaceshipRect = spaceship.getBoundingClientRect();
+                // Delta time normalizado a 60fps (dt=1 a 60fps, dt=2 a 30fps)
+                const dt = lastFrameTime ? Math.min((timestamp - lastFrameTime) / 16.67, 3) : 1;
+                lastFrameTime = timestamp;
+
                 const screenWidth = window.innerWidth;
 
-                // --- Mover misiles y detectar colisiones misil↔enemigo ---
+                // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
                     const m = activeMissiles[i];
-                    const el = m.element;
-
-                    // Mover misil hacia la derecha
-                    m.x += 6; // ~6px por frame a 60fps ≈ 360px/s
-                    el.style.left = m.x + 'px';
-
-                    // Fuera de pantalla → eliminar
-                    if (m.x > screenWidth) {
-                        el.remove();
+                    m.tx += 6 * dt;
+                    if (m.originX + m.tx > screenWidth) {
+                        m.element.remove();
                         activeMissiles.splice(i, 1);
                         continue;
                     }
+                    m.element.style.transform = `translateX(${m.tx}px)`;
+                }
 
-                    const missileRect = el.getBoundingClientRect();
-                    let missileHit = false;
+                // === FASE READ: leer TODAS las posiciones en un solo batch ===
+                // (una sola recalculación de layout para todo el frame)
+                const spaceshipRect = spaceship.getBoundingClientRect();
 
-                    // Colisión misil ↔ cyberattacks/asteroides
+                for (let i = 0; i < activeMissiles.length; i++) {
+                    activeMissiles[i]._r = activeMissiles[i].element.getBoundingClientRect();
+                }
+                for (let i = 0; i < activeHazards.length; i++) {
+                    activeHazards[i]._r = activeHazards[i].destroyed ? null : activeHazards[i].element.getBoundingClientRect();
+                }
+                for (let i = 0; i < activePacks.length; i++) {
+                    activePacks[i]._r = activePacks[i].destroyed ? null : activePacks[i].element.getBoundingClientRect();
+                }
+
+                // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
+
+                // Misiles ↔ cyberattacks + packs
+                for (let i = activeMissiles.length - 1; i >= 0; i--) {
+                    const mR = activeMissiles[i]._r;
+                    let hit = false;
+
                     for (let j = activeHazards.length - 1; j >= 0; j--) {
                         const h = activeHazards[j];
-                        if (h.type !== 'cyber' || h.destroyed) continue;
-                        const hRect = h.element.getBoundingClientRect();
-                        if (!(missileRect.top > hRect.bottom || missileRect.bottom < hRect.top ||
-                              missileRect.right < hRect.left || missileRect.left > hRect.right)) {
-                            // Impacto en cyberattack
+                        if (h.type !== 'cyber' || h.destroyed || !h._r) continue;
+                        if (!(mR.top > h._r.bottom || mR.bottom < h._r.top ||
+                              mR.right < h._r.left || mR.left > h._r.right)) {
                             h.element.src = './img/exploit.png';
                             h.element.classList.add('destroyed');
                             h.destroyed = true;
@@ -454,23 +468,19 @@
                                 const idx = activeHazards.indexOf(h);
                                 if (idx !== -1) activeHazards.splice(idx, 1);
                             }, 500);
-
                             cyberattackCount += 1;
                             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
-
-                            missileHit = true;
+                            hit = true;
                             break;
                         }
                     }
 
-                    // Colisión misil ↔ ammo packs (destruye el pack)
-                    if (!missileHit) {
+                    if (!hit) {
                         for (let j = activePacks.length - 1; j >= 0; j--) {
                             const p = activePacks[j];
-                            if (p.destroyed) continue;
-                            const pRect = p.element.getBoundingClientRect();
-                            if (!(missileRect.top > pRect.bottom || missileRect.bottom < pRect.top ||
-                                  missileRect.right < pRect.left || missileRect.left > pRect.right)) {
+                            if (p.destroyed || !p._r) continue;
+                            if (!(mR.top > p._r.bottom || mR.bottom < p._r.top ||
+                                  mR.right < p._r.left || mR.left > p._r.right)) {
                                 p.element.innerHTML = '<img src="./img/exploit.png" style="width:100%;height:auto;">';
                                 p.element.classList.add('destroyed');
                                 p.destroyed = true;
@@ -479,38 +489,36 @@
                                     const idx = activePacks.indexOf(p);
                                     if (idx !== -1) activePacks.splice(idx, 1);
                                 }, 500);
-                                missileHit = true;
+                                hit = true;
                                 break;
                             }
                         }
                     }
 
-                    if (missileHit) {
-                        el.remove();
+                    if (hit) {
+                        activeMissiles[i].element.remove();
                         activeMissiles.splice(i, 1);
                     }
                 }
 
-                // --- Colisiones nave ↔ hazards (asteroides + cyberattacks) ---
-                for (let i = activeHazards.length - 1; i >= 0; i--) {
+                // Nave ↔ hazards
+                for (let i = 0; i < activeHazards.length; i++) {
                     const h = activeHazards[i];
-                    if (h.destroyed) continue;
-                    const hRect = h.element.getBoundingClientRect();
-                    if (!(spaceshipRect.top > hRect.bottom || spaceshipRect.bottom < hRect.top ||
-                          spaceshipRect.right < hRect.left || spaceshipRect.left > hRect.right)) {
+                    if (h.destroyed || !h._r) continue;
+                    if (!(spaceshipRect.top > h._r.bottom || spaceshipRect.bottom < h._r.top ||
+                          spaceshipRect.right < h._r.left || spaceshipRect.left > h._r.right)) {
                         gameOver = true;
                         showGameOverMessage();
                         return;
                     }
                 }
 
-                // --- Colisiones nave ↔ ammo packs (recolección) ---
+                // Nave ↔ packs (recolección)
                 for (let i = activePacks.length - 1; i >= 0; i--) {
                     const p = activePacks[i];
-                    if (p.destroyed) continue;
-                    const pRect = p.element.getBoundingClientRect();
-                    if (!(spaceshipRect.top > pRect.bottom || spaceshipRect.bottom < pRect.top ||
-                          spaceshipRect.right < pRect.left || spaceshipRect.left > pRect.right)) {
+                    if (p.destroyed || !p._r) continue;
+                    if (!(spaceshipRect.top > p._r.bottom || spaceshipRect.bottom < p._r.top ||
+                          spaceshipRect.right < p._r.left || spaceshipRect.left > p._r.right)) {
                         p.destroyed = true;
                         missileCount += p.amount;
                         packsCollected++;
@@ -528,6 +536,7 @@
             }
 
             // Iniciar el game loop
+            lastFrameTime = 0;
             gameLoopId = requestAnimationFrame(gameLoop);
 
             // ========== FIN GAME LOOP ==========
@@ -563,8 +572,8 @@
 
                 gameContainer.appendChild(missile);
 
-                // Registrar en el array para el game loop
-                activeMissiles.push({ element: missile, x: startX });
+                // Registrar: tx=0 (translateX acumulado), originX para saber cuándo sale de pantalla
+                activeMissiles.push({ element: missile, tx: 0, originX: startX });
             }
 
             // Ráfaga de misiles (máximo 5 por ráfaga)
@@ -850,6 +859,7 @@
                 if (touchAutoFireInterval) clearInterval(touchAutoFireInterval);
 
                 // Reiniciar loops
+                lastFrameTime = 0;
                 startDistanceCounter();
                 startAsteroids();
                 startAmmoPacks();

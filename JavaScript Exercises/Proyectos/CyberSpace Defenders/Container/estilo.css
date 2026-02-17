@@ -58,6 +58,7 @@ body, html {
     position: absolute;
     top: 0;
     left: 0;
+    will-change: transform;
 }
 
 #background::before {
@@ -79,6 +80,7 @@ body, html {
     min-width: 56px;
     height: auto;
     animation: moveAsteroid 5s linear forwards;
+    will-change: transform;
 }
 
 .cyber-attack {
@@ -90,6 +92,7 @@ body, html {
     animation: moveCyberAttack 5s linear forwards;
     border: 2px solid #FF3B3F;
     z-index: 15;
+    will-change: transform;
 }
 
 .missile {
@@ -99,7 +102,7 @@ body, html {
     min-width: 20px;
     height: auto;
     z-index: 20;
-    transition: left 0.1s linear;
+    will-change: transform;
 }
 
 .destroyed {
@@ -194,6 +197,7 @@ body, html {
     height: auto;
     z-index: 15;
     pointer-events: none;
+    will-change: transform;
 }
 
 .ammo-pack .ammo-svg {
