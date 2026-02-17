@@ -253,6 +253,15 @@
         }
 
         // --- Inicialización del juego (se ejecuta tras ingresar alias) ---
+
+        // Arrays para rastrear entidades activas (game loop centralizado)
+        let activeMissiles = [];
+        let activeHazards = [];  // asteroides + cyberattacks
+        let activePacks = [];
+        let gameLoopId = null;
+        let distanceInterval = null;
+        let touchAutoFireInterval = null;
+
         function initGame() {
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
@@ -299,7 +308,6 @@
             updateMissileDisplay();
 
             // Incrementar la distancia recorrida cada segundo + chequeo de misiles
-            let distanceInterval;
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
                     if (!gameOver) {
@@ -357,6 +365,148 @@
                 isDragging = false;
             });
 
+            // Verificación de colisiones (AABB)
+            function isCollision(element1, element2) {
+                const rect1 = element1.getBoundingClientRect();
+                const rect2 = element2.getBoundingClientRect();
+
+                return !(
+                    rect1.top > rect2.bottom ||
+                    rect1.bottom < rect2.top ||
+                    rect1.right < rect2.left ||
+                    rect1.left > rect2.right
+                );
+            }
+
+            // ========== GAME LOOP CENTRALIZADO (requestAnimationFrame) ==========
+            // Reemplaza todos los setInterval individuales por entidad.
+            // Un solo loop a ~60fps maneja: movimiento de misiles + todas las colisiones.
+
+            function gameLoop() {
+                if (gameOver) {
+                    // Limpiar entidades activas
+                    activeMissiles.length = 0;
+                    activeHazards.length = 0;
+                    activePacks.length = 0;
+                    return;
+                }
+
+                const spaceshipRect = spaceship.getBoundingClientRect();
+                const screenWidth = window.innerWidth;
+
+                // --- Mover misiles y detectar colisiones misil↔enemigo ---
+                for (let i = activeMissiles.length - 1; i >= 0; i--) {
+                    const m = activeMissiles[i];
+                    const el = m.element;
+
+                    // Mover misil hacia la derecha
+                    m.x += 6; // ~6px por frame a 60fps ≈ 360px/s
+                    el.style.left = m.x + 'px';
+
+                    // Fuera de pantalla → eliminar
+                    if (m.x > screenWidth) {
+                        el.remove();
+                        activeMissiles.splice(i, 1);
+                        continue;
+                    }
+
+                    const missileRect = el.getBoundingClientRect();
+                    let missileHit = false;
+
+                    // Colisión misil ↔ cyberattacks/asteroides
+                    for (let j = activeHazards.length - 1; j >= 0; j--) {
+                        const h = activeHazards[j];
+                        if (h.type !== 'cyber' || h.destroyed) continue;
+                        const hRect = h.element.getBoundingClientRect();
+                        if (!(missileRect.top > hRect.bottom || missileRect.bottom < hRect.top ||
+                              missileRect.right < hRect.left || missileRect.left > hRect.right)) {
+                            // Impacto en cyberattack
+                            h.element.src = './img/exploit.png';
+                            h.element.classList.add('destroyed');
+                            h.destroyed = true;
+                            setTimeout(() => {
+                                h.element.remove();
+                                const idx = activeHazards.indexOf(h);
+                                if (idx !== -1) activeHazards.splice(idx, 1);
+                            }, 500);
+
+                            cyberattackCount += 1;
+                            cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+
+                            missileHit = true;
+                            break;
+                        }
+                    }
+
+                    // Colisión misil ↔ ammo packs (destruye el pack)
+                    if (!missileHit) {
+                        for (let j = activePacks.length - 1; j >= 0; j--) {
+                            const p = activePacks[j];
+                            if (p.destroyed) continue;
+                            const pRect = p.element.getBoundingClientRect();
+                            if (!(missileRect.top > pRect.bottom || missileRect.bottom < pRect.top ||
+                                  missileRect.right < pRect.left || missileRect.left > pRect.right)) {
+                                p.element.innerHTML = '<img src="./img/exploit.png" style="width:100%;height:auto;">';
+                                p.element.classList.add('destroyed');
+                                p.destroyed = true;
+                                setTimeout(() => {
+                                    p.element.remove();
+                                    const idx = activePacks.indexOf(p);
+                                    if (idx !== -1) activePacks.splice(idx, 1);
+                                }, 500);
+                                missileHit = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (missileHit) {
+                        el.remove();
+                        activeMissiles.splice(i, 1);
+                    }
+                }
+
+                // --- Colisiones nave ↔ hazards (asteroides + cyberattacks) ---
+                for (let i = activeHazards.length - 1; i >= 0; i--) {
+                    const h = activeHazards[i];
+                    if (h.destroyed) continue;
+                    const hRect = h.element.getBoundingClientRect();
+                    if (!(spaceshipRect.top > hRect.bottom || spaceshipRect.bottom < hRect.top ||
+                          spaceshipRect.right < hRect.left || spaceshipRect.left > hRect.right)) {
+                        gameOver = true;
+                        showGameOverMessage();
+                        return;
+                    }
+                }
+
+                // --- Colisiones nave ↔ ammo packs (recolección) ---
+                for (let i = activePacks.length - 1; i >= 0; i--) {
+                    const p = activePacks[i];
+                    if (p.destroyed) continue;
+                    const pRect = p.element.getBoundingClientRect();
+                    if (!(spaceshipRect.top > pRect.bottom || spaceshipRect.bottom < pRect.top ||
+                          spaceshipRect.right < pRect.left || spaceshipRect.left > pRect.right)) {
+                        p.destroyed = true;
+                        missileCount += p.amount;
+                        packsCollected++;
+                        updateMissileDisplay();
+                        p.element.classList.add('ammo-collected');
+                        setTimeout(() => {
+                            p.element.remove();
+                            const idx = activePacks.indexOf(p);
+                            if (idx !== -1) activePacks.splice(idx, 1);
+                        }, 400);
+                    }
+                }
+
+                gameLoopId = requestAnimationFrame(gameLoop);
+            }
+
+            // Iniciar el game loop
+            gameLoopId = requestAnimationFrame(gameLoop);
+
+            // ========== FIN GAME LOOP ==========
+
             // Función para disparar misil desde la posición actual de la nave
             function shootMissile() {
                 if (gameOver || !gameStarted) return;
@@ -383,46 +533,13 @@
                 missile.style.position = 'absolute';
                 const bottomVal = parseFloat(spaceship.style.bottom) || (gameContainerRect.height / 2);
                 missile.style.bottom = `${bottomVal + spaceshipRect.height - 15}px`;
-                missile.style.left = `${spaceshipRect.left - gameContainerRect.left + spaceshipRect.width}px`;
+                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
+                missile.style.left = startX + 'px';
 
                 gameContainer.appendChild(missile);
 
-                const missileInterval = setInterval(() => {
-                    const missileRect = missile.getBoundingClientRect();
-                    missile.style.left = `${missileRect.left + 100}px`;
-
-                    const cyberAttacks = document.querySelectorAll('.cyber-attack');
-                    cyberAttacks.forEach(cyber => {
-                        if (isCollision(missile, cyber) && !cyber.classList.contains('destroyed')) {
-                            cyber.src = './img/exploit.png';
-                            cyber.classList.add('destroyed');
-                            setTimeout(() => cyber.remove(), 500);
-
-                            cyberattackCount += 1;
-                            cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
-
-                            clearInterval(missileInterval);
-                            missile.remove();
-                        }
-                    });
-
-                    // Colisión misil-pack: destruye el pack sin recolectarlo
-                    const ammoPacks = document.querySelectorAll('.ammo-pack');
-                    ammoPacks.forEach(pack => {
-                        if (isCollision(missile, pack) && !pack.classList.contains('destroyed')) {
-                            pack.innerHTML = '<img src="./img/exploit.png" style="width:100%;height:auto;">';
-                            pack.classList.add('destroyed');
-                            setTimeout(() => pack.remove(), 500);
-                            clearInterval(missileInterval);
-                            missile.remove();
-                        }
-                    });
-
-                    if (missileRect.left > window.innerWidth) {
-                        clearInterval(missileInterval);
-                        missile.remove();
-                    }
-                }, 30);
+                // Registrar en el array para el game loop
+                activeMissiles.push({ element: missile, x: startX });
             }
 
             // Ráfaga de misiles (máximo 5 por ráfaga)
@@ -449,7 +566,7 @@
 
             // Disparo automático en dispositivos táctiles cada segundo
             if ('ontouchstart' in window) {
-                setInterval(shootBurst, 1500);
+                touchAutoFireInterval = setInterval(shootBurst, 1500);
             }
 
             // Función para generar un asteroide aleatorio
@@ -471,19 +588,17 @@
                 const asteroidSpeed = Math.random() * 3 + 3;
                 asteroid.style.animation = `moveAsteroid ${asteroidSpeed}s linear forwards`;
 
+                // Registrar en el array para el game loop
+                const hazardEntry = { element: asteroid, type: 'asteroid', destroyed: false };
+                activeHazards.push(hazardEntry);
+
                 asteroid.addEventListener('animationend', () => {
                     asteroidCount += 1;
                     asteroidCounter.textContent = `Paquetes Basura: ${asteroidCount}`;
                     asteroid.remove();
+                    const idx = activeHazards.indexOf(hazardEntry);
+                    if (idx !== -1) activeHazards.splice(idx, 1);
                 });
-
-                const collisionInterval = setInterval(() => {
-                    if (isCollision(spaceship, asteroid) && !gameOver && !asteroid.classList.contains('destroyed')) {
-                        clearInterval(collisionInterval);
-                        gameOver = true;
-                        showGameOverMessage();
-                    }
-                }, 50);
             }
 
             // Función para generar un "cyberattack"
@@ -501,17 +616,14 @@
                 const cyberSpeed = Math.random() * 4 + 5;
                 cyberAttack.style.animation = `moveCyberAttack ${cyberSpeed}s linear forwards`;
 
-                const collisionInterval = setInterval(() => {
-                    if (isCollision(spaceship, cyberAttack) && !gameOver && !cyberAttack.classList.contains('destroyed')) {
-                        clearInterval(collisionInterval);
-                        gameOver = true;
-                        showGameOverMessage();
-                    }
-                }, 50);
+                // Registrar en el array para el game loop
+                const hazardEntry = { element: cyberAttack, type: 'cyber', destroyed: false };
+                activeHazards.push(hazardEntry);
 
                 cyberAttack.addEventListener('animationend', () => {
                     cyberAttack.remove();
-                    clearInterval(collisionInterval);
+                    const idx = activeHazards.indexOf(hazardEntry);
+                    if (idx !== -1) activeHazards.splice(idx, 1);
                 });
             }
 
@@ -557,26 +669,14 @@
                 const packSpeed = Math.random() * 3 + 4;
                 packEl.style.animation = `moveAmmoPack ${packSpeed}s linear forwards`;
 
-                // Detección de colisión para recolección
-                const collisionCheck = setInterval(() => {
-                    if (gameOver) {
-                        clearInterval(collisionCheck);
-                        return;
-                    }
-                    if (isCollision(spaceship, packEl) && !packEl.classList.contains('destroyed')) {
-                        clearInterval(collisionCheck);
-                        missileCount += selected.amount;
-                        packsCollected++;
-                        updateMissileDisplay();
-                        // Efecto de recolección
-                        packEl.classList.add('ammo-collected');
-                        setTimeout(() => packEl.remove(), 400);
-                    }
-                }, 50);
+                // Registrar en el array para el game loop
+                const packEntry = { element: packEl, amount: selected.amount, destroyed: false };
+                activePacks.push(packEntry);
 
                 packEl.addEventListener('animationend', () => {
                     packEl.remove();
-                    clearInterval(collisionCheck);
+                    const idx = activePacks.indexOf(packEntry);
+                    if (idx !== -1) activePacks.splice(idx, 1);
                 });
             }
 
@@ -606,6 +706,12 @@
 
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
+                // Detener el game loop
+                if (gameLoopId) {
+                    cancelAnimationFrame(gameLoopId);
+                    gameLoopId = null;
+                }
+
                 const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
 
                 // Crear el overlay de Game Over INMEDIATAMENTE (sin esperar async)
@@ -709,24 +815,23 @@
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
                 document.querySelectorAll('.ammo-pack').forEach(pack => pack.remove());
+                document.querySelectorAll('.missile').forEach(m => m.remove());
+
+                // Limpiar arrays de entidades
+                activeMissiles.length = 0;
+                activeHazards.length = 0;
+                activePacks.length = 0;
 
                 clearInterval(asteroidGenerationInterval);
+                clearInterval(distanceInterval);
                 clearTimeout(ammoPackTimeout);
+                if (touchAutoFireInterval) clearInterval(touchAutoFireInterval);
+
+                // Reiniciar loops
+                startDistanceCounter();
                 startAsteroids();
                 startAmmoPacks();
-            }
-
-            // Verificación de colisiones
-            function isCollision(element1, element2) {
-                const rect1 = element1.getBoundingClientRect();
-                const rect2 = element2.getBoundingClientRect();
-
-                return !(
-                    rect1.top > rect2.bottom ||
-                    rect1.bottom < rect2.top ||
-                    rect1.right < rect2.left ||
-                    rect1.left > rect2.right
-                );
+                gameLoopId = requestAnimationFrame(gameLoop);
             }
 
             // Iniciar la creación de asteroides y cyberattacks
