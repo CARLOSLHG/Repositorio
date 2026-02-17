@@ -11,8 +11,8 @@
 // Plan gratuito: 10,000 peticiones/mes — suficiente para un juego.
 
 const JSONBIN_CONFIG = {
-    binId: "",
-    apiKey: ""
+    binId: "69941a41d0ea881f40c09220i",
+    apiKey: "$2a$10$un8VGTEgcWRTzKfe2hBtguEh0TvmqdK8A3kijTRQsxsrqfhKiIk8e"
 };
 
 // Verificar si JSONBin está configurado
