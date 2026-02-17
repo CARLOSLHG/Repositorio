@@ -268,7 +268,9 @@ body, html {
     width: 70vw;
     max-width: 750px;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     color: #F3F3F3;
     background: rgba(5, 12, 28, 0.94);
@@ -287,12 +289,18 @@ body, html {
     text-transform: uppercase;
     letter-spacing: 4px;
     text-shadow: 0 0 15px rgba(0, 200, 255, 0.4);
+    flex-shrink: 0;
 }
 
 #game-over-message .player-result {
     color: #8899aa;
     font-size: 1.3vw;
     margin: 0 0 1em 0;
+    flex-shrink: 0;
+}
+
+#game-over-message .game-over-reason {
+    flex-shrink: 0;
 }
 
 #game-over-message .player-result strong {
@@ -306,6 +314,7 @@ body, html {
     flex-wrap: wrap;
     gap: 1.5vw;
     margin-bottom: 1.5em;
+    flex-shrink: 0;
 }
 
 .stat-box {
@@ -402,6 +411,7 @@ body, html {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5em;
+    flex-shrink: 0;
 }
 
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
@@ -589,9 +599,11 @@ body, html {
 }
 
 /* ===== LEADERBOARD ===== */
-#leaderboard-container {
+#leaderboard-container,
+#leaderboard-placeholder {
     margin-top: 1.2em;
-    max-height: 35vh;
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
 }
 
