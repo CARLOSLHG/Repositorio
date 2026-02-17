@@ -186,6 +186,9 @@
         }
 
         // --- Pantalla de inicio: ingreso de alias ---
+        const pregameScreen = document.getElementById('pregame-screen');
+        const launchGameButton = document.getElementById('launch-game-button');
+
         function initPlayerScreen() {
             // Recuperar último alias usado
             const lastAlias = localStorage.getItem('cyberspace_last_alias') || '';
@@ -194,7 +197,7 @@
             }
             playerNameInput.focus();
 
-            function startGame(e) {
+            function goToLeaderboard(e) {
                 e.stopPropagation();
                 e.preventDefault();
 
@@ -209,7 +212,28 @@
                 // Guardar alias en localStorage
                 localStorage.setItem('cyberspace_last_alias', playerName);
 
+                // Mostrar pantalla de leaderboard pre-juego
                 playerScreen.style.display = 'none';
+                pregameScreen.style.display = 'flex';
+
+                const welcomeEl = document.getElementById('pregame-welcome');
+                welcomeEl.innerHTML = `Bienvenido, <strong>${playerName}</strong>`;
+
+                // Cargar leaderboard
+                const lbContainer = document.getElementById('pregame-leaderboard');
+                getLeaderboard().then(board => {
+                    if (board.length === 0) {
+                        lbContainer.innerHTML = '<p style="color:#5577aa;">Aún no hay registros. ¡Sé el primero!</p>';
+                    } else {
+                        lbContainer.innerHTML = buildLeaderboardHTML(board);
+                    }
+                }).catch(() => {
+                    lbContainer.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                });
+            }
+
+            function launchGame() {
+                pregameScreen.style.display = 'none';
                 gameContainer.style.display = 'block';
                 playerDisplay.textContent = `Defensor: ${playerName}`;
                 gameStartTime = Date.now();
@@ -217,14 +241,15 @@
                 initGame();
             }
 
-            startGameButton.addEventListener('click', startGame);
+            startGameButton.addEventListener('click', goToLeaderboard);
             playerNameInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.stopPropagation();
                     e.preventDefault();
-                    startGame(e);
+                    goToLeaderboard(e);
                 }
             });
+            launchGameButton.addEventListener('click', launchGame);
         }
 
         // --- Inicialización del juego (se ejecuta tras ingresar alias) ---
