@@ -683,8 +683,8 @@ body, html {
 }
 
 #launch-game-button {
-    padding: 0.8em 3em;
-    font-size: 1.5vw;
+    padding: 0.5em 2em;
+    font-size: 1.2vw;
     cursor: pointer;
     background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
@@ -722,8 +722,8 @@ body, html {
     }
 
     #launch-game-button {
-        font-size: 4vw;
-        padding: 0.8em 2em;
+        font-size: 3.2vw;
+        padding: 0.5em 1.5em;
     }
 }
 

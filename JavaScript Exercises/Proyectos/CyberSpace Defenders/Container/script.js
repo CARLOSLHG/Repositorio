@@ -263,6 +263,12 @@
         let distanceInterval = null;
         let touchAutoFireInterval = null;
 
+        // --- Smooth touch movement ---
+        let touchTargetBottom = -1;
+        let shipCurrentBottom = -1;
+        let isTouchControlled = false;
+        let lastMobileFireTime = 0;
+
         function initGame() {
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
@@ -338,35 +344,38 @@
                 }
             });
 
-            // --- Controles táctiles para móviles ---
+            // --- Controles táctiles para móviles (movimiento suave + auto-fire en game loop) ---
             const isTouchDevice = 'ontouchstart' in window;
             let touching = false;
+            const MOBILE_BURST_MAX = 3;
+            const MOBILE_FIRE_INTERVAL = 800; // ms entre ráfagas táctiles
 
             if (isTouchDevice) {
-                // Tocar en cualquier parte de la pantalla mueve la nave (Y sigue al dedo)
-                // Auto-fire mientras el dedo esté tocando
-                gameContainer.addEventListener('touchstart', function(event) {
-                    if (gameOver || !gameStarted) return;
-                    // Ignorar toques en botones/overlays
-                    if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
-                    event.preventDefault();
-                    touching = true;
-                    // Mover nave a la posición del dedo inmediatamente
-                    const touchY = event.touches[0].clientY;
+                function updateTouchTarget(touchY) {
                     const containerHeight = gameContainer.clientHeight;
                     const spaceshipHeight = spaceship.clientHeight;
                     const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
-                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                    touchTargetBottom = Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom));
+                    // Primer toque: posicionar inmediatamente sin interpolación
+                    if (!isTouchControlled) {
+                        isTouchControlled = true;
+                        shipCurrentBottom = touchTargetBottom;
+                        spaceship.style.bottom = shipCurrentBottom + 'px';
+                    }
+                }
+
+                gameContainer.addEventListener('touchstart', function(event) {
+                    if (gameOver || !gameStarted) return;
+                    if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                    event.preventDefault();
+                    touching = true;
+                    updateTouchTarget(event.touches[0].clientY);
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchmove', function(event) {
                     if (!touching || gameOver || !gameStarted) return;
                     event.preventDefault();
-                    const touchY = event.touches[0].clientY;
-                    const containerHeight = gameContainer.clientHeight;
-                    const spaceshipHeight = spaceship.clientHeight;
-                    const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
-                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                    updateTouchTarget(event.touches[0].clientY);
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchend', function() {
@@ -376,19 +385,6 @@
                 gameContainer.addEventListener('touchcancel', function() {
                     touching = false;
                 });
-
-                // Auto-fire mientras toca: ráfaga reducida (3 misiles) cada 1.2s
-                const MOBILE_BURST_MAX = 3;
-                touchAutoFireInterval = setInterval(() => {
-                    if (touching && !gameOver && gameStarted && !burstCooldown) {
-                        burstCooldown = true;
-                        const burstCount = Math.min(MOBILE_BURST_MAX, missileCount);
-                        for (let i = 0; i < burstCount; i++) {
-                            setTimeout(() => shootMissile(), i * BURST_DELAY);
-                        }
-                        setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 300);
-                    }
-                }, 1200);
             }
 
             // Verificación de colisiones (AABB)
@@ -421,6 +417,31 @@
                 lastFrameTime = timestamp;
 
                 const screenWidth = window.innerWidth;
+
+                // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
+                if (isTouchControlled && touchTargetBottom >= 0) {
+                    const smoothing = 0.18; // 18% por frame a 60fps
+                    const lerpFactor = 1 - Math.pow(1 - smoothing, dt);
+                    shipCurrentBottom += (touchTargetBottom - shipCurrentBottom) * lerpFactor;
+                    // Snap cuando está muy cerca para evitar micro-movimientos infinitos
+                    if (Math.abs(touchTargetBottom - shipCurrentBottom) < 0.5) {
+                        shipCurrentBottom = touchTargetBottom;
+                    }
+                    spaceship.style.bottom = shipCurrentBottom + 'px';
+                }
+
+                // === MOBILE: Auto-fire sincronizado con game loop ===
+                if (touching && isTouchDevice && !burstCooldown) {
+                    if (!lastMobileFireTime || timestamp - lastMobileFireTime >= MOBILE_FIRE_INTERVAL) {
+                        lastMobileFireTime = timestamp;
+                        burstCooldown = true;
+                        const burstCount = Math.min(MOBILE_BURST_MAX, missileCount);
+                        for (let i = 0; i < burstCount; i++) {
+                            setTimeout(() => shootMissile(), i * BURST_DELAY);
+                        }
+                        setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 200);
+                    }
+                }
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
@@ -853,10 +874,15 @@
                 activeHazards.length = 0;
                 activePacks.length = 0;
 
+                // Reiniciar estado táctil
+                touchTargetBottom = -1;
+                shipCurrentBottom = -1;
+                isTouchControlled = false;
+                lastMobileFireTime = 0;
+
                 clearInterval(asteroidGenerationInterval);
                 clearInterval(distanceInterval);
                 clearTimeout(ammoPackTimeout);
-                if (touchAutoFireInterval) clearInterval(touchAutoFireInterval);
 
                 // Reiniciar loops
                 lastFrameTime = 0;
