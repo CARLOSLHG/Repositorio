@@ -1,5 +1,5 @@
     (function() {
-        // Versión 2.0 - Alias de jugador + Leaderboard
+        // Versión 3.0 - Sistema de misiles + Packs de munición
         const playerScreen = document.getElementById('player-screen');
         const playerNameInput = document.getElementById('player-name-input');
         const startGameButton = document.getElementById('start-game-button');
@@ -16,6 +16,43 @@
         let asteroidGenerationInterval;
         let gameStartTime = null;
         let currentEntryId = null;
+
+        // --- Sistema de misiles ---
+        let missileCount = 100;
+        let ammoPackTimeout = null;
+        let missilesUsed = 0;
+        let packsCollected = 0;
+        const AMMO_PACK_TYPES = [
+            { amount: 25,  label: 'PATCH',    color: '#22cc66', probability: 0.50 },
+            { amount: 50,  label: 'FIREWALL', color: '#00c8ff', probability: 0.30 },
+            { amount: 75,  label: 'ENCRYPT',  color: '#ffaa00', probability: 0.15 },
+            { amount: 100, label: 'ZERO-DAY', color: '#ff44ff', probability: 0.05 }
+        ];
+
+        // --- Actualizar display de misiles ---
+        function updateMissileDisplay() {
+            const countEl = document.getElementById('missile-count-text');
+            const barEl = document.getElementById('missile-bar');
+            if (!countEl || !barEl) return;
+
+            countEl.textContent = missileCount;
+            const barPercent = Math.min(100, (missileCount / 200) * 100);
+            barEl.style.width = barPercent + '%';
+
+            if (missileCount > 50) {
+                barEl.style.background = 'linear-gradient(90deg, #22cc66, #00ffcc)';
+                countEl.style.color = '#22cc66';
+                countEl.classList.remove('missile-low');
+            } else if (missileCount > 25) {
+                barEl.style.background = 'linear-gradient(90deg, #ffaa00, #ffcc44)';
+                countEl.style.color = '#ffaa00';
+                countEl.classList.remove('missile-low');
+            } else {
+                barEl.style.background = 'linear-gradient(90deg, #ff3b3f, #ff6666)';
+                countEl.style.color = '#ff3b3f';
+                countEl.classList.add('missile-low');
+            }
+        }
 
         // --- Leaderboard en localStorage ---
         function getLeaderboard() {
@@ -148,6 +185,9 @@
             const cyberattackCounter = document.getElementById('cyberattack-counter');
             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
 
+            // Inicializar display de misiles
+            updateMissileDisplay();
+
             // Incrementar la distancia recorrida cada segundo
             let distanceInterval;
             function startDistanceCounter() {
@@ -205,6 +245,20 @@
             function shootMissile() {
                 if (gameOver || !gameStarted) return;
 
+                // Verificar munición disponible
+                if (missileCount <= 0) {
+                    const mc = document.getElementById('missile-counter');
+                    if (mc) {
+                        mc.classList.add('no-ammo-flash');
+                        setTimeout(() => mc.classList.remove('no-ammo-flash'), 300);
+                    }
+                    return;
+                }
+
+                missileCount--;
+                missilesUsed++;
+                updateMissileDisplay();
+
                 const missile = document.createElement('img');
                 missile.src = './img/missil.png';
                 missile.classList.add('missile');
@@ -233,6 +287,18 @@
                             cyberattackCount += 1;
                             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
 
+                            clearInterval(missileInterval);
+                            missile.remove();
+                        }
+                    });
+
+                    // Colisión misil-pack: destruye el pack sin recolectarlo
+                    const ammoPacks = document.querySelectorAll('.ammo-pack');
+                    ammoPacks.forEach(pack => {
+                        if (isCollision(missile, pack) && !pack.classList.contains('destroyed')) {
+                            pack.innerHTML = '<img src="./img/exploit.png" style="width:100%;height:auto;">';
+                            pack.classList.add('destroyed');
+                            setTimeout(() => pack.remove(), 500);
                             clearInterval(missileInterval);
                             missile.remove();
                         }
@@ -319,6 +385,90 @@
                 });
             }
 
+            // --- Crear pack de munición con SVG de escudo ---
+            function createAmmoPack() {
+                if (gameOver) return;
+
+                // Seleccionar tipo basado en probabilidad
+                const rand = Math.random();
+                let cumulative = 0;
+                let selected = AMMO_PACK_TYPES[0];
+                for (const pack of AMMO_PACK_TYPES) {
+                    cumulative += pack.probability;
+                    if (rand <= cumulative) {
+                        selected = pack;
+                        break;
+                    }
+                }
+
+                const packEl = document.createElement('div');
+                packEl.classList.add('ammo-pack', `ammo-pack-${selected.amount}`);
+                packEl.dataset.amount = selected.amount;
+
+                // SVG escudo con cantidad y etiqueta
+                packEl.innerHTML = `
+                    <svg viewBox="0 0 80 90" class="ammo-svg">
+                        <path d="M40 5 L70 20 L70 50 Q70 75 40 85 Q10 75 10 50 L10 20 Z"
+                              fill="${selected.color}22" stroke="${selected.color}" stroke-width="2.5"/>
+                        <text x="40" y="42" text-anchor="middle" fill="#ffffff"
+                              font-size="18" font-weight="bold" font-family="Arial">+${selected.amount}</text>
+                        <text x="40" y="62" text-anchor="middle" fill="${selected.color}"
+                              font-size="9" font-weight="bold" font-family="Arial"
+                              letter-spacing="1">${selected.label}</text>
+                    </svg>
+                `;
+
+                const bottomPosition = Math.floor(Math.random() * 70) + 15;
+                packEl.style.bottom = `${bottomPosition}%`;
+                packEl.style.right = '-100px';
+
+                gameContainer.appendChild(packEl);
+
+                const packSpeed = Math.random() * 3 + 5;
+                packEl.style.animation = `moveAmmoPack ${packSpeed}s linear forwards`;
+
+                // Detección de colisión para recolección
+                const collisionCheck = setInterval(() => {
+                    if (gameOver) {
+                        clearInterval(collisionCheck);
+                        return;
+                    }
+                    if (isCollision(spaceship, packEl) && !packEl.classList.contains('destroyed')) {
+                        clearInterval(collisionCheck);
+                        missileCount += selected.amount;
+                        packsCollected++;
+                        updateMissileDisplay();
+                        // Efecto de recolección
+                        packEl.classList.add('ammo-collected');
+                        setTimeout(() => packEl.remove(), 400);
+                    }
+                }, 50);
+
+                packEl.addEventListener('animationend', () => {
+                    packEl.remove();
+                    clearInterval(collisionCheck);
+                });
+            }
+
+            // --- Spawning progresivo de packs (cada vez más escasos) ---
+            function startAmmoPacks() {
+                let spawnDelay = 8000;       // Cada 8 segundos al inicio
+                const maxDelay = 25000;      // Máximo 25 segundos entre packs
+                const delayIncrease = 500;   // Incremento de 0.5s por cada spawn
+
+                function scheduleNext() {
+                    ammoPackTimeout = setTimeout(() => {
+                        if (!gameOver) {
+                            createAmmoPack();
+                            spawnDelay = Math.min(maxDelay, spawnDelay + delayIncrease);
+                            scheduleNext();
+                        }
+                    }, spawnDelay);
+                }
+
+                scheduleNext();
+            }
+
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage() {
                 const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
@@ -338,6 +488,10 @@
                         <div class="stat-box">
                             <span class="stat-value">${elapsedSeconds}s</span>
                             <span class="stat-label">Tiempo de Misión</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">${missileCount}</span>
+                            <span class="stat-label">Misiles Restantes</span>
                         </div>
                     </div>
                     ${leaderboardHTML}
@@ -375,11 +529,15 @@
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
+                missileCount = 100;
+                missilesUsed = 0;
+                packsCollected = 0;
                 gameStartTime = Date.now();
                 currentEntryId = null;
                 distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
                 asteroidCounter.textContent = `Paquetes Basura: ${asteroidCount}`;
                 cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                updateMissileDisplay();
 
                 spaceship.style.bottom = '50%';
                 spaceship.style.left = '50%';
@@ -387,9 +545,12 @@
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
+                document.querySelectorAll('.ammo-pack').forEach(pack => pack.remove());
 
                 clearInterval(asteroidGenerationInterval);
+                clearTimeout(ammoPackTimeout);
                 startAsteroids();
+                startAmmoPacks();
             }
 
             // Verificación de colisiones
@@ -446,6 +607,7 @@
             }
 
             startAsteroids();
+            startAmmoPacks();
 
         } // fin de initGame
 
