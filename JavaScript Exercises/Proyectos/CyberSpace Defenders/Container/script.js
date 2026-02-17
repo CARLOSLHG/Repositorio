@@ -344,10 +344,13 @@
             });
 
             // --- Controles táctiles para móviles (solo movimiento, disparo via botón) ---
-            const isTouchDevice = 'ontouchstart' in window;
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
             let touching = false;
 
             if (isTouchDevice) {
+                // Posicionar nave en el primer cuarto de pantalla para mayor maniobrabilidad
+                spaceship.style.left = '25%';
+
                 function updateTouchTarget(touchY) {
                     const containerHeight = gameContainer.clientHeight;
                     const spaceshipHeight = spaceship.clientHeight;
@@ -902,8 +905,7 @@
                 updateMissileDisplay();
 
                 spaceship.style.bottom = '50%';
-                const isMobile = window.innerWidth <= 768;
-                spaceship.style.left = isMobile ? '25%' : '50%';
+                spaceship.style.left = isTouchDev ? '25%' : '50%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
@@ -923,7 +925,7 @@
                 lastMobileFireTime = 0;
 
                 // Restaurar botón de disparo móvil si es touch device
-                const isTouchDev = 'ontouchstart' in window;
+                const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const fireBtnReset = document.getElementById('mobile-fire-button');
                 if (isTouchDev && fireBtnReset) fireBtnReset.style.display = 'flex';
 
