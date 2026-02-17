@@ -268,6 +268,12 @@
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
 
+        // --- Desktop mouse (zero-delay via game loop) ---
+        let cachedContainerHeight = 0;
+        let cachedSpaceshipHeight = 0;
+        let mouseTargetBottom = -1;
+        let isMouseControlled = false;
+
         function initGame() {
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
@@ -313,6 +319,14 @@
             // Inicializar display de misiles
             updateMissileDisplay();
 
+            // Cache de dimensiones del contenedor para evitar layout thrashing
+            function updateCachedDimensions() {
+                cachedContainerHeight = gameContainer.clientHeight;
+                cachedSpaceshipHeight = spaceship.clientHeight;
+            }
+            window.addEventListener('resize', updateCachedDimensions);
+            updateCachedDimensions();
+
             // Incrementar la distancia recorrida cada segundo + chequeo de misiles
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
@@ -332,14 +346,12 @@
             startDistanceCounter();
 
             // Movimiento de la nave con el mouse para desktop
+            // Solo captura posición objetivo; se aplica en el game loop (zero-delay, sin layout thrashing)
             document.addEventListener('mousemove', function(event) {
                 if (!gameOver && gameStarted) {
-                    const containerHeight = gameContainer.clientHeight;
-                    const mouseY = event.clientY;
-                    const spaceshipHeight = spaceship.clientHeight;
-
-                    const newBottom = containerHeight - mouseY - (spaceshipHeight / 2);
-                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                    isMouseControlled = true;
+                    const newBottom = cachedContainerHeight - event.clientY - (cachedSpaceshipHeight / 2);
+                    mouseTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
                 }
             });
 
@@ -352,10 +364,8 @@
                 spaceship.style.left = '25%';
 
                 function updateTouchTarget(touchY) {
-                    const containerHeight = gameContainer.clientHeight;
-                    const spaceshipHeight = spaceship.clientHeight;
-                    const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
-                    touchTargetBottom = Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom));
+                    const newBottom = cachedContainerHeight - touchY - (cachedSpaceshipHeight / 2);
+                    touchTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
                     // Primer toque: posicionar inmediatamente sin interpolación
                     if (!isTouchControlled) {
                         isTouchControlled = true;
@@ -420,7 +430,7 @@
 
                 // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
                 if (isTouchControlled && touchTargetBottom >= 0) {
-                    const smoothing = 0.18; // 18% por frame a 60fps
+                    const smoothing = 0.35; // 35% por frame a 60fps — más responsivo
                     const lerpFactor = 1 - Math.pow(1 - smoothing, dt);
                     shipCurrentBottom += (touchTargetBottom - shipCurrentBottom) * lerpFactor;
                     // Snap cuando está muy cerca para evitar micro-movimientos infinitos
@@ -428,6 +438,11 @@
                         shipCurrentBottom = touchTargetBottom;
                     }
                     spaceship.style.bottom = shipCurrentBottom + 'px';
+                }
+
+                // === DESKTOP: Aplicar posición del mouse directamente (zero-delay) ===
+                if (isMouseControlled && mouseTargetBottom >= 0) {
+                    spaceship.style.bottom = mouseTargetBottom + 'px';
                 }
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
@@ -918,11 +933,17 @@
                 activeHazards.length = 0;
                 activePacks.length = 0;
 
-                // Reiniciar estado táctil
+                // Reiniciar estado táctil y mouse
                 touchTargetBottom = -1;
                 shipCurrentBottom = -1;
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
+                mouseTargetBottom = -1;
+                isMouseControlled = false;
+
+                // Actualizar dimensiones cacheadas por si cambió el viewport
+                cachedContainerHeight = gameContainer.clientHeight;
+                cachedSpaceshipHeight = spaceship.clientHeight;
 
                 // Restaurar botón de disparo móvil si es touch device
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;

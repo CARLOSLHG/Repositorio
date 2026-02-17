@@ -1,4 +1,11 @@
 /* Versión 2.0 */
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+}
+
 body, html {
     margin: 0;
     overflow: hidden;
@@ -20,7 +27,7 @@ body, html {
     bottom: 50%;
     left: 25%;
     transform: translate(-50%, 50%);
-    transition: bottom 0.1s, transform 0.2s ease-in-out;
+    will-change: bottom;
 }
 
 #game-container {
@@ -124,7 +131,7 @@ body, html {
 
 #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
     position: absolute;
-    left: 10px;
+    left: calc(10px + var(--safe-left));
     font-size: 0.85vw;
     background: rgba(0, 0, 0, 0.7);
     padding: 0.3vw 0.6vw;
@@ -138,19 +145,19 @@ body, html {
 }
 
 #distance-counter {
-    top: 60px;
+    top: calc(60px + var(--safe-top));
 }
 
 #cyberattack-counter {
-    top: 85px;
+    top: calc(85px + var(--safe-top));
 }
 
 #asteroid-counter {
-    top: 110px;
+    top: calc(110px + var(--safe-top));
 }
 
 #missile-counter {
-    top: 135px;
+    top: calc(135px + var(--safe-top));
     border-left: 2px solid rgba(34, 204, 102, 0.6);
 }
 
@@ -234,12 +241,12 @@ body, html {
 
     #game-title {
         font-size: 3.5vw;
-        top: 4px;
+        top: calc(4px + var(--safe-top));
     }
 
     #toggle-music-button {
-        top: 4px;
-        right: 4px;
+        top: calc(4px + var(--safe-top));
+        right: calc(4px + var(--safe-right));
         margin-right: 0;
         font-size: 2.5vw;
         padding: 5px 8px;
@@ -249,23 +256,23 @@ body, html {
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
         font-size: 2.2vw;
         padding: 2px 6px;
-        left: 4px;
+        left: calc(4px + var(--safe-left));
     }
 
     #distance-counter {
-        top: 32px;
+        top: calc(32px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: 50px;
+        top: calc(50px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: 68px;
+        top: calc(68px + var(--safe-top));
     }
 
     #missile-counter {
-        top: 86px;
+        top: calc(86px + var(--safe-top));
     }
 
     #player-display {
@@ -287,7 +294,7 @@ body, html {
 
 #game-title {
     position: absolute;
-    top: 10px;
+    top: calc(10px + var(--safe-top));
     left: 50%;
     transform: translateX(-50%);
     font-size: 3.5vw;
@@ -475,8 +482,8 @@ body, html {
 
 #toggle-music-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: calc(10px + var(--safe-top));
+    right: calc(10px + var(--safe-right));
     margin-right: 25px;
     font-size: 0.9em;
     padding: 8px 12px;
@@ -813,8 +820,8 @@ body, html {
 #mobile-fire-button {
     display: none; /* Oculto por defecto, JS lo muestra en touch devices */
     position: absolute;
-    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-    right: 18px;
+    bottom: calc(18px + var(--safe-bottom));
+    right: calc(18px + var(--safe-right));
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -954,8 +961,8 @@ body, html {
     #mobile-fire-button {
         width: 72px;
         height: 72px;
-        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-        right: 14px;
+        bottom: calc(14px + var(--safe-bottom));
+        right: calc(14px + var(--safe-right));
     }
 
     #mobile-fire-button .fire-icon {
