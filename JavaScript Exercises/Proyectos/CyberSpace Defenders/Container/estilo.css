@@ -581,6 +581,115 @@ body, html {
     margin: 0;
 }
 
+/* ===== PANTALLA PRE-JUEGO (LEADERBOARD) ===== */
+#pregame-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('./img/cyberspace1.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#pregame-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 5, 15, 0.7);
+}
+
+#pregame-panel {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3vw 4vw;
+    border: 2px solid rgba(0, 200, 255, 0.35);
+    border-radius: 20px;
+    background: rgba(5, 15, 30, 0.92);
+    box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
+    min-width: 40vw;
+    max-width: 750px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#pregame-panel h1 {
+    color: #00c8ff;
+    font-size: 3vw;
+    margin: 0 0 0.3em 0;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+}
+
+#pregame-panel > p {
+    color: #7799bb;
+    font-size: 1.3vw;
+    margin: 0 0 1.2em 0;
+    letter-spacing: 1px;
+}
+
+#pregame-panel > p strong {
+    color: #00ffcc;
+}
+
+#pregame-leaderboard {
+    margin-bottom: 1.5em;
+}
+
+#launch-game-button {
+    padding: 1em 3.5em;
+    font-size: 1.8vw;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
+    color: #00c8ff;
+    border: 2px solid rgba(0, 200, 255, 0.5);
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: bold;
+    transition: all 0.3s;
+    text-shadow: 0 0 8px rgba(0, 200, 255, 0.3);
+}
+
+#launch-game-button:hover {
+    background: linear-gradient(135deg, rgba(0, 120, 230, 0.6), rgba(0, 200, 255, 0.4));
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+    transform: scale(1.03);
+}
+
+#launch-game-button:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+    #pregame-panel {
+        padding: 6vw 4vw;
+        min-width: 88vw;
+    }
+
+    #pregame-panel h1 {
+        font-size: 6vw;
+    }
+
+    #pregame-panel > p {
+        font-size: 3vw;
+    }
+
+    #launch-game-button {
+        font-size: 4vw;
+        padding: 0.8em 2em;
+    }
+}
+
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
