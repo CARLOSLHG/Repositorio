@@ -539,10 +539,15 @@ body, html {
 }
 
 .version-info {
-    margin-top: 15px;
-    font-size: 0.65em;
-    color: rgba(150, 180, 200, 0.5);
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.5em;
+    color: rgba(150, 180, 200, 0.3);
     letter-spacing: 1px;
+    margin: 0;
 }
 
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
