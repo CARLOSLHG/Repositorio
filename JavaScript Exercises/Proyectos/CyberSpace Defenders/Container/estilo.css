@@ -267,6 +267,8 @@ body, html {
     transform: translate(-50%, -50%);
     width: 70vw;
     max-width: 750px;
+    max-height: 90vh;
+    overflow-y: auto;
     text-align: center;
     color: #F3F3F3;
     background: rgba(5, 12, 28, 0.94);
@@ -275,6 +277,7 @@ body, html {
     border: 2px solid rgba(0, 200, 255, 0.35);
     box-shadow: 0 0 50px rgba(0, 120, 255, 0.25);
     z-index: 30;
+    box-sizing: border-box;
 }
 
 #game-over-message h1 {
@@ -300,7 +303,8 @@ body, html {
 .stats-row {
     display: flex;
     justify-content: center;
-    gap: 2vw;
+    flex-wrap: wrap;
+    gap: 1.5vw;
     margin-bottom: 1.5em;
 }
 
@@ -308,8 +312,10 @@ body, html {
     background: rgba(0, 150, 255, 0.12);
     border: 1px solid rgba(0, 200, 255, 0.3);
     border-radius: 12px;
-    padding: 1em 2em;
-    min-width: 12vw;
+    padding: 0.8em 1.5em;
+    min-width: 10vw;
+    flex: 1 1 auto;
+    max-width: 20vw;
 }
 
 .stat-value {
@@ -392,6 +398,10 @@ body, html {
 
 .buttons-container {
     margin-top: 1.2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
 }
 
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
@@ -468,6 +478,9 @@ body, html {
     background: rgba(5, 15, 30, 0.88);
     box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
     min-width: 35vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 #player-form h1 {
@@ -663,8 +676,9 @@ body, html {
     }
 
     #game-over-message {
-        width: 90vw;
-        padding: 5vw;
+        width: 92vw;
+        max-height: 88vh;
+        padding: 4vw 3vw;
     }
 
     #game-over-message h1 {
@@ -676,16 +690,17 @@ body, html {
     }
 
     .stat-value {
-        font-size: 6vw;
+        font-size: 5vw;
     }
 
     .stat-label {
-        font-size: 2.2vw;
+        font-size: 2vw;
     }
 
     .stat-box {
-        padding: 0.8em 1.2em;
-        min-width: 30vw;
+        padding: 0.6em 1em;
+        min-width: 25vw;
+        max-width: 40vw;
     }
 
     #leaderboard-table {
