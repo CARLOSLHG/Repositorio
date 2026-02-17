@@ -261,7 +261,6 @@
         let gameLoopId = null;
         let lastFrameTime = 0;
         let distanceInterval = null;
-        let touchAutoFireInterval = null;
 
         // --- Smooth touch movement ---
         let touchTargetBottom = -1;
@@ -344,11 +343,9 @@
                 }
             });
 
-            // --- Controles táctiles para móviles (movimiento suave + auto-fire en game loop) ---
+            // --- Controles táctiles para móviles (solo movimiento, disparo via botón) ---
             const isTouchDevice = 'ontouchstart' in window;
             let touching = false;
-            const MOBILE_BURST_MAX = 3;
-            const MOBILE_FIRE_INTERVAL = 800; // ms entre ráfagas táctiles
 
             if (isTouchDevice) {
                 function updateTouchTarget(touchY) {
@@ -366,7 +363,7 @@
 
                 gameContainer.addEventListener('touchstart', function(event) {
                     if (gameOver || !gameStarted) return;
-                    if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                    if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
                     event.preventDefault();
                     touching = true;
                     updateTouchTarget(event.touches[0].clientY);
@@ -430,18 +427,8 @@
                     spaceship.style.bottom = shipCurrentBottom + 'px';
                 }
 
-                // === MOBILE: Auto-fire sincronizado con game loop ===
-                if (touching && isTouchDevice && !burstCooldown) {
-                    if (!lastMobileFireTime || timestamp - lastMobileFireTime >= MOBILE_FIRE_INTERVAL) {
-                        lastMobileFireTime = timestamp;
-                        burstCooldown = true;
-                        const burstCount = Math.min(MOBILE_BURST_MAX, missileCount);
-                        for (let i = 0; i < burstCount; i++) {
-                            setTimeout(() => shootMissile(), i * BURST_DELAY);
-                        }
-                        setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 200);
-                    }
-                }
+                // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
+                // El disparo móvil se maneja via #mobile-fire-button (ver evento abajo)
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
@@ -613,11 +600,61 @@
                 setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 300);
             }
 
-            // Disparo con clic: solo en desktop (en móvil se maneja via touch auto-fire)
+            // Disparo con clic: solo en desktop
             if (!isTouchDevice) {
                 document.addEventListener('click', function(e) {
                     if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
                     shootBurst();
+                });
+            }
+
+            // --- Botón de disparo dedicado para móviles ---
+            const mobileFireBtn = document.getElementById('mobile-fire-button');
+            if (isTouchDevice && mobileFireBtn) {
+                // Mostrar el botón en dispositivos táctiles
+                mobileFireBtn.style.display = 'flex';
+
+                let fireHoldInterval = null;
+                const FIRE_HOLD_DELAY = 700; // ms entre ráfagas al mantener presionado
+
+                function startFiring() {
+                    if (gameOver || !gameStarted) return;
+                    // Disparar inmediatamente al presionar
+                    shootBurst();
+                    mobileFireBtn.classList.add('firing');
+                    // Si mantiene presionado, disparar ráfagas continuas
+                    if (fireHoldInterval) clearInterval(fireHoldInterval);
+                    fireHoldInterval = setInterval(() => {
+                        if (gameOver || !gameStarted) {
+                            stopFiring();
+                            return;
+                        }
+                        shootBurst();
+                    }, FIRE_HOLD_DELAY);
+                }
+
+                function stopFiring() {
+                    mobileFireBtn.classList.remove('firing');
+                    if (fireHoldInterval) {
+                        clearInterval(fireHoldInterval);
+                        fireHoldInterval = null;
+                    }
+                }
+
+                mobileFireBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    startFiring();
+                }, { passive: false });
+
+                mobileFireBtn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    stopFiring();
+                }, { passive: false });
+
+                mobileFireBtn.addEventListener('touchcancel', function() {
+                    stopFiring();
                 });
             }
 
@@ -799,6 +836,10 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
+                // Ocultar botón de disparo móvil en game over
+                const fireBtn = document.getElementById('mobile-fire-button');
+                if (fireBtn) fireBtn.style.display = 'none';
+
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
                     if (event.target && event.target.id === 'exit-button') {
@@ -861,7 +902,8 @@
                 updateMissileDisplay();
 
                 spaceship.style.bottom = '50%';
-                spaceship.style.left = '50%';
+                const isMobile = window.innerWidth <= 768;
+                spaceship.style.left = isMobile ? '25%' : '50%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
@@ -879,6 +921,11 @@
                 shipCurrentBottom = -1;
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
+
+                // Restaurar botón de disparo móvil si es touch device
+                const isTouchDev = 'ontouchstart' in window;
+                const fireBtnReset = document.getElementById('mobile-fire-button');
+                if (isTouchDev && fireBtnReset) fireBtnReset.style.display = 'flex';
 
                 clearInterval(asteroidGenerationInterval);
                 clearInterval(distanceInterval);
