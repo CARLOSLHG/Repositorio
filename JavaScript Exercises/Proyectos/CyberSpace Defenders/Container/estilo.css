@@ -538,6 +538,13 @@ body, html {
     transform: scale(0.98);
 }
 
+.version-info {
+    margin-top: 15px;
+    font-size: 0.65em;
+    color: rgba(150, 180, 200, 0.5);
+    letter-spacing: 1px;
+}
+
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
