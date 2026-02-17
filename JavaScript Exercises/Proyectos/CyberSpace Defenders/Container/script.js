@@ -54,7 +54,9 @@
             }
         }
 
-        // --- Leaderboard: Firebase (compartido) + localStorage (fallback) ---
+        // --- Leaderboard: JSONBin.io (compartido) + localStorage (fallback) ---
+        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/';
+
         function getLocalLeaderboard() {
             try {
                 return JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
@@ -67,67 +69,86 @@
             localStorage.setItem('cyberspace_leaderboard', JSON.stringify(board));
         }
 
+        function sortAndTrimBoard(board) {
+            board.sort((a, b) => (b.score || 0) - (a.score || 0));
+            if (board.length > 10) board.length = 10;
+            return board;
+        }
+
+        async function fetchRemoteLeaderboard() {
+            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId + '/latest', {
+                headers: { 'X-Master-Key': JSONBIN_CONFIG.apiKey }
+            });
+            if (!res.ok) throw new Error('JSONBin GET ' + res.status);
+            const data = await res.json();
+            return data.record.leaderboard || [];
+        }
+
+        async function saveRemoteLeaderboard(board) {
+            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_CONFIG.apiKey
+                },
+                body: JSON.stringify({ leaderboard: board })
+            });
+            if (!res.ok) throw new Error('JSONBin PUT ' + res.status);
+        }
+
         async function getLeaderboard() {
-            if (db) {
+            if (jsonbinEnabled) {
                 try {
-                    const snapshot = await db.collection('leaderboard')
-                        .orderBy('score', 'desc')
-                        .limit(10)
-                        .get();
-                    const board = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    const board = await fetchRemoteLeaderboard();
                     saveLocalLeaderboard(board);
                     return board;
                 } catch (e) {
-                    console.warn('Firebase read falló, usando localStorage:', e);
+                    console.warn('JSONBin read falló, usando localStorage:', e);
                 }
             }
             return getLocalLeaderboard();
         }
 
         async function addToLeaderboard(name, threats, time) {
+            const entryId = Date.now().toString();
             const entry = {
+                id: entryId,
                 name: name,
                 threats: threats,
                 time: time,
                 score: threats * 100000 + time,
-                date: new Date().toLocaleDateString(),
-                timestamp: Date.now()
+                date: new Date().toLocaleDateString()
             };
 
-            let entryId = Date.now().toString();
+            currentEntryId = entryId;
 
-            if (db) {
+            if (jsonbinEnabled) {
                 try {
-                    const docRef = await db.collection('leaderboard').add(entry);
-                    entryId = docRef.id;
+                    const remoteBoard = await fetchRemoteLeaderboard();
+                    remoteBoard.push(entry);
+                    const sorted = sortAndTrimBoard(remoteBoard);
+                    await saveRemoteLeaderboard(sorted);
+                    saveLocalLeaderboard(sorted);
+                    return sorted;
                 } catch (e) {
-                    console.warn('Firebase write falló:', e);
+                    console.warn('JSONBin write falló:', e);
                 }
             }
 
-            currentEntryId = entryId;
-            entry.id = entryId;
-
-            // Guardar en localStorage como cache
+            // Fallback: solo localStorage
             const localBoard = getLocalLeaderboard();
             localBoard.push(entry);
-            localBoard.sort((a, b) => (b.score || 0) - (a.score || 0));
-            if (localBoard.length > 10) localBoard.length = 10;
-            saveLocalLeaderboard(localBoard);
-
-            // Obtener board actualizado (de Firebase si disponible)
-            return await getLeaderboard();
+            const sorted = sortAndTrimBoard(localBoard);
+            saveLocalLeaderboard(sorted);
+            return sorted;
         }
 
-        async function clearFirebaseLeaderboard() {
-            if (!db) return;
+        async function clearRemoteLeaderboard() {
+            if (!jsonbinEnabled) return;
             try {
-                const snapshot = await db.collection('leaderboard').get();
-                const batch = db.batch();
-                snapshot.docs.forEach(doc => batch.delete(doc.ref));
-                await batch.commit();
+                await saveRemoteLeaderboard([]);
             } catch (e) {
-                console.warn('Firebase clear falló:', e);
+                console.warn('JSONBin clear falló:', e);
             }
         }
 
@@ -144,7 +165,7 @@
                     <td>${entry.date}</td>
                 </tr>`;
             });
-            const modeLabel = db ? '🌐 Global' : '💻 Local';
+            const modeLabel = jsonbinEnabled ? '🌐 Global' : '💻 Local';
             return `
                 <div id="leaderboard-container">
                     <h2>Leaderboard - Top 10 <span style="font-size:0.6em;color:#5577aa;">${modeLabel}</span></h2>
@@ -592,7 +613,7 @@
                         const pwd = prompt('Ingresa la clave de administrador:');
                         if (pwd === '66826682') {
                             localStorage.removeItem('cyberspace_leaderboard');
-                            clearFirebaseLeaderboard();
+                            clearRemoteLeaderboard();
                             const lbContainer = document.getElementById('leaderboard-container');
                             if (lbContainer) {
                                 lbContainer.innerHTML = '<h2>Leaderboard - Top 10</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
