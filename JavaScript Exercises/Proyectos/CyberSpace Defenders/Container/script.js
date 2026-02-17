@@ -112,6 +112,18 @@
             `;
         }
 
+        // --- Fullscreen ---
+        function enterFullscreen() {
+            const el = document.documentElement;
+            const rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+            if (rfs) rfs.call(el).catch(() => {});
+        }
+
+        function exitFullscreen() {
+            const efs = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+            if (efs && document.fullscreenElement) efs.call(document).catch(() => {});
+        }
+
         // --- Pantalla de inicio: ingreso de alias ---
         function initPlayerScreen() {
             // Recuperar último alias usado
@@ -141,6 +153,8 @@
                 playerDisplay.textContent = `Defensor: ${playerName}`;
                 gameStartTime = Date.now();
                 gameStarted = true;
+                // Entrar en pantalla completa al iniciar el juego
+                enterFullscreen();
                 initGame();
             }
 
@@ -502,6 +516,9 @@
                 `;
                 gameContainer.appendChild(gameOverMessage);
 
+                // Salir de pantalla completa al mostrar leaderboard
+                exitFullscreen();
+
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
@@ -524,6 +541,8 @@
                     gameOverMessage.remove();
                 }
                 gameOver = false;
+                // Volver a pantalla completa al reiniciar
+                enterFullscreen();
                 // Ocultar cursor de nuevo al reiniciar
                 gameContainer.style.cursor = 'none';
                 lightYears = 0;
