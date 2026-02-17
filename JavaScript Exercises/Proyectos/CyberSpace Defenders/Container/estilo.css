@@ -5,6 +5,7 @@ body, html {
     background-color: #000;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     font-family: 'Arial', sans-serif;
     touch-action: none;
     -webkit-touch-callout: none;
@@ -17,7 +18,7 @@ body, html {
     min-width: 60px;
     height: auto;
     bottom: 50%;
-    left: 50%;
+    left: 25%;
     transform: translate(-50%, 50%);
     transition: bottom 0.1s, transform 0.2s ease-in-out;
 }
@@ -26,6 +27,7 @@ body, html {
     position: relative;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
@@ -267,7 +269,7 @@ body, html {
     }
 
     #player-display {
-        bottom: 4px;
+        bottom: calc(4px + env(safe-area-inset-bottom, 0px));
         left: 4px;
         font-size: 2.5vw;
         padding: 3px 6px;
@@ -384,7 +386,7 @@ body, html {
 
 #scrolling-text {
     position: absolute;
-    bottom: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
     left: 0;
     width: 200%;
     white-space: nowrap;
@@ -499,6 +501,7 @@ body, html {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     background: url('./img/cyberspace1.png') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -626,6 +629,7 @@ body, html {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     background: url('./img/cyberspace1.png') center/cover no-repeat;
     display: flex;
     align-items: center;
@@ -731,7 +735,7 @@ body, html {
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
-    bottom: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     left: 12px;
     font-size: 1.3vw;
     color: #00ffcc;
@@ -809,7 +813,7 @@ body, html {
 #mobile-fire-button {
     display: none; /* Oculto por defecto, JS lo muestra en touch devices */
     position: absolute;
-    bottom: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     right: 18px;
     width: 80px;
     height: 80px;
@@ -950,7 +954,7 @@ body, html {
     #mobile-fire-button {
         width: 72px;
         height: 72px;
-        bottom: 14px;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
         right: 14px;
     }
 

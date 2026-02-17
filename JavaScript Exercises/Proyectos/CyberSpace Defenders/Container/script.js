@@ -905,7 +905,7 @@
                 updateMissileDisplay();
 
                 spaceship.style.bottom = '50%';
-                spaceship.style.left = isTouchDev ? '25%' : '50%';
+                spaceship.style.left = '25%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
