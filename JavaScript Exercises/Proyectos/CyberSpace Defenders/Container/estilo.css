@@ -113,7 +113,7 @@ body, html {
     to { left: 110%; }
 }
 
-#distance-counter, #asteroid-counter, #cyberattack-counter {
+#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
     position: absolute;
     left: 10px;
     font-size: 0.85vw;
@@ -140,8 +140,85 @@ body, html {
     top: 110px;
 }
 
+#missile-counter {
+    top: 135px;
+    border-left: 2px solid rgba(34, 204, 102, 0.6);
+}
+
+#missile-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 3px;
+    overflow: hidden;
+}
+
+#missile-bar {
+    height: 100%;
+    width: 50%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #22cc66, #00ffcc);
+    transition: width 0.3s, background 0.3s;
+}
+
+.missile-low {
+    animation: missilePulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes missilePulse {
+    from { opacity: 1; }
+    to { opacity: 0.4; }
+}
+
+.no-ammo-flash {
+    animation: noAmmoFlash 0.3s ease-in-out;
+}
+
+@keyframes noAmmoFlash {
+    0% { border-color: rgba(34, 204, 102, 0.6); }
+    50% { border-color: #ff3b3f; box-shadow: 0 0 10px rgba(255, 59, 63, 0.5); }
+    100% { border-color: rgba(34, 204, 102, 0.6); }
+}
+
+/* ===== PACKS DE MUNICION ===== */
+.ammo-pack {
+    position: absolute;
+    width: 7vw;
+    min-width: 55px;
+    max-width: 90px;
+    height: auto;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.ammo-pack .ammo-svg {
+    width: 100%;
+    height: auto;
+}
+
+.ammo-pack-25 .ammo-svg { filter: drop-shadow(0 0 8px rgba(34, 204, 102, 0.5)); }
+.ammo-pack-50 .ammo-svg { filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.5)); }
+.ammo-pack-75 .ammo-svg { filter: drop-shadow(0 0 8px rgba(255, 170, 0, 0.5)); }
+.ammo-pack-100 .ammo-svg { filter: drop-shadow(0 0 10px rgba(255, 68, 255, 0.6)); }
+
+@keyframes moveAmmoPack {
+    from { right: -100px; }
+    to { right: 110%; }
+}
+
+.ammo-collected {
+    animation: collectEffect 0.4s ease-out forwards !important;
+}
+
+@keyframes collectEffect {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
 @media (max-width: 768px) {
-    #distance-counter, #asteroid-counter, #cyberattack-counter {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
         font-size: 2.2vw;
         padding: 0.4vw 0.8vw;
         left: 8px;
@@ -157,6 +234,14 @@ body, html {
 
     #asteroid-counter {
         top: 101px;
+    }
+
+    #missile-counter {
+        top: 124px;
+    }
+
+    .ammo-pack {
+        min-width: 45px;
     }
 }
 
