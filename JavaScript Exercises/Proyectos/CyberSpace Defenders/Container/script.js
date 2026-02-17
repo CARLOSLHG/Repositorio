@@ -317,24 +317,18 @@
             // Función para disparar misil desde la posición actual de la nave
             function shootMissile() {
                 if (gameOver || !gameStarted) return;
-
-                // Verificar munición disponible
-                if (missileCount <= 0) {
-                    const mc = document.getElementById('missile-counter');
-                    if (mc) {
-                        mc.classList.add('no-ammo-flash');
-                        setTimeout(() => mc.classList.remove('no-ammo-flash'), 300);
-                    }
-                    if (!gameOver) {
-                        gameOver = true;
-                        showGameOverMessage('¡Has agotado tus misiles!');
-                    }
-                    return;
-                }
+                if (missileCount <= 0) return;
 
                 missileCount--;
                 missilesUsed++;
                 updateMissileDisplay();
+
+                // Si se agotaron los misiles, fin del juego inmediato
+                if (missileCount <= 0 && !gameOver) {
+                    gameOver = true;
+                    showGameOverMessage('¡Has agotado tus misiles!');
+                    return;
+                }
 
                 const missile = document.createElement('img');
                 missile.src = './img/missil.png';
