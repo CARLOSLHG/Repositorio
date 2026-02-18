@@ -286,10 +286,10 @@
             function toggleMusic() {
                 if (musicPlaying) {
                     audio.pause();
-                    toggleMusicButton.textContent = 'Encender Música';
+                    toggleMusicButton.textContent = 'Encender Música (M)';
                 } else {
                     audio.play().catch(() => {});
-                    toggleMusicButton.textContent = 'Apagar Música';
+                    toggleMusicButton.textContent = 'Apagar Música (M)';
                 }
                 musicPlaying = !musicPlaying;
             }
