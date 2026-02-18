@@ -550,21 +550,21 @@ body, html {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 4vw 5vw;
+    padding: 2.5vw 4vw;
     border: 2px solid rgba(0, 200, 255, 0.35);
     border-radius: 20px;
     background: rgba(5, 15, 30, 0.88);
     box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
     min-width: 35vw;
     max-height: 85vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-sizing: border-box;
 }
 
 #player-form h1 {
     color: #00c8ff;
-    font-size: 4.5vw;
-    margin: 0 0 0.15em 0;
+    font-size: 3.5vw;
+    margin: 0 0 0.1em 0;
     text-transform: uppercase;
     letter-spacing: 5px;
     text-shadow: 0 0 25px rgba(0, 200, 255, 0.5);
@@ -572,16 +572,16 @@ body, html {
 
 #player-form p {
     color: #7799bb;
-    font-size: 1.5vw;
-    margin: 0 0 1.8em 0;
+    font-size: 1.2vw;
+    margin: 0 0 1em 0;
     letter-spacing: 1px;
 }
 
 #player-form .game-synopsis {
-    font-size: 1.1vw;
+    font-size: 0.95vw;
     color: #6688aa;
-    line-height: 1.6;
-    margin: 0.5em auto 1.5em auto;
+    line-height: 1.5;
+    margin: 0.3em auto 1em auto;
     max-width: 90%;
     text-align: center;
     letter-spacing: 0.5px;
@@ -590,9 +590,9 @@ body, html {
 #player-name-input {
     display: block;
     width: 85%;
-    margin: 0 auto 2em auto;
-    padding: 1em 1.2em;
-    font-size: 2vw;
+    margin: 0 auto 1.2em auto;
+    padding: 0.7em 1em;
+    font-size: 1.8vw;
     text-align: center;
     background: rgba(0, 0, 0, 0.65);
     border: 2px solid rgba(0, 200, 255, 0.35);
@@ -615,8 +615,8 @@ body, html {
 }
 
 #start-game-button {
-    padding: 1em 3.5em;
-    font-size: 1.8vw;
+    padding: 0.7em 3em;
+    font-size: 1.5vw;
     cursor: pointer;
     background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
@@ -906,31 +906,36 @@ body, html {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     #player-form {
-        padding: 8vw 6vw;
+        padding: 5vw 5vw;
         min-width: 80vw;
+        max-height: 80vh;
     }
 
     #player-form h1 {
-        font-size: 7vw;
+        font-size: 6vw;
     }
 
     #player-form p {
-        font-size: 3.5vw;
+        font-size: 3vw;
+        margin: 0 0 0.6em 0;
     }
 
     #player-form .game-synopsis {
-        font-size: 2.8vw;
+        font-size: 2.5vw;
         max-width: 95%;
+        line-height: 1.4;
+        margin: 0.2em auto 0.6em auto;
     }
 
     #player-name-input {
-        font-size: 5vw;
-        padding: 0.8em;
+        font-size: 4.5vw;
+        padding: 0.6em;
+        margin-bottom: 0.8em;
     }
 
     #start-game-button {
-        font-size: 4vw;
-        padding: 0.8em 2em;
+        font-size: 3.5vw;
+        padding: 0.6em 1.8em;
     }
 
     #player-display {
