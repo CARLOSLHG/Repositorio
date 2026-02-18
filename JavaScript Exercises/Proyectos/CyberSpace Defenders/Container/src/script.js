@@ -386,6 +386,9 @@
                 gameContainer.addEventListener('touchstart', function(event) {
                     if (gameOver || !gameStarted) return;
                     if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                    // Solo aceptar toques en la mitad inferior de la pantalla para no interferir con botones superiores
+                    const containerHeight = gameContainer.clientHeight;
+                    if (event.touches[0].clientY < containerHeight * 0.5) return;
                     event.preventDefault();
                     touching = true;
                     updateTouchTarget(event.touches[0].clientY);
