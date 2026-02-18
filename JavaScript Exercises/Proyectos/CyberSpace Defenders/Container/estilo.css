@@ -577,6 +577,16 @@ body, html {
     letter-spacing: 1px;
 }
 
+#player-form .game-synopsis {
+    font-size: 1.1vw;
+    color: #6688aa;
+    line-height: 1.6;
+    margin: 0.5em auto 1.5em auto;
+    max-width: 90%;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
 #player-name-input {
     display: block;
     width: 85%;
@@ -906,6 +916,11 @@ body, html {
 
     #player-form p {
         font-size: 3.5vw;
+    }
+
+    #player-form .game-synopsis {
+        font-size: 2.8vw;
+        max-width: 95%;
     }
 
     #player-name-input {
