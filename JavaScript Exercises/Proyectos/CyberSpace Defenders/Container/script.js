@@ -281,23 +281,48 @@
             audio.volume = 0.1;
             audio.play().catch(() => {});
 
+            // Detección de dispositivo táctil (necesario antes de configurar botones)
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+
             // Función para alternar música
             const toggleMusicButton = document.getElementById('toggle-music-button');
             function toggleMusic() {
                 if (musicPlaying) {
                     audio.pause();
-                    toggleMusicButton.textContent = 'Encender Música (M)';
+                    toggleMusicButton.textContent = isTouchDevice ? 'Encender Música' : 'Encender Música (M)';
                 } else {
                     audio.play().catch(() => {});
-                    toggleMusicButton.textContent = 'Apagar Música (M)';
+                    toggleMusicButton.textContent = isTouchDevice ? 'Apagar Música' : 'Apagar Música (M)';
                 }
                 musicPlaying = !musicPlaying;
             }
 
-            // Botón para apagar/encender la música
+            // Texto inicial sin "(M)" en móvil
+            if (isTouchDevice) {
+                toggleMusicButton.textContent = 'Apagar Música';
+            }
+
+            // Botón para apagar/encender la música (desktop click)
             toggleMusicButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 toggleMusic();
+            });
+
+            // Handlers táctiles dedicados para el botón de música (evita interferir con controles de nave)
+            toggleMusicButton.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMusic();
+                toggleMusicButton.blur();
+            }, { passive: false });
+
+            toggleMusicButton.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, { passive: false });
+
+            toggleMusicButton.addEventListener('touchcancel', function(e) {
+                e.stopPropagation();
             });
 
             // Tecla M para apagar/encender la música
@@ -356,7 +381,6 @@
             });
 
             // --- Controles táctiles para móviles (solo movimiento, disparo via botón) ---
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
             let touching = false;
 
             if (isTouchDevice) {
