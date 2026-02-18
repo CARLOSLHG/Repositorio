@@ -29,6 +29,84 @@
             { amount: 100, label: 'ZERO-DAY', color: '#ff44ff', probability: 0.05 }
         ];
 
+        // --- Sistema de dificultad progresiva ---
+        let maxDifficultyLevel = 0;
+        let asteroidSpawnTimeout = null;
+
+        const DIFFICULTY_LEVELS = [
+            { name: 'SEGURO',      color: '#22cc66', threshold: 0 },
+            { name: 'ALERTA',      color: '#ffcc00', threshold: 30 },
+            { name: 'PELIGRO',     color: '#ff8800', threshold: 60 },
+            { name: 'CRÍTICO',     color: '#ff3b3f', threshold: 120 },
+            { name: 'EXTREMO',     color: '#cc00ff', threshold: 180 },
+            { name: 'APOCALIPSIS', color: '#ff0066', threshold: 300 }
+        ];
+
+        // Calcula todos los parámetros de dificultad basado en tiempo transcurrido
+        function getDifficulty(elapsedSeconds) {
+            // Progresión suave de 0 a 1 en 300 segundos (5 min) con curva acelerada
+            const progress = Math.min(1, elapsedSeconds / 300);
+            const factor = Math.pow(progress, 1.4);
+
+            // Determinar nivel visual
+            let level = 0;
+            for (let i = DIFFICULTY_LEVELS.length - 1; i >= 0; i--) {
+                if (elapsedSeconds >= DIFFICULTY_LEVELS[i].threshold) {
+                    level = i;
+                    break;
+                }
+            }
+
+            return {
+                level: level,
+                levelName: DIFFICULTY_LEVELS[level].name,
+                levelColor: DIFFICULTY_LEVELS[level].color,
+
+                // Intervalo de spawn de amenazas: 1500ms → 500ms
+                spawnInterval: 1500 - (1000 * factor),
+
+                // Probabilidad de cyberattack por cada spawn: 0.40 → 0.75
+                cyberProbability: 0.40 + (0.35 * factor),
+
+                // Velocidad asteroides (duración animación): 3-6s → 1.5-3s
+                asteroidSpeedMin: 3 - (1.5 * factor),
+                asteroidSpeedRange: 3 - (1.5 * factor),
+
+                // Velocidad cyberattacks: 5-9s → 2.5-5s
+                cyberSpeedMin: 5 - (2.5 * factor),
+                cyberSpeedRange: 4 - (1.5 * factor),
+
+                // Velocidad packs: 4-7s → 3-5.5s
+                packSpeedMin: 4 - (1 * factor),
+                packSpeedRange: 3 - (0.5 * factor),
+
+                // Delay base de packs: 12s → 20s (más escasos)
+                packBaseDelay: 12000 + (8000 * factor),
+
+                // Delay máximo de packs: 45s → 55s
+                packMaxDelay: 45000 + (10000 * factor),
+
+                // Incremento de delay por segundo: 50ms → 90ms
+                packMsPerSecond: 50 + (40 * factor),
+
+                // Probabilidad de multi-spawn (2 asteroides a la vez): 0% → 40%
+                multiSpawnChance: 0.40 * factor,
+
+                // Shift de probabilidad de packs: los mejores packs se vuelven más raros
+                packProbabilityShift: factor * 0.15,
+
+                // Velocidad del fondo: 20s → 8s
+                backgroundSpeed: 20 - (12 * factor)
+            };
+        }
+
+        function getDifficultyLevel(elapsedSeconds) {
+            for (let i = DIFFICULTY_LEVELS.length - 1; i >= 0; i--) {
+                if (elapsedSeconds >= DIFFICULTY_LEVELS[i].threshold) return i;
+            }
+            return 0;
+        }
+
         // --- Actualizar display de misiles ---
         function updateMissileDisplay() {
             const countEl = document.getElementById('missile-count-text');
@@ -352,12 +430,35 @@
             window.addEventListener('resize', updateCachedDimensions);
             updateCachedDimensions();
 
-            // Incrementar la distancia recorrida cada segundo + chequeo de misiles
+            // Incrementar la distancia recorrida cada segundo + chequeo de misiles + actualizar dificultad
+            const difficultyDisplay = document.getElementById('difficulty-display');
+            const backgroundEl = document.getElementById('background');
+
+            function updateDifficultyHUD(elapsed) {
+                const diff = getDifficulty(elapsed);
+                const level = diff.level;
+                if (level > maxDifficultyLevel) maxDifficultyLevel = level;
+
+                if (difficultyDisplay) {
+                    difficultyDisplay.textContent = `Nivel: ${diff.levelName}`;
+                    difficultyDisplay.style.color = diff.levelColor;
+                    difficultyDisplay.style.textShadow = `0 0 8px ${diff.levelColor}, 0 0 16px ${diff.levelColor}40`;
+                }
+
+                // Acelerar el fondo progresivamente
+                if (backgroundEl) {
+                    backgroundEl.style.animationDuration = diff.backgroundSpeed + 's';
+                }
+            }
+
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
                     if (!gameOver) {
                         lightYears += 1;
                         distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
+
+                        // Actualizar indicador de dificultad
+                        updateDifficultyHUD(lightYears);
 
                         // Seguridad: si los misiles llegan a 0, forzar game over
                         if (missileCount <= 0) {
@@ -702,7 +803,7 @@
                 });
             }
 
-            // Función para generar un asteroide aleatorio
+            // Función para generar un asteroide aleatorio (velocidad dinámica por dificultad)
             function createAsteroid(src, isBottom) {
                 const asteroid = document.createElement('img');
                 asteroid.src = src;
@@ -718,7 +819,10 @@
 
                 gameContainer.appendChild(asteroid);
 
-                const asteroidSpeed = Math.random() * 3 + 3;
+                // Velocidad dinámica según dificultad actual
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const asteroidSpeed = Math.random() * diff.asteroidSpeedRange + diff.asteroidSpeedMin;
                 asteroid.style.animation = `moveAsteroid ${asteroidSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -734,7 +838,7 @@
                 });
             }
 
-            // Función para generar un "cyberattack"
+            // Función para generar un "cyberattack" (velocidad dinámica por dificultad)
             function createCyberAttack(type) {
                 const cyberAttack = document.createElement('img');
                 cyberAttack.src = type;
@@ -746,7 +850,10 @@
 
                 gameContainer.appendChild(cyberAttack);
 
-                const cyberSpeed = Math.random() * 4 + 5;
+                // Velocidad dinámica según dificultad actual
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const cyberSpeed = Math.random() * diff.cyberSpeedRange + diff.cyberSpeedMin;
                 cyberAttack.style.animation = `moveCyberAttack ${cyberSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -760,15 +867,30 @@
                 });
             }
 
-            // --- Crear pack de munición con SVG de escudo ---
+            // --- Crear pack de munición con SVG de escudo (dificultad dinámica) ---
             function createAmmoPack() {
                 if (gameOver) return;
 
-                // Seleccionar tipo basado en probabilidad
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+
+                // Probabilidades ajustadas: a mayor dificultad, los packs grandes son más raros
+                const shift = diff.packProbabilityShift;
+                const adjustedTypes = [
+                    { ...AMMO_PACK_TYPES[0], probability: AMMO_PACK_TYPES[0].probability + shift },      // PATCH: más común
+                    { ...AMMO_PACK_TYPES[1], probability: AMMO_PACK_TYPES[1].probability },                // FIREWALL: igual
+                    { ...AMMO_PACK_TYPES[2], probability: AMMO_PACK_TYPES[2].probability - shift * 0.6 },  // ENCRYPT: más raro
+                    { ...AMMO_PACK_TYPES[3], probability: AMMO_PACK_TYPES[3].probability - shift * 0.4 }   // ZERO-DAY: más raro
+                ];
+                // Normalizar probabilidades
+                const totalProb = adjustedTypes.reduce((sum, t) => sum + Math.max(0.01, t.probability), 0);
+                adjustedTypes.forEach(t => t.probability = Math.max(0.01, t.probability) / totalProb);
+
+                // Seleccionar tipo basado en probabilidad ajustada
                 const rand = Math.random();
                 let cumulative = 0;
-                let selected = AMMO_PACK_TYPES[0];
-                for (const pack of AMMO_PACK_TYPES) {
+                let selected = adjustedTypes[0];
+                for (const pack of adjustedTypes) {
                     cumulative += pack.probability;
                     if (rand <= cumulative) {
                         selected = pack;
@@ -799,7 +921,8 @@
 
                 gameContainer.appendChild(packEl);
 
-                const packSpeed = Math.random() * 3 + 4;
+                // Velocidad dinámica según dificultad
+                const packSpeed = Math.random() * diff.packSpeedRange + diff.packSpeedMin;
                 packEl.style.animation = `moveAmmoPack ${packSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -813,15 +936,12 @@
                 });
             }
 
-            // --- Spawning progresivo de packs (cada vez más escasos) ---
+            // --- Spawning progresivo de packs (escasez controlada por dificultad) ---
             function startAmmoPacks() {
-                const baseDelay = 12000;     // 12s al inicio
-                const maxDelay = 45000;      // Máximo 45s entre packs
-                const msPerSecond = 50;      // +50ms de delay por cada segundo jugado (~3s extra por minuto)
-
                 function getSpawnDelay() {
-                    const elapsed = (Date.now() - gameStartTime) / 1000; // segundos jugados
-                    return Math.min(maxDelay, baseDelay + elapsed * msPerSecond);
+                    const elapsed = (Date.now() - gameStartTime) / 1000;
+                    const diff = getDifficulty(elapsed);
+                    return Math.min(diff.packMaxDelay, diff.packBaseDelay + elapsed * diff.packMsPerSecond);
                 }
 
                 function scheduleNext() {
@@ -850,6 +970,7 @@
                 // Crear el overlay de Game Over INMEDIATAMENTE (sin esperar async)
                 const gameOverMessage = document.createElement('div');
                 gameOverMessage.id = 'game-over-message';
+                const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
                 gameOverMessage.innerHTML = `
                     <h1>Misión Finalizada</h1>
                     ${reason ? `<p class="game-over-reason">${reason}</p>` : ''}
@@ -866,6 +987,10 @@
                         <div class="stat-box">
                             <span class="stat-value">${missileCount}</span>
                             <span class="stat-label">Misiles Restantes</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxLevelInfo.name}</span>
+                            <span class="stat-label">Nivel Máximo</span>
                         </div>
                     </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
@@ -945,6 +1070,12 @@
                 cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
                 updateMissileDisplay();
 
+                // Reiniciar HUD de dificultad y fondo
+                updateDifficultyHUD(0);
+                if (backgroundEl) {
+                    backgroundEl.style.animationDuration = '20s';
+                }
+
                 spaceship.style.bottom = '50%';
                 spaceship.style.left = '25%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
@@ -976,9 +1107,10 @@
                 const fireBtnReset = document.getElementById('mobile-fire-button');
                 if (isTouchDev && fireBtnReset) fireBtnReset.style.display = 'flex';
 
-                clearInterval(asteroidGenerationInterval);
+                clearTimeout(asteroidSpawnTimeout);
                 clearInterval(distanceInterval);
                 clearTimeout(ammoPackTimeout);
+                maxDifficultyLevel = 0;
 
                 // Reiniciar loops
                 lastFrameTime = 0;
@@ -988,7 +1120,7 @@
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
-            // Iniciar la creación de asteroides y cyberattacks
+            // Iniciar la creación de asteroides y cyberattacks (dificultad dinámica)
             function startAsteroids() {
                 const asteroidImages = [
                     './img/rock-1.png',
@@ -1015,17 +1147,34 @@
                     './img/aster-6.png'
                 ];
 
-                asteroidGenerationInterval = setInterval(() => {
-                    if (!gameOver) {
+                function scheduleNextSpawn() {
+                    const elapsed = (Date.now() - gameStartTime) / 1000;
+                    const diff = getDifficulty(elapsed);
+
+                    asteroidSpawnTimeout = setTimeout(() => {
+                        if (gameOver) return;
+
+                        // Spawn asteroide principal
                         const randomAsteroid = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
                         createAsteroid(randomAsteroid, false);
 
-                        if (Math.random() < 0.4) {
+                        // Multi-spawn: chance de un segundo asteroide simultáneo
+                        if (Math.random() < diff.multiSpawnChance) {
+                            const extraAsteroid = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
+                            createAsteroid(extraAsteroid, false);
+                        }
+
+                        // Probabilidad dinámica de cyberattack
+                        if (Math.random() < diff.cyberProbability) {
                             const randomCyber = cyberAttackImages[Math.floor(Math.random() * cyberAttackImages.length)];
                             createCyberAttack(randomCyber);
                         }
-                    }
-                }, 1500);
+
+                        scheduleNextSpawn();
+                    }, diff.spawnInterval);
+                }
+
+                scheduleNextSpawn();
             }
 
             startAsteroids();
