@@ -784,10 +784,10 @@
                 packEl.innerHTML = `
                     <svg viewBox="0 0 80 90" class="ammo-svg">
                         <path d="M40 5 L70 20 L70 50 Q70 75 40 85 Q10 75 10 50 L10 20 Z"
-                              fill="${selected.color}22" stroke="${selected.color}" stroke-width="2.5"/>
+                              fill="${selected.color}" fill-opacity="0.85" stroke="#ffffff" stroke-width="2.5"/>
                         <text x="40" y="42" text-anchor="middle" fill="#ffffff"
                               font-size="18" font-weight="bold" font-family="Arial">+${selected.amount}</text>
-                        <text x="40" y="62" text-anchor="middle" fill="${selected.color}"
+                        <text x="40" y="62" text-anchor="middle" fill="#ffffff"
                               font-size="9" font-weight="bold" font-family="Arial"
                               letter-spacing="1">${selected.label}</text>
                     </svg>
