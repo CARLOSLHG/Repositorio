@@ -29,6 +29,84 @@
             { amount: 100, label: 'ZERO-DAY', color: '#ff44ff', probability: 0.05 }
         ];
 
+        // --- Sistema de dificultad progresiva ---
+        let maxDifficultyLevel = 0;
+        let asteroidSpawnTimeout = null;
+
+        const DIFFICULTY_LEVELS = [
+            { name: 'SEGURO',      color: '#22cc66', threshold: 0 },
+            { name: 'ALERTA',      color: '#ffcc00', threshold: 30 },
+            { name: 'PELIGRO',     color: '#ff8800', threshold: 60 },
+            { name: 'CRÍTICO',     color: '#ff3b3f', threshold: 120 },
+            { name: 'EXTREMO',     color: '#cc00ff', threshold: 180 },
+            { name: 'APOCALIPSIS', color: '#ff0066', threshold: 300 }
+        ];
+
+        // Calcula todos los parámetros de dificultad basado en tiempo transcurrido
+        function getDifficulty(elapsedSeconds) {
+            // Progresión suave de 0 a 1 en 300 segundos (5 min) con curva acelerada
+            const progress = Math.min(1, elapsedSeconds / 300);
+            const factor = Math.pow(progress, 1.4);
+
+            // Determinar nivel visual
+            let level = 0;
+            for (let i = DIFFICULTY_LEVELS.length - 1; i >= 0; i--) {
+                if (elapsedSeconds >= DIFFICULTY_LEVELS[i].threshold) {
+                    level = i;
+                    break;
+                }
+            }
+
+            return {
+                level: level,
+                levelName: DIFFICULTY_LEVELS[level].name,
+                levelColor: DIFFICULTY_LEVELS[level].color,
+
+                // Intervalo de spawn de amenazas: 1500ms → 500ms
+                spawnInterval: 1500 - (1000 * factor),
+
+                // Probabilidad de cyberattack por cada spawn: 0.40 → 0.75
+                cyberProbability: 0.40 + (0.35 * factor),
+
+                // Velocidad asteroides (duración animación): 3-6s → 1.5-3s
+                asteroidSpeedMin: 3 - (1.5 * factor),
+                asteroidSpeedRange: 3 - (1.5 * factor),
+
+                // Velocidad cyberattacks: 5-9s → 2.5-5s
+                cyberSpeedMin: 5 - (2.5 * factor),
+                cyberSpeedRange: 4 - (1.5 * factor),
+
+                // Velocidad packs: 4-7s → 3-5.5s
+                packSpeedMin: 4 - (1 * factor),
+                packSpeedRange: 3 - (0.5 * factor),
+
+                // Delay base de packs: 12s → 20s (más escasos)
+                packBaseDelay: 12000 + (8000 * factor),
+
+                // Delay máximo de packs: 45s → 55s
+                packMaxDelay: 45000 + (10000 * factor),
+
+                // Incremento de delay por segundo: 50ms → 90ms
+                packMsPerSecond: 50 + (40 * factor),
+
+                // Probabilidad de multi-spawn (2 asteroides a la vez): 0% → 40%
+                multiSpawnChance: 0.40 * factor,
+
+                // Shift de probabilidad de packs: los mejores packs se vuelven más raros
+                packProbabilityShift: factor * 0.15,
+
+                // Velocidad del fondo: 20s → 8s
+                backgroundSpeed: 20 - (12 * factor)
+            };
+        }
+
+        function getDifficultyLevel(elapsedSeconds) {
+            for (let i = DIFFICULTY_LEVELS.length - 1; i >= 0; i--) {
+                if (elapsedSeconds >= DIFFICULTY_LEVELS[i].threshold) return i;
+            }
+            return 0;
+        }
+
         // --- Actualizar display de misiles ---
         function updateMissileDisplay() {
             const countEl = document.getElementById('missile-count-text');
@@ -261,7 +339,6 @@
         let gameLoopId = null;
         let lastFrameTime = 0;
         let distanceInterval = null;
-        let touchAutoFireInterval = null;
 
         // --- Smooth touch movement ---
         let touchTargetBottom = -1;
@@ -269,11 +346,17 @@
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
 
+        // --- Desktop mouse (zero-delay via game loop) ---
+        let cachedContainerHeight = 0;
+        let cachedSpaceshipHeight = 0;
+        let mouseTargetBottom = -1;
+        let isMouseControlled = false;
+
         function initGame() {
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
             audio.loop = true;
-            audio.volume = 0.1;
+            audio.volume = 0.08;
             audio.play().catch(() => {});
 
             // Detección de dispositivo táctil (necesario antes de configurar botones)
@@ -290,6 +373,11 @@
                     toggleMusicButton.textContent = isTouchDevice ? 'Apagar Música' : 'Apagar Música (M)';
                 }
                 musicPlaying = !musicPlaying;
+            }
+
+            // Texto inicial sin "(M)" en móvil
+            if (isTouchDevice) {
+                toggleMusicButton.textContent = 'Apagar Música';
             }
 
             // Botón para apagar/encender la música (desktop click)
@@ -334,12 +422,43 @@
             // Inicializar display de misiles
             updateMissileDisplay();
 
-            // Incrementar la distancia recorrida cada segundo + chequeo de misiles
+            // Cache de dimensiones del contenedor para evitar layout thrashing
+            function updateCachedDimensions() {
+                cachedContainerHeight = gameContainer.clientHeight;
+                cachedSpaceshipHeight = spaceship.clientHeight;
+            }
+            window.addEventListener('resize', updateCachedDimensions);
+            updateCachedDimensions();
+
+            // Incrementar la distancia recorrida cada segundo + chequeo de misiles + actualizar dificultad
+            const difficultyDisplay = document.getElementById('difficulty-display');
+            const backgroundEl = document.getElementById('background');
+
+            function updateDifficultyHUD(elapsed) {
+                const diff = getDifficulty(elapsed);
+                const level = diff.level;
+                if (level > maxDifficultyLevel) maxDifficultyLevel = level;
+
+                if (difficultyDisplay) {
+                    difficultyDisplay.textContent = `Nivel: ${diff.levelName}`;
+                    difficultyDisplay.style.color = diff.levelColor;
+                    difficultyDisplay.style.textShadow = `0 0 8px ${diff.levelColor}, 0 0 16px ${diff.levelColor}40`;
+                }
+
+                // Acelerar el fondo progresivamente
+                if (backgroundEl) {
+                    backgroundEl.style.animationDuration = diff.backgroundSpeed + 's';
+                }
+            }
+
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
                     if (!gameOver) {
                         lightYears += 1;
                         distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
+
+                        // Actualizar indicador de dificultad
+                        updateDifficultyHUD(lightYears);
 
                         // Seguridad: si los misiles llegan a 0, forzar game over
                         if (missileCount <= 0) {
@@ -353,28 +472,25 @@
             startDistanceCounter();
 
             // Movimiento de la nave con el mouse para desktop
+            // Solo captura posición objetivo; se aplica en el game loop (zero-delay, sin layout thrashing)
             document.addEventListener('mousemove', function(event) {
                 if (!gameOver && gameStarted) {
-                    const containerHeight = gameContainer.clientHeight;
-                    const mouseY = event.clientY;
-                    const spaceshipHeight = spaceship.clientHeight;
-
-                    const newBottom = containerHeight - mouseY - (spaceshipHeight / 2);
-                    spaceship.style.bottom = `${Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom))}px`;
+                    isMouseControlled = true;
+                    const newBottom = cachedContainerHeight - event.clientY - (cachedSpaceshipHeight / 2);
+                    mouseTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
                 }
             });
 
-            // --- Controles táctiles para móviles (movimiento suave + auto-fire en game loop) ---
+            // --- Controles táctiles para móviles (solo movimiento, disparo via botón) ---
             let touching = false;
-            const MOBILE_BURST_MAX = 3;
-            const MOBILE_FIRE_INTERVAL = 800; // ms entre ráfagas táctiles
 
             if (isTouchDevice) {
+                // Posicionar nave en el primer cuarto de pantalla para mayor maniobrabilidad
+                spaceship.style.left = '25%';
+
                 function updateTouchTarget(touchY) {
-                    const containerHeight = gameContainer.clientHeight;
-                    const spaceshipHeight = spaceship.clientHeight;
-                    const newBottom = containerHeight - touchY - (spaceshipHeight / 2);
-                    touchTargetBottom = Math.max(0, Math.min(containerHeight - spaceshipHeight, newBottom));
+                    const newBottom = cachedContainerHeight - touchY - (cachedSpaceshipHeight / 2);
+                    touchTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
                     // Primer toque: posicionar inmediatamente sin interpolación
                     if (!isTouchControlled) {
                         isTouchControlled = true;
@@ -385,7 +501,7 @@
 
                 gameContainer.addEventListener('touchstart', function(event) {
                     if (gameOver || !gameStarted) return;
-                    if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                    if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
                     // Solo aceptar toques en la mitad izquierda de la pantalla para no interferir con botones
                     if (event.touches[0].clientX > window.innerWidth * 0.5) return;
                     event.preventDefault();
@@ -441,7 +557,7 @@
 
                 // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
                 if (isTouchControlled && touchTargetBottom >= 0) {
-                    const smoothing = 0.18; // 18% por frame a 60fps
+                    const smoothing = 0.35; // 35% por frame a 60fps — más responsivo
                     const lerpFactor = 1 - Math.pow(1 - smoothing, dt);
                     shipCurrentBottom += (touchTargetBottom - shipCurrentBottom) * lerpFactor;
                     // Snap cuando está muy cerca para evitar micro-movimientos infinitos
@@ -451,18 +567,13 @@
                     spaceship.style.bottom = shipCurrentBottom + 'px';
                 }
 
-                // === MOBILE: Auto-fire sincronizado con game loop ===
-                if (touching && isTouchDevice && !burstCooldown) {
-                    if (!lastMobileFireTime || timestamp - lastMobileFireTime >= MOBILE_FIRE_INTERVAL) {
-                        lastMobileFireTime = timestamp;
-                        burstCooldown = true;
-                        const burstCount = Math.min(MOBILE_BURST_MAX, missileCount);
-                        for (let i = 0; i < burstCount; i++) {
-                            setTimeout(() => shootMissile(), i * BURST_DELAY);
-                        }
-                        setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 200);
-                    }
+                // === DESKTOP: Aplicar posición del mouse directamente (zero-delay) ===
+                if (isMouseControlled && mouseTargetBottom >= 0) {
+                    spaceship.style.bottom = mouseTargetBottom + 'px';
                 }
+
+                // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
+                // El disparo móvil se maneja via #mobile-fire-button (ver evento abajo)
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
@@ -634,7 +745,7 @@
                 setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 300);
             }
 
-            // Disparo con clic: solo en desktop (en móvil se maneja via touch auto-fire)
+            // Disparo con clic: solo en desktop
             if (!isTouchDevice) {
                 document.addEventListener('click', function(e) {
                     if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
@@ -642,7 +753,57 @@
                 });
             }
 
-            // Función para generar un asteroide aleatorio
+            // --- Botón de disparo dedicado para móviles ---
+            const mobileFireBtn = document.getElementById('mobile-fire-button');
+            if (isTouchDevice && mobileFireBtn) {
+                // Mostrar el botón en dispositivos táctiles
+                mobileFireBtn.style.display = 'flex';
+
+                let fireHoldInterval = null;
+                const FIRE_HOLD_DELAY = 700; // ms entre ráfagas al mantener presionado
+
+                function startFiring() {
+                    if (gameOver || !gameStarted) return;
+                    // Disparar inmediatamente al presionar
+                    shootBurst();
+                    mobileFireBtn.classList.add('firing');
+                    // Si mantiene presionado, disparar ráfagas continuas
+                    if (fireHoldInterval) clearInterval(fireHoldInterval);
+                    fireHoldInterval = setInterval(() => {
+                        if (gameOver || !gameStarted) {
+                            stopFiring();
+                            return;
+                        }
+                        shootBurst();
+                    }, FIRE_HOLD_DELAY);
+                }
+
+                function stopFiring() {
+                    mobileFireBtn.classList.remove('firing');
+                    if (fireHoldInterval) {
+                        clearInterval(fireHoldInterval);
+                        fireHoldInterval = null;
+                    }
+                }
+
+                mobileFireBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    startFiring();
+                }, { passive: false });
+
+                mobileFireBtn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    stopFiring();
+                }, { passive: false });
+
+                mobileFireBtn.addEventListener('touchcancel', function() {
+                    stopFiring();
+                });
+            }
+
+            // Función para generar un asteroide aleatorio (velocidad dinámica por dificultad)
             function createAsteroid(src, isBottom) {
                 const asteroid = document.createElement('img');
                 asteroid.src = src;
@@ -658,7 +819,10 @@
 
                 gameContainer.appendChild(asteroid);
 
-                const asteroidSpeed = Math.random() * 3 + 3;
+                // Velocidad dinámica según dificultad actual
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const asteroidSpeed = Math.random() * diff.asteroidSpeedRange + diff.asteroidSpeedMin;
                 asteroid.style.animation = `moveAsteroid ${asteroidSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -674,7 +838,7 @@
                 });
             }
 
-            // Función para generar un "cyberattack"
+            // Función para generar un "cyberattack" (velocidad dinámica por dificultad)
             function createCyberAttack(type) {
                 const cyberAttack = document.createElement('img');
                 cyberAttack.src = type;
@@ -686,7 +850,10 @@
 
                 gameContainer.appendChild(cyberAttack);
 
-                const cyberSpeed = Math.random() * 4 + 5;
+                // Velocidad dinámica según dificultad actual
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const cyberSpeed = Math.random() * diff.cyberSpeedRange + diff.cyberSpeedMin;
                 cyberAttack.style.animation = `moveCyberAttack ${cyberSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -700,15 +867,30 @@
                 });
             }
 
-            // --- Crear pack de munición con SVG de escudo ---
+            // --- Crear pack de munición con SVG de escudo (dificultad dinámica) ---
             function createAmmoPack() {
                 if (gameOver) return;
 
-                // Seleccionar tipo basado en probabilidad
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+
+                // Probabilidades ajustadas: a mayor dificultad, los packs grandes son más raros
+                const shift = diff.packProbabilityShift;
+                const adjustedTypes = [
+                    { ...AMMO_PACK_TYPES[0], probability: AMMO_PACK_TYPES[0].probability + shift },      // PATCH: más común
+                    { ...AMMO_PACK_TYPES[1], probability: AMMO_PACK_TYPES[1].probability },                // FIREWALL: igual
+                    { ...AMMO_PACK_TYPES[2], probability: AMMO_PACK_TYPES[2].probability - shift * 0.6 },  // ENCRYPT: más raro
+                    { ...AMMO_PACK_TYPES[3], probability: AMMO_PACK_TYPES[3].probability - shift * 0.4 }   // ZERO-DAY: más raro
+                ];
+                // Normalizar probabilidades
+                const totalProb = adjustedTypes.reduce((sum, t) => sum + Math.max(0.01, t.probability), 0);
+                adjustedTypes.forEach(t => t.probability = Math.max(0.01, t.probability) / totalProb);
+
+                // Seleccionar tipo basado en probabilidad ajustada
                 const rand = Math.random();
                 let cumulative = 0;
-                let selected = AMMO_PACK_TYPES[0];
-                for (const pack of AMMO_PACK_TYPES) {
+                let selected = adjustedTypes[0];
+                for (const pack of adjustedTypes) {
                     cumulative += pack.probability;
                     if (rand <= cumulative) {
                         selected = pack;
@@ -724,10 +906,10 @@
                 packEl.innerHTML = `
                     <svg viewBox="0 0 80 90" class="ammo-svg">
                         <path d="M40 5 L70 20 L70 50 Q70 75 40 85 Q10 75 10 50 L10 20 Z"
-                              fill="${selected.color}22" stroke="${selected.color}" stroke-width="2.5"/>
+                              fill="${selected.color}" fill-opacity="0.85" stroke="#ffffff" stroke-width="2.5"/>
                         <text x="40" y="42" text-anchor="middle" fill="#ffffff"
                               font-size="18" font-weight="bold" font-family="Arial">+${selected.amount}</text>
-                        <text x="40" y="62" text-anchor="middle" fill="${selected.color}"
+                        <text x="40" y="62" text-anchor="middle" fill="#ffffff"
                               font-size="9" font-weight="bold" font-family="Arial"
                               letter-spacing="1">${selected.label}</text>
                     </svg>
@@ -739,7 +921,8 @@
 
                 gameContainer.appendChild(packEl);
 
-                const packSpeed = Math.random() * 3 + 4;
+                // Velocidad dinámica según dificultad
+                const packSpeed = Math.random() * diff.packSpeedRange + diff.packSpeedMin;
                 packEl.style.animation = `moveAmmoPack ${packSpeed}s linear forwards`;
 
                 // Registrar en el array para el game loop
@@ -753,15 +936,12 @@
                 });
             }
 
-            // --- Spawning progresivo de packs (cada vez más escasos) ---
+            // --- Spawning progresivo de packs (escasez controlada por dificultad) ---
             function startAmmoPacks() {
-                const baseDelay = 12000;     // 12s al inicio
-                const maxDelay = 45000;      // Máximo 45s entre packs
-                const msPerSecond = 50;      // +50ms de delay por cada segundo jugado (~3s extra por minuto)
-
                 function getSpawnDelay() {
-                    const elapsed = (Date.now() - gameStartTime) / 1000; // segundos jugados
-                    return Math.min(maxDelay, baseDelay + elapsed * msPerSecond);
+                    const elapsed = (Date.now() - gameStartTime) / 1000;
+                    const diff = getDifficulty(elapsed);
+                    return Math.min(diff.packMaxDelay, diff.packBaseDelay + elapsed * diff.packMsPerSecond);
                 }
 
                 function scheduleNext() {
@@ -790,6 +970,7 @@
                 // Crear el overlay de Game Over INMEDIATAMENTE (sin esperar async)
                 const gameOverMessage = document.createElement('div');
                 gameOverMessage.id = 'game-over-message';
+                const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
                 gameOverMessage.innerHTML = `
                     <h1>Misión Finalizada</h1>
                     ${reason ? `<p class="game-over-reason">${reason}</p>` : ''}
@@ -807,6 +988,10 @@
                             <span class="stat-value">${missileCount}</span>
                             <span class="stat-label">Misiles Restantes</span>
                         </div>
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxLevelInfo.name}</span>
+                            <span class="stat-label">Nivel Máximo</span>
+                        </div>
                     </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
                     <div class="buttons-container">
@@ -819,6 +1004,10 @@
 
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
+
+                // Ocultar botón de disparo móvil en game over
+                const fireBtn = document.getElementById('mobile-fire-button');
+                if (fireBtn) fireBtn.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -881,8 +1070,14 @@
                 cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
                 updateMissileDisplay();
 
+                // Reiniciar HUD de dificultad y fondo
+                updateDifficultyHUD(0);
+                if (backgroundEl) {
+                    backgroundEl.style.animationDuration = '20s';
+                }
+
                 spaceship.style.bottom = '50%';
-                spaceship.style.left = '50%';
+                spaceship.style.left = '25%';
                 spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
@@ -895,15 +1090,27 @@
                 activeHazards.length = 0;
                 activePacks.length = 0;
 
-                // Reiniciar estado táctil
+                // Reiniciar estado táctil y mouse
                 touchTargetBottom = -1;
                 shipCurrentBottom = -1;
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
+                mouseTargetBottom = -1;
+                isMouseControlled = false;
 
-                clearInterval(asteroidGenerationInterval);
+                // Actualizar dimensiones cacheadas por si cambió el viewport
+                cachedContainerHeight = gameContainer.clientHeight;
+                cachedSpaceshipHeight = spaceship.clientHeight;
+
+                // Restaurar botón de disparo móvil si es touch device
+                const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+                const fireBtnReset = document.getElementById('mobile-fire-button');
+                if (isTouchDev && fireBtnReset) fireBtnReset.style.display = 'flex';
+
+                clearTimeout(asteroidSpawnTimeout);
                 clearInterval(distanceInterval);
                 clearTimeout(ammoPackTimeout);
+                maxDifficultyLevel = 0;
 
                 // Reiniciar loops
                 lastFrameTime = 0;
@@ -913,7 +1120,7 @@
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
-            // Iniciar la creación de asteroides y cyberattacks
+            // Iniciar la creación de asteroides y cyberattacks (dificultad dinámica)
             function startAsteroids() {
                 const asteroidImages = [
                     './img/rock-1.png',
@@ -940,17 +1147,34 @@
                     './img/aster-6.png'
                 ];
 
-                asteroidGenerationInterval = setInterval(() => {
-                    if (!gameOver) {
+                function scheduleNextSpawn() {
+                    const elapsed = (Date.now() - gameStartTime) / 1000;
+                    const diff = getDifficulty(elapsed);
+
+                    asteroidSpawnTimeout = setTimeout(() => {
+                        if (gameOver) return;
+
+                        // Spawn asteroide principal
                         const randomAsteroid = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
                         createAsteroid(randomAsteroid, false);
 
-                        if (Math.random() < 0.4) {
+                        // Multi-spawn: chance de un segundo asteroide simultáneo
+                        if (Math.random() < diff.multiSpawnChance) {
+                            const extraAsteroid = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
+                            createAsteroid(extraAsteroid, false);
+                        }
+
+                        // Probabilidad dinámica de cyberattack
+                        if (Math.random() < diff.cyberProbability) {
                             const randomCyber = cyberAttackImages[Math.floor(Math.random() * cyberAttackImages.length)];
                             createCyberAttack(randomCyber);
                         }
-                    }
-                }, 1500);
+
+                        scheduleNextSpawn();
+                    }, diff.spawnInterval);
+                }
+
+                scheduleNextSpawn();
             }
 
             startAsteroids();

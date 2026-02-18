@@ -129,7 +129,7 @@ body, html {
     to { left: 110%; }
 }
 
-#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
+#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
     position: absolute;
     left: calc(10px + var(--safe-left));
     font-size: 0.85vw;
@@ -159,6 +159,16 @@ body, html {
 #missile-counter {
     top: calc(135px + var(--safe-top));
     border-left: 2px solid rgba(34, 204, 102, 0.6);
+}
+
+#difficulty-display {
+    top: calc(162px + var(--safe-top));
+    font-weight: bold;
+    font-size: 0.9vw;
+    color: #22cc66;
+    border-left: 2px solid rgba(34, 204, 102, 0.6);
+    text-shadow: 0 0 8px rgba(34, 204, 102, 0.5);
+    transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
 #missile-bar-container {
@@ -273,7 +283,7 @@ body, html {
         max-width: 70px;
     }
 
-    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: 2.2vw;
         padding: 2px 6px;
         left: calc(4px + var(--safe-left));
@@ -293,6 +303,11 @@ body, html {
 
     #missile-counter {
         top: calc(86px + var(--safe-top));
+    }
+
+    #difficulty-display {
+        top: calc(106px + var(--safe-top));
+        font-size: 2.4vw;
     }
 
     #player-display {
