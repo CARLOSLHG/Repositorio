@@ -278,7 +278,7 @@
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
             audio.loop = true;
-            audio.volume = 0.1;
+            audio.volume = 0.08;
             audio.play().catch(() => {});
 
             // Detección de dispositivo táctil (necesario antes de configurar botones)
