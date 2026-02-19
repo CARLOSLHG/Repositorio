@@ -60,13 +60,15 @@ body, html {
 
 #background {
     background: url('./img/cyberspace1.png') repeat-x;
-    background-size: cover;
+    background-size: 50% 100%;
     width: 200%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 #background::before {

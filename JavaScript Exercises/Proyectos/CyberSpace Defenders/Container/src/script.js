@@ -579,14 +579,16 @@
                 // El disparo móvil se maneja via #mobile-fire-button (ver evento abajo)
 
                 // === FONDO: scroll fluido con velocidad interpolada ===
-                // Interpolar suavemente hacia la velocidad objetivo (lerp ~5% por frame a 60fps)
-                const bgLerp = 1 - Math.pow(0.95, dt);
+                // Interpolar suavemente hacia la velocidad objetivo (lerp ~10% por frame a 60fps)
+                const bgLerp = 1 - Math.pow(0.90, dt);
                 bgCurrentSpeed += (bgTargetSpeed - bgCurrentSpeed) * bgLerp;
+                // Suavizar dt para el fondo: evita saltos por picos de frame
+                const bgDt = dt > 1.8 ? 1 + (dt - 1) * 0.3 : dt;
                 // Avanzar posición: -50% en bgCurrentSpeed segundos → por frame a 60fps
-                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * dt;
+                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * bgDt;
                 if (bgScrollX <= -50) bgScrollX += 50; // loop continuo
                 if (backgroundEl) {
-                    backgroundEl.style.transform = `translateX(${bgScrollX}%)`;
+                    backgroundEl.style.transform = `translate3d(${bgScrollX}%, 0, 0)`;
                 }
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
@@ -1097,7 +1099,7 @@
                 bgCurrentSpeed = 20;
                 bgTargetSpeed = 20;
                 if (backgroundEl) {
-                    backgroundEl.style.transform = 'translateX(0%)';
+                    backgroundEl.style.transform = 'translate3d(0%, 0, 0)';
                 }
 
                 spaceship.style.bottom = '50%';
