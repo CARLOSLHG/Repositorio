@@ -60,13 +60,15 @@ body, html {
 
 #background {
     background: url('./img/cyberspace1.png') repeat-x;
-    background-size: cover;
+    background-size: 50% 100%;
     width: 200%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 #background::before {
@@ -859,6 +861,21 @@ body, html {
     color: #00ffcc;
     font-weight: bold;
     text-shadow: 0 0 5px rgba(0, 255, 200, 0.2);
+}
+
+#leaderboard-table tbody tr.god-rank {
+    background: rgba(255, 221, 0, 0.08);
+    border-left: 3px solid #ffdd00;
+}
+
+#leaderboard-table tbody tr.god-rank td {
+    color: #ffdd00;
+    text-shadow: 0 0 6px rgba(255, 221, 0, 0.3);
+}
+
+@keyframes victoryPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.04); }
 }
 
 /* ===== BOTÓN DE DISPARO MÓVIL ===== */
