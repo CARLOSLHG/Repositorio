@@ -149,7 +149,7 @@
 
         function sortAndTrimBoard(board) {
             board.sort((a, b) => (b.score || 0) - (a.score || 0));
-            if (board.length > 10) board.length = 10;
+            if (board.length > 100) board.length = 100;
             return board;
         }
 
@@ -231,7 +231,7 @@
         }
 
         // --- Sistema de rangos sci-fi (basado en amenazas neutralizadas) ---
-        // Primer umbral: 50, cada siguiente +10% del anterior
+        // Primer umbral: 50, cada siguiente +25% del anterior
         const RANK_TABLE = [
             { name: 'Recluta Byte',              color: '#667788' },
             { name: 'Cadete del Firewall',        color: '#5599aa' },
@@ -255,7 +255,7 @@
             let threshold = 50;
             for (let i = 0; i < RANK_TABLE.length - 1; i++) {
                 if (threats < threshold) return RANK_TABLE[i];
-                threshold = Math.ceil(threshold * 1.1);
+                threshold = Math.ceil(threshold * 1.25);
             }
             return RANK_TABLE[RANK_TABLE.length - 1];
         }
@@ -278,7 +278,7 @@
             const modeLabel = jsonbinEnabled ? '🌐 Global' : '💻 Local';
             return `
                 <div id="leaderboard-container">
-                    <h2>Leaderboard - Top 10 <span style="font-size:0.6em;color:#5577aa;">${modeLabel}</span></h2>
+                    <h2>Leaderboard - Top 100 <span style="font-size:0.6em;color:#5577aa;">${modeLabel}</span></h2>
                     <table id="leaderboard-table">
                         <thead>
                             <tr>
@@ -1080,7 +1080,7 @@
                             clearRemoteLeaderboard();
                             const lbContainer = document.getElementById('leaderboard-container');
                             if (lbContainer) {
-                                lbContainer.innerHTML = '<h2>Leaderboard - Top 10</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
+                                lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
                             }
                         } else if (pwd !== null) {
                             alert('Clave incorrecta');
