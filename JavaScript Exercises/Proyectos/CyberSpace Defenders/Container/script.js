@@ -1019,6 +1019,10 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
+                // Reactivar botón de música para que sea clickeable en game over
+                const musicBtn = document.getElementById('toggle-music-button');
+                if (musicBtn) musicBtn.style.pointerEvents = 'auto';
+
                 // Ocultar botón de disparo móvil en game over
                 const fireBtn = document.getElementById('mobile-fire-button');
                 if (fireBtn) fireBtn.style.display = 'none';
@@ -1071,6 +1075,9 @@
                 gameOver = false;
                 // Ocultar cursor de nuevo al reiniciar
                 gameContainer.style.cursor = 'none';
+                // Desactivar pointer-events del botón de música durante gameplay
+                const musicBtnReset = document.getElementById('toggle-music-button');
+                if (musicBtnReset) musicBtnReset.style.pointerEvents = 'none';
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
