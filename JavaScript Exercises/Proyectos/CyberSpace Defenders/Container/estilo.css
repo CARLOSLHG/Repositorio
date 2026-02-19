@@ -63,7 +63,6 @@ body, html {
     background-size: cover;
     width: 200%;
     height: 100%;
-    animation: backgroundScroll 20s linear infinite;
     position: absolute;
     top: 0;
     left: 0;
@@ -530,6 +529,7 @@ body, html {
     white-space: normal;
     z-index: 20;
     max-width: 100px;
+    pointer-events: none;
 }
 
 #toggle-music-button:hover {
