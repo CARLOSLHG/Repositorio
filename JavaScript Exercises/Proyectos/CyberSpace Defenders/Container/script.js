@@ -352,6 +352,11 @@
         let mouseTargetBottom = -1;
         let isMouseControlled = false;
 
+        // --- Background scroll fluido (controlado desde game loop) ---
+        let bgScrollX = 0;          // posición actual (0 a -50, en %)
+        let bgCurrentSpeed = 20;    // velocidad actual (segundos para recorrer el ciclo)
+        let bgTargetSpeed = 20;     // velocidad objetivo (se interpola hacia esta)
+
         function initGame() {
             // Añadir música al juego
             const audio = new Audio('./mp3/sound.mp3');
@@ -445,10 +450,8 @@
                     difficultyDisplay.style.textShadow = `0 0 8px ${diff.levelColor}, 0 0 16px ${diff.levelColor}40`;
                 }
 
-                // Acelerar el fondo progresivamente
-                if (backgroundEl) {
-                    backgroundEl.style.animationDuration = diff.backgroundSpeed + 's';
-                }
+                // Actualizar velocidad objetivo del fondo (se interpola en el game loop)
+                bgTargetSpeed = diff.backgroundSpeed;
             }
 
             function startDistanceCounter() {
@@ -574,6 +577,17 @@
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
                 // El disparo móvil se maneja via #mobile-fire-button (ver evento abajo)
+
+                // === FONDO: scroll fluido con velocidad interpolada ===
+                // Interpolar suavemente hacia la velocidad objetivo (lerp ~5% por frame a 60fps)
+                const bgLerp = 1 - Math.pow(0.95, dt);
+                bgCurrentSpeed += (bgTargetSpeed - bgCurrentSpeed) * bgLerp;
+                // Avanzar posición: -50% en bgCurrentSpeed segundos → por frame a 60fps
+                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * dt;
+                if (bgScrollX <= -50) bgScrollX += 50; // loop continuo
+                if (backgroundEl) {
+                    backgroundEl.style.transform = `translateX(${bgScrollX}%)`;
+                }
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
@@ -1072,8 +1086,11 @@
 
                 // Reiniciar HUD de dificultad y fondo
                 updateDifficultyHUD(0);
+                bgScrollX = 0;
+                bgCurrentSpeed = 20;
+                bgTargetSpeed = 20;
                 if (backgroundEl) {
-                    backgroundEl.style.animationDuration = '20s';
+                    backgroundEl.style.transform = 'translateX(0%)';
                 }
 
                 spaceship.style.bottom = '50%';
