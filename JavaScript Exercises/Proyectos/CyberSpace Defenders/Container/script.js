@@ -1059,7 +1059,22 @@
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
-                        <button id="clear-leaderboard-button">Limpiar Leaderboard</button>
+                        <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
+                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                                <g transform="translate(20,20) rotate(-45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
+                                </g>
+                                <g transform="translate(20,20) rotate(45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                 `;
                 gameContainer.appendChild(victoryOverlay);
@@ -1150,7 +1165,22 @@
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
-                        <button id="clear-leaderboard-button">Limpiar Leaderboard</button>
+                        <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
+                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                                <g transform="translate(20,20) rotate(-45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
+                                </g>
+                                <g transform="translate(20,20) rotate(45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                 `;
                 gameContainer.appendChild(gameOverMessage);
