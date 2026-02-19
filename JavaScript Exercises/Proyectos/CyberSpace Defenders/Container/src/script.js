@@ -397,6 +397,14 @@
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
         let bgCurrentSpeed = 20;    // velocidad actual (segundos para recorrer el ciclo)
         let bgTargetSpeed = 20;     // velocidad objetivo (se interpola hacia esta)
+        // Factor de escala: compensa que el elemento ahora mide 1400vh en vez de 200vw.
+        // Mantiene la misma velocidad visual (px/s) que con width:200%.
+        let bgSpeedScale = 1;
+        function updateBgSpeedScale() {
+            // oldElementWidth = 2 * vw, newElementWidth = 14 * vh
+            // scale = oldWidth / newWidth = (2 * vw) / (14 * vh)
+            bgSpeedScale = (2 * window.innerWidth) / (14 * window.innerHeight);
+        }
 
         function initGame() {
             // Añadir música al juego
@@ -472,6 +480,7 @@
             function updateCachedDimensions() {
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
+                updateBgSpeedScale();
             }
             window.addEventListener('resize', updateCachedDimensions);
             updateCachedDimensions();
@@ -626,7 +635,8 @@
                 // Suavizar dt para el fondo: evita saltos por picos de frame
                 const bgDt = dt > 1.8 ? 1 + (dt - 1) * 0.3 : dt;
                 // Avanzar posición: -50% en bgCurrentSpeed segundos → por frame a 60fps
-                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * bgDt;
+                // bgSpeedScale compensa width:1400vh vs antiguo width:200%
+                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * bgDt * bgSpeedScale;
                 if (bgScrollX <= -50) bgScrollX += 50; // loop continuo
                 if (backgroundEl) {
                     backgroundEl.style.transform = `translate3d(${bgScrollX}%, 0, 0)`;
