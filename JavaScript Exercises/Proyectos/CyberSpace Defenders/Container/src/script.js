@@ -231,25 +231,25 @@
             }
         }
 
-        // --- Sistema de rangos sci-fi (basado en amenazas neutralizadas) ---
+        // --- Sistema de rangos sci-fi + ciberseguridad (basado en amenazas neutralizadas) ---
         // Primer umbral: 50, cada siguiente +20% del anterior
         const RANK_TABLE = [
-            { name: 'Recluta Byte',              color: '#667788' },
-            { name: 'Cadete del Firewall',        color: '#5599aa' },
-            { name: 'Navegante de Red',           color: '#44aacc' },
-            { name: 'Operador del Grid',          color: '#33bbdd' },
-            { name: 'Hacker Alfa',                color: '#22cc88' },
-            { name: 'Centinela Estelar',          color: '#44dd55' },
-            { name: 'Agente del Nexus',           color: '#aacc22' },
-            { name: 'Defensor Cuántico',          color: '#ddbb11' },
-            { name: 'Comandante Neural',          color: '#ff9922' },
-            { name: 'Estratega del Void',         color: '#ff6633' },
-            { name: 'Capitán del Ciberespacio',   color: '#ff3355' },
-            { name: 'Almirante Holográfico',      color: '#dd22aa' },
-            { name: 'Guardián de la Singularidad',color: '#bb33ff' },
-            { name: 'Archon del Cosmos Digital',  color: '#8855ff' },
-            { name: 'Leyenda del Multiverso',     color: '#00ffcc' },
-            { name: 'Dios del Ciberespacio',      color: '#ffdd00' }
+            { name: 'Script Kiddie',              color: '#667788' },
+            { name: 'Cadete Firewall',             color: '#5599aa' },
+            { name: 'Analista de Paquetes',        color: '#44aacc' },
+            { name: 'Operador SOC Estelar',        color: '#33bbdd' },
+            { name: 'Pentester Cuántico',          color: '#22cc88' },
+            { name: 'Centinela Zero-Day',          color: '#44dd55' },
+            { name: 'Agente del Rootkit',          color: '#aacc22' },
+            { name: 'Criptógrafo Interestelar',    color: '#ddbb11' },
+            { name: 'Comandante Exploit',          color: '#ff9922' },
+            { name: 'Red Team Galáctico',          color: '#ff6633' },
+            { name: 'Capitán del Kernel',          color: '#ff3355' },
+            { name: 'Almirante Ransomware Hunter', color: '#dd22aa' },
+            { name: 'Guardián de la Blockchain',   color: '#bb33ff' },
+            { name: 'Archon del Deep Web',         color: '#8855ff' },
+            { name: 'Leyenda del CyberVoid',       color: '#00ffcc' },
+            { name: 'Dios del Ciberespacio',       color: '#ffdd00' }
         ];
 
         function getRank(threats) {
@@ -397,6 +397,14 @@
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
         let bgCurrentSpeed = 20;    // velocidad actual (segundos para recorrer el ciclo)
         let bgTargetSpeed = 20;     // velocidad objetivo (se interpola hacia esta)
+        // Factor de escala: compensa que el elemento ahora mide 1400vh en vez de 200vw.
+        // Mantiene la misma velocidad visual (px/s) que con width:200%.
+        let bgSpeedScale = 1;
+        function updateBgSpeedScale() {
+            // oldElementWidth = 2 * vw, newElementWidth = 14 * vh
+            // scale = oldWidth / newWidth = (2 * vw) / (14 * vh)
+            bgSpeedScale = (2 * window.innerWidth) / (14 * window.innerHeight);
+        }
 
         function initGame() {
             // Añadir música al juego
@@ -472,6 +480,7 @@
             function updateCachedDimensions() {
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
+                updateBgSpeedScale();
             }
             window.addEventListener('resize', updateCachedDimensions);
             updateCachedDimensions();
@@ -626,7 +635,8 @@
                 // Suavizar dt para el fondo: evita saltos por picos de frame
                 const bgDt = dt > 1.8 ? 1 + (dt - 1) * 0.3 : dt;
                 // Avanzar posición: -50% en bgCurrentSpeed segundos → por frame a 60fps
-                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * bgDt;
+                // bgSpeedScale compensa width:1400vh vs antiguo width:200%
+                bgScrollX -= (50 / (bgCurrentSpeed * 60)) * bgDt * bgSpeedScale;
                 if (bgScrollX <= -50) bgScrollX += 50; // loop continuo
                 if (backgroundEl) {
                     backgroundEl.style.transform = `translate3d(${bgScrollX}%, 0, 0)`;
@@ -1059,7 +1069,22 @@
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
-                        <button id="clear-leaderboard-button">Limpiar Leaderboard</button>
+                        <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
+                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                                <g transform="translate(20,20) rotate(-45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
+                                </g>
+                                <g transform="translate(20,20) rotate(45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                 `;
                 gameContainer.appendChild(victoryOverlay);
@@ -1150,7 +1175,22 @@
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
-                        <button id="clear-leaderboard-button">Limpiar Leaderboard</button>
+                        <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
+                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                                <g transform="translate(20,20) rotate(-45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
+                                </g>
+                                <g transform="translate(20,20) rotate(45)">
+                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
+                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                 `;
                 gameContainer.appendChild(gameOverMessage);
