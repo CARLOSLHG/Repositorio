@@ -231,25 +231,25 @@
             }
         }
 
-        // --- Sistema de rangos sci-fi (basado en amenazas neutralizadas) ---
+        // --- Sistema de rangos sci-fi + ciberseguridad (basado en amenazas neutralizadas) ---
         // Primer umbral: 50, cada siguiente +20% del anterior
         const RANK_TABLE = [
-            { name: 'Recluta Byte',              color: '#667788' },
-            { name: 'Cadete del Firewall',        color: '#5599aa' },
-            { name: 'Navegante de Red',           color: '#44aacc' },
-            { name: 'Operador del Grid',          color: '#33bbdd' },
-            { name: 'Hacker Alfa',                color: '#22cc88' },
-            { name: 'Centinela Estelar',          color: '#44dd55' },
-            { name: 'Agente del Nexus',           color: '#aacc22' },
-            { name: 'Defensor Cuántico',          color: '#ddbb11' },
-            { name: 'Comandante Neural',          color: '#ff9922' },
-            { name: 'Estratega del Void',         color: '#ff6633' },
-            { name: 'Capitán del Ciberespacio',   color: '#ff3355' },
-            { name: 'Almirante Holográfico',      color: '#dd22aa' },
-            { name: 'Guardián de la Singularidad',color: '#bb33ff' },
-            { name: 'Archon del Cosmos Digital',  color: '#8855ff' },
-            { name: 'Leyenda del Multiverso',     color: '#00ffcc' },
-            { name: 'Dios del Ciberespacio',      color: '#ffdd00' }
+            { name: 'Script Kiddie',              color: '#667788' },
+            { name: 'Cadete Firewall',             color: '#5599aa' },
+            { name: 'Analista de Paquetes',        color: '#44aacc' },
+            { name: 'Operador SOC Estelar',        color: '#33bbdd' },
+            { name: 'Pentester Cuántico',          color: '#22cc88' },
+            { name: 'Centinela Zero-Day',          color: '#44dd55' },
+            { name: 'Agente del Rootkit',          color: '#aacc22' },
+            { name: 'Criptógrafo Interestelar',    color: '#ddbb11' },
+            { name: 'Comandante Exploit',          color: '#ff9922' },
+            { name: 'Red Team Galáctico',          color: '#ff6633' },
+            { name: 'Capitán del Kernel',          color: '#ff3355' },
+            { name: 'Almirante Ransomware Hunter', color: '#dd22aa' },
+            { name: 'Guardián de la Blockchain',   color: '#bb33ff' },
+            { name: 'Archon del Deep Web',         color: '#8855ff' },
+            { name: 'Leyenda del CyberVoid',       color: '#00ffcc' },
+            { name: 'Dios del Ciberespacio',       color: '#ffdd00' }
         ];
 
         function getRank(threats) {
