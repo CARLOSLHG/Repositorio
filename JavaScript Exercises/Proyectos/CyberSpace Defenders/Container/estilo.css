@@ -863,6 +863,21 @@ body, html {
     text-shadow: 0 0 5px rgba(0, 255, 200, 0.2);
 }
 
+#leaderboard-table tbody tr.god-rank {
+    background: rgba(255, 221, 0, 0.08);
+    border-left: 3px solid #ffdd00;
+}
+
+#leaderboard-table tbody tr.god-rank td {
+    color: #ffdd00;
+    text-shadow: 0 0 6px rgba(255, 221, 0, 0.3);
+}
+
+@keyframes victoryPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.04); }
+}
+
 /* ===== BOTÓN DE DISPARO MÓVIL ===== */
 #mobile-fire-button {
     display: none; /* Oculto por defecto, JS lo muestra en touch devices */

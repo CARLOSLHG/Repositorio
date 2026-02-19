@@ -195,7 +195,8 @@
                 threats: threats,
                 time: time,
                 score: threats * 100000 + time,
-                date: new Date().toLocaleDateString()
+                date: new Date().toLocaleDateString(),
+                godRank: isGodRank(threats)
             };
 
             currentEntryId = entryId;
@@ -254,10 +255,14 @@
         function getRank(threats) {
             let threshold = 50;
             for (let i = 0; i < RANK_TABLE.length - 1; i++) {
-                if (threats < threshold) return RANK_TABLE[i];
+                if (threats < threshold) return { ...RANK_TABLE[i], index: i };
                 threshold = Math.ceil(threshold * 1.2);
             }
-            return RANK_TABLE[RANK_TABLE.length - 1];
+            return { ...RANK_TABLE[RANK_TABLE.length - 1], index: RANK_TABLE.length - 1 };
+        }
+
+        function isGodRank(threats) {
+            return getRank(threats).index === RANK_TABLE.length - 1;
         }
 
         function buildLeaderboardHTML(board) {
@@ -266,9 +271,12 @@
                 const isCurrent = (entry.id === currentEntryId);
                 const medal = i === 0 ? ' ★' : '';
                 const rank = getRank(entry.threats || 0);
-                rows += `<tr class="${isCurrent ? 'current-player' : ''}">
+                const isGod = entry.godRank || isGodRank(entry.threats || 0);
+                const godClass = isGod ? ' god-rank' : '';
+                const godIcon = isGod ? ' &#9889;' : '';
+                rows += `<tr class="${isCurrent ? 'current-player' : ''}${godClass}">
                     <td>${i + 1}${medal}</td>
-                    <td>${entry.name}</td>
+                    <td>${entry.name}${godIcon}</td>
                     <td>${entry.threats}</td>
                     <td>${entry.time}s</td>
                     <td style="color:${rank.color};text-shadow:0 0 6px ${rank.color}40;">${rank.name}</td>
@@ -672,6 +680,11 @@
                             }, 500);
                             cyberattackCount += 1;
                             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                            // Victoria: alcanzó rango máximo
+                            if (isGodRank(cyberattackCount) && !gameOver) {
+                                gameOver = true;
+                                showVictoryMessage();
+                            }
                             hit = true;
                             break;
                         }
@@ -1004,6 +1017,95 @@
                 }
 
                 scheduleNext();
+            }
+
+            // Victoria: alcanzó rango máximo "Dios del Ciberespacio"
+            function showVictoryMessage() {
+                if (gameLoopId) {
+                    cancelAnimationFrame(gameLoopId);
+                    gameLoopId = null;
+                }
+
+                const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
+                const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
+                const godRank = RANK_TABLE[RANK_TABLE.length - 1];
+
+                const victoryOverlay = document.createElement('div');
+                victoryOverlay.id = 'game-over-message';
+                victoryOverlay.innerHTML = `
+                    <h1 class="victory-title" style="color:${godRank.color};text-shadow:0 0 20px ${godRank.color}, 0 0 40px ${godRank.color}80;font-size:1.6em;animation:victoryPulse 1.5s ease-in-out infinite;">&#9733; VICTORIA TOTAL &#9733;</h1>
+                    <p class="game-over-reason" style="color:#ffdd00;font-size:1.1em;">Has alcanzado el rango supremo</p>
+                    <p class="player-result" style="font-size:1.2em;">Defensor: <strong>${playerName}</strong></p>
+                    <p class="player-rank" style="color:${godRank.color};text-shadow:0 0 15px ${godRank.color}, 0 0 30px ${godRank.color}60;font-size:1.4em;margin:0.3em 0 0.6em;letter-spacing:2px;animation:victoryPulse 2s ease-in-out infinite;">&#9889; ${godRank.name} &#9889;</p>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:${godRank.color};">${cyberattackCount}</span>
+                            <span class="stat-label">Amenazas Neutralizadas</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">${elapsedSeconds}s</span>
+                            <span class="stat-label">Tiempo de Misión</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">${missileCount}</span>
+                            <span class="stat-label">Misiles Restantes</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxLevelInfo.name}</span>
+                            <span class="stat-label">Nivel Máximo</span>
+                        </div>
+                    </div>
+                    <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
+                    <div class="buttons-container">
+                        <button id="exit-button">Salir</button>
+                        <button id="restart-game-button">Reiniciar Juego</button>
+                        <button id="clear-leaderboard-button">Limpiar Leaderboard</button>
+                    </div>
+                `;
+                gameContainer.appendChild(victoryOverlay);
+
+                gameContainer.style.cursor = 'default';
+                const musicBtn = document.getElementById('toggle-music-button');
+                if (musicBtn) musicBtn.style.pointerEvents = 'auto';
+                const fireBtn = document.getElementById('mobile-fire-button');
+                if (fireBtn) fireBtn.style.display = 'none';
+
+                victoryOverlay.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    if (event.target && event.target.id === 'exit-button') {
+                        window.close();
+                        window.location.href = 'about:blank';
+                    }
+                    if (event.target && event.target.id === 'restart-game-button') {
+                        resetGame();
+                    }
+                    if (event.target && event.target.id === 'clear-leaderboard-button') {
+                        const pwd = prompt('Ingresa la clave de administrador:');
+                        if (pwd === '66826682') {
+                            localStorage.removeItem('cyberspace_leaderboard');
+                            clearRemoteLeaderboard();
+                            const lbContainer = document.getElementById('leaderboard-container');
+                            if (lbContainer) {
+                                lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
+                            }
+                        } else if (pwd !== null) {
+                            alert('Clave incorrecta');
+                        }
+                    }
+                });
+
+                addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
+                    const placeholder = document.getElementById('leaderboard-placeholder');
+                    if (placeholder) {
+                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    }
+                }).catch(err => {
+                    console.warn('Error cargando leaderboard:', err);
+                    const placeholder = document.getElementById('leaderboard-placeholder');
+                    if (placeholder) {
+                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                    }
+                });
             }
 
             // Mostrar mensaje de "Game Over" con leaderboard
