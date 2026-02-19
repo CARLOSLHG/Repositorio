@@ -231,7 +231,7 @@
         }
 
         // --- Sistema de rangos sci-fi (basado en amenazas neutralizadas) ---
-        // Primer umbral: 50, cada siguiente x2 del anterior
+        // Primer umbral: 50, cada siguiente +20% del anterior
         const RANK_TABLE = [
             { name: 'Recluta Byte',              color: '#667788' },
             { name: 'Cadete del Firewall',        color: '#5599aa' },
@@ -255,7 +255,7 @@
             let threshold = 50;
             for (let i = 0; i < RANK_TABLE.length - 1; i++) {
                 if (threats < threshold) return RANK_TABLE[i];
-                threshold = threshold * 2;
+                threshold = Math.ceil(threshold * 1.2);
             }
             return RANK_TABLE[RANK_TABLE.length - 1];
         }
