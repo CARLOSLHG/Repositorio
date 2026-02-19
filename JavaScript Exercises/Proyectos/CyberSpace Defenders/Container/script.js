@@ -230,16 +230,48 @@
             }
         }
 
+        // --- Sistema de rangos sci-fi (basado en amenazas neutralizadas) ---
+        // Primer umbral: 50, cada siguiente +10% del anterior
+        const RANK_TABLE = [
+            { name: 'Recluta Byte',              color: '#667788' },
+            { name: 'Cadete del Firewall',        color: '#5599aa' },
+            { name: 'Navegante de Red',           color: '#44aacc' },
+            { name: 'Operador del Grid',          color: '#33bbdd' },
+            { name: 'Hacker Alfa',                color: '#22cc88' },
+            { name: 'Centinela Estelar',          color: '#44dd55' },
+            { name: 'Agente del Nexus',           color: '#aacc22' },
+            { name: 'Defensor Cuántico',          color: '#ddbb11' },
+            { name: 'Comandante Neural',          color: '#ff9922' },
+            { name: 'Estratega del Void',         color: '#ff6633' },
+            { name: 'Capitán del Ciberespacio',   color: '#ff3355' },
+            { name: 'Almirante Holográfico',      color: '#dd22aa' },
+            { name: 'Guardián de la Singularidad',color: '#bb33ff' },
+            { name: 'Archon del Cosmos Digital',  color: '#8855ff' },
+            { name: 'Leyenda del Multiverso',     color: '#00ffcc' },
+            { name: 'Dios del Ciberespacio',      color: '#ffdd00' }
+        ];
+
+        function getRank(threats) {
+            let threshold = 50;
+            for (let i = 0; i < RANK_TABLE.length - 1; i++) {
+                if (threats < threshold) return RANK_TABLE[i];
+                threshold = Math.ceil(threshold * 1.1);
+            }
+            return RANK_TABLE[RANK_TABLE.length - 1];
+        }
+
         function buildLeaderboardHTML(board) {
             let rows = '';
             board.forEach((entry, i) => {
                 const isCurrent = (entry.id === currentEntryId);
                 const medal = i === 0 ? ' ★' : '';
+                const rank = getRank(entry.threats || 0);
                 rows += `<tr class="${isCurrent ? 'current-player' : ''}">
                     <td>${i + 1}${medal}</td>
                     <td>${entry.name}</td>
                     <td>${entry.threats}</td>
                     <td>${entry.time}s</td>
+                    <td style="color:${rank.color};text-shadow:0 0 6px ${rank.color}40;">${rank.name}</td>
                     <td>${entry.date}</td>
                 </tr>`;
             });
@@ -254,6 +286,7 @@
                                 <th>Defensor</th>
                                 <th>Amenazas</th>
                                 <th>Tiempo</th>
+                                <th>Rango</th>
                                 <th>Fecha</th>
                             </tr>
                         </thead>
@@ -987,10 +1020,12 @@
                 const gameOverMessage = document.createElement('div');
                 gameOverMessage.id = 'game-over-message';
                 const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
+                const playerRank = getRank(cyberattackCount);
                 gameOverMessage.innerHTML = `
                     <h1>Misión Finalizada</h1>
                     ${reason ? `<p class="game-over-reason">${reason}</p>` : ''}
                     <p class="player-result">Defensor: <strong>${playerName}</strong></p>
+                    <p class="player-rank" style="color:${playerRank.color};text-shadow:0 0 10px ${playerRank.color}60;font-size:1.1em;margin:0.2em 0 0.5em;letter-spacing:1px;">&#9733; ${playerRank.name} &#9733;</p>
                     <div class="stats-row">
                         <div class="stat-box">
                             <span class="stat-value">${cyberattackCount}</span>
