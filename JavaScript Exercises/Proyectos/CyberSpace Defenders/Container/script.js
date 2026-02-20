@@ -1036,7 +1036,46 @@
                 packEl.classList.add('ammo-pack', `ammo-pack-${selected.amount}`);
                 packEl.dataset.amount = selected.amount;
 
-                // SVG escudo detallado con icono, cantidad y etiqueta
+                // Icono SVG específico según tipo de pack
+                const packIcons = {
+                    'PATCH': `
+                        <!-- Cruz médica (parche) -->
+                        <rect x="44" y="22" width="12" height="36" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+                        <rect x="32" y="34" width="36" height="12" rx="3" fill="#ffffff" fill-opacity="0.9"/>`,
+                    'FIREWALL': `
+                        <!-- Muro de ladrillos -->
+                        <rect x="28" y="24" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="54" y="24" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="22" y="34" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="42" y="34" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="62" y="34" width="12" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="28" y="44" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+                        <rect x="54" y="44" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>`,
+                    'ENCRYPT': `
+                        <!-- Candado -->
+                        <path d="M38 42 L38 34 Q38 24 50 24 Q62 24 62 34 L62 42" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.9"/>
+                        <rect x="34" y="42" width="32" height="20" rx="4" fill="#ffffff" fill-opacity="0.9"/>
+                        <circle cx="50" cy="52" r="3.5" fill="${selected.darkColor}"/>
+                        <rect x="48.5" y="52" width="3" height="6" rx="1" fill="${selected.darkColor}"/>`,
+                    'ZERO-DAY': `
+                        <!-- Bug / Virus -->
+                        <ellipse cx="50" cy="40" rx="14" ry="16" fill="#ffffff" fill-opacity="0.9"/>
+                        <circle cx="44" cy="36" r="3" fill="${selected.darkColor}"/>
+                        <circle cx="56" cy="36" r="3" fill="${selected.darkColor}"/>
+                        <path d="M43 46 Q50 50 57 46" fill="none" stroke="${selected.darkColor}" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Antenas -->
+                        <line x1="42" y1="28" x2="36" y2="20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
+                        <line x1="58" y1="28" x2="64" y2="20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
+                        <circle cx="36" cy="19" r="2" fill="#ffffff" fill-opacity="0.8"/>
+                        <circle cx="64" cy="19" r="2" fill="#ffffff" fill-opacity="0.8"/>
+                        <!-- Patas -->
+                        <line x1="36" y1="35" x2="26" y2="30" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+                        <line x1="36" y1="43" x2="26" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+                        <line x1="64" y1="35" x2="74" y2="30" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+                        <line x1="64" y1="43" x2="74" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>`
+                };
+
+                // SVG escudo con icono identificativo, cantidad y etiqueta
                 packEl.innerHTML = `
                     <svg viewBox="0 0 100 120" class="ammo-svg">
                         <defs>
@@ -1059,12 +1098,11 @@
                         <!-- Borde interior -->
                         <path d="M50 12 L80 27 L80 56 Q80 83 50 105 Q20 83 20 56 L20 27 Z"
                               fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
-                        <!-- Cruz / Plus central -->
-                        <rect x="44" y="22" width="12" height="36" rx="3" fill="#ffffff" fill-opacity="0.9"/>
-                        <rect x="32" y="34" width="36" height="12" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+                        <!-- Icono identificativo -->
+                        ${packIcons[selected.label] || ''}
                         <!-- Cantidad (+N) -->
-                        <text x="50" y="78" text-anchor="middle" fill="#ffffff"
-                              font-size="22" font-weight="bold" font-family="Arial"
+                        <text x="50" y="80" text-anchor="middle" fill="#ffffff"
+                              font-size="20" font-weight="bold" font-family="Arial"
                               style="text-shadow: 0 1px 3px rgba(0,0,0,0.5);">+${selected.amount}</text>
                         <!-- Etiqueta -->
                         <text x="50" y="98" text-anchor="middle" fill="#ffffff"
