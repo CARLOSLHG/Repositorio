@@ -1121,16 +1121,25 @@
                 });
             }
 
-            // Spawning de super capsule: ultra raro, solo tras 50+ amenazas
+            // Spawning de super capsule: probabilidad y frecuencia según amenazas eliminadas
+            function getSuperCapsuleParams() {
+                if (cyberattackCount >= 125) return { probability: 0.05, delay: 45000 };
+                if (cyberattackCount >= 100) return { probability: 0.10, delay: 40000 };
+                if (cyberattackCount >= 75)  return { probability: 0.15, delay: 35000 };
+                if (cyberattackCount >= 50)  return { probability: 0.20, delay: 30000 };
+                if (cyberattackCount >= 25)  return { probability: 0.25, delay: 25000 };
+                return null; // Menos de 25: no aparece
+            }
+
             function startSuperCapsuleSpawner() {
                 function scheduleCheck() {
-                    // Revisar cada 20-40 segundos si puede aparecer
-                    const checkDelay = Math.random() * 20000 + 20000;
+                    const params = getSuperCapsuleParams();
+                    const checkDelay = params ? params.delay : 25000;
                     superCapsuleSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
-                        if (cyberattackCount >= 25 && !godModeActive) {
-                            // Probabilidad ultra baja: ~3% cada chequeo
-                            if (Math.random() < 0.03) {
+                        const currentParams = getSuperCapsuleParams();
+                        if (currentParams && !godModeActive) {
+                            if (Math.random() < currentParams.probability) {
                                 createSuperCapsule();
                             }
                         }

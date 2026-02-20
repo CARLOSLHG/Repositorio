@@ -143,6 +143,7 @@ body, html {
     color: #ccddee;
     white-space: nowrap;
     border-left: 2px solid rgba(0, 200, 255, 0.4);
+    pointer-events: none;
 }
 
 #distance-counter {
@@ -921,6 +922,7 @@ body, html {
     letter-spacing: 2px;
     font-weight: bold;
     text-shadow: 0 0 6px rgba(0, 255, 200, 0.3);
+    pointer-events: none;
 }
 
 /* ===== LEADERBOARD ===== */
