@@ -1123,7 +1123,7 @@
 
             // Spawning de super capsule: probabilidad y frecuencia según amenazas eliminadas
             function getSuperCapsuleParams() {
-                if (cyberattackCount >= 101) return { probability: 0.05, delay: 45000 };
+                if (cyberattackCount >= 125) return { probability: 0.05, delay: 45000 };
                 if (cyberattackCount >= 100) return { probability: 0.10, delay: 40000 };
                 if (cyberattackCount >= 75)  return { probability: 0.15, delay: 35000 };
                 if (cyberattackCount >= 50)  return { probability: 0.20, delay: 30000 };
