@@ -357,6 +357,12 @@
                 playerDisplay.textContent = `Defensor: ${playerName}`;
                 gameStartTime = Date.now();
                 gameStarted = true;
+
+                // Pantalla completa al iniciar el juego
+                const el = document.documentElement;
+                const rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+                if (rfs) rfs.call(el).catch(() => {});
+
                 initGame();
             }
 
@@ -1070,7 +1076,7 @@
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
-                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                            <svg viewBox="0 0 40 40" width="30" height="30" style="vertical-align:middle;">
                                 <g transform="translate(20,20) rotate(-45)">
                                     <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
                                     <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
@@ -1176,7 +1182,7 @@
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
-                            <svg viewBox="0 0 40 40" width="22" height="22" style="vertical-align:middle;">
+                            <svg viewBox="0 0 40 40" width="30" height="30" style="vertical-align:middle;">
                                 <g transform="translate(20,20) rotate(-45)">
                                     <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
                                     <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
