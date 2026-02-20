@@ -23,10 +23,10 @@
         let missilesUsed = 0;
         let packsCollected = 0;
         const AMMO_PACK_TYPES = [
-            { amount: 25,  label: 'PATCH',    color: '#22cc66', probability: 0.50 },
-            { amount: 50,  label: 'FIREWALL', color: '#00c8ff', probability: 0.30 },
-            { amount: 75,  label: 'ENCRYPT',  color: '#ffaa00', probability: 0.15 },
-            { amount: 100, label: 'ZERO-DAY', color: '#ff44ff', probability: 0.05 }
+            { amount: 25,  label: 'PATCH',    color: '#22cc66', glowColor: '#22cc66', darkColor: '#178a44', probability: 0.50 },
+            { amount: 50,  label: 'FIREWALL', color: '#d4a017', glowColor: '#d4a017', darkColor: '#9a7510', probability: 0.30 },
+            { amount: 75,  label: 'ENCRYPT',  color: '#f0c040', glowColor: '#f0c040', darkColor: '#c89a20', probability: 0.15 },
+            { amount: 100, label: 'ZERO-DAY', color: '#00bfff', glowColor: '#00bfff', darkColor: '#0088bb', probability: 0.05 }
         ];
 
         // --- Sistema de dificultad progresiva ---
@@ -980,16 +980,40 @@
                 packEl.classList.add('ammo-pack', `ammo-pack-${selected.amount}`);
                 packEl.dataset.amount = selected.amount;
 
-                // SVG escudo con cantidad y etiqueta
+                // SVG escudo detallado con icono, cantidad y etiqueta
                 packEl.innerHTML = `
-                    <svg viewBox="0 0 80 90" class="ammo-svg">
-                        <path d="M40 5 L70 20 L70 50 Q70 75 40 85 Q10 75 10 50 L10 20 Z"
-                              fill="${selected.color}" fill-opacity="0.85" stroke="#ffffff" stroke-width="2.5"/>
-                        <text x="40" y="42" text-anchor="middle" fill="#ffffff"
-                              font-size="18" font-weight="bold" font-family="Arial">+${selected.amount}</text>
-                        <text x="40" y="62" text-anchor="middle" fill="#ffffff"
-                              font-size="9" font-weight="bold" font-family="Arial"
-                              letter-spacing="1">${selected.label}</text>
+                    <svg viewBox="0 0 100 120" class="ammo-svg">
+                        <defs>
+                            <linearGradient id="shieldGrad-${selected.amount}" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="${selected.color}" stop-opacity="1"/>
+                                <stop offset="100%" stop-color="${selected.darkColor}" stop-opacity="1"/>
+                            </linearGradient>
+                            <linearGradient id="shieldShine-${selected.amount}" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.05"/>
+                                <stop offset="100%" stop-color="#000000" stop-opacity="0.15"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Escudo base -->
+                        <path d="M50 4 L88 22 L88 58 Q88 90 50 114 Q12 90 12 58 L12 22 Z"
+                              fill="url(#shieldGrad-${selected.amount})" stroke="${selected.color}" stroke-width="3"/>
+                        <!-- Brillo del escudo -->
+                        <path d="M50 4 L88 22 L88 58 Q88 90 50 114 Q12 90 12 58 L12 22 Z"
+                              fill="url(#shieldShine-${selected.amount})"/>
+                        <!-- Borde interior -->
+                        <path d="M50 12 L80 27 L80 56 Q80 83 50 105 Q20 83 20 56 L20 27 Z"
+                              fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
+                        <!-- Cruz / Plus central -->
+                        <rect x="44" y="22" width="12" height="36" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+                        <rect x="32" y="34" width="36" height="12" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+                        <!-- Cantidad (+N) -->
+                        <text x="50" y="78" text-anchor="middle" fill="#ffffff"
+                              font-size="22" font-weight="bold" font-family="Arial"
+                              style="text-shadow: 0 1px 3px rgba(0,0,0,0.5);">+${selected.amount}</text>
+                        <!-- Etiqueta -->
+                        <text x="50" y="98" text-anchor="middle" fill="#ffffff"
+                              font-size="11" font-weight="bold" font-family="Arial"
+                              letter-spacing="2" fill-opacity="0.9">${selected.label}</text>
                     </svg>
                 `;
 
@@ -1077,12 +1101,25 @@
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
                             <svg viewBox="0 0 64 64" width="28" height="28" style="vertical-align:middle;">
-                                <rect x="12" y="14" width="40" height="4" rx="2" fill="currentColor"/>
-                                <rect x="24" y="10" width="16" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                                <path d="M16 18 L18 54 Q18 56 20 56 L44 56 Q46 56 46 54 L48 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="26" y1="24" x2="26" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="32" y1="24" x2="32" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="38" y1="24" x2="38" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="lbResetGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#00d4ff"/>
+                                        <stop offset="100%" stop-color="#0077cc"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Flecha circular de reset -->
+                                <path d="M32 8 A24 24 0 1 1 10 22" fill="none" stroke="url(#lbResetGrad)" stroke-width="3.5" stroke-linecap="round"/>
+                                <polygon points="6,14 14,14 10,24" fill="#00d4ff"/>
+                                <!-- Barras de gráfico ascendente -->
+                                <rect x="20" y="40" width="6" height="12" rx="1" fill="#00d4ff" opacity="0.7"/>
+                                <rect x="29" y="33" width="6" height="19" rx="1" fill="#00aaee" opacity="0.85"/>
+                                <rect x="38" y="25" width="6" height="27" rx="1" fill="#0088dd"/>
+                                <!-- Estrella en la cima -->
+                                <polygon points="41,19 42.5,23 47,23.5 43.5,26.5 44.5,31 41,28.5 37.5,31 38.5,26.5 35,23.5 39.5,23" fill="#ffd700" stroke="#ffaa00" stroke-width="0.5"/>
+                                <!-- Destellos -->
+                                <circle cx="18" cy="15" r="1.2" fill="#ffffff" opacity="0.8"/>
+                                <circle cx="50" cy="18" r="0.8" fill="#ffffff" opacity="0.6"/>
+                                <circle cx="14" cy="35" r="1" fill="#ffffff" opacity="0.5"/>
                             </svg>
                         </button>
                     </div>
@@ -1177,12 +1214,25 @@
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
                             <svg viewBox="0 0 64 64" width="28" height="28" style="vertical-align:middle;">
-                                <rect x="12" y="14" width="40" height="4" rx="2" fill="currentColor"/>
-                                <rect x="24" y="10" width="16" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/>
-                                <path d="M16 18 L18 54 Q18 56 20 56 L44 56 Q46 56 46 54 L48 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="26" y1="24" x2="26" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="32" y1="24" x2="32" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="38" y1="24" x2="38" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="lbResetGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#00d4ff"/>
+                                        <stop offset="100%" stop-color="#0077cc"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Flecha circular de reset -->
+                                <path d="M32 8 A24 24 0 1 1 10 22" fill="none" stroke="url(#lbResetGrad)" stroke-width="3.5" stroke-linecap="round"/>
+                                <polygon points="6,14 14,14 10,24" fill="#00d4ff"/>
+                                <!-- Barras de gráfico ascendente -->
+                                <rect x="20" y="40" width="6" height="12" rx="1" fill="#00d4ff" opacity="0.7"/>
+                                <rect x="29" y="33" width="6" height="19" rx="1" fill="#00aaee" opacity="0.85"/>
+                                <rect x="38" y="25" width="6" height="27" rx="1" fill="#0088dd"/>
+                                <!-- Estrella en la cima -->
+                                <polygon points="41,19 42.5,23 47,23.5 43.5,26.5 44.5,31 41,28.5 37.5,31 38.5,26.5 35,23.5 39.5,23" fill="#ffd700" stroke="#ffaa00" stroke-width="0.5"/>
+                                <!-- Destellos -->
+                                <circle cx="18" cy="15" r="1.2" fill="#ffffff" opacity="0.8"/>
+                                <circle cx="50" cy="18" r="0.8" fill="#ffffff" opacity="0.6"/>
+                                <circle cx="14" cy="35" r="1" fill="#ffffff" opacity="0.5"/>
                             </svg>
                         </button>
                     </div>
