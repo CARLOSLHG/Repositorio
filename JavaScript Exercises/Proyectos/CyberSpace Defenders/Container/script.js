@@ -1201,7 +1201,7 @@
                     const checkDelay = Math.random() * 20000 + 20000;
                     superCapsuleSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
-                        if (cyberattackCount >= 50 && !godModeActive) {
+                        if (cyberattackCount >= 25 && !godModeActive) {
                             // Probabilidad ultra baja: ~3% cada chequeo
                             if (Math.random() < 0.03) {
                                 createSuperCapsule();
