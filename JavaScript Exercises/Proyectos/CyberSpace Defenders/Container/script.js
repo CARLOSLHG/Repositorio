@@ -691,37 +691,51 @@
 
                 // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
 
-                // Misiles ↔ cyberattacks + packs
+                // Misiles ↔ cyberattacks + packs (super cápsulas son inmunes)
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
                     const mR = activeMissiles[i]._r;
                     let hit = false;
 
-                    for (let j = activeHazards.length - 1; j >= 0; j--) {
-                        const h = activeHazards[j];
-                        if (h.type !== 'cyber' || h.destroyed || !h._r) continue;
-                        if (!(mR.top > h._r.bottom || mR.bottom < h._r.top ||
-                              mR.right < h._r.left || mR.left > h._r.right)) {
-                            h.element.src = './img/exploit.png';
-                            h.element.classList.add('destroyed');
-                            h.destroyed = true;
-                            setTimeout(() => {
-                                h.element.remove();
-                                const idx = activeHazards.indexOf(h);
-                                if (idx !== -1) activeHazards.splice(idx, 1);
-                            }, 500);
-                            cyberattackCount += 1;
-                            cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
-                            // Victoria: alcanzó rango máximo
-                            if (isGodRank(cyberattackCount) && !gameOver) {
-                                gameOver = true;
-                                showVictoryMessage();
-                            }
-                            hit = true;
+                    // Misil ↔ super cápsulas: el misil las atraviesa sin efecto
+                    let overlapsSuper = false;
+                    for (let j = 0; j < activeSuperCapsules.length; j++) {
+                        const sc = activeSuperCapsules[j];
+                        if (sc.destroyed || !sc._r) continue;
+                        if (!(mR.top > sc._r.bottom || mR.bottom < sc._r.top ||
+                              mR.right < sc._r.left || mR.left > sc._r.right)) {
+                            overlapsSuper = true;
                             break;
                         }
                     }
 
-                    if (!hit) {
+                    if (!overlapsSuper) {
+                        for (let j = activeHazards.length - 1; j >= 0; j--) {
+                            const h = activeHazards[j];
+                            if (h.type !== 'cyber' || h.destroyed || !h._r) continue;
+                            if (!(mR.top > h._r.bottom || mR.bottom < h._r.top ||
+                                  mR.right < h._r.left || mR.left > h._r.right)) {
+                                h.element.src = './img/exploit.png';
+                                h.element.classList.add('destroyed');
+                                h.destroyed = true;
+                                setTimeout(() => {
+                                    h.element.remove();
+                                    const idx = activeHazards.indexOf(h);
+                                    if (idx !== -1) activeHazards.splice(idx, 1);
+                                }, 500);
+                                cyberattackCount += 1;
+                                cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                                // Victoria: alcanzó rango máximo
+                                if (isGodRank(cyberattackCount) && !gameOver) {
+                                    gameOver = true;
+                                    showVictoryMessage();
+                                }
+                                hit = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!hit && !overlapsSuper) {
                         for (let j = activePacks.length - 1; j >= 0; j--) {
                             const p = activePacks[j];
                             if (p.destroyed || !p._r) continue;
@@ -863,8 +877,8 @@
                 activeMissiles.push({ element: missile, tx: 0, originX: startX });
             }
 
-            // Ráfaga de misiles (máximo 5 por ráfaga)
-            const BURST_MAX = 5;
+            // Ráfaga de misiles (máximo 3 por ráfaga)
+            const BURST_MAX = 3;
             const BURST_DELAY = 100; // ms entre cada misil de la ráfaga
             let burstCooldown = false;
 
