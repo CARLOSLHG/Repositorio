@@ -29,6 +29,17 @@
             { amount: 100, label: 'ZERO-DAY', color: '#00bfff', glowColor: '#00bfff', darkColor: '#0088bb', probability: 0.05 }
         ];
 
+        // --- Super Capsule: God Mode ---
+        let godModeActive = false;
+        let godModeTimer = null;
+        let godModeBlinkTimer = null;
+        let godModeAutoFireInterval = null;
+        let superCapsuleSpawnTimeout = null;
+        let activeSuperCapsules = [];
+        const GOD_MODE_DURATION = 10000;       // 10 segundos
+        const GOD_MODE_WARN_AT = 5000;         // parpadeo a los 5s restantes
+        const GOD_MODE_AUTOFIRE_RATE = 120;    // ms entre disparos automáticos
+
         // --- Sistema de dificultad progresiva ---
         let maxDifficultyLevel = 0;
         let asteroidSpawnTimeout = null;
@@ -605,6 +616,7 @@
                     activeMissiles.length = 0;
                     activeHazards.length = 0;
                     activePacks.length = 0;
+                    activeSuperCapsules.length = 0;
                     return;
                 }
 
@@ -673,6 +685,9 @@
                 for (let i = 0; i < activePacks.length; i++) {
                     activePacks[i]._r = activePacks[i].destroyed ? null : activePacks[i].element.getBoundingClientRect();
                 }
+                for (let i = 0; i < activeSuperCapsules.length; i++) {
+                    activeSuperCapsules[i]._r = activeSuperCapsules[i].destroyed ? null : activeSuperCapsules[i].element.getBoundingClientRect();
+                }
 
                 // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
 
@@ -732,15 +747,37 @@
                     }
                 }
 
-                // Nave ↔ hazards
-                for (let i = 0; i < activeHazards.length; i++) {
+                // Nave ↔ hazards (god mode: destruye al contacto en vez de morir)
+                for (let i = activeHazards.length - 1; i >= 0; i--) {
                     const h = activeHazards[i];
                     if (h.destroyed || !h._r) continue;
                     if (!(spaceshipRect.top > h._r.bottom || spaceshipRect.bottom < h._r.top ||
                           spaceshipRect.right < h._r.left || spaceshipRect.left > h._r.right)) {
-                        gameOver = true;
-                        showGameOverMessage();
-                        return;
+                        if (godModeActive) {
+                            // God mode: destruir el hazard al contacto
+                            h.element.classList.add('destroyed');
+                            h.destroyed = true;
+                            if (h.type === 'cyber') {
+                                h.element.src = './img/exploit.png';
+                                cyberattackCount += 1;
+                                cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                                if (isGodRank(cyberattackCount) && !gameOver) {
+                                    gameOver = true;
+                                    deactivateGodMode();
+                                    showVictoryMessage();
+                                    return;
+                                }
+                            }
+                            setTimeout(() => {
+                                h.element.remove();
+                                const idx = activeHazards.indexOf(h);
+                                if (idx !== -1) activeHazards.splice(idx, 1);
+                            }, 300);
+                        } else {
+                            gameOver = true;
+                            showGameOverMessage();
+                            return;
+                        }
                     }
                 }
 
@@ -763,6 +800,23 @@
                     }
                 }
 
+                // Nave ↔ super cápsulas (activa god mode)
+                for (let i = activeSuperCapsules.length - 1; i >= 0; i--) {
+                    const sc = activeSuperCapsules[i];
+                    if (sc.destroyed || !sc._r) continue;
+                    if (!(spaceshipRect.top > sc._r.bottom || spaceshipRect.bottom < sc._r.top ||
+                          spaceshipRect.right < sc._r.left || spaceshipRect.left > sc._r.right)) {
+                        sc.destroyed = true;
+                        sc.element.classList.add('ammo-collected');
+                        setTimeout(() => {
+                            sc.element.remove();
+                            const idx = activeSuperCapsules.indexOf(sc);
+                            if (idx !== -1) activeSuperCapsules.splice(idx, 1);
+                        }, 400);
+                        activateGodMode();
+                    }
+                }
+
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -775,6 +829,8 @@
             // Función para disparar misil desde la posición actual de la nave
             function shootMissile() {
                 if (gameOver || !gameStarted) return;
+                // En god mode el disparo manual no gasta misiles (usa shootGodMissile)
+                if (godModeActive) return;
                 if (missileCount <= 0) return;
 
                 missileCount--;
@@ -1059,6 +1115,192 @@
                 scheduleNext();
             }
 
+            // --- Super Capsule: God Mode power-up ---
+            function createSuperCapsule() {
+                if (gameOver || godModeActive) return;
+
+                const capsuleEl = document.createElement('div');
+                capsuleEl.classList.add('super-capsule');
+
+                capsuleEl.innerHTML = `
+                    <svg viewBox="0 0 120 70" class="capsule-svg">
+                        <defs>
+                            <linearGradient id="capsuleLeft" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#ff4444"/>
+                                <stop offset="100%" stop-color="#cc1111"/>
+                            </linearGradient>
+                            <linearGradient id="capsuleRight" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#00d4ff"/>
+                                <stop offset="100%" stop-color="#0088cc"/>
+                            </linearGradient>
+                            <linearGradient id="capsuleShine" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+                                <stop offset="40%" stop-color="#ffffff" stop-opacity="0.05"/>
+                                <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                            </linearGradient>
+                            <radialGradient id="fireGlow" cx="0.2" cy="0.5" r="0.5">
+                                <stop offset="0%" stop-color="#ff6600" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
+                            </radialGradient>
+                            <radialGradient id="iceGlow" cx="0.8" cy="0.5" r="0.5">
+                                <stop offset="0%" stop-color="#00ccff" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Auras de energía -->
+                        <ellipse cx="18" cy="35" rx="22" ry="30" fill="url(#fireGlow)"/>
+                        <ellipse cx="102" cy="35" rx="22" ry="30" fill="url(#iceGlow)"/>
+                        <!-- Cápsula: mitad izquierda roja -->
+                        <path d="M60 8 Q25 8 20 35 Q25 62 60 62 L60 8 Z" fill="url(#capsuleLeft)" stroke="#ff6666" stroke-width="1.5"/>
+                        <!-- Cápsula: mitad derecha azul -->
+                        <path d="M60 8 Q95 8 100 35 Q95 62 60 62 L60 8 Z" fill="url(#capsuleRight)" stroke="#66ccff" stroke-width="1.5"/>
+                        <!-- Línea divisoria central -->
+                        <line x1="60" y1="8" x2="60" y2="62" stroke="#ffffff" stroke-width="2" stroke-opacity="0.6"/>
+                        <!-- Brillo superior -->
+                        <path d="M60 8 Q25 8 20 35 Q25 62 60 62 Q95 62 100 35 Q95 8 60 8 Z" fill="url(#capsuleShine)"/>
+                        <!-- Escudo S central -->
+                        <polygon points="60,16 72,23 72,41 60,48 48,41 48,23" fill="#cc0000" stroke="#ffcc00" stroke-width="2"/>
+                        <polygon points="60,19 69.5,25 69.5,39 60,45 50.5,39 50.5,25" fill="#ee2222"/>
+                        <text x="60" y="38" text-anchor="middle" fill="#ffdd00" font-size="18" font-weight="bold" font-family="Arial" stroke="#aa8800" stroke-width="0.5">S</text>
+                        <!-- Badge 10s -->
+                        <rect x="85" y="48" width="28" height="16" rx="8" fill="#222" stroke="#ffcc00" stroke-width="1.5"/>
+                        <text x="99" y="60" text-anchor="middle" fill="#ffdd00" font-size="10" font-weight="bold" font-family="Arial">10s</text>
+                        <!-- Destellos -->
+                        <circle cx="35" cy="18" r="2" fill="#ffffff" opacity="0.9"/>
+                        <circle cx="85" cy="15" r="1.5" fill="#ffffff" opacity="0.7"/>
+                        <circle cx="25" cy="48" r="1.5" fill="#ffffff" opacity="0.6"/>
+                        <circle cx="95" cy="50" r="1" fill="#ffffff" opacity="0.5"/>
+                    </svg>
+                `;
+
+                const bottomPosition = Math.floor(Math.random() * 60) + 20;
+                capsuleEl.style.bottom = `${bottomPosition}%`;
+                capsuleEl.style.right = '-140px';
+
+                gameContainer.appendChild(capsuleEl);
+
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const capsuleSpeed = Math.random() * 3 + diff.packSpeedMin + 2;
+                capsuleEl.style.animation = `moveAmmoPack ${capsuleSpeed}s linear forwards`;
+
+                const capsuleEntry = { element: capsuleEl, destroyed: false };
+                activeSuperCapsules.push(capsuleEntry);
+
+                capsuleEl.addEventListener('animationend', () => {
+                    capsuleEl.remove();
+                    const idx = activeSuperCapsules.indexOf(capsuleEntry);
+                    if (idx !== -1) activeSuperCapsules.splice(idx, 1);
+                });
+            }
+
+            // Spawning de super capsule: ultra raro, solo tras 50+ amenazas
+            function startSuperCapsuleSpawner() {
+                function scheduleCheck() {
+                    // Revisar cada 20-40 segundos si puede aparecer
+                    const checkDelay = Math.random() * 20000 + 20000;
+                    superCapsuleSpawnTimeout = setTimeout(() => {
+                        if (gameOver) return;
+                        if (cyberattackCount >= 50 && !godModeActive) {
+                            // Probabilidad ultra baja: ~3% cada chequeo
+                            if (Math.random() < 0.03) {
+                                createSuperCapsule();
+                            }
+                        }
+                        scheduleCheck();
+                    }, checkDelay);
+                }
+                scheduleCheck();
+            }
+
+            // Disparo gratuito (god mode) - no consume misiles
+            function shootGodMissile() {
+                if (gameOver || !gameStarted) return;
+
+                const missile = document.createElement('img');
+                missile.src = './img/missil.png';
+                missile.classList.add('missile', 'god-missile');
+
+                const spaceshipRect = spaceship.getBoundingClientRect();
+                const gameContainerRect = gameContainer.getBoundingClientRect();
+
+                missile.style.position = 'absolute';
+                const bottomVal = parseFloat(spaceship.style.bottom) || (gameContainerRect.height / 2);
+                missile.style.bottom = `${bottomVal + spaceshipRect.height - 15}px`;
+                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
+                missile.style.left = startX + 'px';
+
+                gameContainer.appendChild(missile);
+                activeMissiles.push({ element: missile, tx: 0, originX: startX });
+            }
+
+            // Activar God Mode
+            function activateGodMode() {
+                if (godModeActive) return;
+                godModeActive = true;
+
+                // Crear halo alrededor de la nave
+                const halo = document.createElement('div');
+                halo.id = 'god-mode-halo';
+                halo.classList.add('god-halo');
+                spaceship.parentElement.appendChild(halo);
+
+                // Posicionar el halo sobre la nave (se actualiza en el game loop)
+                function updateHaloPosition() {
+                    if (!godModeActive) return;
+                    const shipRect = spaceship.getBoundingClientRect();
+                    const containerRect = gameContainer.getBoundingClientRect();
+                    const centerX = shipRect.left - containerRect.left + shipRect.width / 2;
+                    const centerY = shipRect.top - containerRect.top + shipRect.height / 2;
+                    halo.style.left = centerX + 'px';
+                    halo.style.top = centerY + 'px';
+                    requestAnimationFrame(updateHaloPosition);
+                }
+                updateHaloPosition();
+
+                // Auto-fire continuo
+                godModeAutoFireInterval = setInterval(() => {
+                    if (gameOver || !godModeActive) {
+                        clearInterval(godModeAutoFireInterval);
+                        return;
+                    }
+                    shootGodMissile();
+                }, GOD_MODE_AUTOFIRE_RATE);
+
+                // A los 5 segundos restantes: empezar parpadeo de aviso
+                godModeBlinkTimer = setTimeout(() => {
+                    halo.classList.add('god-halo-warning');
+                }, GOD_MODE_DURATION - GOD_MODE_WARN_AT);
+
+                // Al terminar: desactivar todo
+                godModeTimer = setTimeout(() => {
+                    deactivateGodMode();
+                }, GOD_MODE_DURATION);
+            }
+
+            function deactivateGodMode() {
+                godModeActive = false;
+
+                if (godModeAutoFireInterval) {
+                    clearInterval(godModeAutoFireInterval);
+                    godModeAutoFireInterval = null;
+                }
+                if (godModeTimer) {
+                    clearTimeout(godModeTimer);
+                    godModeTimer = null;
+                }
+                if (godModeBlinkTimer) {
+                    clearTimeout(godModeBlinkTimer);
+                    godModeBlinkTimer = null;
+                }
+
+                const halo = document.getElementById('god-mode-halo');
+                if (halo) {
+                    halo.classList.add('god-halo-fadeout');
+                    setTimeout(() => halo.remove(), 500);
+                }
+            }
+
             // Victoria: alcanzó rango máximo "Dios del Ciberespacio"
             function showVictoryMessage() {
                 if (gameLoopId) {
@@ -1172,6 +1414,9 @@
 
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
+                // Detener god mode si estaba activo
+                deactivateGodMode();
+
                 // Detener el game loop
                 if (gameLoopId) {
                     cancelAnimationFrame(gameLoopId);
@@ -1331,6 +1576,14 @@
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
                 document.querySelectorAll('.ammo-pack').forEach(pack => pack.remove());
                 document.querySelectorAll('.missile').forEach(m => m.remove());
+                document.querySelectorAll('.super-capsule').forEach(sc => sc.remove());
+                const haloEl = document.getElementById('god-mode-halo');
+                if (haloEl) haloEl.remove();
+
+                // Limpiar god mode
+                deactivateGodMode();
+                activeSuperCapsules.length = 0;
+                clearTimeout(superCapsuleSpawnTimeout);
 
                 // Limpiar arrays de entidades
                 activeMissiles.length = 0;
@@ -1364,6 +1617,7 @@
                 startDistanceCounter();
                 startAsteroids();
                 startAmmoPacks();
+                startSuperCapsuleSpawner();
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -1426,6 +1680,7 @@
 
             startAsteroids();
             startAmmoPacks();
+            startSuperCapsuleSpawner();
 
         } // fin de initGame
 
