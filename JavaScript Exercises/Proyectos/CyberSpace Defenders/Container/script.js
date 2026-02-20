@@ -23,10 +23,10 @@
         let missilesUsed = 0;
         let packsCollected = 0;
         const AMMO_PACK_TYPES = [
-            { amount: 25,  label: 'PATCH',    color: '#22cc66', glowColor: '#22cc66', darkColor: '#178a44', probability: 0.50 },
-            { amount: 50,  label: 'FIREWALL', color: '#d4a017', glowColor: '#d4a017', darkColor: '#9a7510', probability: 0.30 },
-            { amount: 75,  label: 'ENCRYPT',  color: '#f0c040', glowColor: '#f0c040', darkColor: '#c89a20', probability: 0.15 },
-            { amount: 100, label: 'ZERO-DAY', color: '#00bfff', glowColor: '#00bfff', darkColor: '#0088bb', probability: 0.05 }
+            { amount: 25,  label: 'PATCH',    color: '#22cc66', glowColor: '#22cc66', darkColor: '#178a44', img: './img/pack-25.png', probability: 0.50 },
+            { amount: 50,  label: 'FIREWALL', color: '#d4a017', glowColor: '#d4a017', darkColor: '#9a7510', img: './img/pack-50.png', probability: 0.30 },
+            { amount: 75,  label: 'ENCRYPT',  color: '#f0c040', glowColor: '#f0c040', darkColor: '#c89a20', img: './img/pack-75.png', probability: 0.15 },
+            { amount: 100, label: 'ZERO-DAY', color: '#00bfff', glowColor: '#00bfff', darkColor: '#0088bb', img: './img/pack-100.png', probability: 0.05 }
         ];
 
         // --- Super Capsule: God Mode ---
@@ -1036,80 +1036,13 @@
                 packEl.classList.add('ammo-pack', `ammo-pack-${selected.amount}`);
                 packEl.dataset.amount = selected.amount;
 
-                // Icono SVG específico según tipo de pack
-                const packIcons = {
-                    'PATCH': `
-                        <!-- Cruz médica (parche) -->
-                        <rect x="44" y="22" width="12" height="36" rx="3" fill="#ffffff" fill-opacity="0.9"/>
-                        <rect x="32" y="34" width="36" height="12" rx="3" fill="#ffffff" fill-opacity="0.9"/>`,
-                    'FIREWALL': `
-                        <!-- Muro de ladrillos -->
-                        <rect x="28" y="24" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="54" y="24" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="22" y="34" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="42" y="34" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="62" y="34" width="12" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="28" y="44" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
-                        <rect x="54" y="44" width="18" height="8" rx="1" fill="#ffffff" fill-opacity="0.85" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>`,
-                    'ENCRYPT': `
-                        <!-- Candado -->
-                        <path d="M38 42 L38 34 Q38 24 50 24 Q62 24 62 34 L62 42" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.9"/>
-                        <rect x="34" y="42" width="32" height="20" rx="4" fill="#ffffff" fill-opacity="0.9"/>
-                        <circle cx="50" cy="52" r="3.5" fill="${selected.darkColor}"/>
-                        <rect x="48.5" y="52" width="3" height="6" rx="1" fill="${selected.darkColor}"/>`,
-                    'ZERO-DAY': `
-                        <!-- Bug / Virus -->
-                        <ellipse cx="50" cy="40" rx="14" ry="16" fill="#ffffff" fill-opacity="0.9"/>
-                        <circle cx="44" cy="36" r="3" fill="${selected.darkColor}"/>
-                        <circle cx="56" cy="36" r="3" fill="${selected.darkColor}"/>
-                        <path d="M43 46 Q50 50 57 46" fill="none" stroke="${selected.darkColor}" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Antenas -->
-                        <line x1="42" y1="28" x2="36" y2="20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
-                        <line x1="58" y1="28" x2="64" y2="20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
-                        <circle cx="36" cy="19" r="2" fill="#ffffff" fill-opacity="0.8"/>
-                        <circle cx="64" cy="19" r="2" fill="#ffffff" fill-opacity="0.8"/>
-                        <!-- Patas -->
-                        <line x1="36" y1="35" x2="26" y2="30" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-                        <line x1="36" y1="43" x2="26" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-                        <line x1="64" y1="35" x2="74" y2="30" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-                        <line x1="64" y1="43" x2="74" y2="48" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>`
-                };
-
-                // SVG escudo con icono identificativo, cantidad y etiqueta
-                packEl.innerHTML = `
-                    <svg viewBox="0 0 100 120" class="ammo-svg">
-                        <defs>
-                            <linearGradient id="shieldGrad-${selected.amount}" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="${selected.color}" stop-opacity="1"/>
-                                <stop offset="100%" stop-color="${selected.darkColor}" stop-opacity="1"/>
-                            </linearGradient>
-                            <linearGradient id="shieldShine-${selected.amount}" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
-                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.05"/>
-                                <stop offset="100%" stop-color="#000000" stop-opacity="0.15"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Escudo base -->
-                        <path d="M50 4 L88 22 L88 58 Q88 90 50 114 Q12 90 12 58 L12 22 Z"
-                              fill="url(#shieldGrad-${selected.amount})" stroke="${selected.color}" stroke-width="3"/>
-                        <!-- Brillo del escudo -->
-                        <path d="M50 4 L88 22 L88 58 Q88 90 50 114 Q12 90 12 58 L12 22 Z"
-                              fill="url(#shieldShine-${selected.amount})"/>
-                        <!-- Borde interior -->
-                        <path d="M50 12 L80 27 L80 56 Q80 83 50 105 Q20 83 20 56 L20 27 Z"
-                              fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
-                        <!-- Icono identificativo -->
-                        ${packIcons[selected.label] || ''}
-                        <!-- Cantidad (+N) -->
-                        <text x="50" y="80" text-anchor="middle" fill="#ffffff"
-                              font-size="20" font-weight="bold" font-family="Arial"
-                              style="text-shadow: 0 1px 3px rgba(0,0,0,0.5);">+${selected.amount}</text>
-                        <!-- Etiqueta -->
-                        <text x="50" y="98" text-anchor="middle" fill="#ffffff"
-                              font-size="11" font-weight="bold" font-family="Arial"
-                              letter-spacing="2" fill-opacity="0.9">${selected.label}</text>
-                    </svg>
-                `;
+                // Imagen PNG del pack
+                const packImg = document.createElement('img');
+                packImg.src = selected.img;
+                packImg.alt = `${selected.label} +${selected.amount}`;
+                packImg.classList.add('ammo-img');
+                packImg.draggable = false;
+                packEl.appendChild(packImg);
 
                 const bottomPosition = Math.floor(Math.random() * 70) + 15;
                 packEl.style.bottom = `${bottomPosition}%`;
@@ -1160,56 +1093,12 @@
                 const capsuleEl = document.createElement('div');
                 capsuleEl.classList.add('super-capsule');
 
-                capsuleEl.innerHTML = `
-                    <svg viewBox="0 0 120 70" class="capsule-svg">
-                        <defs>
-                            <linearGradient id="capsuleLeft" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#ff4444"/>
-                                <stop offset="100%" stop-color="#cc1111"/>
-                            </linearGradient>
-                            <linearGradient id="capsuleRight" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#00d4ff"/>
-                                <stop offset="100%" stop-color="#0088cc"/>
-                            </linearGradient>
-                            <linearGradient id="capsuleShine" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
-                                <stop offset="40%" stop-color="#ffffff" stop-opacity="0.05"/>
-                                <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-                            </linearGradient>
-                            <radialGradient id="fireGlow" cx="0.2" cy="0.5" r="0.5">
-                                <stop offset="0%" stop-color="#ff6600" stop-opacity="0.6"/>
-                                <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
-                            </radialGradient>
-                            <radialGradient id="iceGlow" cx="0.8" cy="0.5" r="0.5">
-                                <stop offset="0%" stop-color="#00ccff" stop-opacity="0.6"/>
-                                <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
-                            </radialGradient>
-                        </defs>
-                        <!-- Auras de energía -->
-                        <ellipse cx="18" cy="35" rx="22" ry="30" fill="url(#fireGlow)"/>
-                        <ellipse cx="102" cy="35" rx="22" ry="30" fill="url(#iceGlow)"/>
-                        <!-- Cápsula: mitad izquierda roja -->
-                        <path d="M60 8 Q25 8 20 35 Q25 62 60 62 L60 8 Z" fill="url(#capsuleLeft)" stroke="#ff6666" stroke-width="1.5"/>
-                        <!-- Cápsula: mitad derecha azul -->
-                        <path d="M60 8 Q95 8 100 35 Q95 62 60 62 L60 8 Z" fill="url(#capsuleRight)" stroke="#66ccff" stroke-width="1.5"/>
-                        <!-- Línea divisoria central -->
-                        <line x1="60" y1="8" x2="60" y2="62" stroke="#ffffff" stroke-width="2" stroke-opacity="0.6"/>
-                        <!-- Brillo superior -->
-                        <path d="M60 8 Q25 8 20 35 Q25 62 60 62 Q95 62 100 35 Q95 8 60 8 Z" fill="url(#capsuleShine)"/>
-                        <!-- Escudo S central -->
-                        <polygon points="60,16 72,23 72,41 60,48 48,41 48,23" fill="#cc0000" stroke="#ffcc00" stroke-width="2"/>
-                        <polygon points="60,19 69.5,25 69.5,39 60,45 50.5,39 50.5,25" fill="#ee2222"/>
-                        <text x="60" y="38" text-anchor="middle" fill="#ffdd00" font-size="18" font-weight="bold" font-family="Arial" stroke="#aa8800" stroke-width="0.5">S</text>
-                        <!-- Badge 10s -->
-                        <rect x="85" y="48" width="28" height="16" rx="8" fill="#222" stroke="#ffcc00" stroke-width="1.5"/>
-                        <text x="99" y="60" text-anchor="middle" fill="#ffdd00" font-size="10" font-weight="bold" font-family="Arial">10s</text>
-                        <!-- Destellos -->
-                        <circle cx="35" cy="18" r="2" fill="#ffffff" opacity="0.9"/>
-                        <circle cx="85" cy="15" r="1.5" fill="#ffffff" opacity="0.7"/>
-                        <circle cx="25" cy="48" r="1.5" fill="#ffffff" opacity="0.6"/>
-                        <circle cx="95" cy="50" r="1" fill="#ffffff" opacity="0.5"/>
-                    </svg>
-                `;
+                const capsuleImg = document.createElement('img');
+                capsuleImg.src = './img/super-capsule.png';
+                capsuleImg.alt = 'Super Capsule';
+                capsuleImg.classList.add('capsule-img');
+                capsuleImg.draggable = false;
+                capsuleEl.appendChild(capsuleImg);
 
                 const bottomPosition = Math.floor(Math.random() * 60) + 20;
                 capsuleEl.style.bottom = `${bottomPosition}%`;
