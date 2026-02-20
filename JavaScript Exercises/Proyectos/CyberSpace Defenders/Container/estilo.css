@@ -265,6 +265,99 @@ body, html {
     100% { transform: scale(2); opacity: 0; }
 }
 
+/* ===== SUPER CAPSULE (GOD MODE POWER-UP) ===== */
+.super-capsule {
+    position: absolute;
+    width: 10vw;
+    min-width: 75px;
+    max-width: 130px;
+    height: auto;
+    z-index: 16;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.super-capsule .capsule-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 12px rgba(255, 100, 0, 0.7)) drop-shadow(0 0 12px rgba(0, 200, 255, 0.7));
+    animation: capsulePulse 0.5s ease-in-out infinite;
+}
+
+@keyframes capsulePulse {
+    0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 12px rgba(255, 100, 0, 0.7)) drop-shadow(0 0 12px rgba(0, 200, 255, 0.7));
+    }
+    50% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 25px rgba(255, 100, 0, 1)) drop-shadow(0 0 25px rgba(0, 200, 255, 1));
+    }
+}
+
+/* ===== GOD MODE HALO ===== */
+.god-halo {
+    position: absolute;
+    width: 12vw;
+    min-width: 80px;
+    max-width: 160px;
+    height: 12vw;
+    min-height: 80px;
+    max-height: 160px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 14;
+    background: radial-gradient(circle, rgba(100, 255, 50, 0.15) 20%, rgba(255, 255, 0, 0.1) 50%, transparent 70%);
+    border: 3px solid rgba(100, 255, 50, 0.7);
+    box-shadow: 0 0 20px rgba(100, 255, 50, 0.5), 0 0 40px rgba(255, 255, 0, 0.3), inset 0 0 20px rgba(100, 255, 50, 0.2);
+    animation: haloGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes haloGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(100, 255, 50, 0.5), 0 0 40px rgba(255, 255, 0, 0.3), inset 0 0 20px rgba(100, 255, 50, 0.2);
+        border-color: rgba(100, 255, 50, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(100, 255, 50, 0.8), 0 0 60px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(100, 255, 50, 0.3);
+        border-color: rgba(200, 255, 50, 0.9);
+    }
+}
+
+/* Parpadeo de aviso a los 5s restantes */
+.god-halo-warning {
+    animation: haloWarning 0.3s ease-in-out infinite !important;
+}
+
+@keyframes haloWarning {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(100, 255, 50, 0.6), 0 0 50px rgba(255, 255, 0, 0.4), inset 0 0 20px rgba(100, 255, 50, 0.2);
+        border-color: rgba(100, 255, 50, 0.8);
+    }
+    50% {
+        opacity: 0.3;
+        box-shadow: 0 0 10px rgba(255, 200, 0, 0.3), 0 0 20px rgba(255, 200, 0, 0.2);
+        border-color: rgba(255, 200, 0, 0.5);
+    }
+}
+
+/* Fadeout al terminar god mode */
+.god-halo-fadeout {
+    animation: haloFadeout 0.5s ease-out forwards !important;
+}
+
+@keyframes haloFadeout {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* Misiles de god mode: brillo especial */
+.god-missile {
+    filter: brightness(1.5) drop-shadow(0 0 6px rgba(100, 255, 50, 0.8));
+}
+
 @media (max-width: 768px) {
     #game-container {
         padding: 8px;
