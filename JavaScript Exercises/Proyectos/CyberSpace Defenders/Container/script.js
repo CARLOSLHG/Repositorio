@@ -1076,19 +1076,13 @@
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
-                            <svg viewBox="0 0 40 40" width="30" height="30" style="vertical-align:middle;">
-                                <g transform="translate(20,20) rotate(-45)">
-                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
-                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
-                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
-                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
-                                </g>
-                                <g transform="translate(20,20) rotate(45)">
-                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
-                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
-                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
-                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
-                                </g>
+                            <svg viewBox="0 0 64 64" width="28" height="28" style="vertical-align:middle;">
+                                <rect x="12" y="14" width="40" height="4" rx="2" fill="currentColor"/>
+                                <rect x="24" y="10" width="16" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                                <path d="M16 18 L18 54 Q18 56 20 56 L44 56 Q46 56 46 54 L48 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="26" y1="24" x2="26" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="32" y1="24" x2="32" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="38" y1="24" x2="38" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
                         </button>
                     </div>
@@ -1182,19 +1176,13 @@
                         <button id="exit-button">Salir</button>
                         <button id="restart-game-button">Reiniciar Juego</button>
                         <button id="clear-leaderboard-button" title="Limpiar Leaderboard">
-                            <svg viewBox="0 0 40 40" width="30" height="30" style="vertical-align:middle;">
-                                <g transform="translate(20,20) rotate(-45)">
-                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor"/>
-                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor"/>
-                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor"/>
-                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor"/>
-                                </g>
-                                <g transform="translate(20,20) rotate(45)">
-                                    <rect x="-3" y="-14" width="6" height="16" rx="2" fill="currentColor" opacity="0.7"/>
-                                    <rect x="-5" y="2" width="10" height="4" rx="1" fill="currentColor" opacity="0.7"/>
-                                    <rect x="3" y="4" width="6" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
-                                    <rect x="3" y="0" width="4" height="2" rx="0.5" fill="currentColor" opacity="0.7"/>
-                                </g>
+                            <svg viewBox="0 0 64 64" width="28" height="28" style="vertical-align:middle;">
+                                <rect x="12" y="14" width="40" height="4" rx="2" fill="currentColor"/>
+                                <rect x="24" y="10" width="16" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                                <path d="M16 18 L18 54 Q18 56 20 56 L44 56 Q46 56 46 54 L48 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="26" y1="24" x2="26" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="32" y1="24" x2="32" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="38" y1="24" x2="38" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
                         </button>
                     </div>
