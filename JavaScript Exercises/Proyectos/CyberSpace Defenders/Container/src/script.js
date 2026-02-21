@@ -1033,6 +1033,11 @@
                 activeHazards.push(hazardEntry);
 
                 cyberAttack.addEventListener('animationend', () => {
+                    // Penalización: si la amenaza no fue destruida, restar 2 al contador
+                    if (!hazardEntry.destroyed && !gameOver) {
+                        cyberattackCount = Math.max(0, cyberattackCount - 2);
+                        cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                    }
                     cyberAttack.remove();
                     const idx = activeHazards.indexOf(hazardEntry);
                     if (idx !== -1) activeHazards.splice(idx, 1);
