@@ -569,28 +569,52 @@
                     }
                 }
 
+                let moveTouchId = null; // ID del dedo que controla la nave
+
                 gameContainer.addEventListener('touchstart', function(event) {
                     if (gameOver || !gameStarted) return;
                     if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
+                    // Usar changedTouches para verificar el dedo NUEVO, no uno existente
+                    const newTouch = event.changedTouches[0];
                     // Solo aceptar toques en la mitad izquierda de la pantalla para no interferir con botones
-                    if (event.touches[0].clientX > window.innerWidth * 0.5) return;
+                    if (newTouch.clientX > window.innerWidth * 0.5) return;
                     event.preventDefault();
                     touching = true;
-                    updateTouchTarget(event.touches[0].clientY);
+                    moveTouchId = newTouch.identifier;
+                    updateTouchTarget(newTouch.clientY);
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchmove', function(event) {
                     if (!touching || gameOver || !gameStarted) return;
                     event.preventDefault();
-                    updateTouchTarget(event.touches[0].clientY);
+                    // Seguir solo el dedo que inició el movimiento
+                    for (let i = 0; i < event.touches.length; i++) {
+                        if (event.touches[i].identifier === moveTouchId) {
+                            updateTouchTarget(event.touches[i].clientY);
+                            break;
+                        }
+                    }
                 }, { passive: false });
 
-                gameContainer.addEventListener('touchend', function() {
-                    touching = false;
+                gameContainer.addEventListener('touchend', function(event) {
+                    // Solo soltar control si se levantó el dedo que controla la nave
+                    for (let i = 0; i < event.changedTouches.length; i++) {
+                        if (event.changedTouches[i].identifier === moveTouchId) {
+                            touching = false;
+                            moveTouchId = null;
+                            break;
+                        }
+                    }
                 });
 
-                gameContainer.addEventListener('touchcancel', function() {
-                    touching = false;
+                gameContainer.addEventListener('touchcancel', function(event) {
+                    for (let i = 0; i < event.changedTouches.length; i++) {
+                        if (event.changedTouches[i].identifier === moveTouchId) {
+                            touching = false;
+                            moveTouchId = null;
+                            break;
+                        }
+                    }
                 });
             }
 
@@ -1319,8 +1343,6 @@
                 gameContainer.appendChild(victoryOverlay);
 
                 gameContainer.style.cursor = 'default';
-                const musicBtn = document.getElementById('toggle-music-button');
-                if (musicBtn) musicBtn.style.pointerEvents = 'auto';
                 const fireBtn = document.getElementById('mobile-fire-button');
                 if (fireBtn) fireBtn.style.display = 'none';
 
@@ -1437,10 +1459,6 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
-                // Reactivar botón de música para que sea clickeable en game over
-                const musicBtn = document.getElementById('toggle-music-button');
-                if (musicBtn) musicBtn.style.pointerEvents = 'auto';
-
                 // Ocultar botón de disparo móvil en game over
                 const fireBtn = document.getElementById('mobile-fire-button');
                 if (fireBtn) fireBtn.style.display = 'none';
@@ -1493,9 +1511,6 @@
                 gameOver = false;
                 // Ocultar cursor de nuevo al reiniciar
                 gameContainer.style.cursor = 'none';
-                // Desactivar pointer-events del botón de música durante gameplay
-                const musicBtnReset = document.getElementById('toggle-music-button');
-                if (musicBtnReset) musicBtnReset.style.pointerEvents = 'none';
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
