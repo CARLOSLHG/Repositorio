@@ -1256,7 +1256,7 @@
                 lifeEl.classList.add('life-pack');
 
                 const lifeImg = document.createElement('img');
-                lifeImg.src = './img/pack-life+1.png';
+                lifeImg.src = './img/pack-life.svg';
                 lifeImg.alt = 'Life +1';
                 lifeImg.classList.add('capsule-img');
                 lifeImg.draggable = false;
@@ -1557,12 +1557,31 @@
                     updateMissileDisplay();
                 }
 
+                // Limpiar amenazas en pantalla para dar un respiro al jugador
+                document.querySelectorAll('.asteroid').forEach(a => a.remove());
+                document.querySelectorAll('.cyber-attack').forEach(c => c.remove());
+
                 // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
                 const invHud = document.getElementById('inventory-hud');
                 if (invHud) invHud.style.display = 'flex';
+
+                // Limpiar spawners anteriores (ya están muertos por gameOver)
+                clearTimeout(asteroidSpawnTimeout);
+                clearInterval(distanceInterval);
+                clearTimeout(ammoPackTimeout);
+                clearTimeout(superCapsuleSpawnTimeout);
+                clearTimeout(lifePackSpawnTimeout);
+
+                // Reiniciar todos los spawners (gameStartTime NO se resetea,
+                // así la dificultad continúa desde donde estaba)
+                startDistanceCounter();
+                startAsteroids();
+                startAmmoPacks();
+                startSuperCapsuleSpawner();
+                startLifePackSpawner();
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
