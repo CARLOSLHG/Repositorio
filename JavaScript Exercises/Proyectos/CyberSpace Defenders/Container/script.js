@@ -489,10 +489,17 @@
                 e.stopPropagation();
             });
 
-            // Tecla M para apagar/encender la música
+            // Tecla M para apagar/encender la música, S para usar super capsule
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
+                }
+                if (e.key === 's' || e.key === 'S') {
+                    if (storedSuperCapsules > 0 && !godModeActive && !gameOver && gameStarted) {
+                        storedSuperCapsules--;
+                        updateInventoryUI();
+                        activateGodMode();
+                    }
                 }
             });
 
@@ -1297,6 +1304,7 @@
 
             // --- Actualizar UI de inventario (super capsules y vidas) ---
             function updateInventoryUI() {
+                // Mobile buttons
                 const scBtn = document.getElementById('use-super-capsule-button');
                 const scCount = document.getElementById('super-capsule-count');
                 const lifeBtn = document.getElementById('use-life-button');
@@ -1309,6 +1317,21 @@
                 if (lifeBtn && lifeCount) {
                     lifeBtn.style.display = storedLives > 0 ? 'flex' : 'none';
                     lifeCount.textContent = storedLives;
+                }
+
+                // PC HUD (esquina inferior derecha)
+                const pcSuper = document.getElementById('pc-inv-super');
+                const pcSuperCount = document.getElementById('pc-super-count');
+                const pcLife = document.getElementById('pc-inv-life');
+                const pcLifeCount = document.getElementById('pc-life-count');
+
+                if (pcSuper && pcSuperCount) {
+                    pcSuper.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
+                    pcSuperCount.textContent = storedSuperCapsules;
+                }
+                if (pcLife && pcLifeCount) {
+                    pcLife.style.display = storedLives > 0 ? 'flex' : 'none';
+                    pcLifeCount.textContent = storedLives;
                 }
             }
 
@@ -1548,10 +1571,12 @@
                     updateMissileDisplay();
                 }
 
-                // Restaurar controles móviles
+                // Restaurar controles móviles y HUD de PC
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
+                const pcInv = document.getElementById('pc-inventory');
+                if (pcInv && !isTouchDev) pcInv.style.display = 'flex';
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
@@ -1574,19 +1599,27 @@
                     gameContainer.style.cursor = 'default';
                     const continueOverlay = document.createElement('div');
                     continueOverlay.id = 'game-over-message';
+                    const lifeWord = storedLives > 1 ? 'vidas extra' : 'vida extra';
                     continueOverlay.innerHTML = `
-                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">Has sido alcanzado</h1>
-                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">Tienes <strong>${storedLives}</strong> vida${storedLives > 1 ? 's' : ''} adicional${storedLives > 1 ? 'es' : ''}. ¿Quieres continuar?</p>
-                        <div class="buttons-container" style="margin-top:1em;">
-                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;">Continuar</button>
-                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;">Rendirse</button>
+                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">&#9888; Has sido alcanzado</h1>
+                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">
+                            Tienes <strong>${storedLives}</strong> ${lifeWord} disponible${storedLives > 1 ? 's' : ''}
+                        </p>
+                        <p style="color:#ccc;font-size:0.95em;margin:0.3em 0 1em;">
+                            ¿Quieres usar una vida extra para continuar o terminar la misión?
+                        </p>
+                        <div class="buttons-container" style="margin-top:0.5em;">
+                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;font-size:1em;padding:0.5em 1.5em;">&#9654; Continuar con vida extra</button>
+                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;font-size:1em;padding:0.5em 1.5em;">&#10006; Terminar misión</button>
                         </div>
                     `;
                     gameContainer.appendChild(continueOverlay);
 
-                    // Ocultar controles móviles
+                    // Ocultar controles móviles y HUD de PC
                     const mobileCtrlCont = document.getElementById('mobile-controls');
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
+                    const pcInv = document.getElementById('pc-inventory');
+                    if (pcInv) pcInv.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
