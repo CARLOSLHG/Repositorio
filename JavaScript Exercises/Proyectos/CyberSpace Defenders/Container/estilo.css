@@ -298,6 +298,36 @@ body, html {
     }
 }
 
+.life-pack {
+    position: absolute;
+    width: 10vw;
+    min-width: 75px;
+    max-width: 130px;
+    height: auto;
+    z-index: 16;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.life-pack .capsule-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 100, 0.7)) drop-shadow(0 0 12px rgba(0, 255, 100, 0.5));
+    animation: lifePulse 0.6s ease-in-out infinite;
+}
+
+@keyframes lifePulse {
+    0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 12px rgba(0, 255, 100, 0.7)) drop-shadow(0 0 12px rgba(0, 255, 100, 0.5));
+    }
+    50% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 25px rgba(0, 255, 100, 1)) drop-shadow(0 0 25px rgba(0, 255, 100, 0.8));
+    }
+}
+
 /* ===== GOD MODE HALO ===== */
 .god-halo {
     position: absolute;
@@ -1000,23 +1030,34 @@ body, html {
     50% { opacity: 0.85; transform: scale(1.04); }
 }
 
-/* ===== BOTÓN DE DISPARO MÓVIL ===== */
-#mobile-fire-button {
-    display: none; /* Oculto por defecto, JS lo muestra en touch devices */
+/* ===== CONTROLES MÓVILES ===== */
+#mobile-controls {
+    display: none;
     position: absolute;
     bottom: calc(18px + var(--safe-bottom));
     right: calc(18px + var(--safe-right));
+    z-index: 25;
+    align-items: flex-end;
+    gap: 10px;
+    pointer-events: none;
+}
+
+#mobile-controls > * {
+    pointer-events: auto;
+}
+
+#mobile-fire-button {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     border: 3px solid rgba(255, 59, 63, 0.6);
     background: radial-gradient(circle, rgba(255, 59, 63, 0.25) 0%, rgba(255, 59, 63, 0.08) 70%);
     box-shadow: 0 0 20px rgba(255, 59, 63, 0.3), inset 0 0 15px rgba(255, 59, 63, 0.1);
-    z-index: 25;
     padding: 0;
     cursor: pointer;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1024,9 +1065,11 @@ body, html {
     transition: transform 0.1s, box-shadow 0.1s;
 }
 
-#mobile-fire-button .fire-icon {
+#mobile-fire-button .fire-icon-img {
     width: 44px;
     height: 44px;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 #mobile-fire-button .fire-label {
@@ -1046,9 +1089,67 @@ body, html {
     background: radial-gradient(circle, rgba(255, 59, 63, 0.45) 0%, rgba(255, 59, 63, 0.15) 70%);
 }
 
+/* ===== BOTONES DE INVENTARIO (vida y super-capsule) ===== */
+.inventory-btn {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 200, 255, 0.5);
+    background: radial-gradient(circle, rgba(0, 200, 255, 0.2) 0%, rgba(0, 200, 255, 0.05) 70%);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.25);
+    padding: 0;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.inventory-btn .inventory-icon {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.inventory-btn .inventory-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    background: #00ccff;
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 4px;
+    box-shadow: 0 0 6px rgba(0, 200, 255, 0.6);
+    pointer-events: none;
+}
+
+#use-life-button {
+    border-color: rgba(0, 255, 100, 0.5);
+    background: radial-gradient(circle, rgba(0, 255, 100, 0.2) 0%, rgba(0, 255, 100, 0.05) 70%);
+    box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+}
+
+#use-life-button .inventory-count {
+    background: #00ff66;
+}
+
+.inventory-btn:active {
+    transform: scale(0.88);
+}
+
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
 @media (hover: none) and (pointer: coarse) {
-    #mobile-fire-button {
+    #mobile-controls {
         display: flex;
     }
 
@@ -1151,20 +1252,34 @@ body, html {
         padding: 0.5em 1em;
     }
 
-    /* Botón de disparo móvil - más grande en pantallas pequeñas */
+    /* Controles móviles en pantallas pequeñas */
+    #mobile-controls {
+        bottom: calc(14px + var(--safe-bottom));
+        right: calc(14px + var(--safe-right));
+        gap: 8px;
+    }
+
     #mobile-fire-button {
         width: 72px;
         height: 72px;
-        bottom: calc(14px + var(--safe-bottom));
-        right: calc(14px + var(--safe-right));
     }
 
-    #mobile-fire-button .fire-icon {
+    #mobile-fire-button .fire-icon-img {
         width: 38px;
         height: 38px;
     }
 
     #mobile-fire-button .fire-label {
         font-size: 9px;
+    }
+
+    .inventory-btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .inventory-btn .inventory-icon {
+        width: 28px;
+        height: 28px;
     }
 }

@@ -36,9 +36,15 @@
         let godModeAutoFireInterval = null;
         let superCapsuleSpawnTimeout = null;
         let activeSuperCapsules = [];
+        let storedSuperCapsules = 0;
         const GOD_MODE_DURATION = 10000;       // 10 segundos
         const GOD_MODE_WARN_AT = 5000;         // parpadeo a los 5s restantes
         const GOD_MODE_AUTOFIRE_RATE = 120;    // ms entre disparos automáticos
+
+        // --- Life Pack: Vidas extra ---
+        let storedLives = 0;
+        let activeLifePacks = [];
+        let lifePackSpawnTimeout = null;
 
         // --- Sistema de dificultad progresiva ---
         let maxDifficultyLevel = 0;
@@ -712,27 +718,41 @@
                 for (let i = 0; i < activeSuperCapsules.length; i++) {
                     activeSuperCapsules[i]._r = activeSuperCapsules[i].destroyed ? null : activeSuperCapsules[i].element.getBoundingClientRect();
                 }
+                for (let i = 0; i < activeLifePacks.length; i++) {
+                    activeLifePacks[i]._r = activeLifePacks[i].destroyed ? null : activeLifePacks[i].element.getBoundingClientRect();
+                }
 
                 // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
 
-                // Misiles ↔ cyberattacks + packs (super cápsulas son inmunes)
+                // Misiles ↔ cyberattacks + packs (super cápsulas y life packs son inmunes)
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
                     const mR = activeMissiles[i]._r;
                     let hit = false;
 
-                    // Misil ↔ super cápsulas: el misil las atraviesa sin efecto
-                    let overlapsSuper = false;
+                    // Misil ↔ super cápsulas y life packs: el misil las atraviesa sin efecto
+                    let overlapsImmune = false;
                     for (let j = 0; j < activeSuperCapsules.length; j++) {
                         const sc = activeSuperCapsules[j];
                         if (sc.destroyed || !sc._r) continue;
                         if (!(mR.top > sc._r.bottom || mR.bottom < sc._r.top ||
                               mR.right < sc._r.left || mR.left > sc._r.right)) {
-                            overlapsSuper = true;
+                            overlapsImmune = true;
                             break;
                         }
                     }
+                    if (!overlapsImmune) {
+                        for (let j = 0; j < activeLifePacks.length; j++) {
+                            const lp = activeLifePacks[j];
+                            if (lp.destroyed || !lp._r) continue;
+                            if (!(mR.top > lp._r.bottom || mR.bottom < lp._r.top ||
+                                  mR.right < lp._r.left || mR.left > lp._r.right)) {
+                                overlapsImmune = true;
+                                break;
+                            }
+                        }
+                    }
 
-                    if (!overlapsSuper) {
+                    if (!overlapsImmune) {
                         for (let j = activeHazards.length - 1; j >= 0; j--) {
                             const h = activeHazards[j];
                             if (h.type !== 'cyber' || h.destroyed || !h._r) continue;
@@ -759,7 +779,7 @@
                         }
                     }
 
-                    if (!hit && !overlapsSuper) {
+                    if (!hit && !overlapsImmune) {
                         for (let j = activePacks.length - 1; j >= 0; j--) {
                             const p = activePacks[j];
                             if (p.destroyed || !p._r) continue;
@@ -838,7 +858,7 @@
                     }
                 }
 
-                // Nave ↔ super cápsulas (activa god mode)
+                // Nave ↔ super cápsulas (almacenar en inventario)
                 for (let i = activeSuperCapsules.length - 1; i >= 0; i--) {
                     const sc = activeSuperCapsules[i];
                     if (sc.destroyed || !sc._r) continue;
@@ -851,7 +871,26 @@
                             const idx = activeSuperCapsules.indexOf(sc);
                             if (idx !== -1) activeSuperCapsules.splice(idx, 1);
                         }, 400);
-                        activateGodMode();
+                        storedSuperCapsules++;
+                        updateInventoryUI();
+                    }
+                }
+
+                // Nave ↔ life packs (almacenar en inventario)
+                for (let i = activeLifePacks.length - 1; i >= 0; i--) {
+                    const lp = activeLifePacks[i];
+                    if (lp.destroyed || !lp._r) continue;
+                    if (!(spaceshipRect.top > lp._r.bottom || spaceshipRect.bottom < lp._r.top ||
+                          spaceshipRect.right < lp._r.left || spaceshipRect.left > lp._r.right)) {
+                        lp.destroyed = true;
+                        lp.element.classList.add('ammo-collected');
+                        setTimeout(() => {
+                            lp.element.remove();
+                            const idx = activeLifePacks.indexOf(lp);
+                            if (idx !== -1) activeLifePacks.splice(idx, 1);
+                        }, 400);
+                        storedLives++;
+                        updateInventoryUI();
                     }
                 }
 
@@ -926,10 +965,11 @@
             }
 
             // --- Botón de disparo dedicado para móviles ---
+            const mobileControls = document.getElementById('mobile-controls');
             const mobileFireBtn = document.getElementById('mobile-fire-button');
             if (isTouchDevice && mobileFireBtn) {
-                // Mostrar el botón en dispositivos táctiles
-                mobileFireBtn.style.display = 'flex';
+                // Mostrar los controles en dispositivos táctiles
+                if (mobileControls) mobileControls.style.display = 'flex';
 
                 let fireHoldInterval = null;
                 const FIRE_HOLD_DELAY = 700; // ms entre ráfagas al mantener presionado
@@ -1192,6 +1232,100 @@
                 scheduleCheck();
             }
 
+            // --- Life Pack: vida extra coleccionable ---
+            function createLifePack() {
+                if (gameOver) return;
+
+                const lifeEl = document.createElement('div');
+                lifeEl.classList.add('life-pack');
+
+                const lifeImg = document.createElement('img');
+                lifeImg.src = './img/life-pack+1.png';
+                lifeImg.alt = 'Life +1';
+                lifeImg.classList.add('capsule-img');
+                lifeImg.draggable = false;
+                lifeEl.appendChild(lifeImg);
+
+                const bottomPosition = Math.floor(Math.random() * 60) + 20;
+                lifeEl.style.bottom = `${bottomPosition}%`;
+                lifeEl.style.right = '-140px';
+
+                gameContainer.appendChild(lifeEl);
+
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const lifeSpeed = Math.random() * 3 + diff.packSpeedMin + 2;
+                lifeEl.style.animation = `moveAmmoPack ${lifeSpeed}s linear forwards`;
+
+                const lifeEntry = { element: lifeEl, destroyed: false };
+                activeLifePacks.push(lifeEntry);
+
+                lifeEl.addEventListener('animationend', () => {
+                    lifeEl.remove();
+                    const idx = activeLifePacks.indexOf(lifeEntry);
+                    if (idx !== -1) activeLifePacks.splice(idx, 1);
+                });
+            }
+
+            // Spawner de life packs: misma tabla de probabilidad que super capsules
+            function startLifePackSpawner() {
+                function scheduleCheck() {
+                    const params = getSuperCapsuleParams();
+                    const checkDelay = params ? params.delay : 25000;
+                    lifePackSpawnTimeout = setTimeout(() => {
+                        if (gameOver) return;
+                        const currentParams = getSuperCapsuleParams();
+                        if (currentParams) {
+                            if (Math.random() < currentParams.probability) {
+                                createLifePack();
+                            }
+                        }
+                        scheduleCheck();
+                    }, checkDelay);
+                }
+                scheduleCheck();
+            }
+
+            // --- Actualizar UI de inventario (super capsules y vidas) ---
+            function updateInventoryUI() {
+                const scBtn = document.getElementById('use-super-capsule-button');
+                const scCount = document.getElementById('super-capsule-count');
+                const lifeBtn = document.getElementById('use-life-button');
+                const lifeCount = document.getElementById('life-count');
+
+                if (scBtn && scCount) {
+                    scBtn.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
+                    scCount.textContent = storedSuperCapsules;
+                }
+                if (lifeBtn && lifeCount) {
+                    lifeBtn.style.display = storedLives > 0 ? 'flex' : 'none';
+                    lifeCount.textContent = storedLives;
+                }
+            }
+
+            // --- Handler del botón de usar super capsule ---
+            const useSuperCapsuleBtn = document.getElementById('use-super-capsule-button');
+            if (useSuperCapsuleBtn) {
+                function useSuperCapsule(e) {
+                    if (e) { e.preventDefault(); e.stopPropagation(); }
+                    if (storedSuperCapsules <= 0 || godModeActive || gameOver || !gameStarted) return;
+                    storedSuperCapsules--;
+                    updateInventoryUI();
+                    activateGodMode();
+                }
+                useSuperCapsuleBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
+                useSuperCapsuleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                useSuperCapsuleBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
+            }
+
+            // --- Handler del botón de usar vida (no activa en gameplay, solo en game over) ---
+            const useLifeBtn = document.getElementById('use-life-button');
+            if (useLifeBtn) {
+                useLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                useLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                useLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+            }
+
             // Disparo gratuito (god mode) - no consume misiles
             function shootGodMissile() {
                 if (gameOver || !gameStarted) return;
@@ -1348,8 +1482,8 @@
                 gameContainer.appendChild(victoryOverlay);
 
                 gameContainer.style.cursor = 'default';
-                const fireBtn = document.getElementById('mobile-fire-button');
-                if (fireBtn) fireBtn.style.display = 'none';
+                const mobileCtrlVictory = document.getElementById('mobile-controls');
+                if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1389,6 +1523,32 @@
                 });
             }
 
+            // Continuar juego usando una vida almacenada
+            function continueWithLife() {
+                storedLives--;
+                updateInventoryUI();
+                gameOver = false;
+                gameContainer.style.cursor = 'none';
+
+                // Reposicionar nave en zona segura
+                spaceship.style.bottom = '50%';
+
+                // Dar misiles mínimos si se quedó sin ellos
+                if (missileCount <= 0) {
+                    missileCount = 25;
+                    updateMissileDisplay();
+                }
+
+                // Restaurar controles móviles
+                const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+                const mobileCtrlCont = document.getElementById('mobile-controls');
+                if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
+
+                // Reiniciar el game loop
+                lastFrameTime = 0;
+                gameLoopId = requestAnimationFrame(gameLoop);
+            }
+
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
                 // Detener god mode si estaba activo
@@ -1398,6 +1558,38 @@
                 if (gameLoopId) {
                     cancelAnimationFrame(gameLoopId);
                     gameLoopId = null;
+                }
+
+                // Si tiene vidas, ofrecer continuar
+                if (storedLives > 0) {
+                    gameContainer.style.cursor = 'default';
+                    const continueOverlay = document.createElement('div');
+                    continueOverlay.id = 'game-over-message';
+                    continueOverlay.innerHTML = `
+                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">Has sido alcanzado</h1>
+                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">Tienes <strong>${storedLives}</strong> vida${storedLives > 1 ? 's' : ''} adicional${storedLives > 1 ? 'es' : ''}. ¿Quieres continuar?</p>
+                        <div class="buttons-container" style="margin-top:1em;">
+                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;">Continuar</button>
+                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;">Rendirse</button>
+                        </div>
+                    `;
+                    gameContainer.appendChild(continueOverlay);
+
+                    // Ocultar controles móviles
+                    const mobileCtrlCont = document.getElementById('mobile-controls');
+                    if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
+
+                    continueOverlay.addEventListener('click', function(event) {
+                        event.stopPropagation();
+                        if (event.target.id === 'continue-yes-btn') {
+                            continueOverlay.remove();
+                            continueWithLife();
+                        } else if (event.target.id === 'continue-no-btn') {
+                            continueOverlay.remove();
+                            showGameOverMessage(reason);
+                        }
+                    });
+                    return;
                 }
 
                 const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
@@ -1464,9 +1656,9 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
-                // Ocultar botón de disparo móvil en game over
-                const fireBtn = document.getElementById('mobile-fire-button');
-                if (fireBtn) fireBtn.style.display = 'none';
+                // Ocultar controles móviles en game over
+                const mobileCtrlGO = document.getElementById('mobile-controls');
+                if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1547,13 +1739,16 @@
                 document.querySelectorAll('.ammo-pack').forEach(pack => pack.remove());
                 document.querySelectorAll('.missile').forEach(m => m.remove());
                 document.querySelectorAll('.super-capsule').forEach(sc => sc.remove());
+                document.querySelectorAll('.life-pack').forEach(lp => lp.remove());
                 const haloEl = document.getElementById('god-mode-halo');
                 if (haloEl) haloEl.remove();
 
                 // Limpiar god mode
                 deactivateGodMode();
                 activeSuperCapsules.length = 0;
+                activeLifePacks.length = 0;
                 clearTimeout(superCapsuleSpawnTimeout);
+                clearTimeout(lifePackSpawnTimeout);
 
                 // Limpiar arrays de entidades
                 activeMissiles.length = 0;
@@ -1572,10 +1767,15 @@
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
 
-                // Restaurar botón de disparo móvil si es touch device
+                // Restaurar controles móviles si es touch device
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
-                const fireBtnReset = document.getElementById('mobile-fire-button');
-                if (isTouchDev && fireBtnReset) fireBtnReset.style.display = 'flex';
+                const mobileCtrlReset = document.getElementById('mobile-controls');
+                if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
+
+                // Reiniciar inventario
+                storedSuperCapsules = 0;
+                storedLives = 0;
+                updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);
                 clearInterval(distanceInterval);
@@ -1588,6 +1788,7 @@
                 startAsteroids();
                 startAmmoPacks();
                 startSuperCapsuleSpawner();
+                startLifePackSpawner();
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -1651,6 +1852,7 @@
             startAsteroids();
             startAmmoPacks();
             startSuperCapsuleSpawner();
+            startLifePackSpawner();
 
         } // fin de initGame
 
