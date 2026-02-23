@@ -133,9 +133,9 @@ body, html {
 #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
     position: absolute;
     left: calc(10px + var(--safe-left));
-    font-size: 0.85vw;
+    font-size: clamp(11px, 0.85vw, 16px);
     background: rgba(0, 0, 0, 0.7);
-    padding: 0.3vw 0.6vw;
+    padding: 4px 8px;
     border-radius: 4px;
     line-height: 1.3;
     z-index: 10;
@@ -166,7 +166,7 @@ body, html {
 #difficulty-display {
     top: calc(162px + var(--safe-top));
     font-weight: bold;
-    font-size: 0.9vw;
+    font-size: clamp(12px, 0.9vw, 17px);
     color: #22cc66;
     border-left: 2px solid rgba(34, 204, 102, 0.6);
     text-shadow: 0 0 8px rgba(34, 204, 102, 0.5);
@@ -332,11 +332,11 @@ body, html {
 .god-halo {
     position: absolute;
     width: 12vw;
-    min-width: 80px;
-    max-width: 160px;
+    min-width: 100px;
+    max-width: 180px;
     height: 12vw;
-    min-height: 80px;
-    max-height: 160px;
+    min-height: 100px;
+    max-height: 180px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -411,13 +411,13 @@ body, html {
     }
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
-        font-size: 2.2vw;
-        padding: 2px 6px;
-        left: calc(4px + var(--safe-left));
+        font-size: clamp(10px, 2.2vw, 15px);
+        padding: 3px 7px;
+        left: calc(6px + var(--safe-left));
     }
 
     #distance-counter {
-        top: calc(32px + var(--safe-top));
+        top: calc(30px + var(--safe-top));
     }
 
     #cyberattack-counter {
@@ -425,23 +425,23 @@ body, html {
     }
 
     #asteroid-counter {
-        top: calc(68px + var(--safe-top));
+        top: calc(70px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(86px + var(--safe-top));
+        top: calc(90px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(106px + var(--safe-top));
-        font-size: 2.4vw;
+        top: calc(112px + var(--safe-top));
+        font-size: clamp(11px, 2.4vw, 16px);
     }
 
     #player-display {
-        bottom: calc(4px + env(safe-area-inset-bottom, 0px));
-        left: 4px;
-        font-size: 2.5vw;
-        padding: 3px 6px;
+        bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+        left: 6px;
+        font-size: clamp(10px, 2.5vw, 16px);
+        padding: 3px 8px;
     }
 
     .ammo-pack {
@@ -459,13 +459,14 @@ body, html {
     top: calc(10px + var(--safe-top));
     left: 50%;
     transform: translateX(-50%);
-    font-size: 3.5vw;
+    font-size: clamp(12px, 3.5vw, 42px);
     font-weight: bold;
     color: #ffffff;
     text-transform: uppercase;
     white-space: nowrap;
-    z-index: 25;
+    z-index: 26;
     text-align: center;
+    text-shadow: 0 0 12px rgba(0, 200, 255, 0.3);
 }
 
 /* ===== GAME OVER MESSAGE ===== */
@@ -483,7 +484,7 @@ body, html {
     text-align: center;
     color: #F3F3F3;
     background: rgba(5, 12, 28, 0.94);
-    padding: 1.5vw 2.5vw;
+    padding: clamp(12px, 1.5vw, 20px) clamp(16px, 2.5vw, 32px);
     border-radius: 16px;
     border: 2px solid rgba(0, 200, 255, 0.35);
     box-shadow: 0 0 50px rgba(0, 120, 255, 0.25);
@@ -493,7 +494,7 @@ body, html {
 
 #game-over-message h1 {
     color: #00c8ff;
-    font-size: 2.2vw;
+    font-size: clamp(16px, 2.2vw, 28px);
     margin: 0 0 0.15em 0;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -503,7 +504,7 @@ body, html {
 
 #game-over-message .player-result {
     color: #8899aa;
-    font-size: 1.1vw;
+    font-size: clamp(12px, 1.1vw, 18px);
     margin: 0 0 0.6em 0;
     flex-shrink: 0;
 }
@@ -521,7 +522,7 @@ body, html {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1vw;
+    gap: clamp(6px, 1vw, 14px);
     margin-bottom: 0.8em;
     flex-shrink: 0;
 }
@@ -530,15 +531,15 @@ body, html {
     background: rgba(0, 150, 255, 0.12);
     border: 1px solid rgba(0, 200, 255, 0.3);
     border-radius: 10px;
-    padding: 0.5em 1.2em;
-    min-width: 10vw;
+    padding: 0.5em clamp(8px, 1.2em, 20px);
+    min-width: clamp(80px, 10vw, 140px);
     flex: 1 1 auto;
     max-width: 20vw;
 }
 
 .stat-value {
     display: block;
-    font-size: 2.2vw;
+    font-size: clamp(16px, 2.2vw, 28px);
     font-weight: bold;
     color: #00ffcc;
     text-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
@@ -546,8 +547,8 @@ body, html {
 
 .stat-label {
     display: block;
-    font-size: 0.75vw;
-    color: #6688aa;
+    font-size: clamp(10px, 0.75vw, 14px);
+    color: #88aacc;
     margin-top: 0.2em;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -560,7 +561,7 @@ body, html {
     width: 200%;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 0.7vw;
+    font-size: clamp(9px, 0.7vw, 13px);
     color: rgba(255, 255, 255, 0.3);
     animation: textScroll 40s linear infinite;
 }
@@ -651,7 +652,7 @@ body, html {
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
 @media (min-width: 1024px) {
     #game-title {
-        font-size: 2.8vw;
+        font-size: clamp(22px, 2.8vw, 40px);
         text-align: center;
         transform: translateX(-50%);
         white-space: nowrap;
@@ -659,11 +660,11 @@ body, html {
 
     #exit-button, #restart-game-button, #clear-leaderboard-button {
         font-size: 1em;
-        padding: 0.8vw 1.5vw;
+        padding: 8px 16px;
     }
 
     #game-over-message h1 {
-        font-size: 2.2vw;
+        font-size: clamp(18px, 2.2vw, 30px);
     }
 }
 
@@ -686,7 +687,8 @@ body, html {
 }
 
 #toggle-music-button:hover {
-    background-color: rgba(255, 59, 63, 0.8);
+    background-color: rgba(0, 150, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
 }
 
 /* ===== PANTALLA DE INGRESO DE JUGADOR ===== */
@@ -731,7 +733,7 @@ body, html {
 
 #player-form h1 {
     color: #00c8ff;
-    font-size: 2.8vw;
+    font-size: clamp(18px, 2.8vw, 36px);
     margin: 0 0 0.1em 0;
     text-transform: uppercase;
     letter-spacing: 4px;
@@ -739,15 +741,15 @@ body, html {
 }
 
 #player-form p {
-    color: #7799bb;
-    font-size: 1.2vw;
+    color: #8899bb;
+    font-size: clamp(11px, 1.2vw, 18px);
     margin: 0 0 1em 0;
     letter-spacing: 1px;
 }
 
 #player-form .game-synopsis {
-    font-size: 0.95vw;
-    color: #6688aa;
+    font-size: clamp(10px, 0.95vw, 15px);
+    color: #7799aa;
     line-height: 1.5;
     margin: 0.3em auto 1em auto;
     max-width: 90%;
@@ -760,7 +762,7 @@ body, html {
     width: 85%;
     margin: 0 auto 1.2em auto;
     padding: 0.7em 1em;
-    font-size: 1.8vw;
+    font-size: clamp(14px, 1.8vw, 24px);
     text-align: center;
     background: rgba(0, 0, 0, 0.65);
     border: 2px solid rgba(0, 200, 255, 0.35);
@@ -784,7 +786,7 @@ body, html {
 
 #start-game-button {
     padding: 0.5em 2.5em;
-    font-size: 1.2vw;
+    font-size: clamp(12px, 1.2vw, 18px);
     cursor: pointer;
     background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
@@ -870,7 +872,7 @@ body, html {
 
 #pregame-panel h1 {
     color: #00c8ff;
-    font-size: 2.5vw;
+    font-size: clamp(16px, 2.5vw, 32px);
     margin: 0 0 0.2em 0;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -878,8 +880,8 @@ body, html {
 }
 
 #pregame-panel > p {
-    color: #7799bb;
-    font-size: 1.1vw;
+    color: #8899bb;
+    font-size: clamp(11px, 1.1vw, 17px);
     margin: 0 0 0.8em 0;
     letter-spacing: 1px;
 }
@@ -894,7 +896,7 @@ body, html {
 
 #launch-game-button {
     padding: 0.5em 2em;
-    font-size: 1.2vw;
+    font-size: clamp(12px, 1.2vw, 18px);
     cursor: pointer;
     background: linear-gradient(135deg, rgba(0, 100, 200, 0.4), rgba(0, 180, 255, 0.25));
     color: #00c8ff;
@@ -942,10 +944,10 @@ body, html {
     position: absolute;
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     left: 12px;
-    font-size: 1.3vw;
+    font-size: clamp(11px, 1.3vw, 20px);
     color: #00ffcc;
     background: rgba(0, 0, 0, 0.75);
-    padding: 0.5vw 1vw;
+    padding: 5px 10px;
     border-radius: 6px;
     border: 1px solid rgba(0, 200, 255, 0.3);
     z-index: 10;
@@ -1074,7 +1076,7 @@ body, html {
 
 #mobile-fire-button .fire-label {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     color: #ff3b3f;
     letter-spacing: 2px;
@@ -1151,56 +1153,57 @@ body, html {
 #pc-inventory {
     display: flex;
     position: absolute;
-    bottom: 14px;
-    right: 18px;
+    bottom: 16px;
+    right: 20px;
     z-index: 25;
     align-items: flex-end;
-    gap: 10px;
+    gap: 12px;
     pointer-events: none;
 }
 
 .pc-inv-item {
     position: relative;
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
     border: 2px solid rgba(0, 200, 255, 0.5);
     background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0.03) 70%);
-    box-shadow: 0 0 10px rgba(0, 200, 255, 0.2);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: auto;
+    transition: box-shadow 0.2s;
 }
 
 .pc-inv-item.pc-inv-life {
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
-    box-shadow: 0 0 10px rgba(0, 255, 100, 0.2);
+    box-shadow: 0 0 12px rgba(0, 255, 100, 0.2);
 }
 
 .pc-inv-icon {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
     pointer-events: none;
 }
 
 .pc-inv-count {
     position: absolute;
-    top: -6px;
-    right: -6px;
-    min-width: 18px;
-    height: 18px;
-    line-height: 18px;
-    border-radius: 9px;
+    top: -7px;
+    right: -7px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
     background: #00ccff;
     color: #000;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     text-align: center;
-    padding: 0 4px;
-    box-shadow: 0 0 6px rgba(0, 200, 255, 0.6);
+    padding: 0 5px;
+    box-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
     pointer-events: none;
 }
 
@@ -1210,18 +1213,19 @@ body, html {
 
 .pc-inv-key {
     position: absolute;
-    bottom: -6px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(0, 200, 255, 0.4);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 200, 255, 0.5);
     color: #00ccff;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: bold;
-    padding: 1px 5px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
     pointer-events: none;
     letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(0, 200, 255, 0.4);
 }
 
 /* Ocultar HUD de PC en dispositivos táctiles (usan mobile-controls) */
@@ -1290,27 +1294,27 @@ body, html {
     }
 
     #game-over-message h1 {
-        font-size: 4.5vw;
+        font-size: clamp(15px, 4.5vw, 24px);
         margin-bottom: 0.1em;
     }
 
     #game-over-message .player-result {
-        font-size: 2.5vw;
+        font-size: clamp(11px, 2.5vw, 16px);
         margin-bottom: 0.4em;
     }
 
     .stat-value {
-        font-size: 4vw;
+        font-size: clamp(14px, 4vw, 22px);
     }
 
     .stat-label {
-        font-size: 1.8vw;
+        font-size: clamp(9px, 1.8vw, 12px);
     }
 
     .stat-box {
-        padding: 0.4em 0.8em;
+        padding: 0.4em 0.7em;
         min-width: 25vw;
-        max-width: 40vw;
+        max-width: 42vw;
     }
 
     #leaderboard-table {
@@ -1332,7 +1336,7 @@ body, html {
     }
 
     #exit-button, #restart-game-button, #clear-leaderboard-button {
-        font-size: 2.8vw;
+        font-size: clamp(11px, 2.8vw, 16px);
         padding: 0.5em 1em;
     }
 
@@ -1354,7 +1358,7 @@ body, html {
     }
 
     #mobile-fire-button .fire-label {
-        font-size: 9px;
+        font-size: 10px;
     }
 
     .inventory-btn {
