@@ -1302,13 +1302,12 @@
                 scheduleCheck();
             }
 
-            // --- Actualizar UI de inventario (super capsules y vidas) ---
+            // --- Actualizar UI de inventario unificado (super capsules y vidas) ---
             function updateInventoryUI() {
-                // Mobile buttons
-                const scBtn = document.getElementById('use-super-capsule-button');
-                const scCount = document.getElementById('super-capsule-count');
-                const lifeBtn = document.getElementById('use-life-button');
-                const lifeCount = document.getElementById('life-count');
+                const scBtn = document.getElementById('inv-super');
+                const scCount = document.getElementById('inv-super-count');
+                const lifeBtn = document.getElementById('inv-life');
+                const lifeCount = document.getElementById('inv-life-count');
 
                 if (scBtn && scCount) {
                     scBtn.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
@@ -1318,26 +1317,11 @@
                     lifeBtn.style.display = storedLives > 0 ? 'flex' : 'none';
                     lifeCount.textContent = storedLives;
                 }
-
-                // PC HUD (esquina inferior derecha)
-                const pcSuper = document.getElementById('pc-inv-super');
-                const pcSuperCount = document.getElementById('pc-super-count');
-                const pcLife = document.getElementById('pc-inv-life');
-                const pcLifeCount = document.getElementById('pc-life-count');
-
-                if (pcSuper && pcSuperCount) {
-                    pcSuper.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
-                    pcSuperCount.textContent = storedSuperCapsules;
-                }
-                if (pcLife && pcLifeCount) {
-                    pcLife.style.display = storedLives > 0 ? 'flex' : 'none';
-                    pcLifeCount.textContent = storedLives;
-                }
             }
 
-            // --- Handler del botón de usar super capsule ---
-            const useSuperCapsuleBtn = document.getElementById('use-super-capsule-button');
-            if (useSuperCapsuleBtn) {
+            // --- Handler del botón de usar super capsule (click/touch en inventario unificado) ---
+            const invSuperBtn = document.getElementById('inv-super');
+            if (invSuperBtn) {
                 function useSuperCapsule(e) {
                     if (e) { e.preventDefault(); e.stopPropagation(); }
                     if (storedSuperCapsules <= 0 || godModeActive || gameOver || !gameStarted) return;
@@ -1345,17 +1329,17 @@
                     updateInventoryUI();
                     activateGodMode();
                 }
-                useSuperCapsuleBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
-                useSuperCapsuleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useSuperCapsuleBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
+                invSuperBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
+                invSuperBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
             }
 
-            // --- Handler del botón de usar vida (no activa en gameplay, solo en game over) ---
-            const useLifeBtn = document.getElementById('use-life-button');
-            if (useLifeBtn) {
-                useLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+            // --- Handler del botón de vida (no activa en gameplay, solo visual) ---
+            const invLifeBtn = document.getElementById('inv-life');
+            if (invLifeBtn) {
+                invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
             }
 
             // Disparo gratuito (god mode) - no consume misiles
@@ -1516,6 +1500,8 @@
                 gameContainer.style.cursor = 'default';
                 const mobileCtrlVictory = document.getElementById('mobile-controls');
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
+                const invHudVictory = document.getElementById('inventory-hud');
+                if (invHudVictory) invHudVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1571,12 +1557,12 @@
                     updateMissileDisplay();
                 }
 
-                // Restaurar controles móviles y HUD de PC
+                // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
-                const pcInv = document.getElementById('pc-inventory');
-                if (pcInv && !isTouchDev) pcInv.style.display = 'flex';
+                const invHud = document.getElementById('inventory-hud');
+                if (invHud) invHud.style.display = 'flex';
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
@@ -1615,11 +1601,11 @@
                     `;
                     gameContainer.appendChild(continueOverlay);
 
-                    // Ocultar controles móviles y HUD de PC
+                    // Ocultar controles móviles e inventario durante el diálogo
                     const mobileCtrlCont = document.getElementById('mobile-controls');
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
-                    const pcInv = document.getElementById('pc-inventory');
-                    if (pcInv) pcInv.style.display = 'none';
+                    const invHud = document.getElementById('inventory-hud');
+                    if (invHud) invHud.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
@@ -1698,9 +1684,11 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
-                // Ocultar controles móviles en game over
+                // Ocultar controles móviles e inventario en game over
                 const mobileCtrlGO = document.getElementById('mobile-controls');
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
+                const invHudGO = document.getElementById('inventory-hud');
+                if (invHudGO) invHudGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1809,10 +1797,12 @@
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
 
-                // Restaurar controles móviles si es touch device
+                // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlReset = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
+                const invHudReset = document.getElementById('inventory-hud');
+                if (invHudReset) invHudReset.style.display = 'flex';
 
                 // Reiniciar inventario
                 storedSuperCapsules = 0;

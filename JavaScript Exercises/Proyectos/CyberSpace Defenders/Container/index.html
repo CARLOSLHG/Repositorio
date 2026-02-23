@@ -82,31 +82,23 @@
 
         <!-- Botón de disparo para móviles (solo visible en touch devices) -->
         <div id="mobile-controls">
-            <button id="use-life-button" class="inventory-btn" aria-label="Usar Vida" style="display:none;">
-                <img src="./img/pack-life+1.png" alt="Life" class="inventory-icon" draggable="false">
-                <span class="inventory-count" id="life-count">0</span>
-            </button>
             <button id="mobile-fire-button" aria-label="Disparar">
                 <img src="./img/fire-bton.png" alt="FIRE" class="fire-icon-img" draggable="false">
                 <span class="fire-label">FIRE</span>
             </button>
-            <button id="use-super-capsule-button" class="inventory-btn" aria-label="Usar Super Capsule" style="display:none;">
-                <img src="./img/super-capsule.png" alt="Super Capsule" class="inventory-icon" draggable="false">
-                <span class="inventory-count" id="super-capsule-count">0</span>
-            </button>
         </div>
 
-        <!-- HUD inventario para PC (esquina inferior derecha) -->
-        <div id="pc-inventory">
-            <div id="pc-inv-super" class="pc-inv-item" style="display:none;" title="Super Capsule (S)">
-                <img src="./img/super-capsule.png" alt="Super Capsule" class="pc-inv-icon" draggable="false">
-                <span class="pc-inv-count" id="pc-super-count">0</span>
-                <span class="pc-inv-key">S</span>
-            </div>
-            <div id="pc-inv-life" class="pc-inv-item pc-inv-life" style="display:none;" title="Vida Extra">
-                <img src="./img/pack-life+1.png" alt="Life" class="pc-inv-icon" draggable="false">
-                <span class="pc-inv-count" id="pc-life-count">0</span>
-            </div>
+        <!-- HUD inventario unificado (esquina inferior derecha, PC y móvil) -->
+        <div id="inventory-hud">
+            <button id="inv-super" class="inv-item inv-super-capsule" style="display:none;" aria-label="Usar Super Capsule">
+                <img src="./img/super-capsule.png" alt="Super Capsule" class="inv-icon" draggable="false">
+                <span class="inv-count" id="inv-super-count">0</span>
+                <span class="inv-key">S</span>
+            </button>
+            <button id="inv-life" class="inv-item inv-life-pack" style="display:none;" aria-label="Vida Extra">
+                <img src="./img/pack-life+1.png" alt="Life" class="inv-icon" draggable="false">
+                <span class="inv-count" id="inv-life-count">0</span>
+            </button>
         </div>
     </div>
 
