@@ -489,10 +489,17 @@
                 e.stopPropagation();
             });
 
-            // Tecla M para apagar/encender la música
+            // Tecla M para apagar/encender la música, S para usar super capsule
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
+                }
+                if (e.key === 's' || e.key === 'S') {
+                    if (storedSuperCapsules > 0 && !godModeActive && !gameOver && gameStarted) {
+                        storedSuperCapsules--;
+                        updateInventoryUI();
+                        activateGodMode();
+                    }
                 }
             });
 
@@ -1249,7 +1256,7 @@
                 lifeEl.classList.add('life-pack');
 
                 const lifeImg = document.createElement('img');
-                lifeImg.src = './img/life-pack+1.png';
+                lifeImg.src = './img/pack-life+1.png';
                 lifeImg.alt = 'Life +1';
                 lifeImg.classList.add('capsule-img');
                 lifeImg.draggable = false;
@@ -1295,12 +1302,12 @@
                 scheduleCheck();
             }
 
-            // --- Actualizar UI de inventario (super capsules y vidas) ---
+            // --- Actualizar UI de inventario unificado (super capsules y vidas) ---
             function updateInventoryUI() {
-                const scBtn = document.getElementById('use-super-capsule-button');
-                const scCount = document.getElementById('super-capsule-count');
-                const lifeBtn = document.getElementById('use-life-button');
-                const lifeCount = document.getElementById('life-count');
+                const scBtn = document.getElementById('inv-super');
+                const scCount = document.getElementById('inv-super-count');
+                const lifeBtn = document.getElementById('inv-life');
+                const lifeCount = document.getElementById('inv-life-count');
 
                 if (scBtn && scCount) {
                     scBtn.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
@@ -1312,9 +1319,9 @@
                 }
             }
 
-            // --- Handler del botón de usar super capsule ---
-            const useSuperCapsuleBtn = document.getElementById('use-super-capsule-button');
-            if (useSuperCapsuleBtn) {
+            // --- Handler del botón de usar super capsule (click/touch en inventario unificado) ---
+            const invSuperBtn = document.getElementById('inv-super');
+            if (invSuperBtn) {
                 function useSuperCapsule(e) {
                     if (e) { e.preventDefault(); e.stopPropagation(); }
                     if (storedSuperCapsules <= 0 || godModeActive || gameOver || !gameStarted) return;
@@ -1322,17 +1329,17 @@
                     updateInventoryUI();
                     activateGodMode();
                 }
-                useSuperCapsuleBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
-                useSuperCapsuleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useSuperCapsuleBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
+                invSuperBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
+                invSuperBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
             }
 
-            // --- Handler del botón de usar vida (no activa en gameplay, solo en game over) ---
-            const useLifeBtn = document.getElementById('use-life-button');
-            if (useLifeBtn) {
-                useLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                useLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+            // --- Handler del botón de vida (no activa en gameplay, solo visual) ---
+            const invLifeBtn = document.getElementById('inv-life');
+            if (invLifeBtn) {
+                invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
             }
 
             // Disparo gratuito (god mode) - no consume misiles
@@ -1493,6 +1500,8 @@
                 gameContainer.style.cursor = 'default';
                 const mobileCtrlVictory = document.getElementById('mobile-controls');
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
+                const invHudVictory = document.getElementById('inventory-hud');
+                if (invHudVictory) invHudVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1548,10 +1557,12 @@
                     updateMissileDisplay();
                 }
 
-                // Restaurar controles móviles
+                // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
+                const invHud = document.getElementById('inventory-hud');
+                if (invHud) invHud.style.display = 'flex';
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
@@ -1574,19 +1585,27 @@
                     gameContainer.style.cursor = 'default';
                     const continueOverlay = document.createElement('div');
                     continueOverlay.id = 'game-over-message';
+                    const lifeWord = storedLives > 1 ? 'vidas extra' : 'vida extra';
                     continueOverlay.innerHTML = `
-                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">Has sido alcanzado</h1>
-                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">Tienes <strong>${storedLives}</strong> vida${storedLives > 1 ? 's' : ''} adicional${storedLives > 1 ? 'es' : ''}. ¿Quieres continuar?</p>
-                        <div class="buttons-container" style="margin-top:1em;">
-                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;">Continuar</button>
-                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;">Rendirse</button>
+                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">&#9888; Has sido alcanzado</h1>
+                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">
+                            Tienes <strong>${storedLives}</strong> ${lifeWord} disponible${storedLives > 1 ? 's' : ''}
+                        </p>
+                        <p style="color:#ccc;font-size:0.95em;margin:0.3em 0 1em;">
+                            ¿Quieres usar una vida extra para continuar o terminar la misión?
+                        </p>
+                        <div class="buttons-container" style="margin-top:0.5em;">
+                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;font-size:1em;padding:0.5em 1.5em;">&#9654; Continuar con vida extra</button>
+                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;font-size:1em;padding:0.5em 1.5em;">&#10006; Terminar misión</button>
                         </div>
                     `;
                     gameContainer.appendChild(continueOverlay);
 
-                    // Ocultar controles móviles
+                    // Ocultar controles móviles e inventario durante el diálogo
                     const mobileCtrlCont = document.getElementById('mobile-controls');
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
+                    const invHud = document.getElementById('inventory-hud');
+                    if (invHud) invHud.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
@@ -1665,9 +1684,11 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
-                // Ocultar controles móviles en game over
+                // Ocultar controles móviles e inventario en game over
                 const mobileCtrlGO = document.getElementById('mobile-controls');
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
+                const invHudGO = document.getElementById('inventory-hud');
+                if (invHudGO) invHudGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -1776,10 +1797,12 @@
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
 
-                // Restaurar controles móviles si es touch device
+                // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlReset = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
+                const invHudReset = document.getElementById('inventory-hud');
+                if (invHudReset) invHudReset.style.display = 'flex';
 
                 // Reiniciar inventario
                 storedSuperCapsules = 0;
