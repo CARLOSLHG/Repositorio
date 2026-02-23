@@ -9,6 +9,12 @@
     
 </head>
 <body>
+    <!-- Aviso de rotación para móviles en portrait -->
+    <div id="rotate-notice">
+        <div class="rotate-icon">&#128241;</div>
+        <p>Gira tu dispositivo para jugar</p>
+    </div>
+
     <!-- Pantalla de ingreso de jugador -->
     <div id="player-screen">
         <div id="player-form">
@@ -75,18 +81,20 @@
         </div>
 
         <!-- Botón de disparo para móviles (solo visible en touch devices) -->
-        <button id="mobile-fire-button" aria-label="Disparar">
-            <svg viewBox="0 0 80 80" class="fire-icon">
-                <circle cx="40" cy="40" r="36" fill="rgba(255,59,63,0.15)" stroke="#ff3b3f" stroke-width="3"/>
-                <polygon points="40,12 46,30 40,26 34,30" fill="#ff3b3f"/>
-                <polygon points="40,68 34,50 40,54 46,50" fill="#ff3b3f"/>
-                <polygon points="12,40 30,34 26,40 30,46" fill="#ff3b3f"/>
-                <polygon points="68,40 50,46 54,40 50,34" fill="#ff3b3f"/>
-                <circle cx="40" cy="40" r="8" fill="none" stroke="#ff3b3f" stroke-width="2"/>
-                <circle cx="40" cy="40" r="3" fill="#ff3b3f"/>
-            </svg>
-            <span class="fire-label">FIRE</span>
-        </button>
+        <div id="mobile-controls">
+            <button id="use-life-button" class="inventory-btn" aria-label="Usar Vida" style="display:none;">
+                <img src="./img/life-pack+1.png" alt="Life" class="inventory-icon" draggable="false">
+                <span class="inventory-count" id="life-count">0</span>
+            </button>
+            <button id="mobile-fire-button" aria-label="Disparar">
+                <img src="./img/fire-bton.png" alt="FIRE" class="fire-icon-img" draggable="false">
+                <span class="fire-label">FIRE</span>
+            </button>
+            <button id="use-super-capsule-button" class="inventory-btn" aria-label="Usar Super Capsule" style="display:none;">
+                <img src="./img/super-capsule.png" alt="Super Capsule" class="inventory-icon" draggable="false">
+                <span class="inventory-count" id="super-capsule-count">0</span>
+            </button>
+        </div>
     </div>
 
     <!-- Configuración del leaderboard compartido (JSONBin.io) -->
