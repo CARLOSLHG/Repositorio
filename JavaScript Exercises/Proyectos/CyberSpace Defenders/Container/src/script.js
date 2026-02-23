@@ -375,10 +375,19 @@
                 gameStartTime = Date.now();
                 gameStarted = true;
 
-                // Pantalla completa al iniciar el juego
+                // Pantalla completa + forzar landscape al iniciar el juego
                 const el = document.documentElement;
                 const rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
-                if (rfs) rfs.call(el).catch(() => {});
+                if (rfs) {
+                    const fsPromise = rfs.call(el);
+                    if (fsPromise && fsPromise.then) {
+                        fsPromise.then(() => {
+                            if (screen.orientation && screen.orientation.lock) {
+                                screen.orientation.lock('landscape').catch(() => {});
+                            }
+                        }).catch(() => {});
+                    }
+                }
 
                 initGame();
             }
@@ -557,46 +566,46 @@
                 }
             });
 
-            // --- Controles táctiles para móviles (solo movimiento, disparo via botón) ---
+            // --- Controles táctiles para móviles (movimiento relativo, disparo via botón) ---
             let touching = false;
 
             if (isTouchDevice) {
                 // Posicionar nave en el primer cuarto de pantalla para mayor maniobrabilidad
                 spaceship.style.left = '25%';
 
-                function updateTouchTarget(touchY) {
-                    const newBottom = cachedContainerHeight - touchY - (cachedSpaceshipHeight / 2);
-                    touchTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
-                    // Primer toque: posicionar inmediatamente sin interpolación
-                    if (!isTouchControlled) {
-                        isTouchControlled = true;
-                        shipCurrentBottom = touchTargetBottom;
-                        spaceship.style.bottom = shipCurrentBottom + 'px';
-                    }
-                }
-
                 let moveTouchId = null; // ID del dedo que controla la nave
+                let lastTouchY = 0;     // Última posición Y del dedo (para calcular delta)
 
                 gameContainer.addEventListener('touchstart', function(event) {
                     if (gameOver || !gameStarted) return;
                     if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
-                    // Usar changedTouches para verificar el dedo NUEVO, no uno existente
                     const newTouch = event.changedTouches[0];
-                    // Solo aceptar toques en la mitad izquierda de la pantalla para no interferir con botones
                     if (newTouch.clientX > window.innerWidth * 0.5) return;
                     event.preventDefault();
                     touching = true;
                     moveTouchId = newTouch.identifier;
-                    updateTouchTarget(newTouch.clientY);
+                    lastTouchY = newTouch.clientY;
+                    // Activar control táctil sin mover la nave (solo registrar posición inicial)
+                    if (!isTouchControlled) {
+                        isTouchControlled = true;
+                        shipCurrentBottom = parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2);
+                        touchTargetBottom = shipCurrentBottom;
+                    }
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchmove', function(event) {
                     if (!touching || gameOver || !gameStarted) return;
                     event.preventDefault();
-                    // Seguir solo el dedo que inició el movimiento
                     for (let i = 0; i < event.touches.length; i++) {
                         if (event.touches[i].identifier === moveTouchId) {
-                            updateTouchTarget(event.touches[i].clientY);
+                            const currentY = event.touches[i].clientY;
+                            const deltaY = lastTouchY - currentY; // positivo = dedo sube = nave sube
+                            lastTouchY = currentY;
+                            // Aplicar delta a la posición objetivo de la nave
+                            touchTargetBottom = Math.max(0, Math.min(
+                                cachedContainerHeight - cachedSpaceshipHeight,
+                                touchTargetBottom + deltaY
+                            ));
                             break;
                         }
                     }
