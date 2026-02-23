@@ -1256,7 +1256,7 @@
                 lifeEl.classList.add('life-pack');
 
                 const lifeImg = document.createElement('img');
-                lifeImg.src = './img/life-pack+1.png';
+                lifeImg.src = './img/pack-life+1.png';
                 lifeImg.alt = 'Life +1';
                 lifeImg.classList.add('capsule-img');
                 lifeImg.draggable = false;
