@@ -535,15 +535,11 @@
                 }
             }
 
+            // Bloquear menú contextual SIEMPRE dentro del juego
             document.addEventListener('contextmenu', (e) => {
-                if (!gameStarted || gameOver) return;
                 e.preventDefault();
-                useSuperCapsule();
-            });
-
-            document.addEventListener('mousedown', (e) => {
-                if (e.button === 2 && gameStarted && !gameOver) {
-                    e.preventDefault();
+                if (gameStarted && !gameOver) {
+                    useSuperCapsule();
                 }
             });
 
