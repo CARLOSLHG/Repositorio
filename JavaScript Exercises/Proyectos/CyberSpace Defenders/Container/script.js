@@ -1277,14 +1277,48 @@
                 });
             }
 
-            // Spawning de super capsule: probabilidad y frecuencia según amenazas eliminadas
+            // Spawning de super capsule: probabilidad y frecuencia según nivel de dificultad
+            // A mayor dificultad → mayor probabilidad y menor delay (aparecen más seguido)
             function getSuperCapsuleParams() {
-                if (cyberattackCount >= 125) return { probability: 0.05, delay: 45000 };
-                if (cyberattackCount >= 100) return { probability: 0.10, delay: 40000 };
-                if (cyberattackCount >= 75)  return { probability: 0.15, delay: 35000 };
-                if (cyberattackCount >= 50)  return { probability: 0.20, delay: 30000 };
-                if (cyberattackCount >= 25)  return { probability: 0.25, delay: 25000 };
-                return null; // Menos de 25: no aparece
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const level = getDifficultyLevel(elapsed);
+                // Nivel 0 SEGURO:      no aparece
+                // Nivel 1 ALERTA:      prob 0.08, cada 35s
+                // Nivel 2 PELIGRO:     prob 0.14, cada 28s
+                // Nivel 3 CRÍTICO:     prob 0.22, cada 22s
+                // Nivel 4 EXTREMO:     prob 0.30, cada 18s
+                // Nivel 5 APOCALIPSIS: prob 0.40, cada 14s
+                const table = [
+                    null,
+                    { probability: 0.08, delay: 35000 },
+                    { probability: 0.14, delay: 28000 },
+                    { probability: 0.22, delay: 22000 },
+                    { probability: 0.30, delay: 18000 },
+                    { probability: 0.40, delay: 14000 }
+                ];
+                return table[level] || null;
+            }
+
+            // Spawning de life packs: similar a super capsule pero con sus propias probabilidades
+            // Vidas son más valiosas → probabilidad ligeramente menor, pero mejora con dificultad
+            function getLifePackParams() {
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const level = getDifficultyLevel(elapsed);
+                // Nivel 0 SEGURO:      no aparece (empiezas con vidas iniciales)
+                // Nivel 1 ALERTA:      prob 0.06, cada 40s
+                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.18, cada 25s
+                // Nivel 4 EXTREMO:     prob 0.25, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
+                const table = [
+                    null,
+                    { probability: 0.06, delay: 40000 },
+                    { probability: 0.10, delay: 32000 },
+                    { probability: 0.18, delay: 25000 },
+                    { probability: 0.25, delay: 20000 },
+                    { probability: 0.35, delay: 15000 }
+                ];
+                return table[level] || null;
             }
 
             function startSuperCapsuleSpawner() {
@@ -1340,14 +1374,14 @@
                 });
             }
 
-            // Spawner de life packs: misma tabla de probabilidad que super capsules
+            // Spawner de life packs: probabilidad propia que mejora con la dificultad
             function startLifePackSpawner() {
                 function scheduleCheck() {
-                    const params = getSuperCapsuleParams();
-                    const checkDelay = params ? params.delay : 25000;
+                    const params = getLifePackParams();
+                    const checkDelay = params ? params.delay : 30000;
                     lifePackSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
-                        const currentParams = getSuperCapsuleParams();
+                        const currentParams = getLifePackParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
                                 createLifePack();
