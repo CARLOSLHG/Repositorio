@@ -42,7 +42,8 @@
         const GOD_MODE_AUTOFIRE_RATE = 120;    // ms entre disparos automáticos
 
         // --- Life Pack: Vidas extra ---
-        let storedLives = 0;
+        const INITIAL_EXTRA_LIVES = 2;
+        let storedLives = INITIAL_EXTRA_LIVES;
         let activeLifePacks = [];
         let lifePackSpawnTimeout = null;
 
@@ -1822,9 +1823,9 @@
                 const invHudReset = document.getElementById('inventory-hud');
                 if (invHudReset) invHudReset.style.display = 'flex';
 
-                // Reiniciar inventario
+                // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
-                storedLives = 0;
+                storedLives = INITIAL_EXTRA_LIVES;
                 updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);
@@ -1903,6 +1904,9 @@
             startAmmoPacks();
             startSuperCapsuleSpawner();
             startLifePackSpawner();
+
+            // Mostrar vidas iniciales en el HUD
+            updateInventoryUI();
 
         } // fin de initGame
 
