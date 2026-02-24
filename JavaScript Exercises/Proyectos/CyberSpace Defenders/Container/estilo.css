@@ -746,25 +746,30 @@ body, html {
         max-width: 225px;
     }
 
-    /* +25% tamaño de inventario/storage (PC/Mac) */
-    .inv-item {
-        width: 114px;
-        height: 114px;
-    }
-
-    .inv-item.inv-life-pack {
-        width: 129px;
-        height: 129px;
+    /* Storage slots más grandes en PC/Mac */
+    .inv-slot {
+        width: 88px;
+        height: 88px;
+        border-radius: 12px;
     }
 
     .inv-icon {
-        width: 76px;
-        height: 76px;
+        width: 48px;
+        height: 48px;
     }
 
-    .inv-life-pack .inv-icon {
-        width: 88px;
-        height: 88px;
+    .inv-count {
+        min-width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 13px;
+        top: -7px;
+        right: -7px;
+    }
+
+    .inv-label {
+        font-size: 9px;
+        letter-spacing: 1.8px;
     }
 }
 
@@ -1042,8 +1047,8 @@ body, html {
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
-    bottom: calc(12px + var(--safe-bottom));
-    left: calc(12px + var(--safe-left));
+    bottom: calc(100px + var(--safe-bottom));
+    left: calc(14px + var(--safe-left));
     font-size: clamp(11px, 1.3vw, 20px);
     color: #00ffcc;
     background: rgba(0, 0, 0, 0.75);
@@ -1188,139 +1193,212 @@ body, html {
     transform: scale(0.85);
 }
 
-/* ===== HUD INVENTARIO UNIFICADO (esquina inferior derecha, PC y móvil) ===== */
+/* ===== STORAGE HUD: 3 cubículos fijos, esquina inferior izquierda ===== */
 #inventory-hud {
     display: flex;
     position: absolute;
-    bottom: calc(16px + var(--safe-bottom));
-    right: calc(20px + var(--safe-right));
+    bottom: calc(14px + var(--safe-bottom));
+    left: calc(14px + var(--safe-left));
     z-index: 25;
+    flex-direction: row;
     align-items: flex-end;
-    gap: 10px;
+    gap: 6px;
     pointer-events: none;
 }
 
-.inv-item {
+/* --- Slot base (cubículo) --- */
+.inv-slot {
     position: relative;
-    width: 91px;
-    height: 91px;
-    border-radius: 14px;
-    border: none;
-    background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0.03) 70%);
-    box-shadow: 0 0 12px rgba(0, 200, 255, 0.25);
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 200, 255, 0.18);
+    background: rgba(5, 15, 30, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     padding: 0;
     cursor: pointer;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1px;
     pointer-events: auto;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: transform 0.12s, border-color 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-.inv-item.inv-life-pack {
-    width: 103px;
-    height: 103px;
-    border-color: rgba(0, 255, 100, 0.5);
-    background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
-    box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+/* Estado vacío: ícono apagado, slot sutil */
+.inv-slot.slot-empty {
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(5, 15, 30, 0.35);
+    cursor: default;
 }
 
-.inv-life-pack .inv-icon {
-    width: 70px;
-    height: 70px;
+.inv-slot.slot-empty .inv-icon {
+    opacity: 0.18;
+    filter: grayscale(1) brightness(0.5);
 }
 
-.inv-icon {
-    width: 61px;
-    height: 61px;
-    object-fit: contain;
-    pointer-events: none;
+.inv-slot.slot-empty .inv-count {
+    display: none;
 }
 
-.inv-count {
-    position: absolute;
-    top: -9px;
-    right: -9px;
-    min-width: 28px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 14px;
-    background: #00ccff;
-    color: #000;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    padding: 0 6px;
-    box-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
-    pointer-events: none;
+.inv-slot.slot-empty .inv-label {
+    opacity: 0.25;
 }
 
-.inv-life-pack .inv-count {
-    background: #00ff66;
+/* Estado activo/lleno: brillo y borde */
+.inv-slot.slot-active {
+    border-color: rgba(0, 200, 255, 0.4);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 200, 255, 0.15);
 }
 
-.inv-key {
-    position: absolute;
-    bottom: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(0, 200, 255, 0.5);
-    color: #00ccff;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 2px 7px;
-    border-radius: 5px;
-    pointer-events: none;
-    letter-spacing: 0.5px;
-    text-shadow: 0 0 4px rgba(0, 200, 255, 0.4);
+.inv-slot.slot-active .inv-icon {
+    opacity: 1;
+    filter: none;
 }
 
-.inv-item:active {
+/* Variante: life slot activo → verde */
+.inv-slot[data-slot="life"].slot-active {
+    border-color: rgba(0, 255, 100, 0.4);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 255, 100, 0.15);
+}
+
+/* Variante: dual slot activo → magenta */
+.inv-slot[data-slot="dual"].slot-active {
+    border-color: rgba(255, 0, 200, 0.4);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 200, 0.15);
+}
+
+/* Efecto pulse cuando el dual-shoot está ACTIVO en gameplay */
+.inv-slot[data-slot="dual"].slot-engaged {
+    border-color: rgba(255, 0, 200, 0.6);
+    animation: slotEngage 1.2s ease-in-out infinite;
+}
+
+@keyframes slotEngage {
+    0%, 100% { box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 200, 0.2); }
+    50% { box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 0, 200, 0.45); }
+}
+
+.inv-slot:active:not(.slot-empty) {
     transform: scale(0.9);
 }
 
-/* En móviles: ocultar tecla shortcut, posicionar a la IZQUIERDA del FIRE button, alineados horizontalmente */
+/* --- Ícono dentro del slot --- */
+.inv-icon {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    pointer-events: none;
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+/* --- Badge de cantidad --- */
+.inv-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    background: #00ccff;
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 4px;
+    box-shadow: 0 0 6px rgba(0, 200, 255, 0.5);
+    pointer-events: none;
+}
+
+.inv-slot[data-slot="life"] .inv-count {
+    background: #00ff66;
+}
+
+.inv-slot[data-slot="dual"] .inv-count {
+    background: #ff44cc;
+    color: #fff;
+}
+
+/* --- Etiqueta inferior --- */
+.inv-label {
+    font-size: 8px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    pointer-events: none;
+    line-height: 1;
+    margin-top: -1px;
+}
+
+.inv-slot[data-slot="life"] .inv-label {
+    color: rgba(0, 255, 100, 0.6);
+}
+
+.inv-slot[data-slot="dual"] .inv-label {
+    color: rgba(255, 0, 200, 0.6);
+}
+
+/* --- Tecla shortcut (solo PC) --- */
+.inv-key {
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 200, 255, 0.35);
+    color: #00ccff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 4px;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+}
+
+/* --- Mobile: posicionar a la izquierda del FIRE, ocultar tecla --- */
 @media (hover: none) and (pointer: coarse) {
     #inventory-hud {
         bottom: calc(18px + var(--safe-bottom) + 55px);
         right: calc(210px + var(--safe-right));
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
+        left: auto;
+        gap: 5px;
     }
 
     .inv-key {
         display: none;
     }
 
-    .inv-item {
-        width: 70px;
-        height: 70px;
-        border: none;
-        background: rgba(0, 0, 0, 0.35);
-        box-shadow: none;
-        border-radius: 16px;
-    }
-
-    .inv-item.inv-life-pack {
-        width: 75px;
-        height: 75px;
-        border: none;
-        background: rgba(0, 0, 0, 0.35);
-        box-shadow: none;
+    .inv-slot {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
     }
 
     .inv-icon {
-        width: 56px;
-        height: 56px;
+        width: 32px;
+        height: 32px;
     }
 
-    .inv-life-pack .inv-icon {
-        width: 60px;
-        height: 60px;
+    .inv-label {
+        font-size: 6px;
+        letter-spacing: 1px;
+    }
+
+    .inv-count {
+        min-width: 16px;
+        height: 16px;
+        line-height: 16px;
+        font-size: 9px;
+        top: -4px;
+        right: -4px;
+        padding: 0 3px;
     }
 }
 
@@ -1506,35 +1584,35 @@ body, html {
     }
 
     #inventory-hud {
-        bottom: calc(14px + var(--safe-bottom) + 46px);
+        bottom: calc(14px + var(--safe-bottom) + 42px);
         right: calc(186px + var(--safe-right));
+        left: auto;
     }
 
-    .inv-item {
-        width: 64px;
-        height: 64px;
-        border: none;
-        background: rgba(0, 0, 0, 0.35);
-        box-shadow: none;
-        border-radius: 14px;
-    }
-
-    .inv-item.inv-life-pack {
-        width: 68px;
-        height: 68px;
-        border: none;
-        background: rgba(0, 0, 0, 0.35);
-        box-shadow: none;
+    .inv-slot {
+        width: 54px;
+        height: 54px;
+        border-radius: 8px;
     }
 
     .inv-icon {
-        width: 52px;
-        height: 52px;
+        width: 28px;
+        height: 28px;
     }
 
-    .inv-life-pack .inv-icon {
-        width: 55px;
-        height: 55px;
+    .inv-label {
+        font-size: 5.5px;
+        letter-spacing: 0.8px;
+    }
+
+    .inv-count {
+        min-width: 14px;
+        height: 14px;
+        line-height: 14px;
+        font-size: 8px;
+        top: -3px;
+        right: -3px;
+        padding: 0 2px;
     }
 }
 
