@@ -1604,18 +1604,17 @@
                     gameContainer.style.cursor = 'default';
                     const continueOverlay = document.createElement('div');
                     continueOverlay.id = 'game-over-message';
+                    continueOverlay.classList.add('continue-screen');
                     const lifeWord = storedLives > 1 ? 'vidas extra' : 'vida extra';
                     continueOverlay.innerHTML = `
-                        <h1 style="font-size:1.4em;margin-bottom:0.3em;">&#9888; Has sido alcanzado</h1>
-                        <p style="color:#00ff66;font-size:1.1em;margin:0.5em 0;">
-                            Tienes <strong>${storedLives}</strong> ${lifeWord} disponible${storedLives > 1 ? 's' : ''}
+                        <img src="./img/continue-banner.png" alt="Continue?" class="continue-banner" draggable="false">
+                        <p class="continue-lives-info">
+                            <img src="./img/pack-life+1.png" alt="" class="continue-life-icon">
+                            <span><strong>${storedLives}</strong> ${lifeWord}</span>
                         </p>
-                        <p style="color:#ccc;font-size:0.95em;margin:0.3em 0 1em;">
-                            ¿Quieres usar una vida extra para continuar o terminar la misión?
-                        </p>
-                        <div class="buttons-container" style="margin-top:0.5em;">
-                            <button id="continue-yes-btn" style="background:rgba(0,255,100,0.2);border:2px solid #00ff66;color:#00ff66;font-size:1em;padding:0.5em 1.5em;">&#9654; Continuar con vida extra</button>
-                            <button id="continue-no-btn" style="background:rgba(255,59,63,0.2);border:2px solid #ff3b3f;color:#ff3b3f;font-size:1em;padding:0.5em 1.5em;">&#10006; Terminar misión</button>
+                        <div class="buttons-container" style="margin-top:0.8em;gap:1em;">
+                            <button id="continue-yes-btn" class="continue-btn continue-btn-yes">&#9654; Continuar</button>
+                            <button id="continue-no-btn" class="continue-btn continue-btn-no">&#10006; Rendirse</button>
                         </div>
                     `;
                     gameContainer.appendChild(continueOverlay);
