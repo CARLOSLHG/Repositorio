@@ -517,6 +517,87 @@ body, html {
     color: #00ffcc;
 }
 
+/* --- Continue screen (usar vida extra) --- */
+#game-over-message.continue-screen {
+    background: rgba(2, 8, 20, 0.96);
+    border-color: rgba(0, 255, 100, 0.4);
+    box-shadow: 0 0 60px rgba(0, 255, 100, 0.2), 0 0 120px rgba(0, 200, 255, 0.1);
+    padding: clamp(16px, 2vw, 28px);
+    align-items: center;
+}
+
+.continue-banner {
+    width: 90%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 0.6em;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 100, 0.5));
+    animation: continuePulse 2s ease-in-out infinite;
+}
+
+@keyframes continuePulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 100, 0.5)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 35px rgba(0, 255, 100, 0.8)) drop-shadow(0 0 60px rgba(0, 200, 255, 0.3)); transform: scale(1.02); }
+}
+
+.continue-lives-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    color: #00ff66;
+    font-size: clamp(14px, 1.8vw, 22px);
+    margin: 0.3em 0 0.5em;
+    text-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
+}
+
+.continue-life-icon {
+    width: clamp(28px, 4vw, 44px);
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 100, 0.6));
+}
+
+.continue-btn {
+    font-family: inherit;
+    font-size: clamp(13px, 1.4vw, 18px);
+    font-weight: bold;
+    padding: 0.6em 1.8em;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.continue-btn:active {
+    transform: scale(0.95);
+}
+
+.continue-btn-yes {
+    background: rgba(0, 255, 100, 0.15);
+    border: 2px solid #00ff66;
+    color: #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 100, 0.3);
+}
+
+.continue-btn-yes:hover {
+    background: rgba(0, 255, 100, 0.3);
+    box-shadow: 0 0 25px rgba(0, 255, 100, 0.5);
+}
+
+.continue-btn-no {
+    background: rgba(255, 59, 63, 0.15);
+    border: 2px solid #ff3b3f;
+    color: #ff3b3f;
+    box-shadow: 0 0 10px rgba(255, 59, 63, 0.2);
+}
+
+.continue-btn-no:hover {
+    background: rgba(255, 59, 63, 0.3);
+    box-shadow: 0 0 20px rgba(255, 59, 63, 0.4);
+}
+
 /* Stats boxes */
 .stats-row {
     display: flex;
