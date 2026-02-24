@@ -384,11 +384,6 @@ body, html {
         padding: 0;
     }
 
-    #game-title {
-        font-size: 3.5vw;
-        top: calc(2px + var(--safe-top));
-    }
-
     #toggle-music-button {
         top: calc(2px + var(--safe-top));
         right: var(--safe-right, 0px);
@@ -444,18 +439,7 @@ body, html {
 }
 
 #game-title {
-    position: absolute;
-    top: calc(10px + var(--safe-top));
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: clamp(12px, 3.5vw, 42px);
-    font-weight: bold;
-    color: #ffffff;
-    text-transform: uppercase;
-    white-space: nowrap;
-    z-index: 26;
-    text-align: center;
-    text-shadow: 0 0 12px rgba(0, 200, 255, 0.3);
+    display: none;
 }
 
 /* ===== GAME OVER MESSAGE ===== */
@@ -728,13 +712,6 @@ body, html {
 
 /* Ajustes específicos para dispositivos grandes (pantallas de escritorio) */
 @media (min-width: 1024px) {
-    #game-title {
-        font-size: clamp(22px, 2.8vw, 40px);
-        text-align: center;
-        transform: translateX(-50%);
-        white-space: nowrap;
-    }
-
     #exit-button, #restart-game-button, #clear-leaderboard-button {
         font-size: 1em;
         padding: 8px 16px;
@@ -1259,13 +1236,13 @@ body, html {
     transform: scale(0.9);
 }
 
-/* En móviles: ocultar tecla shortcut, posicionar encima del FIRE button */
+/* En móviles: ocultar tecla shortcut, posicionar a la IZQUIERDA del FIRE button, alineados horizontalmente */
 @media (hover: none) and (pointer: coarse) {
     #inventory-hud {
-        bottom: calc(100px + var(--safe-bottom));
-        right: calc(18px + var(--safe-right));
+        bottom: calc(18px + var(--safe-bottom) + 55px);
+        right: calc(210px + var(--safe-right));
         flex-direction: row;
-        align-items: flex-end;
+        align-items: center;
         gap: 10px;
     }
 
@@ -1274,8 +1251,8 @@ body, html {
     }
 
     .inv-item {
-        width: 81px;
-        height: 81px;
+        width: 70px;
+        height: 70px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
@@ -1283,21 +1260,21 @@ body, html {
     }
 
     .inv-item.inv-life-pack {
-        width: 86px;
-        height: 86px;
+        width: 75px;
+        height: 75px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 66px;
-        height: 66px;
+        width: 56px;
+        height: 56px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 }
 
@@ -1361,36 +1338,36 @@ body, html {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Continue screen en móvil: compacta y contenida */
+    /* Continue screen en móvil: adaptada a pantalla completa */
     #game-over-message.continue-screen {
-        width: 70vw;
-        max-width: 94vw;
-        max-height: 80dvh;
-        padding: clamp(8px, 2vw, 16px);
-        border-radius: 10px;
+        width: 88vw;
+        max-width: 96vw;
+        max-height: 90dvh;
+        padding: clamp(12px, 3vw, 24px);
+        border-radius: 12px;
         overflow-y: auto;
         overflow-x: hidden;
     }
 
     .continue-banner {
-        width: 50%;
-        max-width: 140px;
-        margin-bottom: 0.2em;
+        width: 70%;
+        max-width: 280px;
+        margin-bottom: 0.4em;
     }
 
     .continue-lives-info {
-        font-size: clamp(10px, 2.5vw, 14px);
-        margin: 0.1em 0 0.2em;
-        gap: 0.3em;
+        font-size: clamp(14px, 4vw, 20px);
+        margin: 0.3em 0 0.4em;
+        gap: 0.5em;
     }
 
     .continue-life-icon {
-        width: clamp(16px, 5vw, 24px);
+        width: clamp(24px, 7vw, 36px);
     }
 
     .continue-btn {
-        font-size: clamp(10px, 2.5vw, 14px);
-        padding: 0.35em 1em;
+        font-size: clamp(14px, 4vw, 20px);
+        padding: 0.6em 1.5em;
     }
 
     #game-over-message h1 {
@@ -1482,9 +1459,14 @@ body, html {
         font-size: 10px;
     }
 
+    #inventory-hud {
+        bottom: calc(14px + var(--safe-bottom) + 46px);
+        right: calc(186px + var(--safe-right));
+    }
+
     .inv-item {
-        width: 76px;
-        height: 76px;
+        width: 64px;
+        height: 64px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
@@ -1492,21 +1474,21 @@ body, html {
     }
 
     .inv-item.inv-life-pack {
-        width: 81px;
-        height: 81px;
+        width: 68px;
+        height: 68px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 61px;
-        height: 61px;
+        width: 52px;
+        height: 52px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 66px;
-        height: 66px;
+        width: 55px;
+        height: 55px;
     }
 }
 
@@ -1589,29 +1571,29 @@ body, html {
     }
 
     #game-over-message.continue-screen {
-        width: 38vw;
-        max-width: 94vw;
-        max-height: 90dvh;
-        padding: clamp(6px, 1.5vw, 12px);
-        border-radius: 8px;
+        width: 55vw;
+        max-width: 96vw;
+        max-height: 92dvh;
+        padding: clamp(8px, 2vw, 16px);
+        border-radius: 10px;
         overflow-y: auto;
         overflow-x: hidden;
     }
 
     .continue-banner {
-        width: 45%;
-        max-width: 100px;
-        margin-bottom: 0.1em;
+        width: 60%;
+        max-width: 180px;
+        margin-bottom: 0.2em;
     }
 
     .continue-lives-info {
-        font-size: clamp(9px, 2.2vw, 12px);
-        margin: 0.1em 0 0.15em;
+        font-size: clamp(11px, 2.8vw, 16px);
+        margin: 0.2em 0 0.3em;
     }
 
     .continue-btn {
-        font-size: clamp(9px, 2.2vw, 12px);
-        padding: 0.25em 0.7em;
+        font-size: clamp(11px, 2.8vw, 16px);
+        padding: 0.45em 1.2em;
     }
 
     #game-over-message h1 {
