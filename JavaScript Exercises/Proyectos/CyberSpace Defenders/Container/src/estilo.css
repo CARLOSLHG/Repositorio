@@ -27,7 +27,8 @@ body, html {
     bottom: 50%;
     left: 25%;
     transform: translate(-50%, 50%);
-    will-change: bottom;
+    will-change: bottom, transform;
+    contain: layout style;
 }
 
 #game-container {
@@ -43,6 +44,7 @@ body, html {
     -webkit-user-select: none;
     touch-action: none;
     overscroll-behavior: none;
+    contain: layout style;
 }
 
 #game-container *:not(#game-over-message):not(#game-over-message *) {
@@ -97,6 +99,8 @@ body, html {
     height: auto;
     animation: moveAsteroid 5s linear forwards;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .cyber-attack {
@@ -109,6 +113,8 @@ body, html {
     border: 2px solid #FF3B3F;
     z-index: 15;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .missile {
@@ -119,6 +125,8 @@ body, html {
     height: auto;
     z-index: 20;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .destroyed {
@@ -225,6 +233,8 @@ body, html {
     z-index: 15;
     pointer-events: none;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .ammo-pack .ammo-img {
@@ -233,34 +243,19 @@ body, html {
     display: block;
 }
 
-.ammo-pack-25 .ammo-img { filter: drop-shadow(0 0 10px rgba(34, 204, 102, 0.8)); animation: packBlink-25 0.8s ease-in-out infinite; }
-.ammo-pack-50 .ammo-img { filter: drop-shadow(0 0 10px rgba(212, 160, 23, 0.8)); animation: packBlink-50 0.8s ease-in-out infinite; }
-.ammo-pack-75 .ammo-img { filter: drop-shadow(0 0 12px rgba(240, 192, 64, 0.8)); animation: packBlink-75 0.7s ease-in-out infinite; }
-.ammo-pack-100 .ammo-img { filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.9)); animation: packBlink-100 0.6s ease-in-out infinite; }
+.ammo-pack-25 .ammo-img { filter: drop-shadow(0 0 10px rgba(34, 204, 102, 0.8)); animation: packBlink 0.8s ease-in-out infinite; }
+.ammo-pack-50 .ammo-img { filter: drop-shadow(0 0 10px rgba(212, 160, 23, 0.8)); animation: packBlink 0.8s ease-in-out infinite; }
+.ammo-pack-75 .ammo-img { filter: drop-shadow(0 0 12px rgba(240, 192, 64, 0.8)); animation: packBlink 0.7s ease-in-out infinite; }
+.ammo-pack-100 .ammo-img { filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.9)); animation: packBlink 0.6s ease-in-out infinite; }
 
-@keyframes packBlink-25 {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(34, 204, 102, 0.8)); }
-    50% { opacity: 0.7; filter: drop-shadow(0 0 20px rgba(34, 204, 102, 1)); }
-}
-
-@keyframes packBlink-50 {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(212, 160, 23, 0.8)); }
-    50% { opacity: 0.7; filter: drop-shadow(0 0 20px rgba(212, 160, 23, 1)); }
-}
-
-@keyframes packBlink-75 {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px rgba(240, 192, 64, 0.8)); }
-    50% { opacity: 0.7; filter: drop-shadow(0 0 22px rgba(240, 192, 64, 1)); }
-}
-
-@keyframes packBlink-100 {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.9)); }
-    50% { opacity: 0.7; filter: drop-shadow(0 0 24px rgba(0, 191, 255, 1)); }
+@keyframes packBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 @keyframes moveAmmoPack {
-    from { right: -100px; }
-    to { right: 110%; }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100vw - 100%)); }
 }
 
 .ammo-collected {
@@ -283,6 +278,8 @@ body, html {
     z-index: 16;
     pointer-events: none;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .super-capsule .capsule-img {
@@ -294,14 +291,8 @@ body, html {
 }
 
 @keyframes capsulePulse {
-    0%, 100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 12px rgba(255, 100, 0, 0.7)) drop-shadow(0 0 12px rgba(0, 200, 255, 0.7));
-    }
-    50% {
-        opacity: 0.85;
-        filter: drop-shadow(0 0 25px rgba(255, 100, 0, 1)) drop-shadow(0 0 25px rgba(0, 200, 255, 1));
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
 }
 
 .life-pack {
@@ -313,6 +304,8 @@ body, html {
     z-index: 16;
     pointer-events: none;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .life-pack .capsule-img {
@@ -324,14 +317,8 @@ body, html {
 }
 
 @keyframes lifePulse {
-    0%, 100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 12px rgba(0, 255, 100, 0.7)) drop-shadow(0 0 12px rgba(0, 255, 100, 0.5));
-    }
-    50% {
-        opacity: 0.85;
-        filter: drop-shadow(0 0 25px rgba(0, 255, 100, 1)) drop-shadow(0 0 25px rgba(0, 255, 100, 0.8));
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
 }
 
 /* ===== GOD MODE HALO ===== */
@@ -354,14 +341,8 @@ body, html {
 }
 
 @keyframes haloGlow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(100, 255, 50, 0.5), 0 0 40px rgba(255, 255, 0, 0.3), inset 0 0 20px rgba(100, 255, 50, 0.2);
-        border-color: rgba(100, 255, 50, 0.7);
-    }
-    50% {
-        box-shadow: 0 0 35px rgba(100, 255, 50, 0.8), 0 0 60px rgba(255, 255, 0, 0.5), inset 0 0 30px rgba(100, 255, 50, 0.3);
-        border-color: rgba(200, 255, 50, 0.9);
-    }
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
 /* Parpadeo de aviso a los 5s restantes */
@@ -370,16 +351,8 @@ body, html {
 }
 
 @keyframes haloWarning {
-    0%, 100% {
-        opacity: 1;
-        box-shadow: 0 0 25px rgba(100, 255, 50, 0.6), 0 0 50px rgba(255, 255, 0, 0.4), inset 0 0 20px rgba(100, 255, 50, 0.2);
-        border-color: rgba(100, 255, 50, 0.8);
-    }
-    50% {
-        opacity: 0.3;
-        box-shadow: 0 0 10px rgba(255, 200, 0, 0.3), 0 0 20px rgba(255, 200, 0, 0.2);
-        border-color: rgba(255, 200, 0, 0.5);
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
 /* Fadeout al terminar god mode */
@@ -661,13 +634,13 @@ body, html {
 }
 
 @keyframes moveAsteroid {
-    from { right: -100px; }
-    to { right: 110%; }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100vw - 100%)); }
 }
 
 @keyframes moveCyberAttack {
-    from { right: -100px; }
-    to { right: 110%; }
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100vw - 100%)); }
 }
 
 @keyframes textScroll {
@@ -1533,6 +1506,8 @@ body, html {
     z-index: 16;
     pointer-events: none;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .dual-shoot-pack .capsule-img {
@@ -1544,14 +1519,8 @@ body, html {
 }
 
 @keyframes dualShootPulse {
-    0%, 100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 12px rgba(255, 0, 200, 0.7)) drop-shadow(0 0 12px rgba(0, 180, 255, 0.7));
-    }
-    50% {
-        opacity: 0.85;
-        filter: drop-shadow(0 0 25px rgba(255, 0, 200, 1)) drop-shadow(0 0 25px rgba(0, 180, 255, 1));
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
 }
 
 /* Línea guía horizontal del dual-shoot */
@@ -1569,11 +1538,9 @@ body, html {
 
 @keyframes guideGlow {
     0%, 100% {
-        box-shadow: 0 0 8px rgba(255, 0, 200, 0.5), 0 0 16px rgba(0, 180, 255, 0.3);
         opacity: 0.7;
     }
     50% {
-        box-shadow: 0 0 14px rgba(255, 0, 200, 0.8), 0 0 28px rgba(0, 180, 255, 0.5);
         opacity: 1;
     }
 }
