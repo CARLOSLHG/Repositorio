@@ -1360,12 +1360,13 @@ body, html {
     }
 
     #game-over-message {
-        width: 88vw;
-        max-height: 80vh;
-        max-height: 80dvh;
-        padding: 2.5vw 2vw;
+        width: 92vw;
+        max-height: 88vh;
+        max-height: 88dvh;
+        padding: 2vw 2vw;
         overflow-y: auto;
         touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
     }
 
     /* Continue screen en móvil: ultra-compacta */
@@ -1375,6 +1376,7 @@ body, html {
         max-height: 50dvh;
         padding: 2vw 2vw;
         border-radius: 12px;
+        overflow: hidden;
     }
 
     .continue-banner {
@@ -1399,39 +1401,52 @@ body, html {
     }
 
     #game-over-message h1 {
-        font-size: clamp(14px, 4vw, 22px);
-        margin-bottom: 0.1em;
+        font-size: clamp(13px, 3.5vw, 20px);
+        margin-bottom: 0.05em;
+        letter-spacing: 1px;
     }
 
     #game-over-message .player-result {
-        font-size: clamp(11px, 2.5vw, 16px);
-        margin-bottom: 0.3em;
+        font-size: clamp(10px, 2.2vw, 14px);
+        margin-bottom: 0.2em;
+    }
+
+    #game-over-message .player-rank {
+        font-size: clamp(10px, 2.5vw, 15px) !important;
+        margin: 0.1em 0 0.3em !important;
+    }
+
+    #game-over-message .game-over-reason {
+        font-size: clamp(10px, 2.2vw, 14px);
+        margin: 2px 0 5px;
     }
 
     .stat-value {
-        font-size: clamp(13px, 3.5vw, 20px);
+        font-size: clamp(11px, 3vw, 17px);
     }
 
     .stat-label {
-        font-size: clamp(9px, 2vw, 13px);
+        font-size: clamp(7px, 1.6vw, 11px);
     }
 
     .stat-box {
-        padding: 0.3em 0.6em;
+        padding: 0.2em 0.4em;
         min-width: auto;
         max-width: none;
         flex: 1 1 auto;
         text-align: left;
+        border-radius: 6px;
     }
 
     .stats-row {
         flex-wrap: nowrap;
         justify-content: flex-start;
-        gap: clamp(4px, 1.5vw, 10px);
+        gap: clamp(3px, 1vw, 8px);
+        margin-bottom: 0.4em;
     }
 
     #leaderboard-table {
-        font-size: 2.4vw;
+        font-size: 2.2vw;
     }
 
     #leaderboard-table thead th {
@@ -1504,17 +1519,22 @@ body, html {
 
 /* ===== EXTRA-SMALL: landscape con poca altura (iPhone SE, etc.) ===== */
 @media (max-height: 420px) and (max-width: 900px) {
+    #game-over-message {
+        max-height: 92dvh;
+        padding: 1.5vw 2vw;
+    }
+
     #game-over-message.continue-screen {
-        width: 42vw;
-        max-height: 80dvh;
+        width: 38vw;
+        max-height: 85dvh;
         padding: 1.5vw;
         border-radius: 10px;
     }
 
     .continue-banner {
         width: 50%;
-        max-width: 130px;
-        margin-bottom: 0.15em;
+        max-width: 120px;
+        margin-bottom: 0.1em;
     }
 
     .continue-lives-info {
@@ -1525,6 +1545,21 @@ body, html {
     .continue-btn {
         font-size: clamp(10px, 2.2vw, 13px);
         padding: 0.3em 0.8em;
+    }
+
+    #game-over-message h1 {
+        font-size: clamp(12px, 3vw, 18px);
+        margin-bottom: 0;
+    }
+
+    .stat-value { font-size: clamp(10px, 2.5vw, 15px); }
+    .stat-label { font-size: clamp(6px, 1.4vw, 10px); }
+    .stat-box { padding: 0.15em 0.3em; }
+    .stats-row { margin-bottom: 0.3em; }
+
+    #exit-button, #restart-game-button, #clear-leaderboard-button {
+        font-size: clamp(9px, 2vw, 13px);
+        padding: 0.35em 0.7em;
     }
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {

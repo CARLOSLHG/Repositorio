@@ -961,28 +961,52 @@
                 activeMissiles.push({ element: missile, tx: 0, originX: startX });
             }
 
-            // Ráfaga de misiles (máximo 3 por ráfaga)
-            const BURST_MAX = 3;
-            const BURST_DELAY = 60; // ms entre cada misil de la ráfaga
-            let burstCooldown = false;
+            // Disparo unificado: 1 misil al pulsar, ráfaga continua (~8/s) al mantener
+            const HOLD_FIRE_RATE = 120; // ms entre misiles al mantener (≈8 disparos/s)
 
-            function shootBurst() {
-                if (gameOver || !gameStarted || burstCooldown) return;
-                burstCooldown = true;
-                const burstCount = Math.min(BURST_MAX, missileCount);
-                for (let i = 0; i < burstCount; i++) {
-                    setTimeout(() => shootMissile(), i * BURST_DELAY);
-                }
-                // Cooldown después de la ráfaga completa
-                setTimeout(() => { burstCooldown = false; }, burstCount * BURST_DELAY + 100);
-            }
-
-            // Disparo con mousedown: solo en desktop (más rápido que click)
+            // Desktop: mousedown/mouseup para disparo con hold
             if (!isTouchDevice) {
+                let desktopFireInterval = null;
+                let desktopFireActive = false;
+
+                function startDesktopFiring() {
+                    if (gameOver || !gameStarted) return;
+                    desktopFireActive = true;
+                    // Disparo inmediato al pulsar
+                    shootMissile();
+                    // Si mantiene pulsado, ráfaga continua de misiles individuales
+                    if (desktopFireInterval) clearInterval(desktopFireInterval);
+                    desktopFireInterval = setInterval(() => {
+                        if (gameOver || !gameStarted || !desktopFireActive) {
+                            stopDesktopFiring();
+                            return;
+                        }
+                        shootMissile();
+                    }, HOLD_FIRE_RATE);
+                }
+
+                function stopDesktopFiring() {
+                    desktopFireActive = false;
+                    if (desktopFireInterval) {
+                        clearInterval(desktopFireInterval);
+                        desktopFireInterval = null;
+                    }
+                }
+
                 document.addEventListener('mousedown', function(e) {
                     if (e.button !== 0) return;
                     if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
-                    shootBurst();
+                    startDesktopFiring();
+                });
+
+                document.addEventListener('mouseup', function(e) {
+                    if (e.button !== 0) return;
+                    stopDesktopFiring();
+                });
+
+                // Detener si el mouse sale de la ventana
+                document.addEventListener('mouseleave', function() {
+                    stopDesktopFiring();
                 });
             }
 
@@ -1641,6 +1665,9 @@
                             continueWithLife();
                         } else if (event.target.id === 'continue-no-btn') {
                             continueOverlay.remove();
+                            // Descartar vidas restantes para ir directo al game over con leaderboard
+                            storedLives = 0;
+                            updateInventoryUI();
                             showGameOverMessage(reason);
                         }
                     });
