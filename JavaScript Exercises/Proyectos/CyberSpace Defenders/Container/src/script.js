@@ -994,25 +994,28 @@
                 if (mobileControls) mobileControls.style.display = 'flex';
 
                 let fireHoldInterval = null;
-                const FIRE_HOLD_DELAY = 350; // ms entre ráfagas al mantener presionado
+                const FIRE_HOLD_RATE = 120; // ms entre misiles al mantener presionado
+                let mobileFireActive = false;
 
                 function startFiring() {
                     if (gameOver || !gameStarted) return;
-                    // Disparar inmediatamente al presionar
-                    shootBurst();
+                    mobileFireActive = true;
+                    // Disparar UN misil inmediatamente (sin pasar por burst/cooldown)
+                    shootMissile();
                     mobileFireBtn.classList.add('firing');
-                    // Si mantiene presionado, disparar ráfagas continuas
+                    // Si mantiene presionado, disparar misiles individuales continuos
                     if (fireHoldInterval) clearInterval(fireHoldInterval);
                     fireHoldInterval = setInterval(() => {
-                        if (gameOver || !gameStarted) {
+                        if (gameOver || !gameStarted || !mobileFireActive) {
                             stopFiring();
                             return;
                         }
-                        shootBurst();
-                    }, FIRE_HOLD_DELAY);
+                        shootMissile();
+                    }, FIRE_HOLD_RATE);
                 }
 
                 function stopFiring() {
+                    mobileFireActive = false;
                     mobileFireBtn.classList.remove('firing');
                     if (fireHoldInterval) {
                         clearInterval(fireHoldInterval);
