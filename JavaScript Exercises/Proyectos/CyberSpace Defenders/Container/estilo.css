@@ -1204,9 +1204,16 @@ body, html {
 }
 
 .inv-item.inv-life-pack {
+    width: 64px;
+    height: 64px;
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+}
+
+.inv-life-pack .inv-icon {
+    width: 42px;
+    height: 42px;
 }
 
 .inv-icon {
