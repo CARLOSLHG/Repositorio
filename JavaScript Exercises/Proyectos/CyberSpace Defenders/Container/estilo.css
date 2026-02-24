@@ -1508,8 +1508,9 @@ body, html {
     50% { transform: rotate(90deg); }
 }
 
+/* Solo se muestra vía JS cuando el juego está activo y el dispositivo está en portrait */
 @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
-    #rotate-notice {
+    #rotate-notice.rotate-active {
         display: flex;
     }
 }
