@@ -945,8 +945,8 @@
                 const gameContainerRect = gameContainer.getBoundingClientRect();
 
                 missile.style.position = 'absolute';
-                const bottomVal = parseFloat(spaceship.style.bottom) || (gameContainerRect.height / 2);
-                missile.style.bottom = `${bottomVal + spaceshipRect.height - 15}px`;
+                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
+                missile.style.bottom = `${missileBottomPos}px`;
                 const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
                 missile.style.left = startX + 'px';
 
@@ -1354,8 +1354,8 @@
                 const gameContainerRect = gameContainer.getBoundingClientRect();
 
                 missile.style.position = 'absolute';
-                const bottomVal = parseFloat(spaceship.style.bottom) || (gameContainerRect.height / 2);
-                missile.style.bottom = `${bottomVal + spaceshipRect.height - 15}px`;
+                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
+                missile.style.bottom = `${missileBottomPos}px`;
                 const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
                 missile.style.left = startX + 'px';
 
