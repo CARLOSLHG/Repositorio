@@ -1942,7 +1942,7 @@
                             <img src="./img/pack-life+1.png" alt="" class="continue-life-icon">
                             <span><strong>${storedLives}</strong> ${lifeWord}</span>
                         </p>
-                        <div class="buttons-container" style="margin-top:0.8em;gap:1em;">
+                        <div class="buttons-container" style="margin-top:0.5em;gap:0.6em;flex-wrap:wrap;justify-content:center;">
                             <button id="continue-yes-btn" class="continue-btn continue-btn-yes">&#9654; Continuar</button>
                             <button id="continue-no-btn" class="continue-btn continue-btn-no">&#10006; Rendirse</button>
                         </div>

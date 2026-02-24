@@ -456,9 +456,10 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70vw;
-    max-width: 750px;
-    max-height: 90vh;
-    overflow: hidden;
+    max-width: min(750px, 96vw);
+    max-height: min(90vh, 96dvh);
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -502,8 +503,12 @@ body, html {
     background: rgba(2, 8, 20, 0.96);
     border-color: rgba(0, 255, 100, 0.4);
     box-shadow: 0 0 60px rgba(0, 255, 100, 0.2), 0 0 120px rgba(0, 200, 255, 0.1);
-    padding: clamp(16px, 2vw, 28px);
+    padding: clamp(10px, 2vw, 28px);
     align-items: center;
+    max-width: min(750px, 94vw);
+    max-height: min(90vh, 94dvh);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .continue-banner {
@@ -1348,35 +1353,36 @@ body, html {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Continue screen en móvil: reducida 50% */
+    /* Continue screen en móvil: compacta y contenida */
     #game-over-message.continue-screen {
-        width: 24vw;
-        max-height: 25vh;
-        max-height: 25dvh;
-        padding: 1vw 1vw;
-        border-radius: 6px;
-        overflow: hidden;
+        width: 70vw;
+        max-width: 94vw;
+        max-height: 80dvh;
+        padding: clamp(8px, 2vw, 16px);
+        border-radius: 10px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .continue-banner {
-        width: 31.5%;
-        max-width: 92px;
-        margin-bottom: 0.1em;
+        width: 50%;
+        max-width: 140px;
+        margin-bottom: 0.2em;
     }
 
     .continue-lives-info {
-        font-size: clamp(6px, 1.25vw, 8px);
-        margin: 0.05em 0 0.1em;
-        gap: 0.15em;
+        font-size: clamp(10px, 2.5vw, 14px);
+        margin: 0.1em 0 0.2em;
+        gap: 0.3em;
     }
 
     .continue-life-icon {
-        width: clamp(9px, 2.5vw, 13px);
+        width: clamp(16px, 5vw, 24px);
     }
 
     .continue-btn {
-        font-size: clamp(6px, 1.25vw, 7px);
-        padding: 0.18em 0.5em;
+        font-size: clamp(10px, 2.5vw, 14px);
+        padding: 0.35em 1em;
     }
 
     #game-over-message h1 {
@@ -1574,25 +1580,28 @@ body, html {
 
     #game-over-message.continue-screen {
         width: 38vw;
-        max-height: 85dvh;
-        padding: 1.5vw;
-        border-radius: 10px;
+        max-width: 94vw;
+        max-height: 90dvh;
+        padding: clamp(6px, 1.5vw, 12px);
+        border-radius: 8px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .continue-banner {
-        width: 57.5%;
-        max-width: 138px;
+        width: 45%;
+        max-width: 100px;
         margin-bottom: 0.1em;
     }
 
     .continue-lives-info {
-        font-size: clamp(10px, 2.2vw, 13px);
+        font-size: clamp(9px, 2.2vw, 12px);
         margin: 0.1em 0 0.15em;
     }
 
     .continue-btn {
-        font-size: clamp(10px, 2.2vw, 13px);
-        padding: 0.3em 0.8em;
+        font-size: clamp(9px, 2.2vw, 12px);
+        padding: 0.25em 0.7em;
     }
 
     #game-over-message h1 {
