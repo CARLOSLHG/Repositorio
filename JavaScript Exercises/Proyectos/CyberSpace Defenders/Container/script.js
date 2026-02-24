@@ -369,7 +369,15 @@
                 const nextBtn = document.getElementById('tutorial-next');
                 const skipBtn = document.getElementById('tutorial-skip');
 
-                // Crear dots
+                // Clonar botones para limpiar listeners anteriores (previene acumulación)
+                var newPrev = prevBtn.cloneNode(true);
+                prevBtn.parentNode.replaceChild(newPrev, prevBtn);
+                var newNext = nextBtn.cloneNode(true);
+                nextBtn.parentNode.replaceChild(newNext, nextBtn);
+                var newSkip = skipBtn.cloneNode(true);
+                skipBtn.parentNode.replaceChild(newSkip, skipBtn);
+
+                // Crear dots (limpia anteriores)
                 dotsContainer.innerHTML = '';
                 for (let i = 0; i < TOTAL_SLIDES; i++) {
                     const dot = document.createElement('button');
@@ -380,33 +388,37 @@
                     dotsContainer.appendChild(dot);
                 }
 
+                // Reset al primer slide
+                track.style.transform = 'translateX(0%)';
+                newPrev.disabled = true;
+                newNext.innerHTML = 'Siguiente &#9654;';
+                newNext.classList.remove('tutorial-finish');
+
                 function goToSlide(index) {
                     currentSlide = index;
                     track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
 
-                    // Actualizar dots
-                    const dots = dotsContainer.querySelectorAll('.tutorial-dot');
-                    dots.forEach(function(d, i) {
-                        d.classList.toggle('active', i === currentSlide);
+                    var dots = dotsContainer.querySelectorAll('.tutorial-dot');
+                    dots.forEach(function(d, idx) {
+                        d.classList.toggle('active', idx === currentSlide);
                     });
 
-                    // Actualizar botones
-                    prevBtn.disabled = (currentSlide === 0);
+                    newPrev.disabled = (currentSlide === 0);
 
                     if (currentSlide === TOTAL_SLIDES - 1) {
-                        nextBtn.innerHTML = 'Iniciar &#9654;';
-                        nextBtn.classList.add('tutorial-finish');
+                        newNext.innerHTML = 'Iniciar &#9654;';
+                        newNext.classList.add('tutorial-finish');
                     } else {
-                        nextBtn.innerHTML = 'Siguiente &#9654;';
-                        nextBtn.classList.remove('tutorial-finish');
+                        newNext.innerHTML = 'Siguiente &#9654;';
+                        newNext.classList.remove('tutorial-finish');
                     }
                 }
 
-                prevBtn.addEventListener('click', function() {
+                newPrev.addEventListener('click', function() {
                     if (currentSlide > 0) goToSlide(currentSlide - 1);
                 });
 
-                nextBtn.addEventListener('click', function() {
+                newNext.addEventListener('click', function() {
                     if (currentSlide < TOTAL_SLIDES - 1) {
                         goToSlide(currentSlide + 1);
                     } else {
@@ -414,21 +426,19 @@
                     }
                 });
 
-                skipBtn.addEventListener('click', function() {
+                newSkip.addEventListener('click', function() {
                     exitTutorial();
                 });
 
                 // Soporte swipe táctil
                 let touchStartX = 0;
-                let touchEndX = 0;
-                tutorialScreen.addEventListener('touchstart', function(ev) {
+                function onTouchStart(ev) {
                     if (ev.target.closest('button')) return;
                     touchStartX = ev.changedTouches[0].clientX;
-                }, { passive: true });
-                tutorialScreen.addEventListener('touchend', function(ev) {
+                }
+                function onTouchEnd(ev) {
                     if (ev.target.closest('button')) return;
-                    touchEndX = ev.changedTouches[0].clientX;
-                    const diff = touchStartX - touchEndX;
+                    var diff = touchStartX - ev.changedTouches[0].clientX;
                     if (Math.abs(diff) > 50) {
                         if (diff > 0 && currentSlide < TOTAL_SLIDES - 1) {
                             goToSlide(currentSlide + 1);
@@ -436,9 +446,11 @@
                             goToSlide(currentSlide - 1);
                         }
                     }
-                }, { passive: true });
+                }
+                tutorialScreen.addEventListener('touchstart', onTouchStart, { passive: true });
+                tutorialScreen.addEventListener('touchend', onTouchEnd, { passive: true });
 
-                // Soporte teclado (flechas)
+                // Soporte teclado (flechas + Escape)
                 function tutorialKeyHandler(ev) {
                     if (ev.key === 'ArrowRight' && currentSlide < TOTAL_SLIDES - 1) {
                         goToSlide(currentSlide + 1);
@@ -451,7 +463,10 @@
                 document.addEventListener('keydown', tutorialKeyHandler);
 
                 function exitTutorial() {
+                    // Limpiar TODOS los listeners del tutorial
                     document.removeEventListener('keydown', tutorialKeyHandler);
+                    tutorialScreen.removeEventListener('touchstart', onTouchStart);
+                    tutorialScreen.removeEventListener('touchend', onTouchEnd);
                     tutorialScreen.style.display = 'none';
                     goToLeaderboard();
                 }
@@ -478,7 +493,7 @@
             function launchGame() {
                 pregameScreen.style.display = 'none';
                 gameContainer.style.display = 'block';
-                playerDisplay.textContent = `Defensor: ${playerName}`;
+                if (playerDisplay) playerDisplay.textContent = `Defensor: ${playerName}`;
                 const storageNameEl = document.getElementById('storage-player-name');
                 if (storageNameEl) storageNameEl.textContent = playerName;
                 gameStartTime = Date.now();
