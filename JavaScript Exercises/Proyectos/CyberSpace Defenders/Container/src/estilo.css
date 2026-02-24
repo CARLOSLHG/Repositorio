@@ -1348,35 +1348,35 @@ body, html {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Continue screen en móvil: ultra-compacta */
+    /* Continue screen en móvil: reducida 50% */
     #game-over-message.continue-screen {
-        width: 48vw;
-        max-height: 50vh;
-        max-height: 50dvh;
-        padding: 2vw 2vw;
-        border-radius: 12px;
+        width: 24vw;
+        max-height: 25vh;
+        max-height: 25dvh;
+        padding: 1vw 1vw;
+        border-radius: 6px;
         overflow: hidden;
     }
 
     .continue-banner {
-        width: 63%;
-        max-width: 184px;
-        margin-bottom: 0.2em;
+        width: 31.5%;
+        max-width: 92px;
+        margin-bottom: 0.1em;
     }
 
     .continue-lives-info {
-        font-size: clamp(11px, 2.5vw, 15px);
-        margin: 0.1em 0 0.2em;
-        gap: 0.3em;
+        font-size: clamp(6px, 1.25vw, 8px);
+        margin: 0.05em 0 0.1em;
+        gap: 0.15em;
     }
 
     .continue-life-icon {
-        width: clamp(18px, 5vw, 26px);
+        width: clamp(9px, 2.5vw, 13px);
     }
 
     .continue-btn {
-        font-size: clamp(11px, 2.5vw, 14px);
-        padding: 0.35em 1em;
+        font-size: clamp(6px, 1.25vw, 7px);
+        padding: 0.18em 0.5em;
     }
 
     #game-over-message h1 {
