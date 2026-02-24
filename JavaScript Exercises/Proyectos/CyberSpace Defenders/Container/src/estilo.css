@@ -101,6 +101,8 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .cyber-attack {
@@ -115,6 +117,8 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .missile {
@@ -127,6 +131,7 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
 }
 
 .destroyed {
@@ -235,6 +240,8 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .ammo-pack .ammo-img {
@@ -280,6 +287,8 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .super-capsule .capsule-img {
@@ -471,6 +480,8 @@ body, html {
     box-shadow: 0 0 50px rgba(0, 120, 255, 0.25);
     z-index: 30;
     box-sizing: border-box;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 #game-over-message h1 {
@@ -1008,8 +1019,8 @@ body, html {
 /* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
 #player-display {
     position: absolute;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    left: 12px;
+    bottom: calc(12px + var(--safe-bottom));
+    left: calc(12px + var(--safe-left));
     font-size: clamp(11px, 1.3vw, 20px);
     color: #00ffcc;
     background: rgba(0, 0, 0, 0.75);
@@ -1151,18 +1162,15 @@ body, html {
 
 #mobile-fire-button:active,
 #mobile-fire-button.firing {
-    transform: scale(0.9);
-    border-color: #ff6666;
-    box-shadow: 0 0 30px rgba(255, 59, 63, 0.6), inset 0 0 20px rgba(255, 59, 63, 0.3);
-    background: radial-gradient(circle, rgba(255, 59, 63, 0.45) 0%, rgba(255, 59, 63, 0.15) 70%);
+    transform: scale(0.85);
 }
 
 /* ===== HUD INVENTARIO UNIFICADO (esquina inferior derecha, PC y móvil) ===== */
 #inventory-hud {
     display: flex;
     position: absolute;
-    bottom: 16px;
-    right: 20px;
+    bottom: calc(16px + var(--safe-bottom));
+    right: calc(20px + var(--safe-right));
     z-index: 25;
     align-items: flex-end;
     gap: 10px;
@@ -1514,6 +1522,8 @@ body, html {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 .dual-shoot-pack .capsule-img {
