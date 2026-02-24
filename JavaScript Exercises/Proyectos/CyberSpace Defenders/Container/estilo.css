@@ -393,17 +393,17 @@ body, html {
 
 @media (max-width: 768px) {
     #game-container {
-        padding: 8px;
+        padding: 0;
     }
 
     #game-title {
         font-size: 3.5vw;
-        top: calc(4px + var(--safe-top));
+        top: calc(2px + var(--safe-top));
     }
 
     #toggle-music-button {
-        top: calc(4px + var(--safe-top));
-        right: calc(4px + var(--safe-right));
+        top: calc(2px + var(--safe-top));
+        right: var(--safe-right, 0px);
         margin-right: 0;
         font-size: 2.5vw;
         padding: 5px 8px;
@@ -413,27 +413,27 @@ body, html {
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(10px, 2.2vw, 15px);
         padding: 2px 5px;
-        left: calc(3px + var(--safe-left));
+        left: var(--safe-left, 0px);
     }
 
     #distance-counter {
-        top: calc(26px + var(--safe-top));
+        top: calc(20px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: calc(44px + var(--safe-top));
+        top: calc(36px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(62px + var(--safe-top));
+        top: calc(52px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(80px + var(--safe-top));
+        top: calc(68px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(100px + var(--safe-top));
+        top: calc(86px + var(--safe-top));
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
@@ -1186,9 +1186,9 @@ body, html {
 
 .inv-item {
     position: relative;
-    width: 54px;
-    height: 54px;
-    border-radius: 10px;
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
     border: 2px solid rgba(0, 200, 255, 0.5);
     background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 200, 255, 0.25);
@@ -1204,36 +1204,36 @@ body, html {
 }
 
 .inv-item.inv-life-pack {
-    width: 64px;
-    height: 64px;
+    width: 82px;
+    height: 82px;
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
 }
 
 .inv-life-pack .inv-icon {
-    width: 42px;
-    height: 42px;
+    width: 56px;
+    height: 56px;
 }
 
 .inv-icon {
-    width: 34px;
-    height: 34px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
     pointer-events: none;
 }
 
 .inv-count {
     position: absolute;
-    top: -7px;
-    right: -7px;
-    min-width: 20px;
-    height: 20px;
-    line-height: 20px;
-    border-radius: 10px;
+    top: -8px;
+    right: -8px;
+    min-width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 11px;
     background: #00ccff;
     color: #000;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     padding: 0 5px;
@@ -1281,23 +1281,23 @@ body, html {
     }
 
     .inv-item {
-        width: 58px;
-        height: 58px;
+        width: 76px;
+        height: 76px;
     }
 
     .inv-item.inv-life-pack {
-        width: 66px;
-        height: 66px;
+        width: 86px;
+        height: 86px;
     }
 
     .inv-icon {
-        width: 36px;
-        height: 36px;
+        width: 50px;
+        height: 50px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 44px;
-        height: 44px;
+        width: 58px;
+        height: 58px;
     }
 }
 
@@ -1457,23 +1457,23 @@ body, html {
     }
 
     .inv-item {
-        width: 56px;
-        height: 56px;
+        width: 70px;
+        height: 70px;
     }
 
     .inv-item.inv-life-pack {
-        width: 64px;
-        height: 64px;
+        width: 80px;
+        height: 80px;
     }
 
     .inv-icon {
-        width: 34px;
-        height: 34px;
+        width: 46px;
+        height: 46px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 42px;
-        height: 42px;
+        width: 54px;
+        height: 54px;
     }
 }
 
