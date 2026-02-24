@@ -401,6 +401,21 @@
                     }
                 }
 
+                // Manejar cambio de fullscreen: si el jugador sale de fullscreen
+                // accidentalmente (ESC, barra del navegador), re-solicitar
+                document.addEventListener('fullscreenchange', function() {
+                    if (!document.fullscreenElement && gameStarted && !gameOver) {
+                        // Re-solicitar fullscreen automáticamente al hacer click
+                        const reEnter = function() {
+                            if (rfs && !document.fullscreenElement && gameStarted) {
+                                rfs.call(el).catch(() => {});
+                            }
+                            document.removeEventListener('click', reEnter);
+                        };
+                        document.addEventListener('click', reEnter);
+                    }
+                });
+
                 initGame();
             }
 
@@ -594,11 +609,14 @@
 
             // Movimiento de la nave con el mouse para desktop
             // Solo captura posición objetivo; se aplica en el game loop (zero-delay, sin layout thrashing)
+            // Margen superior para evitar activar la barra de salida de pantalla completa del navegador
+            const MOUSE_TOP_MARGIN = 30; // px de margen seguro en la parte superior
             document.addEventListener('mousemove', function(event) {
                 if (!gameOver && gameStarted) {
                     isMouseControlled = true;
+                    const maxBottom = cachedContainerHeight - cachedSpaceshipHeight - MOUSE_TOP_MARGIN;
                     const newBottom = cachedContainerHeight - event.clientY - (cachedSpaceshipHeight / 2);
-                    mouseTargetBottom = Math.max(0, Math.min(cachedContainerHeight - cachedSpaceshipHeight, newBottom));
+                    mouseTargetBottom = Math.max(0, Math.min(maxBottom, newBottom));
                 }
             });
 
@@ -1119,9 +1137,11 @@
                     stopDesktopFiring();
                 });
 
-                document.addEventListener('mouseleave', function() {
-                    stopDesktopFiring();
-                });
+                // No detener disparo al salir brevemente del área (evita cortes
+                // cuando el mouse toca la barra de fullscreen del navegador).
+                // Solo parar al soltar el botón (mouseup).
+                // Si el mouse sale completamente, el mouseup no se captura
+                // y el disparo se detiene al volver a mover (mousedown no estará presionado).
             }
 
             // --- Botón de disparo dedicado para móviles ---
@@ -1823,13 +1843,14 @@
             }
 
             // Continuar juego usando una vida almacenada
+            // Reinicia desde el INICIO del nivel de dificultad actual
             function continueWithLife() {
                 storedLives--;
                 updateInventoryUI();
                 gameOver = false;
                 gameContainer.style.cursor = 'none';
 
-                // Reposicionar nave en zona segura
+                // Reposicionar nave en zona segura (centro)
                 spaceship.style.bottom = '50%';
 
                 // Dar misiles mínimos si se quedó sin ellos
@@ -1838,9 +1859,34 @@
                     updateMissileDisplay();
                 }
 
-                // Limpiar amenazas en pantalla para dar un respiro al jugador
+                // Limpiar TODAS las amenazas y packs en pantalla
                 document.querySelectorAll('.asteroid').forEach(a => a.remove());
                 document.querySelectorAll('.cyber-attack').forEach(c => c.remove());
+                document.querySelectorAll('.ammo-pack').forEach(p => p.remove());
+                document.querySelectorAll('.super-capsule').forEach(s => s.remove());
+                document.querySelectorAll('.life-pack').forEach(l => l.remove());
+                document.querySelectorAll('.dual-shoot-pack').forEach(d => d.remove());
+
+                // Limpiar arrays de entidades en pantalla
+                activeHazards.length = 0;
+                activePacks.length = 0;
+                activeSuperCapsules.length = 0;
+                activeLifePacks.length = 0;
+                activeDualShootPacks.length = 0;
+                activeMissiles.forEach(m => m.element.remove());
+                activeMissiles.length = 0;
+
+                // --- Retroceder gameStartTime al inicio del nivel actual ---
+                // Esto reinicia la dificultad al comienzo del nivel en que murió
+                const elapsedNow = (Date.now() - gameStartTime) / 1000;
+                const currentLevel = getDifficultyLevel(elapsedNow);
+                const levelStartSeconds = DIFFICULTY_LEVELS[currentLevel].threshold;
+                gameStartTime = Date.now() - (levelStartSeconds * 1000);
+
+                // Actualizar HUD de dificultad y distancia al nuevo tiempo
+                lightYears = levelStartSeconds;
+                distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
+                updateDifficultyHUD(levelStartSeconds);
 
                 // Restaurar controles móviles e inventario
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
@@ -1849,20 +1895,26 @@
                 const invHud = document.getElementById('inventory-hud');
                 if (invHud) invHud.style.display = 'flex';
 
-                // Limpiar spawners anteriores (ya están muertos por gameOver)
+                // Limpiar spawners anteriores
                 clearTimeout(asteroidSpawnTimeout);
                 clearInterval(distanceInterval);
                 clearTimeout(ammoPackTimeout);
                 clearTimeout(superCapsuleSpawnTimeout);
                 clearTimeout(lifePackSpawnTimeout);
+                clearTimeout(dualShootSpawnTimeout);
 
-                // Reiniciar todos los spawners (gameStartTime NO se resetea,
-                // así la dificultad continúa desde donde estaba)
+                // Reiniciar todos los spawners desde el inicio del nivel
                 startDistanceCounter();
                 startAsteroids();
                 startAmmoPacks();
                 startSuperCapsuleSpawner();
                 startLifePackSpawner();
+                startDualShootSpawner();
+
+                // Reiniciar controles de movimiento
+                touchTargetBottom = -1;
+                shipCurrentBottom = -1;
+                mouseTargetBottom = -1;
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
