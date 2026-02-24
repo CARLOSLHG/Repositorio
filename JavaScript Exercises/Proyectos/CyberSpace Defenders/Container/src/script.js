@@ -556,12 +556,18 @@
             updateMissileDisplay();
 
             // Cache de dimensiones del contenedor para evitar layout thrashing
+            let cachedScreenWidth = window.innerWidth;
             function updateCachedDimensions() {
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
+                cachedScreenWidth = window.innerWidth;
                 updateBgSpeedScale();
             }
-            window.addEventListener('resize', updateCachedDimensions);
+            window.addEventListener('resize', updateCachedDimensions, { passive: true });
+            // Manejar cambios de orientación en móviles (iOS puede tardar en reportar resize)
+            window.addEventListener('orientationchange', function() {
+                setTimeout(updateCachedDimensions, 150);
+            });
             updateCachedDimensions();
 
             // Incrementar la distancia recorrida cada segundo + chequeo de misiles + actualizar dificultad
@@ -630,7 +636,7 @@
                     if (gameOver || !gameStarted) return;
                     if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
                     const newTouch = event.changedTouches[0];
-                    if (newTouch.clientX > window.innerWidth * 0.5) return;
+                    if (newTouch.clientX > cachedScreenWidth * 0.5) return;
                     event.preventDefault();
                     touching = true;
                     moveTouchId = newTouch.identifier;
@@ -713,7 +719,7 @@
                 const dt = lastFrameTime ? Math.min((timestamp - lastFrameTime) / 16.67, 3) : 1;
                 lastFrameTime = timestamp;
 
-                const screenWidth = window.innerWidth;
+                const screenWidth = cachedScreenWidth;
 
                 // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
                 if (isTouchControlled && touchTargetBottom >= 0) {
@@ -1011,6 +1017,26 @@
             // Iniciar el game loop
             lastFrameTime = 0;
             gameLoopId = requestAnimationFrame(gameLoop);
+
+            // Pausar/reanudar game loop cuando la pestaña pierde/gana foco (ahorro de batería en móviles)
+            document.addEventListener('visibilitychange', function() {
+                if (gameOver) return;
+                if (document.hidden) {
+                    // Pausar: cancelar el loop para no consumir CPU/GPU en background
+                    if (gameLoopId) {
+                        cancelAnimationFrame(gameLoopId);
+                        gameLoopId = null;
+                    }
+                } else {
+                    // Reanudar: resetear timestamp para evitar salto de delta time
+                    lastFrameTime = 0;
+                    if (!gameLoopId) {
+                        gameLoopId = requestAnimationFrame(gameLoop);
+                    }
+                    // Actualizar dimensiones por si el usuario rotó el dispositivo
+                    updateCachedDimensions();
+                }
+            });
 
             // ========== FIN GAME LOOP ==========
 
@@ -1942,7 +1968,7 @@
                             <img src="./img/pack-life+1.png" alt="" class="continue-life-icon">
                             <span><strong>${storedLives}</strong> ${lifeWord}</span>
                         </p>
-                        <div class="buttons-container" style="margin-top:0.8em;gap:1em;">
+                        <div class="buttons-container" style="margin-top:0.5em;gap:0.6em;flex-wrap:wrap;justify-content:center;">
                             <button id="continue-yes-btn" class="continue-btn continue-btn-yes">&#9654; Continuar</button>
                             <button id="continue-no-btn" class="continue-btn continue-btn-no">&#10006; Rendirse</button>
                         </div>
