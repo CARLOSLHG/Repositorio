@@ -6,7 +6,7 @@
     <title></title>
     <!-- Versión 2.0 -->
     <link rel="stylesheet" href="estilo.css">
-    
+
 </head>
 <body>
     <!-- Aviso de rotación para móviles en portrait -->
@@ -41,9 +41,6 @@
     <div id="game-container" style="display: none;">
         <!-- Contenedor del título -->
         <div id="game-title">CyberSpace Defender ver.2.0</div>
-
-        <!-- Nombre del jugador -->
-        <div id="player-display"></div>
 
         <!-- Fondo del juego -->
         <div id="background"></div>
@@ -88,24 +85,37 @@
             </button>
         </div>
 
-        <!-- HUD Storage: 3 cubículos fijos en esquina inferior izquierda -->
-        <div id="inventory-hud">
-            <button id="inv-super" class="inv-slot" data-slot="super" aria-label="Usar Super Capsule">
-                <img src="./img/super-capsule.png" alt="Super Capsule" class="inv-icon" draggable="false">
-                <span class="inv-count" id="inv-super-count">0</span>
-                <span class="inv-key">S</span>
-                <span class="inv-label">SHIELD</span>
-            </button>
-            <button id="inv-life" class="inv-slot" data-slot="life" aria-label="Vida Extra">
-                <img src="./img/pack-life+1.png" alt="Life +1" class="inv-icon" draggable="false">
-                <span class="inv-count" id="inv-life-count">0</span>
-                <span class="inv-label">LIFE</span>
-            </button>
-            <button id="inv-dual" class="inv-slot" data-slot="dual" aria-label="Dual Shoot">
-                <img src="./img/dual-shoot.png" alt="Dual Shoot" class="inv-icon" draggable="false">
-                <span class="inv-count" id="inv-dual-count"></span>
-                <span class="inv-label">LASER</span>
-            </button>
+        <!-- HUD Storage: panel unificado con nombre + 3 cubículos -->
+        <div id="storage-panel">
+            <div id="storage-header">
+                <span id="storage-player-name"></span>
+                <span id="storage-divider"></span>
+                <span id="storage-title">STORAGE</span>
+            </div>
+            <div id="storage-slots">
+                <button id="inv-super" class="inv-slot" data-slot="super" aria-label="Usar Super Capsule">
+                    <div class="slot-inner">
+                        <img src="./img/super-capsule.png" alt="Super Capsule" class="inv-icon" draggable="false">
+                        <span class="inv-count" id="inv-super-count">0</span>
+                    </div>
+                    <span class="inv-label">SHIELD</span>
+                    <span class="inv-key">S</span>
+                </button>
+                <button id="inv-life" class="inv-slot" data-slot="life" aria-label="Vida Extra">
+                    <div class="slot-inner">
+                        <img src="./img/pack-life+1.png" alt="Life +1" class="inv-icon" draggable="false">
+                        <span class="inv-count" id="inv-life-count">0</span>
+                    </div>
+                    <span class="inv-label">LIFE</span>
+                </button>
+                <button id="inv-dual" class="inv-slot" data-slot="dual" aria-label="Dual Shoot">
+                    <div class="slot-inner">
+                        <img src="./img/dual-shoot.png" alt="Dual Shoot" class="inv-icon" draggable="false">
+                        <span class="inv-count" id="inv-dual-count"></span>
+                    </div>
+                    <span class="inv-label">LASER</span>
+                </button>
+            </div>
         </div>
     </div>
 

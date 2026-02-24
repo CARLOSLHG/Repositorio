@@ -380,6 +380,8 @@
                 pregameScreen.style.display = 'none';
                 gameContainer.style.display = 'block';
                 playerDisplay.textContent = `Defensor: ${playerName}`;
+                const storageNameEl = document.getElementById('storage-player-name');
+                if (storageNameEl) storageNameEl.textContent = playerName;
                 gameStartTime = Date.now();
                 gameStarted = true;
 
@@ -1860,7 +1862,7 @@
                 gameContainer.style.cursor = 'default';
                 const mobileCtrlVictory = document.getElementById('mobile-controls');
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
-                const invHudVictory = document.getElementById('inventory-hud');
+                const invHudVictory = document.getElementById('storage-panel');
                 if (invHudVictory) invHudVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
@@ -1951,7 +1953,7 @@
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
-                const invHud = document.getElementById('inventory-hud');
+                const invHud = document.getElementById('storage-panel');
                 if (invHud) invHud.style.display = 'flex';
 
                 // Limpiar spawners anteriores
@@ -2015,7 +2017,7 @@
                     // Ocultar controles móviles e inventario durante el diálogo
                     const mobileCtrlCont = document.getElementById('mobile-controls');
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
-                    const invHud = document.getElementById('inventory-hud');
+                    const invHud = document.getElementById('storage-panel');
                     if (invHud) invHud.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
@@ -2101,7 +2103,7 @@
                 // Ocultar controles móviles e inventario en game over
                 const mobileCtrlGO = document.getElementById('mobile-controls');
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
-                const invHudGO = document.getElementById('inventory-hud');
+                const invHudGO = document.getElementById('storage-panel');
                 if (invHudGO) invHudGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
@@ -2219,7 +2221,7 @@
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlReset = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
-                const invHudReset = document.getElementById('inventory-hud');
+                const invHudReset = document.getElementById('storage-panel');
                 if (invHudReset) invHudReset.style.display = 'flex';
 
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
