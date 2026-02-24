@@ -1609,6 +1609,8 @@
                 dualShootGuideEl.id = 'dual-shoot-guide';
                 dualShootGuideEl.classList.add('dual-shoot-guide');
                 gameContainer.appendChild(dualShootGuideEl);
+
+                updateInventoryUI();
             }
 
             function deactivateDualShoot() {
@@ -1620,46 +1622,81 @@
                     setTimeout(() => el.remove(), 500);
                     dualShootGuideEl = null;
                 }
+                updateInventoryUI();
             }
 
-            // --- Actualizar UI de inventario unificado (super capsules, vidas, dual-shoot) ---
+            // --- Actualizar UI del storage: 3 slots fijos con estados vacío/activo/engaged ---
             function updateInventoryUI() {
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
                 const lifeBtn = document.getElementById('inv-life');
                 const lifeCount = document.getElementById('inv-life-count');
+                const dualBtn = document.getElementById('inv-dual');
+                const dualCount = document.getElementById('inv-dual-count');
 
+                // Super Capsule slot
                 if (scBtn && scCount) {
-                    scBtn.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
-                    scCount.textContent = storedSuperCapsules;
+                    if (storedSuperCapsules > 0) {
+                        scBtn.classList.remove('slot-empty');
+                        scBtn.classList.add('slot-active');
+                        scCount.textContent = storedSuperCapsules;
+                    } else {
+                        scBtn.classList.remove('slot-active');
+                        scBtn.classList.add('slot-empty');
+                    }
                 }
+                // Life slot
                 if (lifeBtn && lifeCount) {
-                    lifeBtn.style.display = storedLives > 0 ? 'flex' : 'none';
-                    lifeCount.textContent = storedLives;
+                    if (storedLives > 0) {
+                        lifeBtn.classList.remove('slot-empty');
+                        lifeBtn.classList.add('slot-active');
+                        lifeCount.textContent = storedLives;
+                    } else {
+                        lifeBtn.classList.remove('slot-active');
+                        lifeBtn.classList.add('slot-empty');
+                    }
+                }
+                // Dual Shoot slot
+                if (dualBtn && dualCount) {
+                    if (dualShootActive) {
+                        dualBtn.classList.remove('slot-empty', 'slot-active');
+                        dualBtn.classList.add('slot-engaged');
+                        dualCount.textContent = 'ON';
+                    } else {
+                        dualBtn.classList.remove('slot-active', 'slot-engaged');
+                        dualBtn.classList.add('slot-empty');
+                        dualCount.textContent = '';
+                    }
                 }
             }
 
-            // --- Handler del botón de usar super capsule (click/touch en inventario unificado) ---
+            // --- Handler del botón de usar super capsule (click/touch en storage) ---
             const invSuperBtn = document.getElementById('inv-super');
             if (invSuperBtn) {
-                function useSuperCapsule(e) {
+                function useSuperFromStorage(e) {
                     if (e) { e.preventDefault(); e.stopPropagation(); }
                     if (storedSuperCapsules <= 0 || godModeActive || gameOver || !gameStarted) return;
                     storedSuperCapsules--;
                     updateInventoryUI();
                     activateGodMode();
                 }
-                invSuperBtn.addEventListener('touchstart', useSuperCapsule, { passive: false });
+                invSuperBtn.addEventListener('touchstart', useSuperFromStorage, { passive: false });
                 invSuperBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperCapsule(e); });
+                invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperFromStorage(e); });
             }
 
-            // --- Handler del botón de vida (no activa en gameplay, solo visual) ---
+            // --- Handlers de vida y dual (no activan en gameplay, solo visuales) ---
             const invLifeBtn = document.getElementById('inv-life');
             if (invLifeBtn) {
                 invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
                 invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
                 invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+            }
+            const invDualBtn = document.getElementById('inv-dual');
+            if (invDualBtn) {
+                invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invDualBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); });
             }
 
             // Disparo gratuito (god mode) - no consume misiles

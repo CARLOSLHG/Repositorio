@@ -88,16 +88,23 @@
             </button>
         </div>
 
-        <!-- HUD inventario unificado (esquina inferior derecha, PC y móvil) -->
+        <!-- HUD Storage: 3 cubículos fijos en esquina inferior izquierda -->
         <div id="inventory-hud">
-            <button id="inv-super" class="inv-item inv-super-capsule" style="display:none;" aria-label="Usar Super Capsule">
+            <button id="inv-super" class="inv-slot" data-slot="super" aria-label="Usar Super Capsule">
                 <img src="./img/super-capsule.png" alt="Super Capsule" class="inv-icon" draggable="false">
                 <span class="inv-count" id="inv-super-count">0</span>
                 <span class="inv-key">S</span>
+                <span class="inv-label">SHIELD</span>
             </button>
-            <button id="inv-life" class="inv-item inv-life-pack" style="display:none;" aria-label="Vida Extra">
-                <img src="./img/pack-life+1.png" alt="Life" class="inv-icon" draggable="false">
+            <button id="inv-life" class="inv-slot" data-slot="life" aria-label="Vida Extra">
+                <img src="./img/pack-life+1.png" alt="Life +1" class="inv-icon" draggable="false">
                 <span class="inv-count" id="inv-life-count">0</span>
+                <span class="inv-label">LIFE</span>
+            </button>
+            <button id="inv-dual" class="inv-slot" data-slot="dual" aria-label="Dual Shoot">
+                <img src="./img/dual-shoot.png" alt="Dual Shoot" class="inv-icon" draggable="false">
+                <span class="inv-count" id="inv-dual-count"></span>
+                <span class="inv-label">LASER</span>
             </button>
         </div>
     </div>
