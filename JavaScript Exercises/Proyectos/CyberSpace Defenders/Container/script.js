@@ -47,16 +47,11 @@
         let activeLifePacks = [];
         let lifePackSpawnTimeout = null;
 
-        // --- Dual Shoot: disparo doble con línea guía ---
+        // --- Dual Shoot: disparo doble con línea guía (activo hasta morir) ---
         let dualShootActive = false;
-        let dualShootTimer = null;
-        let dualShootWarnTimer = null;
         let dualShootGuideEl = null;
-        let storedDualShoots = 0;
         let activeDualShootPacks = [];
         let dualShootSpawnTimeout = null;
-        const DUAL_SHOOT_DURATION = 25000;     // 25 segundos
-        const DUAL_SHOOT_WARN_AT = 5000;       // parpadeo últimos 5s
 
         // --- Sistema de dificultad progresiva ---
         let maxDifficultyLevel = 0;
@@ -505,7 +500,7 @@
                 e.stopPropagation();
             });
 
-            // Tecla M para música, S para super capsule, D para dual-shoot
+            // Tecla M para música, S para super capsule
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
@@ -515,13 +510,6 @@
                         storedSuperCapsules--;
                         updateInventoryUI();
                         activateGodMode();
-                    }
-                }
-                if (e.key === 'd' || e.key === 'D') {
-                    if (storedDualShoots > 0 && !gameOver && gameStarted) {
-                        storedDualShoots--;
-                        updateInventoryUI();
-                        activateDualShoot();
                     }
                 }
             });
@@ -950,7 +938,7 @@
                     }
                 }
 
-                // Nave ↔ dual-shoot packs (almacenar en inventario)
+                // Nave ↔ dual-shoot packs (activar inmediatamente al capturar)
                 for (let i = activeDualShootPacks.length - 1; i >= 0; i--) {
                     const ds = activeDualShootPacks[i];
                     if (ds.destroyed || !ds._r) continue;
@@ -963,8 +951,10 @@
                             const idx = activeDualShootPacks.indexOf(ds);
                             if (idx !== -1) activeDualShootPacks.splice(idx, 1);
                         }, 400);
-                        storedDualShoots++;
-                        updateInventoryUI();
+                        // Activar dual-shoot inmediatamente (dura hasta morir)
+                        if (!dualShootActive) {
+                            activateDualShoot();
+                        }
                     }
                 }
 
@@ -1541,40 +1531,21 @@
                 scheduleCheck();
             }
 
-            // Activar modo dual-shoot
+            // Activar modo dual-shoot (dura hasta que el jugador muere)
             function activateDualShoot() {
-                if (dualShootActive) {
-                    // Si ya está activo, reiniciar el temporizador
-                    clearTimeout(dualShootTimer);
-                    clearTimeout(dualShootWarnTimer);
-                    if (dualShootGuideEl) dualShootGuideEl.classList.remove('dual-guide-warning');
-                } else {
-                    dualShootActive = true;
+                if (dualShootActive) return; // Ya activo, ignorar
+                dualShootActive = true;
 
-                    // Crear línea guía horizontal
-                    dualShootGuideEl = document.createElement('div');
-                    dualShootGuideEl.id = 'dual-shoot-guide';
-                    dualShootGuideEl.classList.add('dual-shoot-guide');
-                    gameContainer.appendChild(dualShootGuideEl);
-                }
-
-                // Parpadeo de aviso a los 5s restantes
-                dualShootWarnTimer = setTimeout(() => {
-                    if (dualShootGuideEl) dualShootGuideEl.classList.add('dual-guide-warning');
-                }, DUAL_SHOOT_DURATION - DUAL_SHOOT_WARN_AT);
-
-                // Desactivar tras 25s
-                dualShootTimer = setTimeout(() => {
-                    deactivateDualShoot();
-                }, DUAL_SHOOT_DURATION);
+                // Crear línea guía horizontal
+                dualShootGuideEl = document.createElement('div');
+                dualShootGuideEl.id = 'dual-shoot-guide';
+                dualShootGuideEl.classList.add('dual-shoot-guide');
+                gameContainer.appendChild(dualShootGuideEl);
             }
 
             function deactivateDualShoot() {
+                if (!dualShootActive) return;
                 dualShootActive = false;
-                clearTimeout(dualShootTimer);
-                dualShootTimer = null;
-                clearTimeout(dualShootWarnTimer);
-                dualShootWarnTimer = null;
                 if (dualShootGuideEl) {
                     dualShootGuideEl.classList.add('dual-guide-fadeout');
                     const el = dualShootGuideEl;
@@ -1589,8 +1560,6 @@
                 const scCount = document.getElementById('inv-super-count');
                 const lifeBtn = document.getElementById('inv-life');
                 const lifeCount = document.getElementById('inv-life-count');
-                const dsBtn = document.getElementById('inv-dual');
-                const dsCount = document.getElementById('inv-dual-count');
 
                 if (scBtn && scCount) {
                     scBtn.style.display = storedSuperCapsules > 0 ? 'flex' : 'none';
@@ -1599,10 +1568,6 @@
                 if (lifeBtn && lifeCount) {
                     lifeBtn.style.display = storedLives > 0 ? 'flex' : 'none';
                     lifeCount.textContent = storedLives;
-                }
-                if (dsBtn && dsCount) {
-                    dsBtn.style.display = storedDualShoots > 0 ? 'flex' : 'none';
-                    dsCount.textContent = storedDualShoots;
                 }
             }
 
@@ -1627,21 +1592,6 @@
                 invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
                 invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
                 invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
-            }
-
-            // --- Handler del botón de dual-shoot (click/touch en inventario) ---
-            const invDualBtn = document.getElementById('inv-dual');
-            if (invDualBtn) {
-                function useDualShoot(e) {
-                    if (e) { e.preventDefault(); e.stopPropagation(); }
-                    if (storedDualShoots <= 0 || gameOver || !gameStarted) return;
-                    storedDualShoots--;
-                    updateInventoryUI();
-                    activateDualShoot();
-                }
-                invDualBtn.addEventListener('touchstart', useDualShoot, { passive: false });
-                invDualBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); useDualShoot(e); });
             }
 
             // Disparo gratuito (god mode) - no consume misiles
@@ -2149,7 +2099,6 @@
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
                 storedLives = INITIAL_EXTRA_LIVES;
-                storedDualShoots = 0;
                 updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);

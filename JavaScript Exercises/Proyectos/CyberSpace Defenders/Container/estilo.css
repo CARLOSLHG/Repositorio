@@ -1578,17 +1578,7 @@ body, html {
     }
 }
 
-/* Parpadeo de aviso últimos 5s */
-.dual-guide-warning {
-    animation: guideWarning 0.3s ease-in-out infinite !important;
-}
-
-@keyframes guideWarning {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-}
-
-/* Fadeout al terminar */
+/* Fadeout al perder dual-shoot (muerte) */
 .dual-guide-fadeout {
     animation: guideFadeout 0.5s ease-out forwards !important;
 }
@@ -1606,17 +1596,6 @@ body, html {
 /* Misil hacia atrás: invertido horizontalmente */
 .missile-backward {
     transform: scaleX(-1);
-}
-
-/* Inventario: dual-shoot item */
-.inv-item.inv-dual-shoot {
-    border-color: rgba(255, 0, 200, 0.5);
-    background: radial-gradient(circle, rgba(255, 0, 200, 0.15) 0%, rgba(255, 0, 200, 0.03) 70%);
-    box-shadow: 0 0 12px rgba(255, 0, 200, 0.25);
-}
-
-.inv-dual-shoot .inv-count {
-    background: #ff00c8;
 }
 
 /* ===== EXTRA-SMALL: landscape con poca altura (iPhone SE, etc.) ===== */
