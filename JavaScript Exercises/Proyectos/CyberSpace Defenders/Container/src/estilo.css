@@ -49,6 +49,12 @@ body, html {
     cursor: none !important;
 }
 
+/* Elementos de juego: no interactuables con el mouse (sin drag, sin select) */
+#spaceship, #background, .asteroid, .cyber-attack, .missile, #game-title, #scrolling-text {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
 #game-over-message,
 #game-over-message * {
     cursor: default !important;
@@ -422,19 +428,19 @@ body, html {
     }
 
     #cyberattack-counter {
-        top: calc(28px + var(--safe-top));
+        top: calc(34px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(42px + var(--safe-top));
+        top: calc(54px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(56px + var(--safe-top));
+        top: calc(74px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(72px + var(--safe-top));
+        top: calc(96px + var(--safe-top));
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
@@ -1568,10 +1574,10 @@ body, html {
     }
 
     #distance-counter { top: calc(10px + var(--safe-top)); }
-    #cyberattack-counter { top: calc(22px + var(--safe-top)); }
-    #asteroid-counter { top: calc(34px + var(--safe-top)); }
-    #missile-counter { top: calc(46px + var(--safe-top)); }
-    #difficulty-display { top: calc(60px + var(--safe-top)); }
+    #cyberattack-counter { top: calc(26px + var(--safe-top)); }
+    #asteroid-counter { top: calc(42px + var(--safe-top)); }
+    #missile-counter { top: calc(58px + var(--safe-top)); }
+    #difficulty-display { top: calc(76px + var(--safe-top)); }
 }
 
 /* ===== AVISO DE ROTACIÓN (portrait en móviles) ===== */
