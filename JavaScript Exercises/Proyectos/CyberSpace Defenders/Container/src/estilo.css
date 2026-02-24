@@ -412,28 +412,29 @@ body, html {
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(10px, 2.2vw, 15px);
-        padding: 2px 5px;
+        padding: 2px 4px;
         left: var(--safe-left, 0px);
+        border-left-width: 1px;
     }
 
     #distance-counter {
-        top: calc(20px + var(--safe-top));
+        top: calc(14px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: calc(36px + var(--safe-top));
+        top: calc(28px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(52px + var(--safe-top));
+        top: calc(42px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(68px + var(--safe-top));
+        top: calc(56px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(86px + var(--safe-top));
+        top: calc(72px + var(--safe-top));
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
@@ -610,7 +611,7 @@ body, html {
 
 .stat-box {
     background: rgba(0, 150, 255, 0.12);
-    border: 1px solid rgba(0, 200, 255, 0.3);
+    border: none;
     border-radius: 10px;
     padding: 0.5em clamp(8px, 1.2em, 20px);
     min-width: clamp(80px, 10vw, 140px);
