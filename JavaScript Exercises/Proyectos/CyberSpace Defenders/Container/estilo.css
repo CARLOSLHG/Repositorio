@@ -393,17 +393,17 @@ body, html {
 
 @media (max-width: 768px) {
     #game-container {
-        padding: 8px;
+        padding: 0;
     }
 
     #game-title {
         font-size: 3.5vw;
-        top: calc(4px + var(--safe-top));
+        top: calc(2px + var(--safe-top));
     }
 
     #toggle-music-button {
-        top: calc(4px + var(--safe-top));
-        right: calc(4px + var(--safe-right));
+        top: calc(2px + var(--safe-top));
+        right: var(--safe-right, 0px);
         margin-right: 0;
         font-size: 2.5vw;
         padding: 5px 8px;
@@ -413,27 +413,27 @@ body, html {
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(10px, 2.2vw, 15px);
         padding: 2px 5px;
-        left: calc(3px + var(--safe-left));
+        left: var(--safe-left, 0px);
     }
 
     #distance-counter {
-        top: calc(26px + var(--safe-top));
+        top: calc(20px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: calc(44px + var(--safe-top));
+        top: calc(36px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(62px + var(--safe-top));
+        top: calc(52px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(80px + var(--safe-top));
+        top: calc(68px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(100px + var(--safe-top));
+        top: calc(86px + var(--safe-top));
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
