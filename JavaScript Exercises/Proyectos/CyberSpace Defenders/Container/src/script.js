@@ -47,6 +47,12 @@
         let activeLifePacks = [];
         let lifePackSpawnTimeout = null;
 
+        // --- Dual Shoot: disparo doble con línea guía (activo hasta morir) ---
+        let dualShootActive = false;
+        let dualShootGuideEl = null;
+        let activeDualShootPacks = [];
+        let dualShootSpawnTimeout = null;
+
         // --- Sistema de dificultad progresiva ---
         let maxDifficultyLevel = 0;
         let asteroidSpawnTimeout = null;
@@ -494,7 +500,7 @@
                 e.stopPropagation();
             });
 
-            // Tecla M para apagar/encender la música, S para usar super capsule
+            // Tecla M para música, S para super capsule
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
@@ -714,8 +720,11 @@
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
                     const m = activeMissiles[i];
-                    m.tx += 6 * dt;
-                    if (m.originX + m.tx > screenWidth) {
+                    const dir = m.direction || 1;
+                    const spd = m.speed || 1;
+                    m.tx += 6 * dt * dir * spd;
+                    // Fuera de pantalla por la derecha o por la izquierda
+                    if (m.originX + m.tx > screenWidth || m.originX + m.tx < -60) {
                         m.element.remove();
                         activeMissiles.splice(i, 1);
                         continue;
@@ -742,6 +751,9 @@
                 for (let i = 0; i < activeLifePacks.length; i++) {
                     activeLifePacks[i]._r = activeLifePacks[i].destroyed ? null : activeLifePacks[i].element.getBoundingClientRect();
                 }
+                for (let i = 0; i < activeDualShootPacks.length; i++) {
+                    activeDualShootPacks[i]._r = activeDualShootPacks[i].destroyed ? null : activeDualShootPacks[i].element.getBoundingClientRect();
+                }
 
                 // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
 
@@ -750,7 +762,7 @@
                     const mR = activeMissiles[i]._r;
                     let hit = false;
 
-                    // Misil ↔ super cápsulas y life packs: el misil las atraviesa sin efecto
+                    // Misil ↔ super cápsulas, life packs y dual-shoot: el misil las atraviesa sin efecto
                     let overlapsImmune = false;
                     for (let j = 0; j < activeSuperCapsules.length; j++) {
                         const sc = activeSuperCapsules[j];
@@ -767,6 +779,17 @@
                             if (lp.destroyed || !lp._r) continue;
                             if (!(mR.top > lp._r.bottom || mR.bottom < lp._r.top ||
                                   mR.right < lp._r.left || mR.left > lp._r.right)) {
+                                overlapsImmune = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!overlapsImmune) {
+                        for (let j = 0; j < activeDualShootPacks.length; j++) {
+                            const ds = activeDualShootPacks[j];
+                            if (ds.destroyed || !ds._r) continue;
+                            if (!(mR.top > ds._r.bottom || mR.bottom < ds._r.top ||
+                                  mR.right < ds._r.left || mR.left > ds._r.right)) {
                                 overlapsImmune = true;
                                 break;
                             }
@@ -915,6 +938,33 @@
                     }
                 }
 
+                // Nave ↔ dual-shoot packs (activar inmediatamente al capturar)
+                for (let i = activeDualShootPacks.length - 1; i >= 0; i--) {
+                    const ds = activeDualShootPacks[i];
+                    if (ds.destroyed || !ds._r) continue;
+                    if (!(spaceshipRect.top > ds._r.bottom || spaceshipRect.bottom < ds._r.top ||
+                          spaceshipRect.right < ds._r.left || spaceshipRect.left > ds._r.right)) {
+                        ds.destroyed = true;
+                        ds.element.classList.add('ammo-collected');
+                        setTimeout(() => {
+                            ds.element.remove();
+                            const idx = activeDualShootPacks.indexOf(ds);
+                            if (idx !== -1) activeDualShootPacks.splice(idx, 1);
+                        }, 400);
+                        // Activar dual-shoot inmediatamente (dura hasta morir)
+                        if (!dualShootActive) {
+                            activateDualShoot();
+                        }
+                    }
+                }
+
+                // Actualizar posición de la línea guía dual-shoot
+                if (dualShootActive && dualShootGuideEl) {
+                    const guideBottom = spaceshipRect.bottom - gameContainer.getBoundingClientRect().top;
+                    const guideY = guideBottom - spaceshipRect.height / 2;
+                    dualShootGuideEl.style.top = guideY + 'px';
+                }
+
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -942,23 +992,37 @@
                     return;
                 }
 
+                const spaceshipRect = spaceship.getBoundingClientRect();
+                const gameContainerRect = gameContainer.getBoundingClientRect();
+                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
+                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
+
+                // Misil hacia adelante
                 const missile = document.createElement('img');
                 missile.src = './img/missil.png';
                 missile.classList.add('missile');
-
-                const spaceshipRect = spaceship.getBoundingClientRect();
-                const gameContainerRect = gameContainer.getBoundingClientRect();
-
+                if (dualShootActive) missile.classList.add('dual-missile');
                 missile.style.position = 'absolute';
-                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
                 missile.style.bottom = `${missileBottomPos}px`;
-                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
                 missile.style.left = startX + 'px';
-
                 gameContainer.appendChild(missile);
 
-                // Registrar: tx=0 (translateX acumulado), originX para saber cuándo sale de pantalla
-                activeMissiles.push({ element: missile, tx: 0, originX: startX });
+                // speed: 1 = normal, 2 = doble (dual-shoot)
+                const fwdSpeed = dualShootActive ? 2 : 1;
+                activeMissiles.push({ element: missile, tx: 0, originX: startX, speed: fwdSpeed, direction: 1 });
+
+                // Si dual-shoot activo: misil hacia atrás
+                if (dualShootActive) {
+                    const backMissile = document.createElement('img');
+                    backMissile.src = './img/missil.png';
+                    backMissile.classList.add('missile', 'dual-missile', 'missile-backward');
+                    backMissile.style.position = 'absolute';
+                    backMissile.style.bottom = `${missileBottomPos}px`;
+                    const backStartX = spaceshipRect.left - gameContainerRect.left;
+                    backMissile.style.left = backStartX + 'px';
+                    gameContainer.appendChild(backMissile);
+                    activeMissiles.push({ element: backMissile, tx: 0, originX: backStartX, speed: 2, direction: -1 });
+                }
             }
 
             // Desktop: ráfagas de 5 misiles al mantener mouse, 1 al click
@@ -1277,14 +1341,48 @@
                 });
             }
 
-            // Spawning de super capsule: probabilidad y frecuencia según amenazas eliminadas
+            // Spawning de super capsule: probabilidad y frecuencia según nivel de dificultad
+            // A mayor dificultad → mayor probabilidad y menor delay (aparecen más seguido)
             function getSuperCapsuleParams() {
-                if (cyberattackCount >= 125) return { probability: 0.05, delay: 45000 };
-                if (cyberattackCount >= 100) return { probability: 0.10, delay: 40000 };
-                if (cyberattackCount >= 75)  return { probability: 0.15, delay: 35000 };
-                if (cyberattackCount >= 50)  return { probability: 0.20, delay: 30000 };
-                if (cyberattackCount >= 25)  return { probability: 0.25, delay: 25000 };
-                return null; // Menos de 25: no aparece
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const level = getDifficultyLevel(elapsed);
+                // Nivel 0 SEGURO:      no aparece
+                // Nivel 1 ALERTA:      prob 0.08, cada 35s
+                // Nivel 2 PELIGRO:     prob 0.14, cada 28s
+                // Nivel 3 CRÍTICO:     prob 0.22, cada 22s
+                // Nivel 4 EXTREMO:     prob 0.30, cada 18s
+                // Nivel 5 APOCALIPSIS: prob 0.40, cada 14s
+                const table = [
+                    null,
+                    { probability: 0.08, delay: 35000 },
+                    { probability: 0.14, delay: 28000 },
+                    { probability: 0.22, delay: 22000 },
+                    { probability: 0.30, delay: 18000 },
+                    { probability: 0.40, delay: 14000 }
+                ];
+                return table[level] || null;
+            }
+
+            // Spawning de life packs: similar a super capsule pero con sus propias probabilidades
+            // Vidas son más valiosas → probabilidad ligeramente menor, pero mejora con dificultad
+            function getLifePackParams() {
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const level = getDifficultyLevel(elapsed);
+                // Nivel 0 SEGURO:      no aparece (empiezas con vidas iniciales)
+                // Nivel 1 ALERTA:      prob 0.06, cada 40s
+                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.18, cada 25s
+                // Nivel 4 EXTREMO:     prob 0.25, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
+                const table = [
+                    null,
+                    { probability: 0.06, delay: 40000 },
+                    { probability: 0.10, delay: 32000 },
+                    { probability: 0.18, delay: 25000 },
+                    { probability: 0.25, delay: 20000 },
+                    { probability: 0.35, delay: 15000 }
+                ];
+                return table[level] || null;
             }
 
             function startSuperCapsuleSpawner() {
@@ -1340,14 +1438,14 @@
                 });
             }
 
-            // Spawner de life packs: misma tabla de probabilidad que super capsules
+            // Spawner de life packs: probabilidad propia que mejora con la dificultad
             function startLifePackSpawner() {
                 function scheduleCheck() {
-                    const params = getSuperCapsuleParams();
-                    const checkDelay = params ? params.delay : 25000;
+                    const params = getLifePackParams();
+                    const checkDelay = params ? params.delay : 30000;
                     lifePackSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
-                        const currentParams = getSuperCapsuleParams();
+                        const currentParams = getLifePackParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
                                 createLifePack();
@@ -1359,7 +1457,104 @@
                 scheduleCheck();
             }
 
-            // --- Actualizar UI de inventario unificado (super capsules y vidas) ---
+            // --- Dual Shoot: power-up coleccionable ---
+            function createDualShootPack() {
+                if (gameOver) return;
+
+                const dsEl = document.createElement('div');
+                dsEl.classList.add('dual-shoot-pack');
+
+                const dsImg = document.createElement('img');
+                dsImg.src = './img/dual-shoot.png';
+                dsImg.alt = 'Dual Shoot';
+                dsImg.classList.add('capsule-img');
+                dsImg.draggable = false;
+                dsEl.appendChild(dsImg);
+
+                const bottomPosition = Math.floor(Math.random() * 60) + 20;
+                dsEl.style.bottom = `${bottomPosition}%`;
+                dsEl.style.right = '-140px';
+
+                gameContainer.appendChild(dsEl);
+
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const dsSpeed = Math.random() * 3 + diff.packSpeedMin + 2;
+                dsEl.style.animation = `moveAmmoPack ${dsSpeed}s linear forwards`;
+
+                const dsEntry = { element: dsEl, destroyed: false };
+                activeDualShootPacks.push(dsEntry);
+
+                dsEl.addEventListener('animationend', () => {
+                    dsEl.remove();
+                    const idx = activeDualShootPacks.indexOf(dsEntry);
+                    if (idx !== -1) activeDualShootPacks.splice(idx, 1);
+                });
+            }
+
+            // Probabilidad de spawn del dual-shoot según dificultad
+            function getDualShootParams() {
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const level = getDifficultyLevel(elapsed);
+                // Nivel 0 SEGURO:      no aparece
+                // Nivel 1 ALERTA:      no aparece
+                // Nivel 2 PELIGRO:     prob 0.08, cada 35s
+                // Nivel 3 CRÍTICO:     prob 0.14, cada 28s
+                // Nivel 4 EXTREMO:     prob 0.20, cada 22s
+                // Nivel 5 APOCALIPSIS: prob 0.28, cada 16s
+                const table = [
+                    null,
+                    null,
+                    { probability: 0.08, delay: 35000 },
+                    { probability: 0.14, delay: 28000 },
+                    { probability: 0.20, delay: 22000 },
+                    { probability: 0.28, delay: 16000 }
+                ];
+                return table[level] || null;
+            }
+
+            function startDualShootSpawner() {
+                function scheduleCheck() {
+                    const params = getDualShootParams();
+                    const checkDelay = params ? params.delay : 35000;
+                    dualShootSpawnTimeout = setTimeout(() => {
+                        if (gameOver) return;
+                        const currentParams = getDualShootParams();
+                        if (currentParams) {
+                            if (Math.random() < currentParams.probability) {
+                                createDualShootPack();
+                            }
+                        }
+                        scheduleCheck();
+                    }, checkDelay);
+                }
+                scheduleCheck();
+            }
+
+            // Activar modo dual-shoot (dura hasta que el jugador muere)
+            function activateDualShoot() {
+                if (dualShootActive) return; // Ya activo, ignorar
+                dualShootActive = true;
+
+                // Crear línea guía horizontal
+                dualShootGuideEl = document.createElement('div');
+                dualShootGuideEl.id = 'dual-shoot-guide';
+                dualShootGuideEl.classList.add('dual-shoot-guide');
+                gameContainer.appendChild(dualShootGuideEl);
+            }
+
+            function deactivateDualShoot() {
+                if (!dualShootActive) return;
+                dualShootActive = false;
+                if (dualShootGuideEl) {
+                    dualShootGuideEl.classList.add('dual-guide-fadeout');
+                    const el = dualShootGuideEl;
+                    setTimeout(() => el.remove(), 500);
+                    dualShootGuideEl = null;
+                }
+            }
+
+            // --- Actualizar UI de inventario unificado (super capsules, vidas, dual-shoot) ---
             function updateInventoryUI() {
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
@@ -1403,21 +1598,35 @@
             function shootGodMissile() {
                 if (gameOver || !gameStarted) return;
 
+                const spaceshipRect = spaceship.getBoundingClientRect();
+                const gameContainerRect = gameContainer.getBoundingClientRect();
+                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
+                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
+
                 const missile = document.createElement('img');
                 missile.src = './img/missil.png';
                 missile.classList.add('missile', 'god-missile');
-
-                const spaceshipRect = spaceship.getBoundingClientRect();
-                const gameContainerRect = gameContainer.getBoundingClientRect();
-
+                if (dualShootActive) missile.classList.add('dual-missile');
                 missile.style.position = 'absolute';
-                const missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
                 missile.style.bottom = `${missileBottomPos}px`;
-                const startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
                 missile.style.left = startX + 'px';
-
                 gameContainer.appendChild(missile);
-                activeMissiles.push({ element: missile, tx: 0, originX: startX });
+
+                const fwdSpeed = dualShootActive ? 2 : 1;
+                activeMissiles.push({ element: missile, tx: 0, originX: startX, speed: fwdSpeed, direction: 1 });
+
+                // Si dual-shoot activo: misil god hacia atrás
+                if (dualShootActive) {
+                    const backMissile = document.createElement('img');
+                    backMissile.src = './img/missil.png';
+                    backMissile.classList.add('missile', 'god-missile', 'dual-missile', 'missile-backward');
+                    backMissile.style.position = 'absolute';
+                    backMissile.style.bottom = `${missileBottomPos}px`;
+                    const backStartX = spaceshipRect.left - gameContainerRect.left;
+                    backMissile.style.left = backStartX + 'px';
+                    gameContainer.appendChild(backMissile);
+                    activeMissiles.push({ element: backMissile, tx: 0, originX: backStartX, speed: 2, direction: -1 });
+                }
             }
 
             // Activar God Mode
@@ -1647,8 +1856,9 @@
 
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
-                // Detener god mode si estaba activo
+                // Detener god mode y dual-shoot si estaban activos
                 deactivateGodMode();
+                deactivateDualShoot();
 
                 // Detener el game loop
                 if (gameLoopId) {
@@ -1848,15 +2058,19 @@
                 document.querySelectorAll('.missile').forEach(m => m.remove());
                 document.querySelectorAll('.super-capsule').forEach(sc => sc.remove());
                 document.querySelectorAll('.life-pack').forEach(lp => lp.remove());
+                document.querySelectorAll('.dual-shoot-pack').forEach(ds => ds.remove());
                 const haloEl = document.getElementById('god-mode-halo');
                 if (haloEl) haloEl.remove();
 
-                // Limpiar god mode
+                // Limpiar god mode y dual-shoot
                 deactivateGodMode();
+                deactivateDualShoot();
                 activeSuperCapsules.length = 0;
                 activeLifePacks.length = 0;
+                activeDualShootPacks.length = 0;
                 clearTimeout(superCapsuleSpawnTimeout);
                 clearTimeout(lifePackSpawnTimeout);
+                clearTimeout(dualShootSpawnTimeout);
 
                 // Limpiar arrays de entidades
                 activeMissiles.length = 0;
@@ -1899,6 +2113,7 @@
                 startAmmoPacks();
                 startSuperCapsuleSpawner();
                 startLifePackSpawner();
+                startDualShootSpawner();
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -1963,6 +2178,7 @@
             startAmmoPacks();
             startSuperCapsuleSpawner();
             startLifePackSpawner();
+            startDualShootSpawner();
 
             // Mostrar vidas iniciales en el HUD
             updateInventoryUI();
