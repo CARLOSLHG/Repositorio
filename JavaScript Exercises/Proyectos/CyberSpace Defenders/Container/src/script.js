@@ -961,41 +961,66 @@
                 activeMissiles.push({ element: missile, tx: 0, originX: startX });
             }
 
-            // Disparo unificado: 1 misil al pulsar, ráfaga continua (~8/s) al mantener
-            const HOLD_FIRE_RATE = 120; // ms entre misiles al mantener (≈8 disparos/s)
-
-            // Desktop: mousedown/mouseup para disparo con hold
+            // Desktop: ráfagas de 5 misiles al mantener mouse, 1 al click
             if (!isTouchDevice) {
-                let desktopFireInterval = null;
+                const BURST_SIZE = 5;          // misiles por ráfaga
+                const BURST_MISSILE_DELAY = 80; // ms entre misiles dentro de una ráfaga
+                const BURST_PAUSE = 400;        // ms de pausa entre ráfagas
                 let desktopFireActive = false;
+                let desktopBurstTimeout = null;
+
+                function fireBurst(callback) {
+                    let fired = 0;
+                    function fireNext() {
+                        if (!desktopFireActive || gameOver || !gameStarted) return;
+                        if (fired < BURST_SIZE) {
+                            shootMissile();
+                            fired++;
+                            desktopBurstTimeout = setTimeout(fireNext, BURST_MISSILE_DELAY);
+                        } else if (callback) {
+                            // Pausa entre ráfagas, luego siguiente ráfaga
+                            desktopBurstTimeout = setTimeout(callback, BURST_PAUSE);
+                        }
+                    }
+                    fireNext();
+                }
 
                 function startDesktopFiring() {
                     if (gameOver || !gameStarted) return;
                     desktopFireActive = true;
-                    // Disparo inmediato al pulsar
+                    // Disparo inmediato: primer misil al pulsar
                     shootMissile();
-                    // Si mantiene pulsado, ráfaga continua de misiles individuales
-                    if (desktopFireInterval) clearInterval(desktopFireInterval);
-                    desktopFireInterval = setInterval(() => {
-                        if (gameOver || !gameStarted || !desktopFireActive) {
-                            stopDesktopFiring();
-                            return;
-                        }
-                        shootMissile();
-                    }, HOLD_FIRE_RATE);
+                    // Tras un breve delay, iniciar ráfagas continuas de 5
+                    desktopBurstTimeout = setTimeout(function burstLoop() {
+                        if (!desktopFireActive || gameOver || !gameStarted) return;
+                        fireBurst(burstLoop);
+                    }, BURST_PAUSE);
                 }
 
                 function stopDesktopFiring() {
                     desktopFireActive = false;
-                    if (desktopFireInterval) {
-                        clearInterval(desktopFireInterval);
-                        desktopFireInterval = null;
+                    if (desktopBurstTimeout) {
+                        clearTimeout(desktopBurstTimeout);
+                        desktopBurstTimeout = null;
                     }
                 }
 
+                // Prevenir drag/select en todos los elementos del juego
+                gameContainer.addEventListener('dragstart', function(e) {
+                    if (!e.target.closest('#game-over-message') && !e.target.closest('#player-screen')) {
+                        e.preventDefault();
+                    }
+                });
+                gameContainer.addEventListener('selectstart', function(e) {
+                    if (!e.target.closest('#game-over-message') && !e.target.closest('#player-screen')) {
+                        e.preventDefault();
+                    }
+                });
+
                 document.addEventListener('mousedown', function(e) {
                     if (e.button !== 0) return;
-                    if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen')) return;
+                    if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen') || e.target.closest('#pregame-screen')) return;
+                    e.preventDefault(); // Prevenir selección/drag al hacer click en el juego
                     startDesktopFiring();
                 });
 
@@ -1004,7 +1029,6 @@
                     stopDesktopFiring();
                 });
 
-                // Detener si el mouse sale de la ventana
                 document.addEventListener('mouseleave', function() {
                     stopDesktopFiring();
                 });
