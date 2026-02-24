@@ -218,9 +218,9 @@ body, html {
 /* ===== PACKS DE MUNICION ===== */
 .ammo-pack {
     position: absolute;
-    width: 7vw;
-    min-width: 55px;
-    max-width: 90px;
+    width: 7.7vw;
+    min-width: 61px;
+    max-width: 99px;
     height: auto;
     z-index: 15;
     pointer-events: none;
@@ -452,7 +452,7 @@ body, html {
     }
 
     .ammo-pack {
-        min-width: 40px;
+        min-width: 44px;
     }
 
     #spaceship {
@@ -1193,10 +1193,10 @@ body, html {
 
 .inv-item {
     position: relative;
-    width: 83px;
-    height: 83px;
+    width: 91px;
+    height: 91px;
     border-radius: 14px;
-    border: 2px solid rgba(0, 200, 255, 0.5);
+    border: none;
     background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 200, 255, 0.25);
     padding: 0;
@@ -1211,21 +1211,21 @@ body, html {
 }
 
 .inv-item.inv-life-pack {
-    width: 94px;
-    height: 94px;
+    width: 103px;
+    height: 103px;
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
 }
 
 .inv-life-pack .inv-icon {
-    width: 64px;
-    height: 64px;
+    width: 70px;
+    height: 70px;
 }
 
 .inv-icon {
-    width: 55px;
-    height: 55px;
+    width: 61px;
+    height: 61px;
     object-fit: contain;
     pointer-events: none;
 }
@@ -1234,13 +1234,13 @@ body, html {
     position: absolute;
     top: -9px;
     right: -9px;
-    min-width: 25px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 13px;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
     background: #00ccff;
     color: #000;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     padding: 0 6px;
@@ -1288,8 +1288,8 @@ body, html {
     }
 
     .inv-item {
-        width: 74px;
-        height: 74px;
+        width: 81px;
+        height: 81px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
@@ -1297,21 +1297,21 @@ body, html {
     }
 
     .inv-item.inv-life-pack {
-        width: 78px;
-        height: 78px;
+        width: 86px;
+        height: 86px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 60px;
-        height: 60px;
+        width: 66px;
+        height: 66px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 64px;
-        height: 64px;
+        width: 70px;
+        height: 70px;
     }
 }
 
@@ -1496,8 +1496,8 @@ body, html {
     }
 
     .inv-item {
-        width: 69px;
-        height: 69px;
+        width: 76px;
+        height: 76px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
@@ -1505,30 +1505,30 @@ body, html {
     }
 
     .inv-item.inv-life-pack {
-        width: 74px;
-        height: 74px;
+        width: 81px;
+        height: 81px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 55px;
-        height: 55px;
+        width: 61px;
+        height: 61px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 60px;
-        height: 60px;
+        width: 66px;
+        height: 66px;
     }
 }
 
 /* ===== DUAL SHOOT POWER-UP ===== */
 .dual-shoot-pack {
     position: absolute;
-    width: 10vw;
-    min-width: 75px;
-    max-width: 130px;
+    width: 11.5vw;
+    min-width: 86px;
+    max-width: 150px;
     height: auto;
     z-index: 16;
     pointer-events: none;
