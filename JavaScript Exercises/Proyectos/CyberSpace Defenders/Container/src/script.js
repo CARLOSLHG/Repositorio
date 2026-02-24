@@ -34,6 +34,7 @@
         let godModeTimer = null;
         let godModeBlinkTimer = null;
         let godModeAutoFireInterval = null;
+        let godModeHaloEl = null;
         let superCapsuleSpawnTimeout = null;
         let activeSuperCapsules = [];
         let storedSuperCapsules = 0;
@@ -506,11 +507,28 @@
                     toggleMusic();
                 }
                 if (e.key === 's' || e.key === 'S') {
-                    if (storedSuperCapsules > 0 && !godModeActive && !gameOver && gameStarted) {
-                        storedSuperCapsules--;
-                        updateInventoryUI();
-                        activateGodMode();
-                    }
+                    useSuperCapsule();
+                }
+            });
+
+            // Click derecho para activar super capsule (PC/Mac)
+            function useSuperCapsule() {
+                if (storedSuperCapsules > 0 && !godModeActive && !gameOver && gameStarted) {
+                    storedSuperCapsules--;
+                    updateInventoryUI();
+                    activateGodMode();
+                }
+            }
+
+            document.addEventListener('contextmenu', (e) => {
+                if (!gameStarted || gameOver) return;
+                e.preventDefault();
+                useSuperCapsule();
+            });
+
+            document.addEventListener('mousedown', (e) => {
+                if (e.button === 2 && gameStarted && !gameOver) {
+                    e.preventDefault();
                 }
             });
 
@@ -702,6 +720,14 @@
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
                 // El disparo móvil se maneja via #mobile-fire-button (ver evento abajo)
+
+                // === GOD MODE HALO: seguir la nave desde el game loop ===
+                if (godModeActive && godModeHaloEl) {
+                    const shipRect = spaceship.getBoundingClientRect();
+                    const containerRect = gameContainer.getBoundingClientRect();
+                    godModeHaloEl.style.left = (shipRect.left - containerRect.left + shipRect.width / 2) + 'px';
+                    godModeHaloEl.style.top = (shipRect.top - containerRect.top + shipRect.height / 2) + 'px';
+                }
 
                 // === FONDO: scroll fluido con velocidad interpolada ===
                 // Interpolar suavemente hacia la velocidad objetivo (lerp ~10% por frame a 60fps)
@@ -1164,7 +1190,7 @@
                     const bottomPosition = isBottom ? 0 : Math.floor(Math.random() * 80) + 10;
                     asteroid.style.bottom = `${bottomPosition}%`;
                 }
-                asteroid.style.right = '-100px';
+                asteroid.style.left = '100%';
 
                 gameContainer.appendChild(asteroid);
 
@@ -1195,7 +1221,7 @@
 
                 const bottomPosition = Math.floor(Math.random() * 80) + 10;
                 cyberAttack.style.bottom = `${bottomPosition}%`;
-                cyberAttack.style.right = '-100px';
+                cyberAttack.style.left = '100%';
 
                 gameContainer.appendChild(cyberAttack);
 
@@ -1266,7 +1292,7 @@
 
                 const bottomPosition = Math.floor(Math.random() * 70) + 15;
                 packEl.style.bottom = `${bottomPosition}%`;
-                packEl.style.right = '-100px';
+                packEl.style.left = '100%';
 
                 gameContainer.appendChild(packEl);
 
@@ -1322,7 +1348,7 @@
 
                 const bottomPosition = Math.floor(Math.random() * 60) + 20;
                 capsuleEl.style.bottom = `${bottomPosition}%`;
-                capsuleEl.style.right = '-140px';
+                capsuleEl.style.left = '100%';
 
                 gameContainer.appendChild(capsuleEl);
 
@@ -1419,7 +1445,7 @@
 
                 const bottomPosition = Math.floor(Math.random() * 60) + 20;
                 lifeEl.style.bottom = `${bottomPosition}%`;
-                lifeEl.style.right = '-140px';
+                lifeEl.style.left = '100%';
 
                 gameContainer.appendChild(lifeEl);
 
@@ -1473,7 +1499,7 @@
 
                 const bottomPosition = Math.floor(Math.random() * 60) + 20;
                 dsEl.style.bottom = `${bottomPosition}%`;
-                dsEl.style.right = '-140px';
+                dsEl.style.left = '100%';
 
                 gameContainer.appendChild(dsEl);
 
@@ -1634,24 +1660,12 @@
                 if (godModeActive) return;
                 godModeActive = true;
 
-                // Crear halo alrededor de la nave
+                // Crear halo alrededor de la nave (posición se actualiza en el game loop principal)
                 const halo = document.createElement('div');
                 halo.id = 'god-mode-halo';
                 halo.classList.add('god-halo');
                 spaceship.parentElement.appendChild(halo);
-
-                // Posicionar el halo sobre la nave (se actualiza en el game loop)
-                function updateHaloPosition() {
-                    if (!godModeActive) return;
-                    const shipRect = spaceship.getBoundingClientRect();
-                    const containerRect = gameContainer.getBoundingClientRect();
-                    const centerX = shipRect.left - containerRect.left + shipRect.width / 2;
-                    const centerY = shipRect.top - containerRect.top + shipRect.height / 2;
-                    halo.style.left = centerX + 'px';
-                    halo.style.top = centerY + 'px';
-                    requestAnimationFrame(updateHaloPosition);
-                }
-                updateHaloPosition();
+                godModeHaloEl = halo;
 
                 // Auto-fire continuo
                 godModeAutoFireInterval = setInterval(() => {
@@ -1694,6 +1708,7 @@
                     halo.classList.add('god-halo-fadeout');
                     setTimeout(() => halo.remove(), 500);
                 }
+                godModeHaloEl = null;
             }
 
             // Victoria: alcanzó rango máximo "Dios del Ciberespacio"
