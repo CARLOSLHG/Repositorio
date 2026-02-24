@@ -720,6 +720,52 @@ body, html {
     #game-over-message h1 {
         font-size: clamp(18px, 2.2vw, 30px);
     }
+
+    /* +25% tamaño de power-ups y packs en juego (PC/Mac) */
+    .ammo-pack {
+        width: 9.6vw;
+        min-width: 76px;
+        max-width: 124px;
+    }
+
+    .super-capsule {
+        width: 12.5vw;
+        min-width: 94px;
+        max-width: 163px;
+    }
+
+    .life-pack {
+        width: 12.5vw;
+        min-width: 94px;
+        max-width: 163px;
+    }
+
+    .dual-shoot-pack {
+        width: 17.25vw;
+        min-width: 129px;
+        max-width: 225px;
+    }
+
+    /* +25% tamaño de inventario/storage (PC/Mac) */
+    .inv-item {
+        width: 114px;
+        height: 114px;
+    }
+
+    .inv-item.inv-life-pack {
+        width: 129px;
+        height: 129px;
+    }
+
+    .inv-icon {
+        width: 76px;
+        height: 76px;
+    }
+
+    .inv-life-pack .inv-icon {
+        width: 88px;
+        height: 88px;
+    }
 }
 
 #toggle-music-button {
