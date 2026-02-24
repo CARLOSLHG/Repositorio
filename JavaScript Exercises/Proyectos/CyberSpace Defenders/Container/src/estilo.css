@@ -421,12 +421,6 @@ body, html {
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
-    #player-display {
-        bottom: calc(6px + env(safe-area-inset-bottom, 0px));
-        left: 6px;
-        font-size: clamp(10px, 2.5vw, 16px);
-        padding: 3px 8px;
-    }
 
     .ammo-pack {
         min-width: 44px;
@@ -746,29 +740,52 @@ body, html {
         max-width: 225px;
     }
 
-    /* Storage slots más grandes en PC/Mac */
-    .inv-slot {
-        width: 88px;
-        height: 88px;
+    /* Storage panel más grande en PC/Mac */
+    #storage-panel {
+        padding: 8px 10px 10px;
         border-radius: 12px;
     }
 
+    #storage-player-name {
+        font-size: 13px;
+        max-width: 160px;
+    }
+
+    #storage-divider {
+        height: 12px;
+    }
+
+    #storage-title {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    #storage-slots {
+        gap: 6px;
+    }
+
+    .inv-slot {
+        width: 82px;
+        height: 82px;
+        border-radius: 10px;
+    }
+
     .inv-icon {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
     }
 
     .inv-count {
-        min-width: 24px;
-        height: 24px;
-        line-height: 24px;
-        font-size: 13px;
-        top: -7px;
-        right: -7px;
+        min-width: 22px;
+        height: 22px;
+        line-height: 22px;
+        font-size: 12px;
+        top: -8px;
+        right: -8px;
     }
 
     .inv-label {
-        font-size: 9px;
+        font-size: 8px;
         letter-spacing: 1.8px;
     }
 }
@@ -1044,22 +1061,9 @@ body, html {
     }
 }
 
-/* ===== DISPLAY DEL NOMBRE DEL JUGADOR ===== */
+/* ===== DISPLAY DEL NOMBRE DEL JUGADOR (oculto, reemplazado por storage-panel) ===== */
 #player-display {
-    position: absolute;
-    bottom: calc(100px + var(--safe-bottom));
-    left: calc(14px + var(--safe-left));
-    font-size: clamp(11px, 1.3vw, 20px);
-    color: #00ffcc;
-    background: rgba(0, 0, 0, 0.75);
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: 1px solid rgba(0, 200, 255, 0.3);
-    z-index: 10;
-    letter-spacing: 2px;
-    font-weight: bold;
-    text-shadow: 0 0 6px rgba(0, 255, 200, 0.3);
-    pointer-events: none;
+    display: none;
 }
 
 /* ===== LEADERBOARD ===== */
@@ -1193,29 +1197,78 @@ body, html {
     transform: scale(0.85);
 }
 
-/* ===== STORAGE HUD: 3 cubículos fijos, esquina inferior izquierda ===== */
-#inventory-hud {
-    display: flex;
+/* ===== STORAGE PANEL: panel unificado con nombre + 3 cubículos ===== */
+#storage-panel {
     position: absolute;
-    bottom: calc(14px + var(--safe-bottom));
-    left: calc(14px + var(--safe-left));
+    bottom: calc(12px + var(--safe-bottom));
+    left: calc(12px + var(--safe-left));
     z-index: 25;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     pointer-events: none;
+    background: rgba(2, 8, 20, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 200, 255, 0.12);
+    border-radius: 10px;
+    padding: 6px 8px 8px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Header: nombre del jugador + título STORAGE --- */
+#storage-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    padding: 0 2px;
+    pointer-events: none;
+}
+
+#storage-player-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #00ffcc;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 6px rgba(0, 255, 200, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+#storage-divider {
+    width: 1px;
+    height: 10px;
+    background: rgba(0, 200, 255, 0.25);
+    flex-shrink: 0;
+}
+
+#storage-title {
+    font-size: 8px;
+    font-weight: 700;
+    color: rgba(0, 200, 255, 0.4);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+/* --- Grid de 3 slots --- */
+#storage-slots {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 /* --- Slot base (cubículo) --- */
 .inv-slot {
     position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 200, 255, 0.18);
-    background: rgba(5, 15, 30, 0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    width: 68px;
+    height: 68px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 200, 255, 0.12);
+    background: rgba(0, 10, 25, 0.5);
     padding: 0;
     cursor: pointer;
     touch-action: manipulation;
@@ -1224,22 +1277,27 @@ body, html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1px;
+    gap: 2px;
     pointer-events: auto;
     transition: transform 0.12s, border-color 0.3s, box-shadow 0.3s;
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Estado vacío: ícono apagado, slot sutil */
+.slot-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado vacío: ícono apagado */
 .inv-slot.slot-empty {
-    border-color: rgba(255, 255, 255, 0.06);
-    background: rgba(5, 15, 30, 0.35);
+    border-color: rgba(255, 255, 255, 0.04);
     cursor: default;
 }
 
 .inv-slot.slot-empty .inv-icon {
-    opacity: 0.18;
-    filter: grayscale(1) brightness(0.5);
+    opacity: 0.15;
+    filter: grayscale(1) brightness(0.4);
 }
 
 .inv-slot.slot-empty .inv-count {
@@ -1247,13 +1305,13 @@ body, html {
 }
 
 .inv-slot.slot-empty .inv-label {
-    opacity: 0.25;
+    opacity: 0.2;
 }
 
-/* Estado activo/lleno: brillo y borde */
+/* Estado activo: borde iluminado + ícono visible */
 .inv-slot.slot-active {
-    border-color: rgba(0, 200, 255, 0.4);
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 200, 255, 0.15);
+    border-color: rgba(0, 200, 255, 0.35);
+    box-shadow: inset 0 0 10px rgba(0, 200, 255, 0.08);
 }
 
 .inv-slot.slot-active .inv-icon {
@@ -1261,58 +1319,68 @@ body, html {
     filter: none;
 }
 
-/* Variante: life slot activo → verde */
+/* Variante: life activo → verde */
 .inv-slot[data-slot="life"].slot-active {
-    border-color: rgba(0, 255, 100, 0.4);
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(0, 255, 100, 0.15);
+    border-color: rgba(0, 255, 100, 0.35);
+    box-shadow: inset 0 0 10px rgba(0, 255, 100, 0.08);
 }
 
-/* Variante: dual slot activo → magenta */
+/* Variante: dual activo → magenta */
 .inv-slot[data-slot="dual"].slot-active {
-    border-color: rgba(255, 0, 200, 0.4);
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 200, 0.15);
+    border-color: rgba(255, 0, 200, 0.35);
+    box-shadow: inset 0 0 10px rgba(255, 0, 200, 0.08);
 }
 
-/* Efecto pulse cuando el dual-shoot está ACTIVO en gameplay */
+/* Dual-shoot ENGAGED (activo en gameplay): pulse */
 .inv-slot[data-slot="dual"].slot-engaged {
-    border-color: rgba(255, 0, 200, 0.6);
+    border-color: rgba(255, 0, 200, 0.5);
     animation: slotEngage 1.2s ease-in-out infinite;
 }
 
+.inv-slot[data-slot="dual"].slot-engaged .inv-icon {
+    opacity: 1;
+    filter: none;
+}
+
+.inv-slot[data-slot="dual"].slot-engaged .inv-label {
+    opacity: 1;
+    color: rgba(255, 0, 200, 0.8);
+}
+
 @keyframes slotEngage {
-    0%, 100% { box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 0, 200, 0.2); }
-    50% { box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 0, 200, 0.45); }
+    0%, 100% { box-shadow: inset 0 0 10px rgba(255, 0, 200, 0.1); }
+    50% { box-shadow: inset 0 0 14px rgba(255, 0, 200, 0.3), 0 0 10px rgba(255, 0, 200, 0.2); }
 }
 
 .inv-slot:active:not(.slot-empty) {
-    transform: scale(0.9);
+    transform: scale(0.92);
 }
 
-/* --- Ícono dentro del slot --- */
+/* --- Ícono --- */
 .inv-icon {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
     pointer-events: none;
     transition: opacity 0.3s, filter 0.3s;
 }
 
-/* --- Badge de cantidad --- */
+/* --- Badge cantidad (esquina superior derecha del slot-inner) --- */
 .inv-count {
     position: absolute;
-    top: -6px;
-    right: -6px;
-    min-width: 20px;
-    height: 20px;
-    line-height: 20px;
-    border-radius: 10px;
+    top: -7px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 9px;
     background: #00ccff;
     color: #000;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 800;
     text-align: center;
     padding: 0 4px;
-    box-shadow: 0 0 6px rgba(0, 200, 255, 0.5);
+    box-shadow: 0 0 5px rgba(0, 200, 255, 0.4);
     pointer-events: none;
 }
 
@@ -1325,50 +1393,80 @@ body, html {
     color: #fff;
 }
 
-/* --- Etiqueta inferior --- */
+/* --- Etiqueta nombre del ícono (debajo) --- */
 .inv-label {
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 700;
-    color: rgba(0, 200, 255, 0.6);
+    color: rgba(0, 200, 255, 0.5);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     pointer-events: none;
     line-height: 1;
-    margin-top: -1px;
+    transition: opacity 0.3s, color 0.3s;
 }
 
 .inv-slot[data-slot="life"] .inv-label {
-    color: rgba(0, 255, 100, 0.6);
+    color: rgba(0, 255, 100, 0.5);
 }
 
 .inv-slot[data-slot="dual"] .inv-label {
-    color: rgba(255, 0, 200, 0.6);
+    color: rgba(255, 0, 200, 0.5);
+}
+
+/* Labels más brillantes en estado activo */
+.inv-slot.slot-active .inv-label {
+    opacity: 1;
 }
 
 /* --- Tecla shortcut (solo PC) --- */
 .inv-key {
     position: absolute;
-    bottom: -7px;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(0, 200, 255, 0.35);
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(0, 200, 255, 0.3);
     color: #00ccff;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: bold;
-    padding: 1px 5px;
-    border-radius: 4px;
+    padding: 0px 4px;
+    border-radius: 3px;
     pointer-events: none;
     letter-spacing: 0.5px;
 }
 
-/* --- Mobile: posicionar a la izquierda del FIRE, ocultar tecla --- */
+/* --- Mobile: panel al lado izquierdo del FIRE, compacto --- */
 @media (hover: none) and (pointer: coarse) {
-    #inventory-hud {
-        bottom: calc(18px + var(--safe-bottom) + 55px);
+    #storage-panel {
+        bottom: calc(18px + var(--safe-bottom) + 40px);
         right: calc(210px + var(--safe-right));
         left: auto;
-        gap: 5px;
+        padding: 5px 6px 6px;
+        border-radius: 8px;
+    }
+
+    #storage-header {
+        margin-bottom: 4px;
+        gap: 4px;
+    }
+
+    #storage-player-name {
+        font-size: 9px;
+        max-width: 80px;
+        letter-spacing: 1px;
+    }
+
+    #storage-divider {
+        height: 8px;
+    }
+
+    #storage-title {
+        font-size: 6px;
+        letter-spacing: 2px;
+    }
+
+    #storage-slots {
+        gap: 4px;
     }
 
     .inv-key {
@@ -1376,29 +1474,29 @@ body, html {
     }
 
     .inv-slot {
-        width: 60px;
-        height: 60px;
-        border-radius: 10px;
+        width: 52px;
+        height: 52px;
+        border-radius: 7px;
     }
 
     .inv-icon {
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
     }
 
     .inv-label {
-        font-size: 6px;
+        font-size: 5px;
         letter-spacing: 1px;
     }
 
     .inv-count {
-        min-width: 16px;
-        height: 16px;
-        line-height: 16px;
-        font-size: 9px;
+        min-width: 14px;
+        height: 14px;
+        line-height: 14px;
+        font-size: 8px;
         top: -4px;
-        right: -4px;
-        padding: 0 3px;
+        right: -6px;
+        padding: 0 2px;
     }
 }
 
@@ -1448,8 +1546,62 @@ body, html {
         padding: 0.5em 1.5em;
     }
 
-    #player-display {
-        font-size: 2.8vw;
+    #storage-panel {
+        bottom: calc(14px + var(--safe-bottom) + 30px);
+        right: calc(180px + var(--safe-right));
+        left: auto;
+        padding: 4px 5px 5px;
+        border-radius: 7px;
+    }
+
+    #storage-header {
+        margin-bottom: 3px;
+        gap: 3px;
+    }
+
+    #storage-player-name {
+        font-size: 8px;
+        max-width: 60px;
+        letter-spacing: 0.8px;
+    }
+
+    #storage-divider {
+        height: 7px;
+    }
+
+    #storage-title {
+        font-size: 5px;
+        letter-spacing: 1.5px;
+    }
+
+    #storage-slots {
+        gap: 3px;
+    }
+
+    .inv-slot {
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+    }
+
+    .inv-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .inv-label {
+        font-size: 4.5px;
+        letter-spacing: 0.6px;
+    }
+
+    .inv-count {
+        min-width: 12px;
+        height: 12px;
+        line-height: 12px;
+        font-size: 7px;
+        top: -3px;
+        right: -5px;
+        padding: 0 2px;
     }
 
     #game-over-message {
@@ -1583,37 +1735,6 @@ body, html {
         font-size: 10px;
     }
 
-    #inventory-hud {
-        bottom: calc(14px + var(--safe-bottom) + 42px);
-        right: calc(186px + var(--safe-right));
-        left: auto;
-    }
-
-    .inv-slot {
-        width: 54px;
-        height: 54px;
-        border-radius: 8px;
-    }
-
-    .inv-icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .inv-label {
-        font-size: 5.5px;
-        letter-spacing: 0.8px;
-    }
-
-    .inv-count {
-        min-width: 14px;
-        height: 14px;
-        line-height: 14px;
-        font-size: 8px;
-        top: -3px;
-        right: -3px;
-        padding: 0 2px;
-    }
 }
 
 /* ===== DUAL SHOOT POWER-UP ===== */
@@ -1782,5 +1903,276 @@ body, html {
 @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
     #rotate-notice.rotate-active {
         display: flex;
+    }
+}
+
+/* ===== TUTORIAL CAROUSEL ===== */
+#tutorial-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: radial-gradient(ellipse at center, rgba(5, 18, 40, 0.98) 0%, #000 100%);
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(12px + var(--safe-top)) calc(12px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(12px + var(--safe-left));
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+}
+
+/* Botón SALTAR (esquina superior derecha) */
+#tutorial-skip {
+    position: absolute;
+    top: calc(12px + var(--safe-top));
+    right: calc(12px + var(--safe-right));
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+#tutorial-skip:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Contenedor del carrusel: toma todo el espacio sobrante */
+#tutorial-carousel {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Track horizontal con transición suave */
+#tutorial-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+    align-items: center;
+}
+
+/* Cada slide ocupa el 100% del carrusel */
+.tutorial-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/* Indicadores (dots) — tamaño fijo, nunca se ocultan */
+#tutorial-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tutorial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+}
+
+.tutorial-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.tutorial-dot.active {
+    background: #00ccff;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(0, 200, 255, 0.5);
+}
+
+/* Navegación (Anterior / Siguiente) — tamaño fijo, siempre visible */
+#tutorial-nav {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    flex-shrink: 0;
+}
+
+#tutorial-nav button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 10px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+}
+
+#tutorial-prev {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#tutorial-prev:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#tutorial-prev:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+#tutorial-next {
+    background: rgba(0, 200, 255, 0.15);
+    border: 1px solid rgba(0, 200, 255, 0.35);
+    color: #00ccff;
+}
+
+#tutorial-next:hover {
+    background: rgba(0, 200, 255, 0.25);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.2);
+}
+
+#tutorial-next:active,
+#tutorial-prev:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+/* Último slide: botón cambia a "Iniciar" (verde) */
+#tutorial-next.tutorial-finish {
+    background: rgba(0, 255, 100, 0.15);
+    border-color: rgba(0, 255, 100, 0.4);
+    color: #00ff66;
+}
+
+#tutorial-next.tutorial-finish:hover {
+    background: rgba(0, 255, 100, 0.25);
+    box-shadow: 0 0 14px rgba(0, 255, 100, 0.25);
+}
+
+/* Responsive: tablets y móviles portrait */
+@media (max-width: 768px) {
+    #tutorial-screen {
+        padding: calc(10px + var(--safe-top)) calc(10px + var(--safe-right)) calc(10px + var(--safe-bottom)) calc(10px + var(--safe-left));
+    }
+
+    #tutorial-skip {
+        font-size: 10px;
+        padding: 5px 12px;
+        top: calc(8px + var(--safe-top));
+        right: calc(8px + var(--safe-right));
+    }
+
+    .tutorial-slide img {
+        border-radius: 6px;
+    }
+
+    #tutorial-dots {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .tutorial-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    #tutorial-nav {
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    #tutorial-nav button {
+        font-size: 12px;
+        padding: 8px 18px;
+    }
+}
+
+/* Móviles landscape (pantalla baja) */
+@media (max-height: 420px) {
+    #tutorial-screen {
+        padding: calc(6px + var(--safe-top)) calc(8px + var(--safe-right)) calc(6px + var(--safe-bottom)) calc(8px + var(--safe-left));
+    }
+
+    .tutorial-slide img {
+        border-radius: 4px;
+    }
+
+    #tutorial-dots {
+        margin-top: 4px;
+        gap: 6px;
+    }
+
+    .tutorial-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    #tutorial-nav {
+        margin-top: 4px;
+        gap: 8px;
+    }
+
+    #tutorial-nav button {
+        font-size: 10px;
+        padding: 5px 14px;
+        border-radius: 6px;
+    }
+
+    #tutorial-skip {
+        font-size: 9px;
+        padding: 3px 10px;
+        top: calc(4px + var(--safe-top));
+        right: calc(4px + var(--safe-right));
+    }
+}
+
+/* Pantallas muy pequeñas (iPhone SE, etc) */
+@media (max-height: 570px) and (orientation: portrait) {
+    #tutorial-screen {
+        padding: calc(8px + var(--safe-top)) 8px calc(8px + var(--safe-bottom)) 8px;
+    }
+
+    #tutorial-nav button {
+        font-size: 11px;
+        padding: 7px 16px;
+    }
+
+    #tutorial-dots {
+        margin-top: 6px;
     }
 }
