@@ -1905,3 +1905,254 @@ body, html {
         display: flex;
     }
 }
+
+/* ===== TUTORIAL CAROUSEL ===== */
+#tutorial-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: radial-gradient(ellipse at center, rgba(5, 18, 40, 0.98) 0%, #000 100%);
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Botón SALTAR (esquina superior derecha) */
+#tutorial-skip {
+    position: absolute;
+    top: calc(16px + var(--safe-top));
+    right: calc(16px + var(--safe-right));
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    z-index: 2;
+}
+
+#tutorial-skip:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Contenedor del carrusel (overflow hidden) */
+#tutorial-carousel {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex-shrink: 1;
+    min-height: 0;
+}
+
+/* Track horizontal con transición suave */
+#tutorial-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+/* Cada slide ocupa el 100% del carrusel */
+.tutorial-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    max-height: 70dvh;
+    object-fit: contain;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/* Indicadores (dots) */
+#tutorial-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.tutorial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+}
+
+.tutorial-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.tutorial-dot.active {
+    background: #00ccff;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(0, 200, 255, 0.5);
+}
+
+/* Navegación (Anterior / Siguiente) */
+#tutorial-nav {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+#tutorial-nav button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 10px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+}
+
+#tutorial-prev {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#tutorial-prev:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#tutorial-prev:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+#tutorial-next {
+    background: rgba(0, 200, 255, 0.15);
+    border: 1px solid rgba(0, 200, 255, 0.35);
+    color: #00ccff;
+}
+
+#tutorial-next:hover {
+    background: rgba(0, 200, 255, 0.25);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.2);
+}
+
+#tutorial-next:active,
+#tutorial-prev:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+/* Último slide: botón cambia a "Iniciar" (verde) */
+#tutorial-next.tutorial-finish {
+    background: rgba(0, 255, 100, 0.15);
+    border-color: rgba(0, 255, 100, 0.4);
+    color: #00ff66;
+}
+
+#tutorial-next.tutorial-finish:hover {
+    background: rgba(0, 255, 100, 0.25);
+    box-shadow: 0 0 14px rgba(0, 255, 100, 0.25);
+}
+
+/* Responsive: móviles */
+@media (max-width: 768px) {
+    #tutorial-screen {
+        padding: 12px;
+    }
+
+    #tutorial-skip {
+        font-size: 10px;
+        padding: 5px 12px;
+        top: calc(10px + var(--safe-top));
+        right: calc(10px + var(--safe-right));
+    }
+
+    .tutorial-slide img {
+        max-height: 60vh;
+        max-height: 60dvh;
+        border-radius: 6px;
+    }
+
+    #tutorial-dots {
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .tutorial-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    #tutorial-nav {
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    #tutorial-nav button {
+        font-size: 12px;
+        padding: 8px 18px;
+    }
+}
+
+/* Extra-small landscape */
+@media (max-height: 420px) and (max-width: 900px) {
+    #tutorial-screen {
+        padding: 8px;
+        flex-direction: column;
+    }
+
+    .tutorial-slide img {
+        max-height: 52dvh;
+        border-radius: 4px;
+    }
+
+    #tutorial-dots {
+        margin-top: 6px;
+        gap: 6px;
+    }
+
+    .tutorial-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    #tutorial-nav {
+        margin-top: 8px;
+        gap: 8px;
+    }
+
+    #tutorial-nav button {
+        font-size: 10px;
+        padding: 6px 14px;
+        border-radius: 6px;
+    }
+
+    #tutorial-skip {
+        font-size: 9px;
+        padding: 4px 10px;
+    }
+}

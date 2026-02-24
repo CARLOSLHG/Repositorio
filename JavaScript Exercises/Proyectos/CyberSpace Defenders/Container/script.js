@@ -341,7 +341,7 @@
             }
             playerNameInput.focus();
 
-            function goToLeaderboard(e) {
+            function goToTutorial(e) {
                 e.stopPropagation();
                 e.preventDefault();
 
@@ -353,17 +353,116 @@
                     return;
                 }
                 playerName = name;
-                // Guardar alias en localStorage
                 localStorage.setItem('cyberspace_last_alias', playerName);
 
-                // Mostrar pantalla de leaderboard pre-juego
+                // Ocultar pantalla de alias, mostrar tutorial
                 playerScreen.style.display = 'none';
+                const tutorialScreen = document.getElementById('tutorial-screen');
+                tutorialScreen.style.display = 'flex';
+
+                // --- Inicializar carrusel del tutorial ---
+                const TOTAL_SLIDES = 8;
+                let currentSlide = 0;
+                const track = document.getElementById('tutorial-track');
+                const dotsContainer = document.getElementById('tutorial-dots');
+                const prevBtn = document.getElementById('tutorial-prev');
+                const nextBtn = document.getElementById('tutorial-next');
+                const skipBtn = document.getElementById('tutorial-skip');
+
+                // Crear dots
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < TOTAL_SLIDES; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('tutorial-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                    dot.addEventListener('click', function() { goToSlide(i); });
+                    dotsContainer.appendChild(dot);
+                }
+
+                function goToSlide(index) {
+                    currentSlide = index;
+                    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+
+                    // Actualizar dots
+                    const dots = dotsContainer.querySelectorAll('.tutorial-dot');
+                    dots.forEach(function(d, i) {
+                        d.classList.toggle('active', i === currentSlide);
+                    });
+
+                    // Actualizar botones
+                    prevBtn.disabled = (currentSlide === 0);
+
+                    if (currentSlide === TOTAL_SLIDES - 1) {
+                        nextBtn.innerHTML = 'Iniciar &#9654;';
+                        nextBtn.classList.add('tutorial-finish');
+                    } else {
+                        nextBtn.innerHTML = 'Siguiente &#9654;';
+                        nextBtn.classList.remove('tutorial-finish');
+                    }
+                }
+
+                prevBtn.addEventListener('click', function() {
+                    if (currentSlide > 0) goToSlide(currentSlide - 1);
+                });
+
+                nextBtn.addEventListener('click', function() {
+                    if (currentSlide < TOTAL_SLIDES - 1) {
+                        goToSlide(currentSlide + 1);
+                    } else {
+                        exitTutorial();
+                    }
+                });
+
+                skipBtn.addEventListener('click', function() {
+                    exitTutorial();
+                });
+
+                // Soporte swipe táctil
+                let touchStartX = 0;
+                let touchEndX = 0;
+                tutorialScreen.addEventListener('touchstart', function(ev) {
+                    if (ev.target.closest('button')) return;
+                    touchStartX = ev.changedTouches[0].clientX;
+                }, { passive: true });
+                tutorialScreen.addEventListener('touchend', function(ev) {
+                    if (ev.target.closest('button')) return;
+                    touchEndX = ev.changedTouches[0].clientX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0 && currentSlide < TOTAL_SLIDES - 1) {
+                            goToSlide(currentSlide + 1);
+                        } else if (diff < 0 && currentSlide > 0) {
+                            goToSlide(currentSlide - 1);
+                        }
+                    }
+                }, { passive: true });
+
+                // Soporte teclado (flechas)
+                function tutorialKeyHandler(ev) {
+                    if (ev.key === 'ArrowRight' && currentSlide < TOTAL_SLIDES - 1) {
+                        goToSlide(currentSlide + 1);
+                    } else if (ev.key === 'ArrowLeft' && currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    } else if (ev.key === 'Escape') {
+                        exitTutorial();
+                    }
+                }
+                document.addEventListener('keydown', tutorialKeyHandler);
+
+                function exitTutorial() {
+                    document.removeEventListener('keydown', tutorialKeyHandler);
+                    tutorialScreen.style.display = 'none';
+                    goToLeaderboard();
+                }
+            }
+
+            function goToLeaderboard() {
                 pregameScreen.style.display = 'flex';
 
                 const welcomeEl = document.getElementById('pregame-welcome');
                 welcomeEl.innerHTML = `Bienvenido, <strong>${playerName}</strong>`;
 
-                // Cargar leaderboard
                 const lbContainer = document.getElementById('pregame-leaderboard');
                 getLeaderboard().then(board => {
                     if (board.length === 0) {
@@ -421,12 +520,12 @@
                 initGame();
             }
 
-            startGameButton.addEventListener('click', goToLeaderboard);
+            startGameButton.addEventListener('click', goToTutorial);
             playerNameInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.stopPropagation();
                     e.preventDefault();
-                    goToLeaderboard(e);
+                    goToTutorial(e);
                 }
             });
             launchGameButton.addEventListener('click', launchGame);
