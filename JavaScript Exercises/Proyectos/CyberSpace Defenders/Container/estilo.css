@@ -412,28 +412,28 @@ body, html {
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(10px, 2.2vw, 15px);
-        padding: 3px 7px;
-        left: calc(6px + var(--safe-left));
+        padding: 2px 5px;
+        left: calc(3px + var(--safe-left));
     }
 
     #distance-counter {
-        top: calc(30px + var(--safe-top));
+        top: calc(26px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: calc(50px + var(--safe-top));
+        top: calc(44px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(70px + var(--safe-top));
+        top: calc(62px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(90px + var(--safe-top));
+        top: calc(80px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(112px + var(--safe-top));
+        top: calc(100px + var(--safe-top));
         font-size: clamp(11px, 2.4vw, 16px);
     }
 
@@ -1204,9 +1204,16 @@ body, html {
 }
 
 .inv-item.inv-life-pack {
+    width: 64px;
+    height: 64px;
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
+}
+
+.inv-life-pack .inv-icon {
+    width: 42px;
+    height: 42px;
 }
 
 .inv-icon {
@@ -1274,13 +1281,23 @@ body, html {
     }
 
     .inv-item {
-        width: 50px;
-        height: 50px;
+        width: 58px;
+        height: 58px;
+    }
+
+    .inv-item.inv-life-pack {
+        width: 66px;
+        height: 66px;
     }
 
     .inv-icon {
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .inv-life-pack .inv-icon {
+        width: 44px;
+        height: 44px;
     }
 }
 
@@ -1336,10 +1353,39 @@ body, html {
 
     #game-over-message {
         width: 92vw;
-        max-height: 92vh;
+        max-height: 85vh;
+        max-height: 85dvh;
         padding: 3vw 2.5vw;
         overflow-y: auto;
         touch-action: pan-y;
+    }
+
+    /* Continue screen en móvil: compacta para caber en pantalla */
+    #game-over-message.continue-screen {
+        width: 80vw;
+        max-height: 78vh;
+        max-height: 78dvh;
+        padding: 3vw 3vw;
+    }
+
+    .continue-banner {
+        width: 75%;
+        max-width: 280px;
+        margin-bottom: 0.4em;
+    }
+
+    .continue-lives-info {
+        font-size: clamp(14px, 3.5vw, 20px);
+        margin: 0.2em 0 0.3em;
+    }
+
+    .continue-life-icon {
+        width: clamp(26px, 7vw, 38px);
+    }
+
+    .continue-btn {
+        font-size: clamp(13px, 3.2vw, 17px);
+        padding: 0.5em 1.4em;
     }
 
     #game-over-message h1 {
@@ -1411,13 +1457,23 @@ body, html {
     }
 
     .inv-item {
-        width: 46px;
-        height: 46px;
+        width: 56px;
+        height: 56px;
+    }
+
+    .inv-item.inv-life-pack {
+        width: 64px;
+        height: 64px;
     }
 
     .inv-icon {
-        width: 28px;
-        height: 28px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .inv-life-pack .inv-icon {
+        width: 42px;
+        height: 42px;
     }
 }
 
@@ -1452,8 +1508,9 @@ body, html {
     50% { transform: rotate(90deg); }
 }
 
+/* Solo se muestra vía JS cuando el juego está activo y el dispositivo está en portrait */
 @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
-    #rotate-notice {
+    #rotate-notice.rotate-active {
         display: flex;
     }
 }

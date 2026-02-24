@@ -376,6 +376,10 @@
                 gameStartTime = Date.now();
                 gameStarted = true;
 
+                // Activar aviso de rotación solo ahora que el juego inicia
+                const rotateNotice = document.getElementById('rotate-notice');
+                if (rotateNotice) rotateNotice.classList.add('rotate-active');
+
                 // Pantalla completa + forzar landscape al iniciar el juego
                 const el = document.documentElement;
                 const rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
