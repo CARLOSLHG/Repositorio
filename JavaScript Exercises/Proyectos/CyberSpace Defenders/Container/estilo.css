@@ -1193,9 +1193,9 @@ body, html {
 
 .inv-item {
     position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 12px;
+    width: 83px;
+    height: 83px;
+    border-radius: 14px;
     border: 2px solid rgba(0, 200, 255, 0.5);
     background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 200, 255, 0.25);
@@ -1211,39 +1211,39 @@ body, html {
 }
 
 .inv-item.inv-life-pack {
-    width: 82px;
-    height: 82px;
+    width: 94px;
+    height: 94px;
     border-color: rgba(0, 255, 100, 0.5);
     background: radial-gradient(circle, rgba(0, 255, 100, 0.15) 0%, rgba(0, 255, 100, 0.03) 70%);
     box-shadow: 0 0 12px rgba(0, 255, 100, 0.25);
 }
 
 .inv-life-pack .inv-icon {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
 }
 
 .inv-icon {
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     object-fit: contain;
     pointer-events: none;
 }
 
 .inv-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    min-width: 22px;
-    height: 22px;
-    line-height: 22px;
-    border-radius: 11px;
+    top: -9px;
+    right: -9px;
+    min-width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 13px;
     background: #00ccff;
     color: #000;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
-    padding: 0 5px;
+    padding: 0 6px;
     box-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
     pointer-events: none;
 }
@@ -1254,16 +1254,16 @@ body, html {
 
 .inv-key {
     position: absolute;
-    bottom: -8px;
+    bottom: -9px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(0, 200, 255, 0.5);
     color: #00ccff;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 2px 7px;
+    border-radius: 5px;
     pointer-events: none;
     letter-spacing: 0.5px;
     text-shadow: 0 0 4px rgba(0, 200, 255, 0.4);
@@ -1288,30 +1288,30 @@ body, html {
     }
 
     .inv-item {
-        width: 64px;
-        height: 64px;
+        width: 74px;
+        height: 74px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
-        border-radius: 14px;
+        border-radius: 16px;
     }
 
     .inv-item.inv-life-pack {
-        width: 68px;
-        height: 68px;
+        width: 78px;
+        height: 78px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 52px;
-        height: 52px;
+        width: 60px;
+        height: 60px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 56px;
-        height: 56px;
+        width: 64px;
+        height: 64px;
     }
 }
 
@@ -1496,30 +1496,30 @@ body, html {
     }
 
     .inv-item {
-        width: 60px;
-        height: 60px;
+        width: 69px;
+        height: 69px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
-        border-radius: 12px;
+        border-radius: 14px;
     }
 
     .inv-item.inv-life-pack {
-        width: 64px;
-        height: 64px;
+        width: 74px;
+        height: 74px;
         border: none;
         background: rgba(0, 0, 0, 0.35);
         box-shadow: none;
     }
 
     .inv-icon {
-        width: 48px;
-        height: 48px;
+        width: 55px;
+        height: 55px;
     }
 
     .inv-life-pack .inv-icon {
-        width: 52px;
-        height: 52px;
+        width: 60px;
+        height: 60px;
     }
 }
 
