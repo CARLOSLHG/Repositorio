@@ -430,7 +430,7 @@ body, html {
     }
 
     #spaceship {
-        min-width: 50px;
+        min-width: 55px;
         left: 25%;
     }
 }
@@ -1710,6 +1710,8 @@ body, html {
     }
 
     #spaceship {
+        width: 7.7vw;
+        min-width: 66px;
         left: 25%;
     }
 }
