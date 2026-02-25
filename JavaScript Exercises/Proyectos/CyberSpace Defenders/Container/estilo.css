@@ -430,7 +430,7 @@ body, html {
     }
 
     #spaceship {
-        min-width: 50px;
+        min-width: 55px;
         left: 25%;
     }
 }
@@ -1710,6 +1710,8 @@ body, html {
     }
 
     #spaceship {
+        width: 7.7vw;
+        min-width: 66px;
         left: 25%;
     }
 }
@@ -2333,10 +2335,10 @@ body, html {
     overflow: hidden;
 }
 
-/* Botón SALTAR (esquina superior derecha) */
+/* Botón SALTAR (esquina inferior derecha, junto a navegación) */
 #tutorial-skip {
     position: absolute;
-    top: calc(12px + var(--safe-top));
+    bottom: calc(12px + var(--safe-bottom));
     right: calc(12px + var(--safe-right));
     background: rgba(0, 200, 255, 0.1);
     border: 1.5px solid rgba(0, 200, 255, 0.5);
@@ -2503,7 +2505,7 @@ body, html {
     #tutorial-skip {
         font-size: 11px;
         padding: 6px 14px;
-        top: calc(8px + var(--safe-top));
+        bottom: calc(8px + var(--safe-bottom));
         right: calc(8px + var(--safe-right));
     }
 
@@ -2566,7 +2568,7 @@ body, html {
     #tutorial-skip {
         font-size: 10px;
         padding: 5px 12px;
-        top: calc(4px + var(--safe-top));
+        bottom: calc(4px + var(--safe-bottom));
         right: calc(4px + var(--safe-right));
     }
 }

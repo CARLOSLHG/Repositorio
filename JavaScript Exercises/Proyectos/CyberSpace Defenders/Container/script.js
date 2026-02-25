@@ -1833,18 +1833,18 @@
                 const elapsed = (Date.now() - gameStartTime) / 1000;
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece
-                // Nivel 1 ALERTA:      prob 0.08, cada 35s
-                // Nivel 2 PELIGRO:     prob 0.14, cada 28s
-                // Nivel 3 CRÍTICO:     prob 0.22, cada 22s
-                // Nivel 4 EXTREMO:     prob 0.30, cada 18s
-                // Nivel 5 APOCALIPSIS: prob 0.40, cada 14s
+                // Nivel 1 ALERTA:      prob 0.13, cada 35s
+                // Nivel 2 PELIGRO:     prob 0.19, cada 28s
+                // Nivel 3 CRÍTICO:     prob 0.27, cada 22s
+                // Nivel 4 EXTREMO:     prob 0.35, cada 18s
+                // Nivel 5 APOCALIPSIS: prob 0.45, cada 14s
                 const table = [
                     null,
-                    { probability: 0.08, delay: 35000 },
-                    { probability: 0.14, delay: 28000 },
-                    { probability: 0.22, delay: 22000 },
-                    { probability: 0.30, delay: 18000 },
-                    { probability: 0.40, delay: 14000 }
+                    { probability: 0.13, delay: 35000 },
+                    { probability: 0.19, delay: 28000 },
+                    { probability: 0.27, delay: 22000 },
+                    { probability: 0.35, delay: 18000 },
+                    { probability: 0.45, delay: 14000 }
                 ];
                 return table[level] || null;
             }
@@ -1855,18 +1855,18 @@
                 const elapsed = (Date.now() - gameStartTime) / 1000;
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece (empiezas con vidas iniciales)
-                // Nivel 1 ALERTA:      prob 0.06, cada 40s
-                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
-                // Nivel 3 CRÍTICO:     prob 0.18, cada 25s
-                // Nivel 4 EXTREMO:     prob 0.25, cada 20s
-                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
+                // Nivel 1 ALERTA:      prob 0.11, cada 40s
+                // Nivel 2 PELIGRO:     prob 0.15, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.23, cada 25s
+                // Nivel 4 EXTREMO:     prob 0.30, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.40, cada 15s
                 const table = [
                     null,
-                    { probability: 0.06, delay: 40000 },
-                    { probability: 0.10, delay: 32000 },
-                    { probability: 0.18, delay: 25000 },
-                    { probability: 0.25, delay: 20000 },
-                    { probability: 0.35, delay: 15000 }
+                    { probability: 0.11, delay: 40000 },
+                    { probability: 0.15, delay: 32000 },
+                    { probability: 0.23, delay: 25000 },
+                    { probability: 0.30, delay: 20000 },
+                    { probability: 0.40, delay: 15000 }
                 ];
                 return table[level] || null;
             }
@@ -1984,17 +1984,17 @@
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece
                 // Nivel 1 ALERTA:      no aparece
-                // Nivel 2 PELIGRO:     prob 0.08, cada 35s
-                // Nivel 3 CRÍTICO:     prob 0.14, cada 28s
-                // Nivel 4 EXTREMO:     prob 0.20, cada 22s
-                // Nivel 5 APOCALIPSIS: prob 0.28, cada 16s
+                // Nivel 2 PELIGRO:     prob 0.13, cada 35s
+                // Nivel 3 CRÍTICO:     prob 0.19, cada 28s
+                // Nivel 4 EXTREMO:     prob 0.25, cada 22s
+                // Nivel 5 APOCALIPSIS: prob 0.33, cada 16s
                 const table = [
                     null,
                     null,
-                    { probability: 0.08, delay: 35000 },
-                    { probability: 0.14, delay: 28000 },
-                    { probability: 0.20, delay: 22000 },
-                    { probability: 0.28, delay: 16000 }
+                    { probability: 0.13, delay: 35000 },
+                    { probability: 0.19, delay: 28000 },
+                    { probability: 0.25, delay: 22000 },
+                    { probability: 0.33, delay: 16000 }
                 ];
                 return table[level] || null;
             }
@@ -2057,16 +2057,16 @@
                 var elapsed = (Date.now() - gameStartTime) / 1000;
                 var level = getDifficultyLevel(elapsed);
                 // Nivel 0-1: no aparece
-                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
-                // Nivel 3 CRÍTICO:     prob 0.16, cada 26s
-                // Nivel 4 EXTREMO:     prob 0.22, cada 20s
-                // Nivel 5 APOCALIPSIS: prob 0.30, cada 15s
+                // Nivel 2 PELIGRO:     prob 0.15, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.21, cada 26s
+                // Nivel 4 EXTREMO:     prob 0.27, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
                 var table = [
                     null, null,
-                    { probability: 0.10, delay: 32000 },
-                    { probability: 0.16, delay: 26000 },
-                    { probability: 0.22, delay: 20000 },
-                    { probability: 0.30, delay: 15000 }
+                    { probability: 0.15, delay: 32000 },
+                    { probability: 0.21, delay: 26000 },
+                    { probability: 0.27, delay: 20000 },
+                    { probability: 0.35, delay: 15000 }
                 ];
                 return table[level] || null;
             }
@@ -2168,14 +2168,14 @@
                 var elapsed = (Date.now() - gameStartTime) / 1000;
                 var level = getDifficultyLevel(elapsed);
                 // Nivel 0-2: no aparece
-                // Nivel 3 CRÍTICO:     prob 0.06, cada 40s
-                // Nivel 4 EXTREMO:     prob 0.12, cada 30s
-                // Nivel 5 APOCALIPSIS: prob 0.18, cada 20s
+                // Nivel 3 CRÍTICO:     prob 0.11, cada 40s
+                // Nivel 4 EXTREMO:     prob 0.17, cada 30s
+                // Nivel 5 APOCALIPSIS: prob 0.23, cada 20s
                 var table = [
                     null, null, null,
-                    { probability: 0.06, delay: 40000 },
-                    { probability: 0.12, delay: 30000 },
-                    { probability: 0.18, delay: 20000 }
+                    { probability: 0.11, delay: 40000 },
+                    { probability: 0.17, delay: 30000 },
+                    { probability: 0.23, delay: 20000 }
                 ];
                 return table[level] || null;
             }
