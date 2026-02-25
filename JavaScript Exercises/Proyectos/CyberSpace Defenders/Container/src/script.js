@@ -12,6 +12,8 @@
         let lightYears = 0;
         let asteroidCount = 0;
         let cyberattackCount = 0;
+        let threatsEscaped = 0;      // amenazas dejadas pasar
+        let totalPenalty = 0;         // total de amenazas perdidas por penalización
         let musicPlaying = true;
         let asteroidGenerationInterval;
         let gameStartTime = null;
@@ -667,6 +669,12 @@
 
             const cyberattackCounter = document.getElementById('cyberattack-counter');
             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+
+            const threatsEscapedCounter = document.getElementById('threats-escaped-counter');
+            threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
+
+            const totalPenaltyCounter = document.getElementById('total-penalty-counter');
+            totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
 
             // Inicializar display de misiles
             updateMissileDisplay();
@@ -1394,10 +1402,17 @@
                 activeHazards.push(hazardEntry);
 
                 cyberAttack.addEventListener('animationend', () => {
-                    // Penalización: si la amenaza no fue destruida, restar 2 al contador
+                    // Penalización escalonada por nivel: nivel 1=-1, nivel 2=-2, ..., nivel 6=-6
                     if (!hazardEntry.destroyed && !gameOver) {
-                        cyberattackCount = Math.max(0, cyberattackCount - 2);
+                        const elapsed = (Date.now() - gameStartTime) / 1000;
+                        const currentLevel = getDifficultyLevel(elapsed);
+                        const penalty = currentLevel + 1; // índice 0=nivel1 → -1, índice 5=nivel6 → -6
+                        threatsEscaped += 1;
+                        totalPenalty += penalty;
+                        cyberattackCount = Math.max(0, cyberattackCount - penalty);
                         cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                        threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
+                        totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
                     }
                     cyberAttack.remove();
                     const idx = activeHazards.indexOf(hazardEntry);
@@ -1942,6 +1957,16 @@
                             <span class="stat-label">Nivel Máximo</span>
                         </div>
                     </div>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
+                            <span class="stat-label">Amenazas Escapadas</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
+                            <span class="stat-label">Penalización Total</span>
+                        </div>
+                    </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
@@ -2180,6 +2205,16 @@
                             <span class="stat-label">Nivel Máximo</span>
                         </div>
                     </div>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
+                            <span class="stat-label">Amenazas Escapadas</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
+                            <span class="stat-label">Penalización Total</span>
+                        </div>
+                    </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
                     <div class="buttons-container">
                         <button id="exit-button">Salir</button>
@@ -2271,6 +2306,8 @@
                 lightYears = 0;
                 asteroidCount = 0;
                 cyberattackCount = 0;
+                threatsEscaped = 0;
+                totalPenalty = 0;
                 missileCount = 50;
                 missilesUsed = 0;
                 packsCollected = 0;
@@ -2279,6 +2316,8 @@
                 distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
                 asteroidCounter.textContent = `Paquetes Basura: ${asteroidCount}`;
                 cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
+                threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
+                totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
                 updateMissileDisplay();
 
                 // Reiniciar HUD de dificultad y fondo

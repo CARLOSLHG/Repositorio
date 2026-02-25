@@ -149,7 +149,7 @@ body, html {
     to { left: 110%; }
 }
 
-#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #threats-escaped-counter, #total-penalty-counter {
     position: absolute;
     left: calc(10px + var(--safe-left));
     font-size: clamp(11px, 0.85vw, 16px);
@@ -190,6 +190,18 @@ body, html {
     border-left: 2px solid rgba(34, 204, 102, 0.6);
     text-shadow: 0 0 8px rgba(34, 204, 102, 0.5);
     transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+#threats-escaped-counter {
+    top: calc(189px + var(--safe-top));
+    color: #ff8844;
+    border-left: 2px solid rgba(255, 136, 68, 0.5);
+}
+
+#total-penalty-counter {
+    top: calc(214px + var(--safe-top));
+    color: #ff4466;
+    border-left: 2px solid rgba(255, 68, 102, 0.5);
 }
 
 #missile-bar-container {
@@ -393,7 +405,7 @@ body, html {
         max-width: 70px;
     }
 
-    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #threats-escaped-counter, #total-penalty-counter {
         font-size: clamp(9px, 2vw, 14px);
         padding: 1px 4px;
         left: calc(2px + var(--safe-left));
@@ -423,6 +435,13 @@ body, html {
         font-size: clamp(10px, 2.2vw, 15px);
     }
 
+    #threats-escaped-counter {
+        top: calc(88px + var(--safe-top));
+    }
+
+    #total-penalty-counter {
+        top: calc(104px + var(--safe-top));
+    }
 
     .ammo-pack {
         min-width: 44px;
@@ -1860,7 +1879,7 @@ body, html {
         padding: 0.35em 0.7em;
     }
 
-    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #threats-escaped-counter, #total-penalty-counter {
         font-size: clamp(9px, 1.8vw, 13px);
         padding: 1px 4px;
         left: calc(2px + var(--safe-left));
@@ -1871,6 +1890,8 @@ body, html {
     #asteroid-counter { top: calc(30px + var(--safe-top)); }
     #missile-counter { top: calc(44px + var(--safe-top)); }
     #difficulty-display { top: calc(60px + var(--safe-top)); }
+    #threats-escaped-counter { top: calc(74px + var(--safe-top)); }
+    #total-penalty-counter { top: calc(88px + var(--safe-top)); }
 }
 
 /* ===== AVISO DE ROTACIÓN (portrait en móviles) ===== */
