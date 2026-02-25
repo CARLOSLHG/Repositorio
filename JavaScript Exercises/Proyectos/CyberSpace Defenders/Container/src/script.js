@@ -20,15 +20,34 @@
         function downloadRankSticker() {
             const img = document.getElementById('rank-sticker-img');
             if (!img || !img.src) return;
-            // Crear un enlace temporal para forzar descarga
             var a = document.createElement('a');
             a.href = img.src;
-            // Extraer nombre del archivo de la URL
             var parts = img.src.split('/');
             a.download = parts[parts.length - 1] || 'rank-sticker.png';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        }
+
+        // --- Zoom del sticker de rango (click para agrandar/cerrar) ---
+        function toggleStickerZoom() {
+            var existing = document.getElementById('sticker-zoom-overlay');
+            if (existing) {
+                existing.remove();
+                return;
+            }
+            var img = document.getElementById('rank-sticker-img');
+            if (!img || !img.src) return;
+            var overlay = document.createElement('div');
+            overlay.id = 'sticker-zoom-overlay';
+            overlay.className = 'sticker-zoom-overlay';
+            var bigImg = document.createElement('img');
+            bigImg.src = img.src;
+            bigImg.alt = img.alt;
+            bigImg.draggable = false;
+            overlay.appendChild(bigImg);
+            overlay.addEventListener('click', function() { overlay.remove(); });
+            document.body.appendChild(overlay);
         }
 
         const playerScreen = document.getElementById('player-screen');
@@ -2112,6 +2131,8 @@
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
                 const invHudVictory = document.getElementById('storage-panel');
                 if (invHudVictory) invHudVictory.style.display = 'none';
+                const musicBtnVictory = document.getElementById('toggle-music-button');
+                if (musicBtnVictory) musicBtnVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -2133,6 +2154,9 @@
                     }
                     if (event.target && event.target.id === 'download-sticker-btn') {
                         downloadRankSticker();
+                    }
+                    if (event.target && event.target.id === 'rank-sticker-img') {
+                        toggleStickerZoom();
                     }
                 });
 
@@ -2199,12 +2223,14 @@
                 distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
                 updateDifficultyHUD(levelStartSeconds);
 
-                // Restaurar controles móviles e inventario
+                // Restaurar controles móviles, inventario y botón de música
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlCont = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
                 const invHud = document.getElementById('storage-panel');
                 if (invHud) invHud.style.display = 'flex';
+                const musicBtnResume = document.getElementById('toggle-music-button');
+                if (musicBtnResume) musicBtnResume.style.display = '';
 
                 // Limpiar spawners anteriores
                 clearTimeout(asteroidSpawnTimeout);
@@ -2264,11 +2290,13 @@
                     `;
                     gameContainer.appendChild(continueOverlay);
 
-                    // Ocultar controles móviles e inventario durante el diálogo
+                    // Ocultar controles móviles, inventario y botón de música durante el diálogo
                     const mobileCtrlCont = document.getElementById('mobile-controls');
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
                     const invHud = document.getElementById('storage-panel');
                     if (invHud) invHud.style.display = 'none';
+                    const musicBtnCont = document.getElementById('toggle-music-button');
+                    if (musicBtnCont) musicBtnCont.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
@@ -2370,11 +2398,13 @@
                 // Mostrar cursor en game over para poder usar botones
                 gameContainer.style.cursor = 'default';
 
-                // Ocultar controles móviles e inventario en game over
+                // Ocultar controles móviles, inventario y botón de música en game over
                 const mobileCtrlGO = document.getElementById('mobile-controls');
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
                 const invHudGO = document.getElementById('storage-panel');
                 if (invHudGO) invHudGO.style.display = 'none';
+                const musicBtnGO = document.getElementById('toggle-music-button');
+                if (musicBtnGO) musicBtnGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -2396,6 +2426,9 @@
                     }
                     if (event.target && event.target.id === 'download-sticker-btn') {
                         downloadRankSticker();
+                    }
+                    if (event.target && event.target.id === 'rank-sticker-img') {
+                        toggleStickerZoom();
                     }
                 });
 
@@ -2491,12 +2524,14 @@
                 cachedContainerHeight = gameContainer.clientHeight;
                 cachedSpaceshipHeight = spaceship.clientHeight;
 
-                // Restaurar controles móviles e inventario
+                // Restaurar controles móviles, inventario y botón de música
                 const isTouchDev = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
                 const mobileCtrlReset = document.getElementById('mobile-controls');
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
                 const invHudReset = document.getElementById('storage-panel');
                 if (invHudReset) invHudReset.style.display = 'flex';
+                const musicBtnReset = document.getElementById('toggle-music-button');
+                if (musicBtnReset) musicBtnReset.style.display = '';
 
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
