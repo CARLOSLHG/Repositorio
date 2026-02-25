@@ -670,12 +670,6 @@
             const cyberattackCounter = document.getElementById('cyberattack-counter');
             cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
 
-            const threatsEscapedCounter = document.getElementById('threats-escaped-counter');
-            threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
-
-            const totalPenaltyCounter = document.getElementById('total-penalty-counter');
-            totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
-
             // Inicializar display de misiles
             updateMissileDisplay();
 
@@ -1411,8 +1405,6 @@
                         totalPenalty += penalty;
                         cyberattackCount = Math.max(0, cyberattackCount - penalty);
                         cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
-                        threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
-                        totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
                     }
                     cyberAttack.remove();
                     const idx = activeHazards.indexOf(hazardEntry);
@@ -2316,8 +2308,6 @@
                 distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
                 asteroidCounter.textContent = `Paquetes Basura: ${asteroidCount}`;
                 cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
-                threatsEscapedCounter.textContent = `Amenazas Escapadas: ${threatsEscaped}`;
-                totalPenaltyCounter.textContent = `Penalización Total: ${totalPenalty}`;
                 updateMissileDisplay();
 
                 // Reiniciar HUD de dificultad y fondo
