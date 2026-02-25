@@ -704,7 +704,7 @@
                 if (level > maxDifficultyLevel) maxDifficultyLevel = level;
 
                 if (difficultyDisplay) {
-                    difficultyDisplay.textContent = `Nivel: ${diff.levelName}`;
+                    difficultyDisplay.textContent = `Nivel ${diff.level + 1}: ${diff.levelName}`;
                     difficultyDisplay.style.color = diff.levelColor;
                     difficultyDisplay.style.textShadow = `0 0 8px ${diff.levelColor}, 0 0 16px ${diff.levelColor}40`;
                 }
@@ -1953,7 +1953,7 @@
                             <span class="stat-label">Misiles Restantes</span>
                         </div>
                         <div class="stat-box">
-                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxLevelInfo.name}</span>
+                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${maxLevelInfo.name}</span>
                             <span class="stat-label">Nivel Máximo</span>
                         </div>
                     </div>
@@ -2201,7 +2201,7 @@
                             <span class="stat-label">Misiles Restantes</span>
                         </div>
                         <div class="stat-box">
-                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxLevelInfo.name}</span>
+                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${maxLevelInfo.name}</span>
                             <span class="stat-label">Nivel Máximo</span>
                         </div>
                     </div>
