@@ -52,7 +52,7 @@ body, html {
 }
 
 /* Elementos de juego: no interactuables con el mouse (sin drag, sin select) */
-#spaceship, #background, .asteroid, .cyber-attack, .missile, #game-title, #scrolling-text, .dual-shoot-guide, .triple-shoot-pack {
+#spaceship, #background, .asteroid, .cyber-attack, .missile, #game-title, #scrolling-text, .laser-point-guide, .triple-shoot-pack {
     pointer-events: none;
     -webkit-user-drag: none;
 }
@@ -1167,6 +1167,43 @@ body, html {
     margin-bottom: 0.8em;
 }
 
+/* Toggle de música en pantalla pre-juego */
+#pregame-music-toggle {
+    margin-bottom: 0.8em;
+}
+
+.pregame-music-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.35em 1.2em;
+    font-size: clamp(11px, 1vw, 15px);
+    cursor: pointer;
+    background: rgba(0, 180, 100, 0.15);
+    color: #44ddaa;
+    border: 1px solid rgba(0, 200, 120, 0.4);
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.pregame-music-btn:hover {
+    background: rgba(0, 180, 100, 0.3);
+    box-shadow: 0 0 12px rgba(0, 200, 120, 0.3);
+}
+
+.pregame-music-btn.music-off {
+    background: rgba(180, 50, 50, 0.15);
+    color: #cc6666;
+    border-color: rgba(200, 60, 60, 0.4);
+}
+
+.pregame-music-btn.music-off:hover {
+    background: rgba(180, 50, 50, 0.3);
+    box-shadow: 0 0 12px rgba(200, 60, 60, 0.3);
+}
+
 #launch-game-button {
     padding: 0.5em 2em;
     font-size: clamp(12px, 1.2vw, 18px);
@@ -1948,36 +1985,91 @@ body, html {
     50% { opacity: 0.85; }
 }
 
-/* Línea guía horizontal del dual-shoot */
-.dual-shoot-guide {
+/* ===== LASER POINT POWER-UP ===== */
+.laser-point-pack {
+    position: absolute;
+    width: 13.8vw;
+    min-width: 103px;
+    max-width: 180px;
+    height: auto;
+    z-index: 16;
+    pointer-events: none;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: layout style;
+    transform: translateZ(0);
+}
+
+.laser-point-pack .capsule-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.7)) drop-shadow(0 0 12px rgba(255, 80, 80, 0.7));
+    animation: laserPointPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes laserPointPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+/* Línea guía horizontal del laser-point */
+.laser-point-guide {
     position: absolute;
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, rgba(255, 0, 200, 0.6), rgba(0, 180, 255, 0.8), rgba(255, 0, 200, 0.6));
-    box-shadow: 0 0 8px rgba(255, 0, 200, 0.5), 0 0 16px rgba(0, 180, 255, 0.3);
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.6), rgba(255, 50, 50, 0.9), rgba(255, 0, 0, 0.6));
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5), 0 0 16px rgba(255, 50, 50, 0.3);
     z-index: 13;
     pointer-events: none;
-    animation: guideGlow 1.5s ease-in-out infinite;
+    animation: laserGuideGlow 1.5s ease-in-out infinite;
 }
 
-@keyframes guideGlow {
-    0%, 100% {
-        opacity: 0.7;
-    }
-    50% {
-        opacity: 1;
-    }
+@keyframes laserGuideGlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
-/* Fadeout al perder dual-shoot (muerte) */
-.dual-guide-fadeout {
-    animation: guideFadeout 0.5s ease-out forwards !important;
+/* Fadeout al perder laser-point (muerte) */
+.laser-guide-fadeout {
+    animation: laserGuideFadeout 0.5s ease-out forwards !important;
 }
 
-@keyframes guideFadeout {
+@keyframes laserGuideFadeout {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+/* ===== LASER SLOT COLOR VARIANTS ===== */
+.inv-slot[data-slot="laser"].slot-engaged {
+    border-color: rgba(255, 0, 0, 0.5);
+    animation: slotEngageLaser 1.2s ease-in-out infinite;
+}
+
+.inv-slot[data-slot="laser"].slot-engaged .inv-icon {
+    opacity: 1;
+    filter: none;
+}
+
+.inv-slot[data-slot="laser"].slot-engaged .inv-label {
+    opacity: 1;
+    color: rgba(255, 50, 50, 0.8);
+}
+
+@keyframes slotEngageLaser {
+    0%, 100% { box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.1); }
+    50% { box-shadow: inset 0 0 14px rgba(255, 0, 0, 0.3), 0 0 10px rgba(255, 0, 0, 0.2); }
+}
+
+.inv-slot[data-slot="laser"] .inv-count {
+    background: #ff3333;
+    color: #fff;
+}
+
+.inv-slot[data-slot="laser"] .inv-label {
+    color: rgba(255, 50, 50, 0.5);
 }
 
 /* Misiles dual-shoot: brillo especial */

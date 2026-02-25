@@ -28,7 +28,7 @@
         <p class="version-info">Versión Final — Creado por Carlos Luis Hernández — 2024</p>
     </div>
 
-    <!-- Tutorial: carrusel de 9 slides (aparece tras ingresar alias) -->
+    <!-- Tutorial: carrusel de 10 slides (aparece tras ingresar alias) -->
     <div id="tutorial-screen" style="display: none;">
         <button id="tutorial-skip">SALTAR</button>
         <div id="tutorial-carousel">
@@ -38,10 +38,11 @@
                 <div class="tutorial-slide"><img src="./img/slide-2.png" alt="Tutorial 3" draggable="false"></div>
                 <div class="tutorial-slide"><img src="./img/slide-3.png" alt="Tutorial 4" draggable="false"></div>
                 <div class="tutorial-slide"><img src="./img/slide-4.png" alt="Tutorial 5" draggable="false"></div>
-                <div class="tutorial-slide"><img src="./img/slide-5.png" alt="Tutorial 6" draggable="false"></div>
-                <div class="tutorial-slide"><img src="./img/slide-5a.png" alt="Tutorial 7" draggable="false"></div>
-                <div class="tutorial-slide"><img src="./img/slide-6.png" alt="Tutorial 8" draggable="false"></div>
-                <div class="tutorial-slide"><img src="./img/slide-7.png" alt="Tutorial 9" draggable="false"></div>
+                <div class="tutorial-slide"><img src="./img/slide-4a.png" alt="Tutorial 6" draggable="false"></div>
+                <div class="tutorial-slide"><img src="./img/slide-5.png" alt="Tutorial 7" draggable="false"></div>
+                <div class="tutorial-slide"><img src="./img/slide-5a.png" alt="Tutorial 8" draggable="false"></div>
+                <div class="tutorial-slide"><img src="./img/slide-6.png" alt="Tutorial 9" draggable="false"></div>
+                <div class="tutorial-slide"><img src="./img/slide-7.png" alt="Tutorial 10" draggable="false"></div>
             </div>
         </div>
         <div id="tutorial-dots"></div>
@@ -57,6 +58,12 @@
             <h1>Leaderboard</h1>
             <p id="pregame-welcome"></p>
             <div id="pregame-leaderboard"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
+            <div id="pregame-music-toggle">
+                <button id="pregame-music-btn" class="pregame-music-btn" aria-label="Activar/Desactivar Música">
+                    <span id="pregame-music-icon">&#9835;</span>
+                    <span id="pregame-music-text">Música: ON</span>
+                </button>
+            </div>
             <button id="launch-game-button">Iniciar Misión</button>
         </div>
         <p class="version-info">Versión Final — Creado por Carlos Luis Hernández — 2024</p>
@@ -134,15 +141,21 @@
                         <img src="./img/dual-shoot.png" alt="Dual Shoot" class="inv-icon" draggable="false">
                         <span class="inv-count" id="inv-dual-count"></span>
                     </div>
+                    <span class="inv-label">DUAL</span>
+                </button>
+                <button id="inv-laser" class="inv-slot" data-slot="laser" aria-label="Laser Point">
+                    <div class="slot-inner">
+                        <img src="./img/laser-point.png" alt="Laser Point" class="inv-icon" draggable="false">
+                        <span class="inv-count" id="inv-laser-count"></span>
+                    </div>
                     <span class="inv-label">LASER</span>
                 </button>
                 <button id="inv-triple" class="inv-slot" data-slot="triple" aria-label="Triple Shoot">
                     <div class="slot-inner">
                         <img src="./img/triple-shoot.png" alt="Triple Shoot" class="inv-icon" draggable="false">
-                        <span class="inv-count" id="inv-triple-count">0</span>
+                        <span class="inv-count" id="inv-triple-count"></span>
                     </div>
                     <span class="inv-label">TRIPLE</span>
-                    <span class="inv-key">3</span>
                 </button>
             </div>
         </div>
