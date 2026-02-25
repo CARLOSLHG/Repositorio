@@ -168,14 +168,14 @@
                 packSpeedMin: 4 - (1 * factor),
                 packSpeedRange: 3 - (0.5 * factor),
 
-                // Delay base de packs: 12s → 20s (más escasos)
-                packBaseDelay: 12000 + (8000 * factor),
+                // Delay base de packs: 10.8s → 18s (−10% más frecuentes)
+                packBaseDelay: 10800 + (7200 * factor),
 
-                // Delay máximo de packs: 45s → 55s
-                packMaxDelay: 45000 + (10000 * factor),
+                // Delay máximo de packs: 40.5s → 49.5s (−10%)
+                packMaxDelay: 40500 + (9000 * factor),
 
-                // Incremento de delay por segundo: 50ms → 90ms
-                packMsPerSecond: 50 + (40 * factor),
+                // Incremento de delay por segundo: 45ms → 81ms (−10%)
+                packMsPerSecond: 45 + (36 * factor),
 
                 // Probabilidad de multi-spawn (2 asteroides a la vez): 0% → 40%
                 multiSpawnChance: 0.40 * factor,
@@ -1408,17 +1408,24 @@
                 // En god mode el disparo manual no gasta misiles (usa shootGodMissile)
                 if (godModeActive) return;
 
-                // Triple-shoot activo: dispara 3 misiles en abanico SIN gastar munición
-                // (si también tiene dual, se añade el misil trasero)
+                // Triple-shoot activo: dispara en abanico (consume misiles)
                 if (tripleShootActive) {
                     shootTripleMissiles();
                     return;
                 }
 
-                if (missileCount <= 0) return;
+                // Calcular coste: 1 normal + 1 extra si dual-shoot activo
+                const cost = dualShootActive ? 2 : 1;
+                if (missileCount < cost) {
+                    if (missileCount <= 0 && !gameOver) {
+                        gameOver = true;
+                        showGameOverMessage('¡Has agotado tus misiles!');
+                    }
+                    return;
+                }
 
-                missileCount--;
-                missilesUsed++;
+                missileCount -= cost;
+                missilesUsed += cost;
                 updateMissileDisplay();
 
                 // Si se agotaron los misiles, fin del juego inmediato
@@ -1464,6 +1471,28 @@
             // Disparo triple en abanico: 3 misiles a +30°, 0°, -30° a doble velocidad
             // Si dual-shoot también está activo, añade misil trasero (stacking)
             function shootTripleMissiles() {
+                // Consumo de misiles: 3 (triple) + 1 extra si dual activo
+                // Excepción: god mode = misiles infinitos
+                if (!godModeActive) {
+                    var cost = dualShootActive ? 4 : 3;
+                    if (missileCount < cost) {
+                        if (missileCount <= 0 && !gameOver) {
+                            gameOver = true;
+                            showGameOverMessage('¡Has agotado tus misiles!');
+                        }
+                        return;
+                    }
+                    missileCount -= cost;
+                    missilesUsed += cost;
+                    updateMissileDisplay();
+
+                    if (missileCount <= 0 && !gameOver) {
+                        gameOver = true;
+                        showGameOverMessage('¡Has agotado tus misiles!');
+                        return;
+                    }
+                }
+
                 var spaceshipRect = spaceship.getBoundingClientRect();
                 var gameContainerRect = gameContainer.getBoundingClientRect();
                 var missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
