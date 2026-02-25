@@ -1394,9 +1394,12 @@
                 activeHazards.push(hazardEntry);
 
                 cyberAttack.addEventListener('animationend', () => {
-                    // Penalización: si la amenaza no fue destruida, restar 2 al contador
+                    // Penalización escalonada por nivel: nivel 1=-1, nivel 2=-2, ..., nivel 6=-6
                     if (!hazardEntry.destroyed && !gameOver) {
-                        cyberattackCount = Math.max(0, cyberattackCount - 2);
+                        const elapsed = (Date.now() - gameStartTime) / 1000;
+                        const currentLevel = getDifficultyLevel(elapsed);
+                        const penalty = currentLevel + 1; // índice 0=nivel1 → -1, índice 5=nivel6 → -6
+                        cyberattackCount = Math.max(0, cyberattackCount - penalty);
                         cyberattackCounter.textContent = `Amenazas Neutralizadas: ${cyberattackCount}`;
                     }
                     cyberAttack.remove();
