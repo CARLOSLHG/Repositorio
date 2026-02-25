@@ -910,9 +910,6 @@ body, html {
     #storage-panel {
         padding: 8px 10px 10px;
         border-radius: 12px;
-        background: rgba(2, 8, 20, 0.18);
-        border-color: rgba(0, 200, 255, 0.08);
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     }
 
     #storage-player-name {
@@ -1413,11 +1410,11 @@ body, html {
     flex-direction: column;
     gap: 0;
     pointer-events: none;
-    background: rgba(2, 8, 20, 0.82);
-    border: 1px solid rgba(0, 200, 255, 0.12);
+    background: rgba(2, 8, 20, 0.15);
+    border: 1px solid rgba(0, 200, 255, 0.10);
     border-radius: 10px;
     padding: 6px 8px 8px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Header: nombre del jugador + título STORAGE --- */
@@ -2243,16 +2240,17 @@ body, html {
     }
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
-        font-size: clamp(9px, 1.8vw, 13px);
+        font-size: clamp(8px, 1.5vw, 11px);
         padding: 1px 4px;
         left: calc(2px + var(--safe-left));
+        line-height: 1.2;
     }
 
     #distance-counter { top: calc(2px + var(--safe-top)); }
-    #cyberattack-counter { top: calc(16px + var(--safe-top)); }
-    #asteroid-counter { top: calc(30px + var(--safe-top)); }
-    #missile-counter { top: calc(44px + var(--safe-top)); }
-    #difficulty-display { top: calc(60px + var(--safe-top)); }
+    #cyberattack-counter { top: calc(18px + var(--safe-top)); }
+    #asteroid-counter { top: calc(34px + var(--safe-top)); }
+    #missile-counter { top: calc(50px + var(--safe-top)); }
+    #difficulty-display { top: calc(68px + var(--safe-top)); font-size: clamp(8px, 1.5vw, 11px); }
 }
 
 /* ===== CONTINUE SCREEN: pantallas ultra-pequeñas (iPhone SE, Mini landscape) ===== */
