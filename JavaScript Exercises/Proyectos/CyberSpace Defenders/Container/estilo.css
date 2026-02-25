@@ -409,19 +409,19 @@ body, html {
     }
 
     #cyberattack-counter {
-        top: calc(20px + var(--safe-top));
+        top: calc(26px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(36px + var(--safe-top));
+        top: calc(48px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(52px + var(--safe-top));
+        top: calc(70px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(70px + var(--safe-top));
+        top: calc(94px + var(--safe-top));
         font-size: clamp(10px, 2.2vw, 15px);
     }
 
@@ -910,6 +910,9 @@ body, html {
     #storage-panel {
         padding: 8px 10px 10px;
         border-radius: 12px;
+        background: rgba(2, 8, 20, 0.18);
+        border-color: rgba(0, 200, 255, 0.08);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     }
 
     #storage-player-name {
@@ -2503,10 +2506,12 @@ body, html {
     }
 
     #tutorial-skip {
-        font-size: 11px;
-        padding: 6px 14px;
+        font-size: 10px;
+        padding: 5px 12px;
         bottom: calc(8px + var(--safe-bottom));
         right: calc(8px + var(--safe-right));
+        letter-spacing: 1.5px;
+        border-radius: 16px;
     }
 
     .tutorial-slide img {
@@ -2566,10 +2571,12 @@ body, html {
     }
 
     #tutorial-skip {
-        font-size: 10px;
-        padding: 5px 12px;
+        font-size: 8px;
+        padding: 3px 8px;
         bottom: calc(4px + var(--safe-bottom));
         right: calc(4px + var(--safe-right));
+        letter-spacing: 1px;
+        border-radius: 12px;
     }
 }
 
@@ -2586,5 +2593,29 @@ body, html {
 
     #tutorial-dots {
         margin-top: 6px;
+    }
+
+    #tutorial-skip {
+        font-size: 9px;
+        padding: 4px 10px;
+        letter-spacing: 1px;
+        border-radius: 14px;
+    }
+}
+
+/* Pantallas muy estrechas (ancho < 380px) */
+@media (max-width: 380px) {
+    #tutorial-skip {
+        font-size: 8px;
+        padding: 3px 8px;
+        letter-spacing: 1px;
+        border-radius: 12px;
+        bottom: calc(6px + var(--safe-bottom));
+        right: calc(6px + var(--safe-right));
+    }
+
+    #tutorial-nav button {
+        font-size: 10px;
+        padding: 6px 12px;
     }
 }
