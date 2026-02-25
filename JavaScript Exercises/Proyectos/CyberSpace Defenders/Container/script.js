@@ -1,5 +1,21 @@
     (function() {
         // Versión 3.0 - Sistema de misiles + Packs de munición
+
+        // --- Utilidades de seguridad ---
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        // Hash SHA-256 para verificación de clave admin (nunca almacenar en texto plano)
+        const ADMIN_HASH = 'c7d33c0557ab5572dca8cabb712c2c22551f5d2259ee37b200e4df273efe13d6';
+        async function sha256(text) {
+            const data = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
         const playerScreen = document.getElementById('player-screen');
         const playerNameInput = document.getElementById('player-name-input');
         const startGameButton = document.getElementById('start-game-button');
@@ -208,7 +224,7 @@
                     saveLocalLeaderboard(board);
                     return board;
                 } catch (e) {
-                    console.warn('JSONBin read falló, usando localStorage:', e);
+                    // JSONBin read fallback silencioso
                 }
             }
             return getLocalLeaderboard();
@@ -237,7 +253,7 @@
                     saveLocalLeaderboard(sorted);
                     return sorted;
                 } catch (e) {
-                    console.warn('JSONBin write falló:', e);
+                    // JSONBin write fallback silencioso
                 }
             }
 
@@ -254,7 +270,7 @@
             try {
                 await saveRemoteLeaderboard([]);
             } catch (e) {
-                console.warn('JSONBin clear falló:', e);
+                // JSONBin clear fallback silencioso
             }
         }
 
@@ -303,9 +319,9 @@
                 const godIcon = isGod ? ' &#9889;' : '';
                 rows += `<tr class="${isCurrent ? 'current-player' : ''}${godClass}">
                     <td>${i + 1}${medal}</td>
-                    <td>${entry.name}${godIcon}</td>
-                    <td>${entry.threats}</td>
-                    <td>${entry.time}s</td>
+                    <td>${escapeHTML(entry.name || '')}${godIcon}</td>
+                    <td>${parseInt(entry.threats, 10) || 0}</td>
+                    <td>${parseInt(entry.time, 10) || 0}s</td>
                     <td style="color:${rank.color};text-shadow:0 0 6px ${rank.color}40;">${rank.name}</td>
                     <td>${entry.date}</td>
                 </tr>`;
@@ -331,6 +347,81 @@
             `;
         }
 
+        // --- Volver al menú principal (reemplaza window.close/about:blank) ---
+        function returnToMainMenu() {
+            // Salir de fullscreen si está activo
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(function() {});
+            }
+            // Recargar la página para volver al estado inicial limpio
+            window.location.reload();
+        }
+
+        // --- Modal in-game para clave admin (reemplaza prompt/alert) ---
+        function showAdminModal(onSuccess) {
+            // Evitar múltiples modales
+            if (document.getElementById('admin-modal')) return;
+
+            const overlay = document.createElement('div');
+            overlay.id = 'admin-modal';
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;';
+
+            const box = document.createElement('div');
+            box.style.cssText = 'background:#0a1628;border:1px solid rgba(0,200,255,0.3);border-radius:12px;padding:20px 24px;max-width:320px;width:90%;text-align:center;';
+
+            const title = document.createElement('p');
+            title.textContent = 'Clave de administrador';
+            title.style.cssText = 'color:#00ccff;font-size:14px;margin:0 0 12px;font-weight:bold;letter-spacing:1px;';
+
+            const input = document.createElement('input');
+            input.type = 'password';
+            input.autocomplete = 'off';
+            input.style.cssText = 'width:100%;box-sizing:border-box;padding:8px 12px;background:#020814;border:1px solid rgba(0,200,255,0.2);border-radius:6px;color:#fff;font-size:16px;text-align:center;outline:none;';
+
+            const error = document.createElement('p');
+            error.style.cssText = 'color:#ff4466;font-size:12px;margin:8px 0 0;min-height:18px;';
+
+            const btnRow = document.createElement('div');
+            btnRow.style.cssText = 'display:flex;gap:8px;margin-top:12px;justify-content:center;';
+
+            const btnCancel = document.createElement('button');
+            btnCancel.textContent = 'Cancelar';
+            btnCancel.style.cssText = 'padding:6px 16px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:#aaa;border-radius:6px;cursor:pointer;font-size:13px;';
+
+            const btnOk = document.createElement('button');
+            btnOk.textContent = 'Confirmar';
+            btnOk.style.cssText = 'padding:6px 16px;border:none;background:#00ccff;color:#000;border-radius:6px;cursor:pointer;font-weight:bold;font-size:13px;';
+
+            function closeModal() { overlay.remove(); }
+
+            btnCancel.addEventListener('click', closeModal);
+            btnOk.addEventListener('click', async function() {
+                const hash = await sha256(input.value);
+                if (hash === ADMIN_HASH) {
+                    closeModal();
+                    onSuccess();
+                } else {
+                    error.textContent = 'Clave incorrecta';
+                    input.value = '';
+                    input.focus();
+                }
+            });
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') btnOk.click();
+                if (e.key === 'Escape') closeModal();
+            });
+
+            box.appendChild(title);
+            box.appendChild(input);
+            box.appendChild(error);
+            btnRow.appendChild(btnCancel);
+            btnRow.appendChild(btnOk);
+            box.appendChild(btnRow);
+            overlay.appendChild(box);
+            document.body.appendChild(overlay);
+            input.focus();
+        }
+
         // --- Pantalla de inicio: ingreso de alias ---
         const pregameScreen = document.getElementById('pregame-screen');
         const launchGameButton = document.getElementById('launch-game-button');
@@ -347,7 +438,8 @@
                 e.stopPropagation();
                 e.preventDefault();
 
-                const name = playerNameInput.value.trim();
+                // Sanitizar: solo alfanuméricos, espacios, guiones y guiones bajos
+                const name = playerNameInput.value.trim().replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑüÜ _\-]/g, '').substring(0, 16);
                 if (!name) {
                     playerNameInput.style.borderColor = '#ff3b3f';
                     playerNameInput.setAttribute('placeholder', '¡Debes ingresar un alias!');
@@ -478,7 +570,7 @@
                 pregameScreen.style.display = 'flex';
 
                 const welcomeEl = document.getElementById('pregame-welcome');
-                welcomeEl.innerHTML = `Bienvenido, <strong>${playerName}</strong>`;
+                welcomeEl.innerHTML = `Bienvenido, <strong>${escapeHTML(playerName)}</strong>`;
 
                 const lbContainer = document.getElementById('pregame-leaderboard');
                 getLeaderboard().then(board => {
@@ -1929,7 +2021,7 @@
                 victoryOverlay.innerHTML = `
                     <h1 class="victory-title" style="color:${godRank.color};text-shadow:0 0 20px ${godRank.color}, 0 0 40px ${godRank.color}80;font-size:1.6em;animation:victoryPulse 1.5s ease-in-out infinite;">&#9733; VICTORIA TOTAL &#9733;</h1>
                     <p class="game-over-reason" style="color:#ffdd00;font-size:1.1em;">Has alcanzado el rango supremo</p>
-                    <p class="player-result" style="font-size:1.2em;">Defensor: <strong>${playerName}</strong></p>
+                    <p class="player-result" style="font-size:1.2em;">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
                     <p class="player-rank" style="color:${godRank.color};text-shadow:0 0 15px ${godRank.color}, 0 0 30px ${godRank.color}60;font-size:1.4em;margin:0.3em 0 0.6em;letter-spacing:2px;animation:victoryPulse 2s ease-in-out infinite;">&#9889; ${godRank.name} &#9889;</p>
                     <div class="stats-row">
                         <div class="stat-box">
@@ -1999,37 +2091,36 @@
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
                     if (event.target && event.target.id === 'exit-button') {
-                        window.close();
-                        window.location.href = 'about:blank';
+                        returnToMainMenu();
                     }
                     if (event.target && event.target.id === 'restart-game-button') {
                         resetGame();
                     }
                     if (event.target && event.target.id === 'clear-leaderboard-button') {
-                        const pwd = prompt('Ingresa la clave de administrador:');
-                        if (pwd === '66826682') {
+                        showAdminModal(function() {
                             localStorage.removeItem('cyberspace_leaderboard');
                             clearRemoteLeaderboard();
                             const lbContainer = document.getElementById('leaderboard-container');
                             if (lbContainer) {
                                 lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
                             }
-                        } else if (pwd !== null) {
-                            alert('Clave incorrecta');
-                        }
+                        });
                     }
                 });
 
                 addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
                     const placeholder = document.getElementById('leaderboard-placeholder');
-                    if (placeholder) {
-                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    if (placeholder && placeholder.parentNode) {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = buildLeaderboardHTML(board);
+                        placeholder.parentNode.replaceChild(wrapper.firstElementChild || wrapper, placeholder);
                     }
-                }).catch(err => {
-                    console.warn('Error cargando leaderboard:', err);
+                }).catch(function() {
+                    // Error cargando leaderboard (silencioso)
                     const placeholder = document.getElementById('leaderboard-placeholder');
                     if (placeholder) {
-                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                        placeholder.textContent = 'Error cargando leaderboard';
+                        placeholder.style.color = '#ff6666';
                     }
                 });
             }
@@ -2176,8 +2267,8 @@
                 const playerRank = getRank(cyberattackCount);
                 gameOverMessage.innerHTML = `
                     <h1>Misión Finalizada</h1>
-                    ${reason ? `<p class="game-over-reason">${reason}</p>` : ''}
-                    <p class="player-result">Defensor: <strong>${playerName}</strong></p>
+                    ${reason ? `<p class="game-over-reason">${escapeHTML(reason)}</p>` : ''}
+                    <p class="player-result">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
                     <p class="player-rank" style="color:${playerRank.color};text-shadow:0 0 10px ${playerRank.color}60;font-size:1.1em;margin:0.2em 0 0.5em;letter-spacing:1px;">&#9733; ${playerRank.name} &#9733;</p>
                     <div class="stats-row">
                         <div class="stat-box">
@@ -2250,38 +2341,37 @@
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
                     if (event.target && event.target.id === 'exit-button') {
-                        window.close();
-                        window.location.href = 'about:blank';
+                        returnToMainMenu();
                     }
                     if (event.target && event.target.id === 'restart-game-button') {
                         resetGame();
                     }
                     if (event.target && event.target.id === 'clear-leaderboard-button') {
-                        const pwd = prompt('Ingresa la clave de administrador:');
-                        if (pwd === '66826682') {
+                        showAdminModal(function() {
                             localStorage.removeItem('cyberspace_leaderboard');
                             clearRemoteLeaderboard();
                             const lbContainer = document.getElementById('leaderboard-container');
                             if (lbContainer) {
                                 lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
                             }
-                        } else if (pwd !== null) {
-                            alert('Clave incorrecta');
-                        }
+                        });
                     }
                 });
 
                 // Cargar leaderboard en segundo plano (no bloquea el UI)
                 addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
                     const placeholder = document.getElementById('leaderboard-placeholder');
-                    if (placeholder) {
-                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    if (placeholder && placeholder.parentNode) {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = buildLeaderboardHTML(board);
+                        placeholder.parentNode.replaceChild(wrapper.firstElementChild || wrapper, placeholder);
                     }
-                }).catch(err => {
-                    console.warn('Error cargando leaderboard:', err);
+                }).catch(function() {
+                    // Error cargando leaderboard (silencioso)
                     const placeholder = document.getElementById('leaderboard-placeholder');
                     if (placeholder) {
-                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                        placeholder.textContent = 'Error cargando leaderboard';
+                        placeholder.style.color = '#ff6666';
                     }
                 });
             }
