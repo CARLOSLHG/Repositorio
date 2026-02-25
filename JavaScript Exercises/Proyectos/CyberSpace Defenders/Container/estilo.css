@@ -1838,15 +1838,26 @@ body, html {
 
     .stat-label {
         font-size: clamp(7px, 1.6vw, 11px);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .stat-box {
         padding: 0.2em 0.4em;
-        min-width: auto;
+        min-width: 0;
         max-width: none;
-        flex: 1 1 auto;
+        flex: 1 1 0;
         text-align: left;
         border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .stat-value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .stats-row {
@@ -2011,9 +2022,9 @@ body, html {
         margin-bottom: 0;
     }
 
-    .stat-value { font-size: clamp(10px, 2.5vw, 15px); }
+    .stat-value { font-size: clamp(10px, 2.5vw, 15px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .stat-label { font-size: clamp(6px, 1.4vw, 10px); }
-    .stat-box { padding: 0.15em 0.3em; }
+    .stat-box { padding: 0.15em 0.3em; min-width: 0; flex: 1 1 0; overflow: hidden; }
     .stats-row { margin-bottom: 0.3em; }
 
     /* Sticker layout extra-small landscape */
