@@ -2338,26 +2338,29 @@ body, html {
     position: absolute;
     top: calc(12px + var(--safe-top));
     right: calc(12px + var(--safe-right));
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 200, 255, 0.1);
+    border: 1.5px solid rgba(0, 200, 255, 0.5);
+    color: #00ccff;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 6px 16px;
+    padding: 8px 20px;
     border-radius: 20px;
     cursor: pointer;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
     z-index: 2;
     flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.2);
+    text-shadow: 0 0 8px rgba(0, 200, 255, 0.4);
 }
 
 #tutorial-skip:hover {
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.5);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 200, 255, 0.8);
+    background: rgba(0, 200, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
 }
 
 /* Contenedor del carrusel: toma todo el espacio sobrante */
@@ -2498,8 +2501,8 @@ body, html {
     }
 
     #tutorial-skip {
-        font-size: 10px;
-        padding: 5px 12px;
+        font-size: 11px;
+        padding: 6px 14px;
         top: calc(8px + var(--safe-top));
         right: calc(8px + var(--safe-right));
     }
@@ -2561,8 +2564,8 @@ body, html {
     }
 
     #tutorial-skip {
-        font-size: 9px;
-        padding: 3px 10px;
+        font-size: 10px;
+        padding: 5px 12px;
         top: calc(4px + var(--safe-top));
         right: calc(4px + var(--safe-right));
     }

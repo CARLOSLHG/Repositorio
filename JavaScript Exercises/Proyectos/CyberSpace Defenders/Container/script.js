@@ -718,6 +718,9 @@
         let shipCurrentBottom = -1;
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
+        // iOS reporta deltas más agresivos (ProMotion 120Hz + mayor frecuencia de eventos)
+        const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const touchSensitivity = isIOSDevice ? 0.65 : 1.0;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
@@ -932,8 +935,10 @@
                     for (let i = 0; i < event.touches.length; i++) {
                         if (event.touches[i].identifier === moveTouchId) {
                             const currentY = event.touches[i].clientY;
-                            const deltaY = lastTouchY - currentY; // positivo = dedo sube = nave sube
+                            const rawDelta = lastTouchY - currentY; // positivo = dedo sube = nave sube
                             lastTouchY = currentY;
+                            // Aplicar sensibilidad (iOS recibe deltas más grandes/frecuentes)
+                            const deltaY = rawDelta * touchSensitivity;
                             // Aplicar delta a la posición objetivo de la nave
                             touchTargetBottom = Math.max(0, Math.min(
                                 cachedContainerHeight - cachedSpaceshipHeight,
@@ -1004,7 +1009,7 @@
 
                 // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
                 if (isTouchControlled && touchTargetBottom >= 0) {
-                    const smoothing = 0.35; // 35% por frame a 60fps — más responsivo
+                    const smoothing = isIOSDevice ? 0.28 : 0.35; // iOS más suave para compensar deltas agresivos
                     const lerpFactor = 1 - Math.pow(1 - smoothing, dt);
                     shipCurrentBottom += (touchTargetBottom - shipCurrentBottom) * lerpFactor;
                     // Snap cuando está muy cerca para evitar micro-movimientos infinitos
