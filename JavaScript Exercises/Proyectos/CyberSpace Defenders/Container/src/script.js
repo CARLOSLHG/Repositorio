@@ -106,6 +106,17 @@
         let activeDualShootPacks = [];
         let dualShootSpawnTimeout = null;
 
+        // --- Triple Shoot: disparo triple en abanico (almacenable, 10s de duración) ---
+        let tripleShootActive = false;
+        let tripleShootTimer = null;
+        let tripleShootBlinkTimer = null;
+        let storedTripleShoot = 0;
+        let activeTripleShootPacks = [];
+        let tripleShootSpawnTimeout = null;
+        const TRIPLE_SHOOT_DURATION = 10000;      // 10 segundos
+        const TRIPLE_SHOOT_WARN_AT = 3000;        // parpadeo a los 3s restantes
+        const TRIPLE_SHOOT_ANGLE = Math.tan(30 * Math.PI / 180); // tan(30°) ≈ 0.577
+
         // --- Sistema de dificultad progresiva ---
         let maxDifficultyLevel = 0;
         let asteroidSpawnTimeout = null;
@@ -489,7 +500,7 @@
                 tutorialScreen.style.display = 'flex';
 
                 // --- Inicializar carrusel del tutorial ---
-                const TOTAL_SLIDES = 8;
+                const TOTAL_SLIDES = 9;
                 let currentSlide = 0;
                 const track = document.getElementById('tutorial-track');
                 const dotsContainer = document.getElementById('tutorial-dots');
@@ -768,6 +779,9 @@
                 if (e.key === 's' || e.key === 'S') {
                     useSuperCapsule();
                 }
+                if (e.key === '3') {
+                    useTripleShoot();
+                }
             });
 
             // Click derecho para activar super capsule (PC/Mac)
@@ -956,6 +970,9 @@
                     activeHazards.length = 0;
                     activePacks.length = 0;
                     activeSuperCapsules.length = 0;
+                    activeLifePacks.length = 0;
+                    activeDualShootPacks.length = 0;
+                    activeTripleShootPacks.length = 0;
                     return;
                 }
 
@@ -1013,13 +1030,22 @@
                     const dir = m.direction || 1;
                     const spd = m.speed || 1;
                     m.tx += 6 * dt * dir * spd;
+                    // Movimiento vertical para misiles angulados (triple-shoot)
+                    if (m.dirY) {
+                        m.ty = (m.ty || 0) + 6 * dt * spd * m.dirY;
+                    }
                     // Fuera de pantalla por la derecha o por la izquierda
                     if (m.originX + m.tx > screenWidth || m.originX + m.tx < -60) {
                         m.element.remove();
                         activeMissiles.splice(i, 1);
                         continue;
                     }
-                    m.element.style.transform = `translateX(${m.tx}px)`;
+                    if (m.ty) {
+                        var rot = m.rotation ? ' rotate(' + m.rotation + ')' : '';
+                        m.element.style.transform = 'translate(' + m.tx + 'px,' + m.ty + 'px)' + rot;
+                    } else {
+                        m.element.style.transform = 'translateX(' + m.tx + 'px)';
+                    }
                 }
 
                 // === FASE READ: leer TODAS las posiciones en un solo batch ===
@@ -1043,6 +1069,9 @@
                 }
                 for (let i = 0; i < activeDualShootPacks.length; i++) {
                     activeDualShootPacks[i]._r = activeDualShootPacks[i].destroyed ? null : activeDualShootPacks[i].element.getBoundingClientRect();
+                }
+                for (let i = 0; i < activeTripleShootPacks.length; i++) {
+                    activeTripleShootPacks[i]._r = activeTripleShootPacks[i].destroyed ? null : activeTripleShootPacks[i].element.getBoundingClientRect();
                 }
 
                 // === FASE COLLIDE: solo matemática, sin tocar el DOM ===
@@ -1080,6 +1109,17 @@
                             if (ds.destroyed || !ds._r) continue;
                             if (!(mR.top > ds._r.bottom || mR.bottom < ds._r.top ||
                                   mR.right < ds._r.left || mR.left > ds._r.right)) {
+                                overlapsImmune = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!overlapsImmune) {
+                        for (let j = 0; j < activeTripleShootPacks.length; j++) {
+                            const ts = activeTripleShootPacks[j];
+                            if (ts.destroyed || !ts._r) continue;
+                            if (!(mR.top > ts._r.bottom || mR.bottom < ts._r.top ||
+                                  mR.right < ts._r.left || mR.left > ts._r.right)) {
                                 overlapsImmune = true;
                                 break;
                             }
@@ -1248,6 +1288,24 @@
                     }
                 }
 
+                // Nave ↔ triple-shoot packs (almacenar en inventario)
+                for (let i = activeTripleShootPacks.length - 1; i >= 0; i--) {
+                    const ts = activeTripleShootPacks[i];
+                    if (ts.destroyed || !ts._r) continue;
+                    if (!(spaceshipRect.top > ts._r.bottom || spaceshipRect.bottom < ts._r.top ||
+                          spaceshipRect.right < ts._r.left || spaceshipRect.left > ts._r.right)) {
+                        ts.destroyed = true;
+                        ts.element.classList.add('ammo-collected');
+                        setTimeout(() => {
+                            ts.element.remove();
+                            var idx = activeTripleShootPacks.indexOf(ts);
+                            if (idx !== -1) activeTripleShootPacks.splice(idx, 1);
+                        }, 400);
+                        storedTripleShoot++;
+                        updateInventoryUI();
+                    }
+                }
+
                 // Actualizar posición de la línea guía dual-shoot
                 if (dualShootActive && dualShootGuideEl) {
                     const guideBottom = spaceshipRect.bottom - gameContainer.getBoundingClientRect().top;
@@ -1289,6 +1347,13 @@
                 if (gameOver || !gameStarted) return;
                 // En god mode el disparo manual no gasta misiles (usa shootGodMissile)
                 if (godModeActive) return;
+
+                // Triple-shoot activo: dispara 3 misiles en abanico SIN gastar munición
+                if (tripleShootActive) {
+                    shootTripleMissiles();
+                    return;
+                }
+
                 if (missileCount <= 0) return;
 
                 missileCount--;
@@ -1319,7 +1384,7 @@
 
                 // speed: 1 = normal, 2 = doble (dual-shoot)
                 const fwdSpeed = dualShootActive ? 2 : 1;
-                activeMissiles.push({ element: missile, tx: 0, originX: startX, speed: fwdSpeed, direction: 1 });
+                activeMissiles.push({ element: missile, tx: 0, ty: 0, originX: startX, speed: fwdSpeed, direction: 1, dirY: 0 });
 
                 // Si dual-shoot activo: misil hacia atrás
                 if (dualShootActive) {
@@ -1331,7 +1396,36 @@
                     const backStartX = spaceshipRect.left - gameContainerRect.left;
                     backMissile.style.left = backStartX + 'px';
                     gameContainer.appendChild(backMissile);
-                    activeMissiles.push({ element: backMissile, tx: 0, originX: backStartX, speed: 2, direction: -1 });
+                    activeMissiles.push({ element: backMissile, tx: 0, ty: 0, originX: backStartX, speed: 2, direction: -1, dirY: 0 });
+                }
+            }
+
+            // Disparo triple en abanico: 3 misiles a +30°, 0°, -30° a doble velocidad
+            function shootTripleMissiles() {
+                var spaceshipRect = spaceship.getBoundingClientRect();
+                var gameContainerRect = gameContainer.getBoundingClientRect();
+                var missileBottomPos = gameContainerRect.bottom - (spaceshipRect.top + spaceshipRect.height / 2);
+                var startX = spaceshipRect.left - gameContainerRect.left + spaceshipRect.width;
+
+                var angles = [
+                    { dirY: -TRIPLE_SHOOT_ANGLE, rot: '-30deg' },  // arriba (+30° visual)
+                    { dirY: 0, rot: '0deg' },                       // recto
+                    { dirY: TRIPLE_SHOOT_ANGLE, rot: '30deg' }      // abajo (-30° visual)
+                ];
+
+                for (var a = 0; a < angles.length; a++) {
+                    var m = document.createElement('img');
+                    m.src = './img/missil.png';
+                    m.classList.add('missile', 'triple-missile');
+                    m.style.position = 'absolute';
+                    m.style.bottom = missileBottomPos + 'px';
+                    m.style.left = startX + 'px';
+                    gameContainer.appendChild(m);
+                    activeMissiles.push({
+                        element: m, tx: 0, ty: 0, originX: startX,
+                        speed: 2, direction: 1, dirY: angles[a].dirY,
+                        rotation: angles[a].rot
+                    });
                 }
             }
 
@@ -1874,7 +1968,123 @@
                 updateInventoryUI();
             }
 
-            // --- Actualizar UI del storage: 3 slots fijos con estados vacío/activo/engaged ---
+            // --- Triple Shoot: crear pack en el mapa ---
+            function createTripleShootPack() {
+                if (gameOver) return;
+
+                const tsEl = document.createElement('div');
+                tsEl.classList.add('triple-shoot-pack');
+
+                const tsImg = document.createElement('img');
+                tsImg.src = './img/triple-shoot.png';
+                tsImg.alt = 'Triple Shoot';
+                tsImg.classList.add('capsule-img');
+                tsImg.draggable = false;
+                tsEl.appendChild(tsImg);
+
+                const bottomPosition = Math.floor(Math.random() * 60) + 20;
+                tsEl.style.bottom = bottomPosition + '%';
+                tsEl.style.left = '100%';
+
+                gameContainer.appendChild(tsEl);
+
+                const elapsed = (Date.now() - gameStartTime) / 1000;
+                const diff = getDifficulty(elapsed);
+                const tsSpeed = Math.random() * 3 + diff.packSpeedMin + 2;
+                tsEl.style.animation = 'moveAmmoPack ' + tsSpeed + 's linear forwards';
+
+                const tsEntry = { element: tsEl, destroyed: false };
+                activeTripleShootPacks.push(tsEntry);
+
+                tsEl.addEventListener('animationend', function() {
+                    tsEl.remove();
+                    var idx = activeTripleShootPacks.indexOf(tsEntry);
+                    if (idx !== -1) activeTripleShootPacks.splice(idx, 1);
+                });
+            }
+
+            // Probabilidad de spawn del triple-shoot según dificultad
+            function getTripleShootParams() {
+                var elapsed = (Date.now() - gameStartTime) / 1000;
+                var level = getDifficultyLevel(elapsed);
+                // Nivel 0-2: no aparece
+                // Nivel 3 CRÍTICO:     prob 0.06, cada 40s
+                // Nivel 4 EXTREMO:     prob 0.12, cada 30s
+                // Nivel 5 APOCALIPSIS: prob 0.18, cada 20s
+                var table = [
+                    null, null, null,
+                    { probability: 0.06, delay: 40000 },
+                    { probability: 0.12, delay: 30000 },
+                    { probability: 0.18, delay: 20000 }
+                ];
+                return table[level] || null;
+            }
+
+            function startTripleShootSpawner() {
+                function scheduleCheck() {
+                    var params = getTripleShootParams();
+                    var checkDelay = params ? params.delay : 40000;
+                    tripleShootSpawnTimeout = setTimeout(function() {
+                        if (gameOver) return;
+                        var currentParams = getTripleShootParams();
+                        if (currentParams) {
+                            if (Math.random() < currentParams.probability) {
+                                createTripleShootPack();
+                            }
+                        }
+                        scheduleCheck();
+                    }, checkDelay);
+                }
+                scheduleCheck();
+            }
+
+            // Activar modo triple-shoot (dura 10 segundos, no consume misiles)
+            function activateTripleShoot() {
+                if (tripleShootActive) {
+                    // Si ya está activo, renovar el timer
+                    clearTimeout(tripleShootTimer);
+                    clearInterval(tripleShootBlinkTimer);
+                } else {
+                    tripleShootActive = true;
+                }
+                updateInventoryUI();
+
+                // Timer de expiración
+                tripleShootTimer = setTimeout(function() {
+                    deactivateTripleShoot();
+                }, TRIPLE_SHOOT_DURATION);
+
+                // Parpadeo de aviso antes de acabar
+                setTimeout(function() {
+                    if (!tripleShootActive) return;
+                    var tripleBtn = document.getElementById('inv-triple');
+                    if (!tripleBtn) return;
+                    tripleShootBlinkTimer = setInterval(function() {
+                        tripleBtn.classList.toggle('slot-blink');
+                    }, 200);
+                }, TRIPLE_SHOOT_DURATION - TRIPLE_SHOOT_WARN_AT);
+            }
+
+            function deactivateTripleShoot() {
+                if (!tripleShootActive) return;
+                tripleShootActive = false;
+                clearTimeout(tripleShootTimer);
+                tripleShootTimer = null;
+                clearInterval(tripleShootBlinkTimer);
+                tripleShootBlinkTimer = null;
+                var tripleBtn = document.getElementById('inv-triple');
+                if (tripleBtn) tripleBtn.classList.remove('slot-blink');
+                updateInventoryUI();
+            }
+
+            function useTripleShoot() {
+                if (storedTripleShoot > 0 && !gameOver && gameStarted) {
+                    storedTripleShoot--;
+                    activateTripleShoot();
+                }
+            }
+
+            // --- Actualizar UI del storage: 4 slots fijos con estados vacío/activo/engaged ---
             function updateInventoryUI() {
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
@@ -1917,6 +2127,24 @@
                         dualCount.textContent = '';
                     }
                 }
+                // Triple Shoot slot
+                var tripleBtn = document.getElementById('inv-triple');
+                var tripleCount = document.getElementById('inv-triple-count');
+                if (tripleBtn && tripleCount) {
+                    if (tripleShootActive) {
+                        tripleBtn.classList.remove('slot-empty', 'slot-active');
+                        tripleBtn.classList.add('slot-engaged');
+                        tripleCount.textContent = 'ON';
+                    } else if (storedTripleShoot > 0) {
+                        tripleBtn.classList.remove('slot-empty', 'slot-engaged');
+                        tripleBtn.classList.add('slot-active');
+                        tripleCount.textContent = storedTripleShoot;
+                    } else {
+                        tripleBtn.classList.remove('slot-active', 'slot-engaged');
+                        tripleBtn.classList.add('slot-empty');
+                        tripleCount.textContent = '0';
+                    }
+                }
             }
 
             // --- Handler del botón de usar super capsule (click/touch en storage) ---
@@ -1947,10 +2175,27 @@
                 invDualBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
                 invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); });
             }
+            // --- Handler del botón de triple-shoot en storage ---
+            var invTripleBtn = document.getElementById('inv-triple');
+            if (invTripleBtn) {
+                function useTripleFromStorage(e) {
+                    if (e) { e.preventDefault(); e.stopPropagation(); }
+                    useTripleShoot();
+                }
+                invTripleBtn.addEventListener('touchstart', useTripleFromStorage, { passive: false });
+                invTripleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invTripleBtn.addEventListener('click', function(e) { e.stopPropagation(); useTripleFromStorage(e); });
+            }
 
             // Disparo gratuito (god mode) - no consume misiles
             function shootGodMissile() {
                 if (gameOver || !gameStarted) return;
+
+                // Si triple-shoot está activo, usar disparo triple también en god mode
+                if (tripleShootActive) {
+                    shootTripleMissiles();
+                    return;
+                }
 
                 const spaceshipRect = spaceship.getBoundingClientRect();
                 const gameContainerRect = gameContainer.getBoundingClientRect();
@@ -2201,6 +2446,7 @@
                 document.querySelectorAll('.super-capsule').forEach(s => s.remove());
                 document.querySelectorAll('.life-pack').forEach(l => l.remove());
                 document.querySelectorAll('.dual-shoot-pack').forEach(d => d.remove());
+                document.querySelectorAll('.triple-shoot-pack').forEach(t => t.remove());
 
                 // Limpiar arrays de entidades en pantalla
                 activeHazards.length = 0;
@@ -2208,6 +2454,7 @@
                 activeSuperCapsules.length = 0;
                 activeLifePacks.length = 0;
                 activeDualShootPacks.length = 0;
+                activeTripleShootPacks.length = 0;
                 activeMissiles.forEach(m => m.element.remove());
                 activeMissiles.length = 0;
 
@@ -2239,6 +2486,7 @@
                 clearTimeout(superCapsuleSpawnTimeout);
                 clearTimeout(lifePackSpawnTimeout);
                 clearTimeout(dualShootSpawnTimeout);
+                clearTimeout(tripleShootSpawnTimeout);
 
                 // Reiniciar todos los spawners desde el inicio del nivel
                 startDistanceCounter();
@@ -2247,6 +2495,8 @@
                 startSuperCapsuleSpawner();
                 startLifePackSpawner();
                 startDualShootSpawner();
+                startTripleShootSpawner();
+                startTripleShootSpawner();
 
                 // Reiniciar controles de movimiento
                 touchTargetBottom = -1;
@@ -2260,9 +2510,10 @@
 
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
-                // Detener god mode y dual-shoot si estaban activos
+                // Detener god mode, dual-shoot y triple-shoot si estaban activos
                 deactivateGodMode();
                 deactivateDualShoot();
+                deactivateTripleShoot();
 
                 // Detener el game loop
                 if (gameLoopId) {
@@ -2494,18 +2745,22 @@
                 document.querySelectorAll('.super-capsule').forEach(sc => sc.remove());
                 document.querySelectorAll('.life-pack').forEach(lp => lp.remove());
                 document.querySelectorAll('.dual-shoot-pack').forEach(ds => ds.remove());
+                document.querySelectorAll('.triple-shoot-pack').forEach(ts => ts.remove());
                 const haloEl = document.getElementById('god-mode-halo');
                 if (haloEl) haloEl.remove();
 
-                // Limpiar god mode y dual-shoot
+                // Limpiar god mode, dual-shoot y triple-shoot
                 deactivateGodMode();
                 deactivateDualShoot();
+                deactivateTripleShoot();
                 activeSuperCapsules.length = 0;
                 activeLifePacks.length = 0;
                 activeDualShootPacks.length = 0;
+                activeTripleShootPacks.length = 0;
                 clearTimeout(superCapsuleSpawnTimeout);
                 clearTimeout(lifePackSpawnTimeout);
                 clearTimeout(dualShootSpawnTimeout);
+                clearTimeout(tripleShootSpawnTimeout);
 
                 // Limpiar arrays de entidades
                 activeMissiles.length = 0;
@@ -2536,6 +2791,7 @@
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
                 storedLives = INITIAL_EXTRA_LIVES;
+                storedTripleShoot = 0;
                 updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);
@@ -2551,6 +2807,7 @@
                 startSuperCapsuleSpawner();
                 startLifePackSpawner();
                 startDualShootSpawner();
+                startTripleShootSpawner();
                 gameLoopId = requestAnimationFrame(gameLoop);
             }
 
@@ -2616,6 +2873,7 @@
             startSuperCapsuleSpawner();
             startLifePackSpawner();
             startDualShootSpawner();
+            startTripleShootSpawner();
 
             // Mostrar vidas iniciales en el HUD
             updateInventoryUI();
