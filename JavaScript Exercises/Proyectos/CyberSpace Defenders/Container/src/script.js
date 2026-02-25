@@ -2081,8 +2081,8 @@
                             </div>
                             <div class="stats-row">
                                 <div class="stat-box">
-                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${escapeHTML(maxLevelInfo.name)}</span>
-                                    <span class="stat-label">Nivel Max</span>
+                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${escapeHTML(maxLevelInfo.name)}</span>
+                                    <span class="stat-label">Nivel ${maxDifficultyLevel + 1}</span>
                                 </div>
                                 <div class="stat-box">
                                     <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
@@ -2350,8 +2350,8 @@
                             </div>
                             <div class="stats-row">
                                 <div class="stat-box">
-                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${escapeHTML(maxLevelInfo.name)}</span>
-                                    <span class="stat-label">Nivel Max</span>
+                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${escapeHTML(maxLevelInfo.name)}</span>
+                                    <span class="stat-label">Nivel ${maxDifficultyLevel + 1}</span>
                                 </div>
                                 <div class="stat-box">
                                     <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
