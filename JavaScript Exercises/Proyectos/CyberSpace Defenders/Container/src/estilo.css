@@ -488,6 +488,114 @@ body, html {
     color: #00ffcc;
 }
 
+/* --- Layout 2 columnas: sticker + stats --- */
+.go-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.6em;
+    flex-wrap: wrap;
+    margin-bottom: 0.3em;
+    flex-shrink: 0;
+}
+
+.go-header h1 {
+    margin: 0;
+}
+
+.go-header .game-over-reason {
+    font-size: clamp(11px, 1vw, 16px);
+    color: #ff8866;
+    white-space: nowrap;
+}
+
+.go-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 24px);
+    margin-bottom: 0.5em;
+    flex-shrink: 0;
+}
+
+.go-sticker-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+.rank-sticker {
+    width: clamp(80px, 12vw, 150px);
+    height: auto;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(0, 200, 255, 0.4));
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.rank-sticker:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
+}
+
+.rank-sticker-god {
+    animation: victoryPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(255, 221, 0, 0.6));
+}
+
+.rank-sticker-god:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 221, 0, 0.9));
+}
+
+.go-sticker-col .player-rank {
+    font-size: clamp(10px, 1.1vw, 16px);
+    letter-spacing: 1px;
+    margin: 0.3em 0 0.2em;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.download-sticker-btn {
+    font-family: inherit;
+    font-size: clamp(9px, 0.8vw, 13px);
+    padding: 0.3em 0.8em;
+    background: rgba(0, 200, 255, 0.1);
+    border: 1px solid rgba(0, 200, 255, 0.3);
+    color: #88ccee;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.download-sticker-btn:hover {
+    background: rgba(0, 200, 255, 0.25);
+    color: #bbddff;
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+}
+
+.download-sticker-btn:active {
+    transform: scale(0.95);
+}
+
+.go-stats-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0.3em;
+}
+
+.go-stats-col .player-result {
+    margin: 0 0 0.2em;
+}
+
+.go-stats-col .stats-row {
+    margin-bottom: 0.3em;
+}
+
 /* --- Continue screen (usar vida extra) --- */
 #game-over-message.continue-screen {
     background: rgba(2, 8, 20, 0.96);
@@ -1670,6 +1778,24 @@ body, html {
         margin: 2px 0 5px;
     }
 
+    /* Sticker layout móvil */
+    .go-body {
+        gap: clamp(6px, 2vw, 14px);
+    }
+
+    .rank-sticker {
+        width: clamp(60px, 18vw, 110px);
+    }
+
+    .go-sticker-col .player-rank {
+        font-size: clamp(8px, 2.2vw, 13px);
+    }
+
+    .download-sticker-btn {
+        font-size: clamp(8px, 2vw, 12px);
+        padding: 0.25em 0.6em;
+    }
+
     .stat-value {
         font-size: clamp(11px, 3vw, 17px);
     }
@@ -1853,6 +1979,13 @@ body, html {
     .stat-label { font-size: clamp(6px, 1.4vw, 10px); }
     .stat-box { padding: 0.15em 0.3em; }
     .stats-row { margin-bottom: 0.3em; }
+
+    /* Sticker layout extra-small landscape */
+    .go-body { gap: clamp(4px, 1.5vw, 10px); margin-bottom: 0.3em; }
+    .rank-sticker { width: clamp(50px, 14vw, 90px); border-radius: 8px; }
+    .go-sticker-col .player-rank { font-size: clamp(7px, 1.8vw, 11px); margin: 0.15em 0; }
+    .download-sticker-btn { font-size: clamp(7px, 1.6vw, 10px); padding: 0.2em 0.5em; }
+    .go-header { margin-bottom: 0.15em; gap: 0.4em; }
 
     #exit-button, #restart-game-button, #clear-leaderboard-button {
         font-size: clamp(9px, 2vw, 13px);
