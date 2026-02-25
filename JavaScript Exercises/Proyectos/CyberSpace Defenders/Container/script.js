@@ -683,6 +683,24 @@
                 }
             });
             launchGameButton.addEventListener('click', launchGame);
+
+            // --- Toggle de música en pantalla pre-juego ---
+            const pregameMusicBtn = document.getElementById('pregame-music-btn');
+            const pregameMusicText = document.getElementById('pregame-music-text');
+            const pregameMusicIcon = document.getElementById('pregame-music-icon');
+            if (pregameMusicBtn) {
+                pregameMusicBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    musicPlaying = !musicPlaying;
+                    if (musicPlaying) {
+                        pregameMusicText.textContent = 'Música: ON';
+                        pregameMusicBtn.classList.remove('music-off');
+                    } else {
+                        pregameMusicText.textContent = 'Música: OFF';
+                        pregameMusicBtn.classList.add('music-off');
+                    }
+                });
+            }
         }
 
         // --- Inicialización del juego (se ejecuta tras ingresar alias) ---
@@ -721,11 +739,13 @@
         }
 
         function initGame() {
-            // Añadir música al juego
+            // Añadir música al juego (respetar preferencia del pregame)
             const audio = new Audio('./mp3/sound.mp3');
             audio.loop = true;
             audio.volume = 0.08;
-            audio.play().catch(() => {});
+            if (musicPlaying) {
+                audio.play().catch(() => {});
+            }
 
             // Detección de dispositivo táctil (necesario antes de configurar botones)
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
@@ -743,9 +763,11 @@
                 musicPlaying = !musicPlaying;
             }
 
-            // Texto inicial sin "(M)" en móvil
-            if (isTouchDevice) {
-                toggleMusicButton.textContent = 'Apagar Música';
+            // Texto inicial según preferencia del pregame y tipo de dispositivo
+            if (musicPlaying) {
+                toggleMusicButton.textContent = isTouchDevice ? 'Apagar Música' : 'Apagar Música (M)';
+            } else {
+                toggleMusicButton.textContent = isTouchDevice ? 'Encender Música' : 'Encender Música (M)';
             }
 
             // Botón para apagar/encender la música (desktop click)

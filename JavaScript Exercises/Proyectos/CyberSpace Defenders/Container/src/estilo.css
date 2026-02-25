@@ -1167,6 +1167,43 @@ body, html {
     margin-bottom: 0.8em;
 }
 
+/* Toggle de música en pantalla pre-juego */
+#pregame-music-toggle {
+    margin-bottom: 0.8em;
+}
+
+.pregame-music-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.35em 1.2em;
+    font-size: clamp(11px, 1vw, 15px);
+    cursor: pointer;
+    background: rgba(0, 180, 100, 0.15);
+    color: #44ddaa;
+    border: 1px solid rgba(0, 200, 120, 0.4);
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.pregame-music-btn:hover {
+    background: rgba(0, 180, 100, 0.3);
+    box-shadow: 0 0 12px rgba(0, 200, 120, 0.3);
+}
+
+.pregame-music-btn.music-off {
+    background: rgba(180, 50, 50, 0.15);
+    color: #cc6666;
+    border-color: rgba(200, 60, 60, 0.4);
+}
+
+.pregame-music-btn.music-off:hover {
+    background: rgba(180, 50, 50, 0.3);
+    box-shadow: 0 0 12px rgba(200, 60, 60, 0.3);
+}
+
 #launch-game-button {
     padding: 0.5em 2em;
     font-size: clamp(12px, 1.2vw, 18px);
