@@ -16,6 +16,21 @@
             return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
+        // --- Descarga del sticker de rango ---
+        function downloadRankSticker() {
+            const img = document.getElementById('rank-sticker-img');
+            if (!img || !img.src) return;
+            // Crear un enlace temporal para forzar descarga
+            var a = document.createElement('a');
+            a.href = img.src;
+            // Extraer nombre del archivo de la URL
+            var parts = img.src.split('/');
+            a.download = parts[parts.length - 1] || 'rank-sticker.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
         const playerScreen = document.getElementById('player-screen');
         const playerNameInput = document.getElementById('player-name-input');
         const startGameButton = document.getElementById('start-game-button');
@@ -277,22 +292,22 @@
         // --- Sistema de rangos sci-fi + ciberseguridad (basado en amenazas neutralizadas) ---
         // Primer umbral: 50, cada siguiente +20% del anterior
         const RANK_TABLE = [
-            { name: 'Script Kiddie',              color: '#667788' },
-            { name: 'Cadete Firewall',             color: '#5599aa' },
-            { name: 'Analista de Paquetes',        color: '#44aacc' },
-            { name: 'Operador SOC Estelar',        color: '#33bbdd' },
-            { name: 'Pentester Cuántico',          color: '#22cc88' },
-            { name: 'Centinela Zero-Day',          color: '#44dd55' },
-            { name: 'Agente del Rootkit',          color: '#aacc22' },
-            { name: 'Criptógrafo Interestelar',    color: '#ddbb11' },
-            { name: 'Comandante Exploit',          color: '#ff9922' },
-            { name: 'Red Team Galáctico',          color: '#ff6633' },
-            { name: 'Capitán del Kernel',          color: '#ff3355' },
-            { name: 'Almirante Ransomware Hunter', color: '#dd22aa' },
-            { name: 'Guardián de la Blockchain',   color: '#bb33ff' },
-            { name: 'Archon del Deep Web',         color: '#8855ff' },
-            { name: 'Leyenda del CyberVoid',       color: '#00ffcc' },
-            { name: 'Dios del Ciberespacio',       color: '#ffdd00' }
+            { name: 'Script Kiddie',              color: '#667788', img: './img/script-kiddie.png' },
+            { name: 'Cadete Firewall',             color: '#5599aa', img: './img/cadete-firewall.png' },
+            { name: 'Analista de Paquetes',        color: '#44aacc', img: './img/analista-de-paquetes.png' },
+            { name: 'Operador SOC Estelar',        color: '#33bbdd', img: './img/operador-soc-estelar.png' },
+            { name: 'Pentester Cuántico',          color: '#22cc88', img: './img/pentester-cuantico.png' },
+            { name: 'Centinela Zero-Day',          color: '#44dd55', img: './img/centinela-zero-day.png' },
+            { name: 'Agente del Rootkit',          color: '#aacc22', img: './img/agente-del-rootkit.png' },
+            { name: 'Criptógrafo Interestelar',    color: '#ddbb11', img: './img/criptografo-interestelar.png' },
+            { name: 'Comandante Exploit',          color: '#ff9922', img: './img/comandante-exploit.png' },
+            { name: 'Red Team Galáctico',          color: '#ff6633', img: './img/red-team-galactico.png' },
+            { name: 'Capitán del Kernel',          color: '#ff3355', img: './img/capitan-del-kernel.png' },
+            { name: 'Almirante Ransomware Hunter', color: '#dd22aa', img: './img/almirante-ransomware-hunter.png' },
+            { name: 'Guardián de la Blockchain',   color: '#bb33ff', img: './img/guardian-de-la-blockchain.png' },
+            { name: 'Archon del Deep Web',         color: '#8855ff', img: './img/archon-del-deep-web.png' },
+            { name: 'Leyenda del CyberVoid',       color: '#00ffcc', img: './img/leyenda-del-cybervoid.png' },
+            { name: 'Dios del Ciberespacio',       color: '#ffdd00', img: './img/dios-del-ciberespacio.png' }
         ];
 
         function getRank(threats) {
@@ -2019,36 +2034,46 @@
                 const victoryOverlay = document.createElement('div');
                 victoryOverlay.id = 'game-over-message';
                 victoryOverlay.innerHTML = `
-                    <h1 class="victory-title" style="color:${godRank.color};text-shadow:0 0 20px ${godRank.color}, 0 0 40px ${godRank.color}80;font-size:1.6em;animation:victoryPulse 1.5s ease-in-out infinite;">&#9733; VICTORIA TOTAL &#9733;</h1>
-                    <p class="game-over-reason" style="color:#ffdd00;font-size:1.1em;">Has alcanzado el rango supremo</p>
-                    <p class="player-result" style="font-size:1.2em;">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
-                    <p class="player-rank" style="color:${godRank.color};text-shadow:0 0 15px ${godRank.color}, 0 0 30px ${godRank.color}60;font-size:1.4em;margin:0.3em 0 0.6em;letter-spacing:2px;animation:victoryPulse 2s ease-in-out infinite;">&#9889; ${godRank.name} &#9889;</p>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:${godRank.color};">${cyberattackCount}</span>
-                            <span class="stat-label">Amenazas Neutralizadas</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">${elapsedSeconds}s</span>
-                            <span class="stat-label">Tiempo de Misión</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">${missileCount}</span>
-                            <span class="stat-label">Misiles Restantes</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${maxLevelInfo.name}</span>
-                            <span class="stat-label">Nivel Máximo</span>
-                        </div>
+                    <div class="go-header">
+                        <h1 class="victory-title" style="color:${godRank.color};text-shadow:0 0 20px ${godRank.color}, 0 0 40px ${godRank.color}80;animation:victoryPulse 1.5s ease-in-out infinite;">&#9733; VICTORIA TOTAL &#9733;</h1>
+                        <span class="game-over-reason" style="color:#ffdd00;">Has alcanzado el rango supremo</span>
                     </div>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
-                            <span class="stat-label">Amenazas Escapadas</span>
+                    <div class="go-body">
+                        <div class="go-sticker-col">
+                            <img src="${godRank.img}" alt="${escapeHTML(godRank.name)}" class="rank-sticker rank-sticker-god" draggable="false" id="rank-sticker-img">
+                            <p class="player-rank" style="color:${godRank.color};text-shadow:0 0 15px ${godRank.color}, 0 0 30px ${godRank.color}60;animation:victoryPulse 2s ease-in-out infinite;">&#9889; ${escapeHTML(godRank.name)} &#9889;</p>
+                            <button id="download-sticker-btn" class="download-sticker-btn" title="Descargar sticker">&#11015; Guardar</button>
                         </div>
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
-                            <span class="stat-label">Penalización Total</span>
+                        <div class="go-stats-col">
+                            <p class="player-result" style="font-size:1.1em;">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
+                            <div class="stats-row">
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:${godRank.color};">${cyberattackCount}</span>
+                                    <span class="stat-label">Amenazas</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">${elapsedSeconds}s</span>
+                                    <span class="stat-label">Tiempo</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">${missileCount}</span>
+                                    <span class="stat-label">Misiles</span>
+                                </div>
+                            </div>
+                            <div class="stats-row">
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${escapeHTML(maxLevelInfo.name)}</span>
+                                    <span class="stat-label">Nivel Max</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
+                                    <span class="stat-label">Escapadas</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
+                                    <span class="stat-label">Penalizaci&#243;n</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
@@ -2105,6 +2130,9 @@
                                 lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
                             }
                         });
+                    }
+                    if (event.target && event.target.id === 'download-sticker-btn') {
+                        downloadRankSticker();
                     }
                 });
 
@@ -2266,36 +2294,46 @@
                 const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
                 const playerRank = getRank(cyberattackCount);
                 gameOverMessage.innerHTML = `
-                    <h1>Misión Finalizada</h1>
-                    ${reason ? `<p class="game-over-reason">${escapeHTML(reason)}</p>` : ''}
-                    <p class="player-result">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
-                    <p class="player-rank" style="color:${playerRank.color};text-shadow:0 0 10px ${playerRank.color}60;font-size:1.1em;margin:0.2em 0 0.5em;letter-spacing:1px;">&#9733; ${playerRank.name} &#9733;</p>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <span class="stat-value">${cyberattackCount}</span>
-                            <span class="stat-label">Amenazas Neutralizadas</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">${elapsedSeconds}s</span>
-                            <span class="stat-label">Tiempo de Misión</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value">${missileCount}</span>
-                            <span class="stat-label">Misiles Restantes</span>
-                        </div>
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${maxLevelInfo.name}</span>
-                            <span class="stat-label">Nivel Máximo</span>
-                        </div>
+                    <div class="go-header">
+                        <h1>Misión Finalizada</h1>
+                        ${reason ? `<span class="game-over-reason">${escapeHTML(reason)}</span>` : ''}
                     </div>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
-                            <span class="stat-label">Amenazas Escapadas</span>
+                    <div class="go-body">
+                        <div class="go-sticker-col">
+                            <img src="${playerRank.img}" alt="${escapeHTML(playerRank.name)}" class="rank-sticker" draggable="false" id="rank-sticker-img">
+                            <p class="player-rank" style="color:${playerRank.color};text-shadow:0 0 10px ${playerRank.color}60;">&#9733; ${escapeHTML(playerRank.name)} &#9733;</p>
+                            <button id="download-sticker-btn" class="download-sticker-btn" title="Descargar sticker">&#11015; Guardar</button>
                         </div>
-                        <div class="stat-box">
-                            <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
-                            <span class="stat-label">Penalización Total</span>
+                        <div class="go-stats-col">
+                            <p class="player-result">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
+                            <div class="stats-row">
+                                <div class="stat-box">
+                                    <span class="stat-value">${cyberattackCount}</span>
+                                    <span class="stat-label">Amenazas</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">${elapsedSeconds}s</span>
+                                    <span class="stat-label">Tiempo</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value">${missileCount}</span>
+                                    <span class="stat-label">Misiles</span>
+                                </div>
+                            </div>
+                            <div class="stats-row">
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:${maxLevelInfo.color};font-size:0.85em;">${maxDifficultyLevel + 1}: ${escapeHTML(maxLevelInfo.name)}</span>
+                                    <span class="stat-label">Nivel Max</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:#ff8844;">${threatsEscaped}</span>
+                                    <span class="stat-label">Escapadas</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-value" style="color:#ff4466;">${totalPenalty}</span>
+                                    <span class="stat-label">Penalizaci&#243;n</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="leaderboard-placeholder"><p style="color:#88aacc;">Cargando leaderboard...</p></div>
@@ -2355,6 +2393,9 @@
                                 lbContainer.innerHTML = '<h2>Leaderboard - Top 100</h2><p style="color:#88aacc;margin-top:10px;">Leaderboard limpiado</p>';
                             }
                         });
+                    }
+                    if (event.target && event.target.id === 'download-sticker-btn') {
+                        downloadRankSticker();
                     }
                 });
 
