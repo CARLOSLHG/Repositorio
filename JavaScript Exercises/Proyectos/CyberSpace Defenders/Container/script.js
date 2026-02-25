@@ -500,7 +500,7 @@
                 tutorialScreen.style.display = 'flex';
 
                 // --- Inicializar carrusel del tutorial ---
-                const TOTAL_SLIDES = 8;
+                const TOTAL_SLIDES = 9;
                 let currentSlide = 0;
                 const track = document.getElementById('tutorial-track');
                 const dotsContainer = document.getElementById('tutorial-dots');
