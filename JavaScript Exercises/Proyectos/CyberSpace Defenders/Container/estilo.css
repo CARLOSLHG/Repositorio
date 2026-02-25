@@ -394,31 +394,33 @@ body, html {
     }
 
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
-        font-size: clamp(10px, 2.2vw, 15px);
-        padding: 2px 5px;
-        left: 2px;
+        font-size: clamp(9px, 2vw, 14px);
+        padding: 1px 4px;
+        left: calc(2px + var(--safe-left));
         border-left-width: 2px;
+        background: rgba(0, 0, 0, 0.55);
+        line-height: 1.2;
     }
 
     #distance-counter {
-        top: calc(14px + var(--safe-top));
+        top: calc(4px + var(--safe-top));
     }
 
     #cyberattack-counter {
-        top: calc(34px + var(--safe-top));
+        top: calc(20px + var(--safe-top));
     }
 
     #asteroid-counter {
-        top: calc(54px + var(--safe-top));
+        top: calc(36px + var(--safe-top));
     }
 
     #missile-counter {
-        top: calc(74px + var(--safe-top));
+        top: calc(52px + var(--safe-top));
     }
 
     #difficulty-display {
-        top: calc(96px + var(--safe-top));
-        font-size: clamp(11px, 2.4vw, 16px);
+        top: calc(70px + var(--safe-top));
+        font-size: clamp(10px, 2.2vw, 15px);
     }
 
 
@@ -1145,11 +1147,11 @@ body, html {
 #mobile-controls {
     display: none;
     position: absolute;
-    bottom: calc(18px + var(--safe-bottom));
-    right: calc(18px + var(--safe-right));
+    bottom: calc(4px + var(--safe-bottom));
+    right: calc(4px + var(--safe-right));
     z-index: 25;
     align-items: flex-end;
-    gap: 10px;
+    gap: 6px;
     pointer-events: none;
 }
 
@@ -1435,14 +1437,16 @@ body, html {
     letter-spacing: 0.5px;
 }
 
-/* --- Mobile: panel al lado izquierdo del FIRE, compacto --- */
+/* --- Mobile: storage panel en esquina inferior izquierda, compacto --- */
 @media (hover: none) and (pointer: coarse) {
     #storage-panel {
-        bottom: calc(18px + var(--safe-bottom) + 40px);
-        right: calc(210px + var(--safe-right));
-        left: auto;
-        padding: 5px 6px 6px;
+        bottom: calc(4px + var(--safe-bottom));
+        left: calc(4px + var(--safe-left));
+        right: auto;
+        padding: 4px 5px 5px;
         border-radius: 8px;
+        background: rgba(2, 8, 20, 0.5);
+        opacity: 0.92;
     }
 
     #storage-header {
@@ -1547,9 +1551,9 @@ body, html {
     }
 
     #storage-panel {
-        bottom: calc(14px + var(--safe-bottom) + 30px);
-        right: calc(180px + var(--safe-right));
-        left: auto;
+        bottom: calc(4px + var(--safe-bottom));
+        left: calc(4px + var(--safe-left));
+        right: auto;
         padding: 4px 5px 5px;
         border-radius: 7px;
     }
@@ -1716,9 +1720,9 @@ body, html {
 
     /* Controles móviles en pantallas pequeñas */
     #mobile-controls {
-        bottom: calc(14px + var(--safe-bottom));
-        right: calc(14px + var(--safe-right));
-        gap: 8px;
+        bottom: calc(4px + var(--safe-bottom));
+        right: calc(4px + var(--safe-right));
+        gap: 6px;
     }
 
     #mobile-fire-button {
@@ -1859,13 +1863,14 @@ body, html {
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(9px, 1.8vw, 13px);
         padding: 1px 4px;
+        left: calc(2px + var(--safe-left));
     }
 
-    #distance-counter { top: calc(10px + var(--safe-top)); }
-    #cyberattack-counter { top: calc(26px + var(--safe-top)); }
-    #asteroid-counter { top: calc(42px + var(--safe-top)); }
-    #missile-counter { top: calc(58px + var(--safe-top)); }
-    #difficulty-display { top: calc(76px + var(--safe-top)); }
+    #distance-counter { top: calc(2px + var(--safe-top)); }
+    #cyberattack-counter { top: calc(16px + var(--safe-top)); }
+    #asteroid-counter { top: calc(30px + var(--safe-top)); }
+    #missile-counter { top: calc(44px + var(--safe-top)); }
+    #difficulty-display { top: calc(60px + var(--safe-top)); }
 }
 
 /* ===== AVISO DE ROTACIÓN (portrait en móviles) ===== */
