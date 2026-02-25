@@ -2110,14 +2110,17 @@
 
                 addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
                     const placeholder = document.getElementById('leaderboard-placeholder');
-                    if (placeholder) {
-                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    if (placeholder && placeholder.parentNode) {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = buildLeaderboardHTML(board);
+                        placeholder.parentNode.replaceChild(wrapper.firstElementChild || wrapper, placeholder);
                     }
-                }).catch(err => {
+                }).catch(function() {
                     // Error cargando leaderboard (silencioso)
                     const placeholder = document.getElementById('leaderboard-placeholder');
                     if (placeholder) {
-                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                        placeholder.textContent = 'Error cargando leaderboard';
+                        placeholder.style.color = '#ff6666';
                     }
                 });
             }
@@ -2264,7 +2267,7 @@
                 const playerRank = getRank(cyberattackCount);
                 gameOverMessage.innerHTML = `
                     <h1>Misión Finalizada</h1>
-                    ${reason ? `<p class="game-over-reason">${reason}</p>` : ''}
+                    ${reason ? `<p class="game-over-reason">${escapeHTML(reason)}</p>` : ''}
                     <p class="player-result">Defensor: <strong>${escapeHTML(playerName)}</strong></p>
                     <p class="player-rank" style="color:${playerRank.color};text-shadow:0 0 10px ${playerRank.color}60;font-size:1.1em;margin:0.2em 0 0.5em;letter-spacing:1px;">&#9733; ${playerRank.name} &#9733;</p>
                     <div class="stats-row">
@@ -2358,14 +2361,17 @@
                 // Cargar leaderboard en segundo plano (no bloquea el UI)
                 addToLeaderboard(playerName, cyberattackCount, elapsedSeconds).then(board => {
                     const placeholder = document.getElementById('leaderboard-placeholder');
-                    if (placeholder) {
-                        placeholder.outerHTML = buildLeaderboardHTML(board);
+                    if (placeholder && placeholder.parentNode) {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = buildLeaderboardHTML(board);
+                        placeholder.parentNode.replaceChild(wrapper.firstElementChild || wrapper, placeholder);
                     }
-                }).catch(err => {
+                }).catch(function() {
                     // Error cargando leaderboard (silencioso)
                     const placeholder = document.getElementById('leaderboard-placeholder');
                     if (placeholder) {
-                        placeholder.innerHTML = '<p style="color:#ff6666;">Error cargando leaderboard</p>';
+                        placeholder.textContent = 'Error cargando leaderboard';
+                        placeholder.style.color = '#ff6666';
                     }
                 });
             }
