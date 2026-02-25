@@ -423,7 +423,6 @@ body, html {
         font-size: clamp(10px, 2.2vw, 15px);
     }
 
-
     .ammo-pack {
         min-width: 44px;
     }
