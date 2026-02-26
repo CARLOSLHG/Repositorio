@@ -421,7 +421,7 @@ body, html {
     }
 
     #difficulty-display {
-        top: calc(94px + var(--safe-top));
+        top: calc(104px + var(--safe-top));
         font-size: clamp(10px, 2.2vw, 15px);
     }
 
@@ -2250,7 +2250,7 @@ body, html {
     #cyberattack-counter { top: calc(18px + var(--safe-top)); }
     #asteroid-counter { top: calc(34px + var(--safe-top)); }
     #missile-counter { top: calc(50px + var(--safe-top)); }
-    #difficulty-display { top: calc(68px + var(--safe-top)); font-size: clamp(8px, 1.5vw, 11px); }
+    #difficulty-display { top: calc(78px + var(--safe-top)); font-size: clamp(8px, 1.5vw, 11px); }
 }
 
 /* ===== CONTINUE SCREEN: pantallas ultra-pequeñas (iPhone SE, Mini landscape) ===== */
