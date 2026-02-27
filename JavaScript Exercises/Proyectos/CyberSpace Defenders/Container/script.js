@@ -224,6 +224,14 @@
         const LEADERBOARD_REMOTE_URL = (typeof LEADERBOARD_CONFIG !== 'undefined' && LEADERBOARD_CONFIG.endpoint)
             ? LEADERBOARD_CONFIG.endpoint.trim()
             : '';
+        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/';
+        const JSONBIN_BIN_ID = (LEADERBOARD_CONFIG && LEADERBOARD_CONFIG.jsonbin && LEADERBOARD_CONFIG.jsonbin.binId)
+            ? LEADERBOARD_CONFIG.jsonbin.binId
+            : '';
+        const JSONBIN_API_KEY = (LEADERBOARD_CONFIG && LEADERBOARD_CONFIG.jsonbin && LEADERBOARD_CONFIG.jsonbin.apiKey)
+            ? LEADERBOARD_CONFIG.jsonbin.apiKey
+            : '';
+        const JSONBIN_ENABLED = !!(JSONBIN_BIN_ID && JSONBIN_API_KEY);
 
         function getLocalLeaderboard() {
             try {
@@ -264,30 +272,61 @@
         }
 
         async function fetchRemoteLeaderboard() {
-            const res = await fetch(LEADERBOARD_REMOTE_URL, {
-                method: 'GET',
-                cache: 'no-store',
-                headers: { 'Accept': 'application/json' }
-            });
-            if (!res.ok) throw new Error('Leaderboard GET ' + res.status);
-            const data = await res.json();
-            const board = Array.isArray(data) ? data : data.leaderboard;
-            return normalizeBoard(board || []);
+            if (LEADERBOARD_REMOTE_URL) {
+                const res = await fetch(LEADERBOARD_REMOTE_URL, {
+                    method: 'GET',
+                    cache: 'no-store',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!res.ok) throw new Error('Leaderboard GET ' + res.status);
+                const data = await res.json();
+                const board = Array.isArray(data) ? data : data.leaderboard;
+                return normalizeBoard(board || []);
+            }
+
+            if (JSONBIN_ENABLED) {
+                const res = await fetch(JSONBIN_URL + JSONBIN_BIN_ID + '/latest', {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!res.ok) throw new Error('JSONBin GET ' + res.status);
+                const data = await res.json();
+                return normalizeBoard((data && data.record && data.record.leaderboard) || []);
+            }
+
+            throw new Error('No remote leaderboard configured');
         }
 
         async function saveRemoteLeaderboard(board) {
-            const res = await fetch(LEADERBOARD_REMOTE_URL, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ leaderboard: board })
-            });
-            if (!res.ok) throw new Error('Leaderboard PUT ' + res.status);
+            if (LEADERBOARD_REMOTE_URL) {
+                const res = await fetch(LEADERBOARD_REMOTE_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ leaderboard: board })
+                });
+                if (!res.ok) throw new Error('Leaderboard PUT ' + res.status);
+                return;
+            }
+
+            if (JSONBIN_ENABLED) {
+                const res = await fetch(JSONBIN_URL + JSONBIN_BIN_ID, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ leaderboard: board })
+                });
+                if (!res.ok) throw new Error('JSONBin PUT ' + res.status);
+                return;
+            }
+
+            throw new Error('No remote leaderboard configured');
         }
 
         async function getLeaderboard() {
-            if (leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL) {
+            if (leaderboardRemoteEnabled) {
                 try {
                     const board = await fetchRemoteLeaderboard();
                     saveLocalLeaderboard(board);
@@ -313,7 +352,7 @@
 
             currentEntryId = entryId;
 
-            if (leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL) {
+            if (leaderboardRemoteEnabled) {
                 try {
                     const remoteBoard = await fetchRemoteLeaderboard();
                     remoteBoard.push(entry);
@@ -335,7 +374,7 @@
         }
 
         async function clearRemoteLeaderboard() {
-            if (!(leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL)) return;
+            if (!leaderboardRemoteEnabled) return;
             try {
                 await saveRemoteLeaderboard([]);
             } catch (e) {
