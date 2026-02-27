@@ -220,12 +220,15 @@
             }
         }
 
-        // --- Leaderboard: JSONBin.io (compartido) + localStorage (fallback) ---
-        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/';
+        // --- Leaderboard: remoto por proxy (opcional) + localStorage (fallback) ---
+        const LEADERBOARD_REMOTE_URL = (typeof LEADERBOARD_CONFIG !== 'undefined' && LEADERBOARD_CONFIG.endpoint)
+            ? LEADERBOARD_CONFIG.endpoint.trim()
+            : '';
 
         function getLocalLeaderboard() {
             try {
-                return JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
+                const board = JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
+                return normalizeBoard(board);
             } catch (e) {
                 return [];
             }
@@ -235,6 +238,25 @@
             localStorage.setItem('cyberspace_leaderboard', JSON.stringify(board));
         }
 
+        function normalizeEntry(entry) {
+            const safeThreats = Math.max(0, parseInt(entry && entry.threats, 10) || 0);
+            const safeTime = Math.max(0, parseInt(entry && entry.time, 10) || 0);
+            return {
+                id: String((entry && entry.id) || ''),
+                name: String((entry && entry.name) || '').slice(0, 32),
+                threats: safeThreats,
+                time: safeTime,
+                score: safeThreats * 100000 + safeTime,
+                date: String((entry && entry.date) || ''),
+                godRank: !!(entry && entry.godRank)
+            };
+        }
+
+        function normalizeBoard(board) {
+            if (!Array.isArray(board)) return [];
+            return board.map(normalizeEntry);
+        }
+
         function sortAndTrimBoard(board) {
             board.sort((a, b) => (b.score || 0) - (a.score || 0));
             if (board.length > 100) board.length = 100;
@@ -242,34 +264,36 @@
         }
 
         async function fetchRemoteLeaderboard() {
-            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId + '/latest', {
-                headers: { 'X-Master-Key': JSONBIN_CONFIG.apiKey }
+            const res = await fetch(LEADERBOARD_REMOTE_URL, {
+                method: 'GET',
+                cache: 'no-store',
+                headers: { 'Accept': 'application/json' }
             });
-            if (!res.ok) throw new Error('JSONBin GET ' + res.status);
+            if (!res.ok) throw new Error('Leaderboard GET ' + res.status);
             const data = await res.json();
-            return data.record.leaderboard || [];
+            const board = Array.isArray(data) ? data : data.leaderboard;
+            return normalizeBoard(board || []);
         }
 
         async function saveRemoteLeaderboard(board) {
-            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId, {
+            const res = await fetch(LEADERBOARD_REMOTE_URL, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': JSONBIN_CONFIG.apiKey
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ leaderboard: board })
             });
-            if (!res.ok) throw new Error('JSONBin PUT ' + res.status);
+            if (!res.ok) throw new Error('Leaderboard PUT ' + res.status);
         }
 
         async function getLeaderboard() {
-            if (jsonbinEnabled) {
+            if (leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL) {
                 try {
                     const board = await fetchRemoteLeaderboard();
                     saveLocalLeaderboard(board);
                     return board;
                 } catch (e) {
-                    // JSONBin read fallback silencioso
+                    // Remote read fallback silencioso
                 }
             }
             return getLocalLeaderboard();
@@ -289,7 +313,7 @@
 
             currentEntryId = entryId;
 
-            if (jsonbinEnabled) {
+            if (leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL) {
                 try {
                     const remoteBoard = await fetchRemoteLeaderboard();
                     remoteBoard.push(entry);
@@ -298,7 +322,7 @@
                     saveLocalLeaderboard(sorted);
                     return sorted;
                 } catch (e) {
-                    // JSONBin write fallback silencioso
+                    // Remote write fallback silencioso
                 }
             }
 
@@ -311,11 +335,11 @@
         }
 
         async function clearRemoteLeaderboard() {
-            if (!jsonbinEnabled) return;
+            if (!(leaderboardRemoteEnabled && LEADERBOARD_REMOTE_URL)) return;
             try {
                 await saveRemoteLeaderboard([]);
             } catch (e) {
-                // JSONBin clear fallback silencioso
+                // Remote clear fallback silencioso
             }
         }
 
@@ -368,10 +392,10 @@
                     <td>${parseInt(entry.threats, 10) || 0}</td>
                     <td>${parseInt(entry.time, 10) || 0}s</td>
                     <td style="color:${rank.color};text-shadow:0 0 6px ${rank.color}40;">${rank.name}</td>
-                    <td>${entry.date}</td>
+                    <td>${escapeHTML(entry.date || '')}</td>
                 </tr>`;
             });
-            const modeLabel = jsonbinEnabled ? '🌐 Global' : '💻 Local';
+            const modeLabel = leaderboardRemoteEnabled ? '🌐 Global' : '💻 Local';
             return `
                 <div id="leaderboard-container">
                     <h2>Leaderboard - Top 100 <span style="font-size:0.6em;color:#5577aa;">${modeLabel}</span></h2>
