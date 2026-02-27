@@ -10,9 +10,23 @@
 //
 // Si endpoint es '', se usa solo localStorage.
 const LEADERBOARD_CONFIG = {
-    endpoint: ''
+    endpoint: '',
+    // Compatibilidad directa con JSONBin (menos seguro que usar backend proxy).
+    jsonbin: {
+        _b: 'Njk5NDFhNDFkMGVhODgxZjQwYzA5MjIw',
+        _k: 'JDJhJDEwJHVuOFZHVEVnY1dSVHpLZmUyaEJ0Z3VFaDBUdm1xZEs4QTNraWpUUlFzeHNycWZoS2lJazhl',
+        get binId() { try { return atob(this._b); } catch (e) { return ''; } },
+        get apiKey() { try { return atob(this._k); } catch (e) { return ''; } }
+    }
 };
 
-const leaderboardRemoteEnabled = typeof LEADERBOARD_CONFIG !== 'undefined' &&
+const leaderboardRemoteEnabled = (
+    typeof LEADERBOARD_CONFIG !== 'undefined' &&
     typeof LEADERBOARD_CONFIG.endpoint === 'string' &&
-    LEADERBOARD_CONFIG.endpoint.trim() !== '';
+    LEADERBOARD_CONFIG.endpoint.trim() !== ''
+) || (
+    !!(LEADERBOARD_CONFIG &&
+        LEADERBOARD_CONFIG.jsonbin &&
+        LEADERBOARD_CONFIG.jsonbin.binId &&
+        LEADERBOARD_CONFIG.jsonbin.apiKey)
+);
