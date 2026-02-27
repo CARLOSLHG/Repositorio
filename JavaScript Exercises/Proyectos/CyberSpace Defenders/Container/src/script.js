@@ -59,6 +59,7 @@
         let playerName = '';
         let gameStarted = false;
         let gameOver = false;
+        let gamePaused = false;
         let lightYears = 0;
         let asteroidCount = 0;
         let cyberattackCount = 0;
@@ -68,6 +69,8 @@
         let asteroidGenerationInterval;
         let gameStartTime = null;
         let currentEntryId = null;
+        let pauseOverlayEl = null;
+        let lastCenterPauseTap = 0;
 
         // --- Sistema de misiles ---
         let missileCount = 50;
@@ -790,7 +793,9 @@
         let cachedContainerHeight = 0;
         let cachedSpaceshipHeight = 0;
         let mouseTargetBottom = -1;
+        let desktopCurrentBottom = -1;
         let isMouseControlled = false;
+        let isPointerLockActive = false;
 
         // --- Background scroll fluido (controlado desde game loop) ---
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
@@ -816,6 +821,56 @@
 
             // Detección de dispositivo táctil (necesario antes de configurar botones)
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
+            const POINTER_LOCK_SENSITIVITY = 1;
+            const DESKTOP_MOUSE_SMOOTHING = 0.42;
+            const pointerLockTarget = gameContainer;
+            const requestGameplayPointerLockNative = pointerLockTarget.requestPointerLock || pointerLockTarget.mozRequestPointerLock || pointerLockTarget.webkitRequestPointerLock;
+            const exitGameplayPointerLockNative = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+
+            function getPointerLockElement() {
+                return document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement || null;
+            }
+
+            function clampShipBottom(value) {
+                const maxBottom = Math.max(0, cachedContainerHeight - cachedSpaceshipHeight - MOUSE_TOP_MARGIN);
+                return Math.max(0, Math.min(maxBottom, value));
+            }
+
+            function syncPointerLockState() {
+                isPointerLockActive = getPointerLockElement() === pointerLockTarget;
+                if (!isPointerLockActive) return;
+                isMouseControlled = true;
+                if (desktopCurrentBottom < 0) {
+                    desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                }
+                mouseTargetBottom = desktopCurrentBottom;
+            }
+
+            function requestGameplayPointerLock() {
+                if (isTouchDevice || gameOver || !gameStarted || !requestGameplayPointerLockNative || isPointerLockActive) return;
+                try {
+                    requestGameplayPointerLockNative.call(pointerLockTarget);
+                } catch (_) {}
+            }
+
+            function releaseGameplayPointerLock() {
+                if (!exitGameplayPointerLockNative || getPointerLockElement() !== pointerLockTarget) return;
+                try {
+                    exitGameplayPointerLockNative.call(document);
+                } catch (_) {}
+            }
+
+            document.addEventListener('pointerlockchange', syncPointerLockState);
+            document.addEventListener('mozpointerlockchange', syncPointerLockState);
+            document.addEventListener('webkitpointerlockchange', syncPointerLockState);
+            document.addEventListener('pointerlockerror', () => { isPointerLockActive = false; });
+            window.addEventListener('blur', () => { isMouseControlled = false; });
+
+            gameContainer.addEventListener('click', function(event) {
+                if (isTouchDevice || gameOver || !gameStarted) return;
+                if (event.target.closest('button') || event.target.closest('#game-over-message')) return;
+                requestGameplayPointerLock();
+            });
 
             // Función para alternar música
             const toggleMusicButton = document.getElementById('toggle-music-button');
@@ -862,6 +917,12 @@
 
             // Teclas rápidas: música + inventario de power-ups
             document.addEventListener('keydown', (e) => {
+                if (e.key === 'p' || e.key === 'P') {
+                    e.preventDefault();
+                    toggleGamePaused();
+                    return;
+                }
+                if (gamePaused) return;
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
                 }
@@ -881,7 +942,7 @@
 
             // Click derecho para activar super capsule (PC/Mac)
             function useSuperCapsule() {
-                if (storedSuperCapsules > 0 && !godModeActive && !gameOver && gameStarted) {
+                if (storedSuperCapsules > 0 && !godModeActive && !gameOver && !gamePaused && gameStarted) {
                     storedSuperCapsules--;
                     updateInventoryUI();
                     activateGodMode();
@@ -891,7 +952,7 @@
             // Bloquear menú contextual SIEMPRE dentro del juego
             document.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
-                if (gameStarted && !gameOver) {
+                if (gameStarted && !gameOver && !gamePaused) {
                     useSuperCapsule();
                 }
             });
@@ -923,6 +984,41 @@
             });
             updateCachedDimensions();
 
+            function ensurePauseOverlay() {
+                if (pauseOverlayEl) return pauseOverlayEl;
+                pauseOverlayEl = document.createElement('div');
+                pauseOverlayEl.id = 'pause-overlay';
+                pauseOverlayEl.innerHTML = `<div class="pause-card"><span class="pause-title">PAUSA</span><span class="pause-hint">${isTouchDevice ? 'Doble toque al centro para continuar' : 'P o click para continuar'}</span></div>`;
+                gameContainer.appendChild(pauseOverlayEl);
+                return pauseOverlayEl;
+            }
+
+            function setGamePaused(nextPaused) {
+                if (!gameStarted || gameOver || gamePaused === nextPaused) return;
+                gamePaused = nextPaused;
+                gameContainer.classList.toggle('game-paused', gamePaused);
+                const overlay = ensurePauseOverlay();
+                overlay.classList.toggle('pause-visible', gamePaused);
+                if (gamePaused) {
+                    releaseGameplayPointerLock();
+                    isMouseControlled = false;
+                } else {
+                    requestGameplayPointerLock();
+                }
+                lastFrameTime = 0;
+            }
+
+            function toggleGamePaused() {
+                setGamePaused(!gamePaused);
+            }
+
+            function isCenterPauseTap(touch) {
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                return Math.abs(touch.clientX - centerX) <= window.innerWidth * 0.18 &&
+                    Math.abs(touch.clientY - centerY) <= window.innerHeight * 0.18;
+            }
+
             // Incrementar la distancia recorrida cada segundo + chequeo de misiles + actualizar dificultad
             const difficultyDisplay = document.getElementById('difficulty-display');
             const backgroundEl = document.getElementById('background');
@@ -944,7 +1040,7 @@
 
             function startDistanceCounter() {
                 distanceInterval = setInterval(() => {
-                    if (!gameOver) {
+                    if (!gameOver && !gamePaused) {
                         lightYears += 1;
                         distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
 
@@ -967,13 +1063,19 @@
             // Margen superior para evitar activar la barra de salida de pantalla completa del navegador
             const MOUSE_TOP_MARGIN = 30; // px de margen seguro en la parte superior
             document.addEventListener('mousemove', function(event) {
-                if (!gameOver && gameStarted) {
-                    isMouseControlled = true;
-                    const maxBottom = cachedContainerHeight - cachedSpaceshipHeight - MOUSE_TOP_MARGIN;
-                    const newBottom = cachedContainerHeight - event.clientY - (cachedSpaceshipHeight / 2);
-                    mouseTargetBottom = Math.max(0, Math.min(maxBottom, newBottom));
+                if (gameOver || !gameStarted || isTouchDevice) return;
+                isMouseControlled = true;
+                if (isPointerLockActive) {
+                    if (desktopCurrentBottom < 0) {
+                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                    }
+                    mouseTargetBottom = clampShipBottom((mouseTargetBottom >= 0 ? mouseTargetBottom : desktopCurrentBottom) - ((event.movementY || 0) * POINTER_LOCK_SENSITIVITY));
+                    return;
                 }
+                const newBottom = cachedContainerHeight - event.clientY - (cachedSpaceshipHeight / 2);
+                mouseTargetBottom = clampShipBottom(newBottom);
             });
+            requestGameplayPointerLock();
 
             // --- Controles táctiles para móviles (movimiento relativo, disparo via botón) ---
             let touching = false;
@@ -986,7 +1088,7 @@
                 let lastTouchY = 0;     // Última posición Y del dedo (para calcular delta)
 
                 gameContainer.addEventListener('touchstart', function(event) {
-                    if (gameOver || !gameStarted) return;
+                    if (gameOver || !gameStarted || gamePaused) return;
                     if (event.target.closest('button') || event.target.closest('#game-over-message') || event.target.closest('#mobile-fire-button')) return;
                     const newTouch = event.changedTouches[0];
                     if (newTouch.clientX > cachedScreenWidth * 0.5) return;
@@ -1003,7 +1105,7 @@
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchmove', function(event) {
-                    if (!touching || gameOver || !gameStarted) return;
+                    if (!touching || gameOver || !gameStarted || gamePaused) return;
                     event.preventDefault();
                     for (let i = 0; i < event.touches.length; i++) {
                         if (event.touches[i].identifier === moveTouchId) {
@@ -1022,6 +1124,18 @@
                 }, { passive: false });
 
                 gameContainer.addEventListener('touchend', function(event) {
+                    if (!event.target.closest('button') && !event.target.closest('#game-over-message')) {
+                        const touch = event.changedTouches[0];
+                        if (touch && isCenterPauseTap(touch)) {
+                            const now = Date.now();
+                            if (now - lastCenterPauseTap < 280) {
+                                toggleGamePaused();
+                                lastCenterPauseTap = 0;
+                            } else {
+                                lastCenterPauseTap = now;
+                            }
+                        }
+                    }
                     // Solo soltar control si se levantó el dedo que controla la nave
                     for (let i = 0; i < event.changedTouches.length; i++) {
                         if (event.changedTouches[i].identifier === moveTouchId) {
@@ -1073,6 +1187,12 @@
                     return;
                 }
 
+                if (gamePaused) {
+                    lastFrameTime = timestamp;
+                    gameLoopId = requestAnimationFrame(gameLoop);
+                    return;
+                }
+
                 // Delta time normalizado a 60fps (dt=1 a 60fps, dt=2 a 30fps)
                 const dt = lastFrameTime ? Math.min((timestamp - lastFrameTime) / 16.67, 3) : 1;
                 lastFrameTime = timestamp;
@@ -1093,7 +1213,15 @@
 
                 // === DESKTOP: Aplicar posición del mouse directamente (zero-delay) ===
                 if (isMouseControlled && mouseTargetBottom >= 0) {
-                    spaceship.style.bottom = mouseTargetBottom + 'px';
+                    if (desktopCurrentBottom < 0) {
+                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || mouseTargetBottom);
+                    }
+                    const desktopLerpFactor = 1 - Math.pow(1 - DESKTOP_MOUSE_SMOOTHING, dt);
+                    desktopCurrentBottom += (mouseTargetBottom - desktopCurrentBottom) * desktopLerpFactor;
+                    if (Math.abs(mouseTargetBottom - desktopCurrentBottom) < 0.35) {
+                        desktopCurrentBottom = mouseTargetBottom;
+                    }
+                    spaceship.style.bottom = desktopCurrentBottom + 'px';
                 }
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
@@ -1484,7 +1612,7 @@
             // Función para disparar misil desde la posición actual de la nave
             // Soporta stacking: dual + triple + laser se combinan
             function shootMissile() {
-                if (gameOver || !gameStarted) return;
+                if (gameOver || !gameStarted || gamePaused) return;
                 // En god mode el disparo manual no gasta misiles (usa shootGodMissile)
                 if (godModeActive) return;
 
@@ -1551,6 +1679,7 @@
             // Disparo triple en abanico: 3 misiles a +30°, 0°, -30° a doble velocidad
             // Si dual-shoot también está activo, añade misil trasero (stacking)
             function shootTripleMissiles() {
+                if (gamePaused) return;
                 // Consumo de misiles: 3 (triple) + 1 extra si dual activo
                 // Excepción: god mode = misiles infinitos
                 if (!godModeActive) {
@@ -1624,7 +1753,7 @@
                 function fireBurst(callback) {
                     let fired = 0;
                     function fireNext() {
-                        if (!desktopFireActive || gameOver || !gameStarted) return;
+                        if (!desktopFireActive || gameOver || !gameStarted || gamePaused) return;
                         if (fired < BURST_SIZE) {
                             shootMissile();
                             fired++;
@@ -1638,7 +1767,7 @@
                 }
 
                 function startDesktopFiring() {
-                    if (gameOver || !gameStarted) return;
+                    if (gameOver || !gameStarted || gamePaused) return;
                     desktopFireActive = true;
                     // Disparo inmediato: primer misil al pulsar
                     shootMissile();
@@ -1671,6 +1800,11 @@
 
                 document.addEventListener('mousedown', function(e) {
                     if (e.button !== 0) return;
+                    if (gamePaused) {
+                        e.preventDefault();
+                        setGamePaused(false);
+                        return;
+                    }
                     if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen') || e.target.closest('#pregame-screen')) return;
                     e.preventDefault(); // Prevenir selección/drag al hacer click en el juego
                     startDesktopFiring();
@@ -1700,7 +1834,7 @@
                 let mobileFireActive = false;
 
                 function startFiring() {
-                    if (gameOver || !gameStarted) return;
+                    if (gameOver || !gameStarted || gamePaused) return;
                     mobileFireActive = true;
                     // Disparar UN misil inmediatamente (sin pasar por burst/cooldown)
                     shootMissile();
@@ -1708,7 +1842,7 @@
                     // Si mantiene presionado, disparar misiles individuales continuos
                     if (fireHoldInterval) clearInterval(fireHoldInterval);
                     fireHoldInterval = setInterval(() => {
-                        if (gameOver || !gameStarted || !mobileFireActive) {
+                        if (gameOver || !gameStarted || gamePaused || !mobileFireActive) {
                             stopFiring();
                             return;
                         }
@@ -1891,6 +2025,11 @@
                 function scheduleNext() {
                     const delay = getSpawnDelay();
                     ammoPackTimeout = setTimeout(() => {
+                        if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleNext();
+                            return;
+                        }
                         if (!gameOver) {
                             createAmmoPack();
                             scheduleNext();
@@ -1971,13 +2110,17 @@
                 // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
                 const table = [
                     null,
-                    { probability: 0.06, delay: 40000 },
-                    { probability: 0.10, delay: 32000 },
-                    { probability: 0.18, delay: 25000 },
-                    { probability: 0.25, delay: 20000 },
-                    { probability: 0.35, delay: 15000 }
+                    { probability: scaleSpawnProbability(0.06, 0.90), delay: 40000 },
+                    { probability: scaleSpawnProbability(0.10, 0.90), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.18, 0.90), delay: 25000 },
+                    { probability: scaleSpawnProbability(0.25, 0.90), delay: 20000 },
+                    { probability: scaleSpawnProbability(0.35, 0.90), delay: 15000 }
                 ];
                 return table[level] || null;
+            }
+
+            function scaleSpawnProbability(probability, multiplier) {
+                return Math.min(0.95, Number((probability * multiplier).toFixed(3)));
             }
 
             function startSuperCapsuleSpawner() {
@@ -1986,6 +2129,10 @@
                     const checkDelay = params ? params.delay : 25000;
                     superCapsuleSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleCheck();
+                            return;
+                        }
                         const currentParams = getSuperCapsuleParams();
                         if (currentParams && !godModeActive) {
                             if (Math.random() < currentParams.probability) {
@@ -2040,6 +2187,10 @@
                     const checkDelay = params ? params.delay : 30000;
                     lifePackSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleCheck();
+                            return;
+                        }
                         const currentParams = getLifePackParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
@@ -2100,10 +2251,10 @@
                 const table = [
                     null,
                     null,
-                    { probability: 0.08, delay: 35000 },
-                    { probability: 0.14, delay: 28000 },
-                    { probability: 0.20, delay: 22000 },
-                    { probability: 0.28, delay: 16000 }
+                    { probability: scaleSpawnProbability(0.08, 1.10), delay: 35000 },
+                    { probability: scaleSpawnProbability(0.14, 1.10), delay: 28000 },
+                    { probability: scaleSpawnProbability(0.20, 1.10), delay: 22000 },
+                    { probability: scaleSpawnProbability(0.28, 1.10), delay: 16000 }
                 ];
                 return table[level] || null;
             }
@@ -2114,6 +2265,10 @@
                     const checkDelay = params ? params.delay : 35000;
                     dualShootSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleCheck();
+                            return;
+                        }
                         const currentParams = getDualShootParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
@@ -2172,10 +2327,10 @@
                 // Nivel 5 APOCALIPSIS: prob 0.30, cada 15s
                 var table = [
                     null, null,
-                    { probability: 0.10, delay: 32000 },
-                    { probability: 0.16, delay: 26000 },
-                    { probability: 0.22, delay: 20000 },
-                    { probability: 0.30, delay: 15000 }
+                    { probability: scaleSpawnProbability(0.10, 1.10), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.16, 1.10), delay: 26000 },
+                    { probability: scaleSpawnProbability(0.22, 1.10), delay: 20000 },
+                    { probability: scaleSpawnProbability(0.30, 1.10), delay: 15000 }
                 ];
                 return table[level] || null;
             }
@@ -2186,6 +2341,10 @@
                     var checkDelay = params ? params.delay : 32000;
                     laserPointSpawnTimeout = setTimeout(function() {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleCheck();
+                            return;
+                        }
                         var currentParams = getLaserPointParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
@@ -2282,9 +2441,9 @@
                 // Nivel 5 APOCALIPSIS: prob 0.18, cada 20s
                 var table = [
                     null, null, null,
-                    { probability: 0.06, delay: 40000 },
-                    { probability: 0.12, delay: 30000 },
-                    { probability: 0.18, delay: 20000 }
+                    { probability: scaleSpawnProbability(0.06, 1.10), delay: 40000 },
+                    { probability: scaleSpawnProbability(0.12, 1.10), delay: 30000 },
+                    { probability: scaleSpawnProbability(0.18, 1.10), delay: 20000 }
                 ];
                 return table[level] || null;
             }
@@ -2295,6 +2454,10 @@
                     var checkDelay = params ? params.delay : 40000;
                     tripleShootSpawnTimeout = setTimeout(function() {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleCheck();
+                            return;
+                        }
                         var currentParams = getTripleShootParams();
                         if (currentParams) {
                             if (Math.random() < currentParams.probability) {
@@ -2321,21 +2484,21 @@
             }
 
             function useDualShootFromStorage() {
-                if (storedDualShoots <= 0 || dualShootActive || gameOver || !gameStarted) return;
+                if (storedDualShoots <= 0 || dualShootActive || gameOver || gamePaused || !gameStarted) return;
                 storedDualShoots--;
                 activateDualShoot();
                 updateInventoryUI();
             }
 
             function useLaserPointFromStorage() {
-                if (storedLaserPoints <= 0 || laserPointActive || gameOver || !gameStarted) return;
+                if (storedLaserPoints <= 0 || laserPointActive || gameOver || gamePaused || !gameStarted) return;
                 storedLaserPoints--;
                 activateLaserPoint();
                 updateInventoryUI();
             }
 
             function useTripleShootFromStorage() {
-                if (storedTripleShoots <= 0 || tripleShootActive || gameOver || !gameStarted) return;
+                if (storedTripleShoots <= 0 || tripleShootActive || gameOver || gamePaused || !gameStarted) return;
                 storedTripleShoots--;
                 activateTripleShoot();
                 updateInventoryUI();
@@ -2573,6 +2736,11 @@
                     gameLoopId = null;
                 }
 
+                gamePaused = false;
+                gameContainer.classList.remove('game-paused');
+                if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
+                releaseGameplayPointerLock();
+                isMouseControlled = false;
                 const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
                 const maxLevelInfo = DIFFICULTY_LEVELS[maxDifficultyLevel];
                 const godRank = RANK_TABLE[RANK_TABLE.length - 1];
@@ -2710,6 +2878,9 @@
                 storedLives--;
                 updateInventoryUI();
                 gameOver = false;
+                gamePaused = false;
+                gameContainer.classList.remove('game-paused');
+                if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 gameContainer.style.cursor = 'none';
 
                 // Reposicionar nave en zona segura (centro)
@@ -2787,14 +2958,21 @@
                 touchTargetBottom = -1;
                 shipCurrentBottom = -1;
                 mouseTargetBottom = -1;
+                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
                 gameLoopId = requestAnimationFrame(gameLoop);
+                requestGameplayPointerLock();
             }
 
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
+                gamePaused = false;
+                gameContainer.classList.remove('game-paused');
+                if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
+                releaseGameplayPointerLock();
+                isMouseControlled = false;
                 // Detener god mode, dual-shoot, laser-point y triple-shoot si estaban activos
                 deactivateGodMode();
                 deactivateDualShoot();
@@ -2994,6 +3172,9 @@
                     gameOverMessage.remove();
                 }
                 gameOver = false;
+                gamePaused = false;
+                gameContainer.classList.remove('game-paused');
+                if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 // Ocultar cursor de nuevo al reiniciar
                 gameContainer.style.cursor = 'none';
                 lightYears = 0;
@@ -3063,6 +3244,7 @@
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
                 mouseTargetBottom = -1;
+                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
                 isMouseControlled = false;
 
                 // Actualizar dimensiones cacheadas por si cambió el viewport
@@ -3102,6 +3284,7 @@
                 startLaserPointSpawner();
                 startTripleShootSpawner();
                 gameLoopId = requestAnimationFrame(gameLoop);
+                requestGameplayPointerLock();
             }
 
             // Iniciar la creación de asteroides y cyberattacks (dificultad dinámica)
@@ -3137,6 +3320,10 @@
 
                     asteroidSpawnTimeout = setTimeout(() => {
                         if (gameOver) return;
+                        if (gamePaused) {
+                            scheduleNextSpawn();
+                            return;
+                        }
 
                         // Spawn asteroide principal
                         const randomAsteroid = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
