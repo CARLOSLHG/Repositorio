@@ -2650,14 +2650,12 @@ body, html {
 
 /* ===== OVERRIDE FINAL MÓVIL: HUD PEGADO A ESQUINAS ===== */
 @media (hover: none) and (pointer: coarse) {
-    --mobile-left-margin: 4px;
-
     #distance-counter,
     #asteroid-counter,
     #cyberattack-counter,
     #missile-counter,
     #difficulty-display {
-        left: var(--mobile-left-margin) !important;
+        left: 4px !important;
     }
 
     #distance-counter { top: 0 !important; }
@@ -2667,13 +2665,13 @@ body, html {
     #difficulty-display { top: 76px !important; }
 
     #storage-panel {
-        left: var(--mobile-left-margin) !important;
+        left: 4px !important;
         bottom: 0 !important;
         right: auto !important;
     }
 
     #toggle-music-button {
-        left: var(--mobile-left-margin) !important;
+        left: 4px !important;
         top: 98px !important;
         bottom: auto !important;
     }
