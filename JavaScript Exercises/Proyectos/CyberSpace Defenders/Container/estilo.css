@@ -95,9 +95,9 @@ body, html {
 
 .asteroid {
     position: absolute;
-    width: 8.4vw;
-    max-width: 140px;
-    min-width: 56px;
+    width: 7.56vw;
+    max-width: 126px;
+    min-width: 50.4px;
     height: auto;
     animation: moveAsteroid 5s linear forwards;
     will-change: transform;
@@ -109,9 +109,9 @@ body, html {
 
 .cyber-attack {
     position: absolute;
-    width: 10vw;
-    max-width: 160px;
-    min-width: 70px;
+    width: 9vw;
+    max-width: 144px;
+    min-width: 63px;
     height: auto;
     animation: moveCyberAttack 5s linear forwards;
     border: 2px solid #FF3B3F;
@@ -389,7 +389,8 @@ body, html {
     }
 
     #toggle-music-button {
-        bottom: calc(88px + var(--safe-bottom));
+        top: calc(130px + var(--safe-top));
+        bottom: auto;
         left: calc(4px + var(--safe-left));
         font-size: clamp(9px, 2vw, 12px);
         padding: 3px 7px;
@@ -958,7 +959,8 @@ body, html {
 
 #toggle-music-button {
     position: absolute;
-    bottom: calc(110px + var(--safe-bottom));
+    top: calc(192px + var(--safe-top));
+    bottom: auto;
     left: calc(12px + var(--safe-left));
     font-size: 0.75em;
     padding: 5px 10px;
@@ -1152,9 +1154,13 @@ body, html {
     background: rgba(5, 15, 30, 0.92);
     box-shadow: 0 0 60px rgba(0, 120, 255, 0.2), inset 0 0 40px rgba(0, 80, 180, 0.08);
     min-width: 40vw;
+    width: min(92vw, 750px);
     max-width: 750px;
     max-height: 90vh;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    overflow: hidden;
     box-sizing: border-box;
 }
 
@@ -1179,12 +1185,30 @@ body, html {
 }
 
 #pregame-leaderboard {
-    margin-bottom: 0.8em;
+    margin-bottom: 0;
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-x: hidden;
+    padding-right: 0.2em;
+}
+
+#pregame-actions {
+    margin-top: auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    padding-top: 0.6em;
+    border-top: 1px solid rgba(0, 200, 255, 0.2);
+    background: linear-gradient(to bottom, rgba(5, 15, 30, 0), rgba(5, 15, 30, 0.96) 40%);
 }
 
 /* Toggle de música en pantalla pre-juego */
 #pregame-music-toggle {
-    margin-bottom: 0.8em;
+    margin-bottom: 0;
 }
 
 .pregame-music-btn {
@@ -1248,6 +1272,8 @@ body, html {
     #pregame-panel {
         padding: 6vw 4vw;
         min-width: 88vw;
+        max-height: 92vh;
+        max-height: 92dvh;
     }
 
     #pregame-panel h1 {
@@ -1361,8 +1387,8 @@ body, html {
 }
 
 #mobile-fire-button {
-    width: 180px;
-    height: 180px;
+    width: 198px;
+    height: 198px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -1387,7 +1413,7 @@ body, html {
 }
 
 #mobile-fire-button .fire-label {
-    display: block;
+    display: none;
     font-size: 11px;
     font-weight: bold;
     color: #ff3b3f;
@@ -1958,8 +1984,8 @@ body, html {
     }
 
     #mobile-fire-button {
-        width: 162px;
-        height: 162px;
+        width: 178.2px;
+        height: 178.2px;
     }
 
     #mobile-fire-button .fire-icon-img {
@@ -2251,6 +2277,10 @@ body, html {
     #asteroid-counter { top: calc(34px + var(--safe-top)); }
     #missile-counter { top: calc(50px + var(--safe-top)); }
     #difficulty-display { top: calc(78px + var(--safe-top)); font-size: clamp(8px, 1.5vw, 11px); }
+    #toggle-music-button {
+        top: calc(96px + var(--safe-top));
+        bottom: auto;
+    }
 }
 
 /* ===== CONTINUE SCREEN: pantallas ultra-pequeñas (iPhone SE, Mini landscape) ===== */
