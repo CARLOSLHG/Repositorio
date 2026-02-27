@@ -102,17 +102,20 @@
 
         // --- Dual Shoot: disparo doble (activo hasta morir) ---
         let dualShootActive = false;
+        let storedDualShoots = 0;
         let activeDualShootPacks = [];
         let dualShootSpawnTimeout = null;
 
         // --- Laser Point: mira láser con línea guía (activo hasta morir) ---
         let laserPointActive = false;
+        let storedLaserPoints = 0;
         let laserPointGuideEl = null;
         let activeLaserPointPacks = [];
         let laserPointSpawnTimeout = null;
 
         // --- Triple Shoot: disparo triple en abanico (activo hasta morir) ---
         let tripleShootActive = false;
+        let storedTripleShoots = 0;
         let activeTripleShootPacks = [];
         let tripleShootSpawnTimeout = null;
         const TRIPLE_SHOOT_ANGLE = Math.tan(30 * Math.PI / 180); // tan(30°) ≈ 0.577
@@ -220,12 +223,23 @@
             }
         }
 
-        // --- Leaderboard: JSONBin.io (compartido) + localStorage (fallback) ---
+        // --- Leaderboard: remoto por proxy (opcional) + localStorage (fallback) ---
+        const LEADERBOARD_REMOTE_URL = (typeof LEADERBOARD_CONFIG !== 'undefined' && LEADERBOARD_CONFIG.endpoint)
+            ? LEADERBOARD_CONFIG.endpoint.trim()
+            : '';
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/';
+        const JSONBIN_BIN_ID = (LEADERBOARD_CONFIG && LEADERBOARD_CONFIG.jsonbin && LEADERBOARD_CONFIG.jsonbin.binId)
+            ? LEADERBOARD_CONFIG.jsonbin.binId
+            : '';
+        const JSONBIN_API_KEY = (LEADERBOARD_CONFIG && LEADERBOARD_CONFIG.jsonbin && LEADERBOARD_CONFIG.jsonbin.apiKey)
+            ? LEADERBOARD_CONFIG.jsonbin.apiKey
+            : '';
+        const JSONBIN_ENABLED = !!(JSONBIN_BIN_ID && JSONBIN_API_KEY);
 
         function getLocalLeaderboard() {
             try {
-                return JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
+                const board = JSON.parse(localStorage.getItem('cyberspace_leaderboard')) || [];
+                return normalizeBoard(board);
             } catch (e) {
                 return [];
             }
@@ -235,6 +249,25 @@
             localStorage.setItem('cyberspace_leaderboard', JSON.stringify(board));
         }
 
+        function normalizeEntry(entry) {
+            const safeThreats = Math.max(0, parseInt(entry && entry.threats, 10) || 0);
+            const safeTime = Math.max(0, parseInt(entry && entry.time, 10) || 0);
+            return {
+                id: String((entry && entry.id) || ''),
+                name: String((entry && entry.name) || '').slice(0, 32),
+                threats: safeThreats,
+                time: safeTime,
+                score: safeThreats * 100000 + safeTime,
+                date: String((entry && entry.date) || ''),
+                godRank: !!(entry && entry.godRank)
+            };
+        }
+
+        function normalizeBoard(board) {
+            if (!Array.isArray(board)) return [];
+            return board.map(normalizeEntry);
+        }
+
         function sortAndTrimBoard(board) {
             board.sort((a, b) => (b.score || 0) - (a.score || 0));
             if (board.length > 100) board.length = 100;
@@ -242,34 +275,67 @@
         }
 
         async function fetchRemoteLeaderboard() {
-            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId + '/latest', {
-                headers: { 'X-Master-Key': JSONBIN_CONFIG.apiKey }
-            });
-            if (!res.ok) throw new Error('JSONBin GET ' + res.status);
-            const data = await res.json();
-            return data.record.leaderboard || [];
+            if (LEADERBOARD_REMOTE_URL) {
+                const res = await fetch(LEADERBOARD_REMOTE_URL, {
+                    method: 'GET',
+                    cache: 'no-store',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!res.ok) throw new Error('Leaderboard GET ' + res.status);
+                const data = await res.json();
+                const board = Array.isArray(data) ? data : data.leaderboard;
+                return normalizeBoard(board || []);
+            }
+
+            if (JSONBIN_ENABLED) {
+                const res = await fetch(JSONBIN_URL + JSONBIN_BIN_ID + '/latest', {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!res.ok) throw new Error('JSONBin GET ' + res.status);
+                const data = await res.json();
+                return normalizeBoard((data && data.record && data.record.leaderboard) || []);
+            }
+
+            throw new Error('No remote leaderboard configured');
         }
 
         async function saveRemoteLeaderboard(board) {
-            const res = await fetch(JSONBIN_URL + JSONBIN_CONFIG.binId, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': JSONBIN_CONFIG.apiKey
-                },
-                body: JSON.stringify({ leaderboard: board })
-            });
-            if (!res.ok) throw new Error('JSONBin PUT ' + res.status);
+            if (LEADERBOARD_REMOTE_URL) {
+                const res = await fetch(LEADERBOARD_REMOTE_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ leaderboard: board })
+                });
+                if (!res.ok) throw new Error('Leaderboard PUT ' + res.status);
+                return;
+            }
+
+            if (JSONBIN_ENABLED) {
+                const res = await fetch(JSONBIN_URL + JSONBIN_BIN_ID, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ leaderboard: board })
+                });
+                if (!res.ok) throw new Error('JSONBin PUT ' + res.status);
+                return;
+            }
+
+            throw new Error('No remote leaderboard configured');
         }
 
         async function getLeaderboard() {
-            if (jsonbinEnabled) {
+            if (leaderboardRemoteEnabled) {
                 try {
                     const board = await fetchRemoteLeaderboard();
                     saveLocalLeaderboard(board);
                     return board;
                 } catch (e) {
-                    // JSONBin read fallback silencioso
+                    // Remote read fallback silencioso
                 }
             }
             return getLocalLeaderboard();
@@ -289,7 +355,7 @@
 
             currentEntryId = entryId;
 
-            if (jsonbinEnabled) {
+            if (leaderboardRemoteEnabled) {
                 try {
                     const remoteBoard = await fetchRemoteLeaderboard();
                     remoteBoard.push(entry);
@@ -298,7 +364,7 @@
                     saveLocalLeaderboard(sorted);
                     return sorted;
                 } catch (e) {
-                    // JSONBin write fallback silencioso
+                    // Remote write fallback silencioso
                 }
             }
 
@@ -311,11 +377,11 @@
         }
 
         async function clearRemoteLeaderboard() {
-            if (!jsonbinEnabled) return;
+            if (!leaderboardRemoteEnabled) return;
             try {
                 await saveRemoteLeaderboard([]);
             } catch (e) {
-                // JSONBin clear fallback silencioso
+                // Remote clear fallback silencioso
             }
         }
 
@@ -368,10 +434,10 @@
                     <td>${parseInt(entry.threats, 10) || 0}</td>
                     <td>${parseInt(entry.time, 10) || 0}s</td>
                     <td style="color:${rank.color};text-shadow:0 0 6px ${rank.color}40;">${rank.name}</td>
-                    <td>${entry.date}</td>
+                    <td>${escapeHTML(entry.date || '')}</td>
                 </tr>`;
             });
-            const modeLabel = jsonbinEnabled ? '🌐 Global' : '💻 Local';
+            const modeLabel = leaderboardRemoteEnabled ? '🌐 Global' : '💻 Local';
             return `
                 <div id="leaderboard-container">
                     <h2>Leaderboard - Top 100 <span style="font-size:0.6em;color:#5577aa;">${modeLabel}</span></h2>
@@ -796,13 +862,22 @@
                 e.stopPropagation();
             });
 
-            // Tecla M para música, S para super capsule
+            // Teclas rápidas: música + inventario de power-ups
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'm' || e.key === 'M') {
                     toggleMusic();
                 }
                 if (e.key === 's' || e.key === 'S') {
                     useSuperCapsule();
+                }
+                if (e.key === 'd' || e.key === 'D') {
+                    useDualShootFromStorage();
+                }
+                if (e.key === 'l' || e.key === 'L') {
+                    useLaserPointFromStorage();
+                }
+                if (e.key === 't' || e.key === 'T') {
+                    useTripleShootFromStorage();
                 }
             });
 
@@ -1307,7 +1382,7 @@
                     }
                 }
 
-                // Nave ↔ dual-shoot packs (activar inmediatamente al capturar)
+                // Nave ↔ dual-shoot packs
                 for (let i = activeDualShootPacks.length - 1; i >= 0; i--) {
                     const ds = activeDualShootPacks[i];
                     if (ds.destroyed || !ds._r) continue;
@@ -1320,14 +1395,16 @@
                             const idx = activeDualShootPacks.indexOf(ds);
                             if (idx !== -1) activeDualShootPacks.splice(idx, 1);
                         }, 400);
-                        // Activar dual-shoot inmediatamente (dura hasta morir)
                         if (!dualShootActive) {
                             activateDualShoot();
+                        } else {
+                            storedDualShoots++;
+                            updateInventoryUI();
                         }
                     }
                 }
 
-                // Nave ↔ laser-point packs (activar inmediatamente al capturar)
+                // Nave ↔ laser-point packs
                 for (let i = activeLaserPointPacks.length - 1; i >= 0; i--) {
                     const lp = activeLaserPointPacks[i];
                     if (lp.destroyed || !lp._r) continue;
@@ -1342,11 +1419,14 @@
                         }, 400);
                         if (!laserPointActive) {
                             activateLaserPoint();
+                        } else {
+                            storedLaserPoints++;
+                            updateInventoryUI();
                         }
                     }
                 }
 
-                // Nave ↔ triple-shoot packs (activar inmediatamente al capturar)
+                // Nave ↔ triple-shoot packs
                 for (let i = activeTripleShootPacks.length - 1; i >= 0; i--) {
                     const ts = activeTripleShootPacks[i];
                     if (ts.destroyed || !ts._r) continue;
@@ -1361,6 +1441,9 @@
                         }, 400);
                         if (!tripleShootActive) {
                             activateTripleShoot();
+                        } else {
+                            storedTripleShoots++;
+                            updateInventoryUI();
                         }
                     }
                 }
@@ -2240,6 +2323,27 @@
                 updateInventoryUI();
             }
 
+            function useDualShootFromStorage() {
+                if (storedDualShoots <= 0 || dualShootActive || gameOver || !gameStarted) return;
+                storedDualShoots--;
+                activateDualShoot();
+                updateInventoryUI();
+            }
+
+            function useLaserPointFromStorage() {
+                if (storedLaserPoints <= 0 || laserPointActive || gameOver || !gameStarted) return;
+                storedLaserPoints--;
+                activateLaserPoint();
+                updateInventoryUI();
+            }
+
+            function useTripleShootFromStorage() {
+                if (storedTripleShoots <= 0 || tripleShootActive || gameOver || !gameStarted) return;
+                storedTripleShoots--;
+                activateTripleShoot();
+                updateInventoryUI();
+            }
+
             // --- Actualizar UI del storage: 4 slots fijos con estados vacío/activo/engaged ---
             function updateInventoryUI() {
                 const scBtn = document.getElementById('inv-super');
@@ -2276,7 +2380,11 @@
                     if (dualShootActive) {
                         dualBtn.classList.remove('slot-empty', 'slot-active');
                         dualBtn.classList.add('slot-engaged');
-                        dualCount.textContent = 'ON';
+                        dualCount.textContent = storedDualShoots > 0 ? ('ON+' + storedDualShoots) : 'ON';
+                    } else if (storedDualShoots > 0) {
+                        dualBtn.classList.remove('slot-empty', 'slot-engaged');
+                        dualBtn.classList.add('slot-active');
+                        dualCount.textContent = storedDualShoots;
                     } else {
                         dualBtn.classList.remove('slot-active', 'slot-engaged');
                         dualBtn.classList.add('slot-empty');
@@ -2290,21 +2398,29 @@
                     if (laserPointActive) {
                         laserBtn.classList.remove('slot-empty', 'slot-active');
                         laserBtn.classList.add('slot-engaged');
-                        laserCount.textContent = 'ON';
+                        laserCount.textContent = storedLaserPoints > 0 ? ('ON+' + storedLaserPoints) : 'ON';
+                    } else if (storedLaserPoints > 0) {
+                        laserBtn.classList.remove('slot-empty', 'slot-engaged');
+                        laserBtn.classList.add('slot-active');
+                        laserCount.textContent = storedLaserPoints;
                     } else {
                         laserBtn.classList.remove('slot-active', 'slot-engaged');
                         laserBtn.classList.add('slot-empty');
                         laserCount.textContent = '';
                     }
                 }
-                // Triple Shoot slot (se activa inmediatamente, dura hasta morir)
+                // Triple Shoot slot
                 var tripleBtn = document.getElementById('inv-triple');
                 var tripleCount = document.getElementById('inv-triple-count');
                 if (tripleBtn && tripleCount) {
                     if (tripleShootActive) {
                         tripleBtn.classList.remove('slot-empty', 'slot-active');
                         tripleBtn.classList.add('slot-engaged');
-                        tripleCount.textContent = 'ON';
+                        tripleCount.textContent = storedTripleShoots > 0 ? ('ON+' + storedTripleShoots) : 'ON';
+                    } else if (storedTripleShoots > 0) {
+                        tripleBtn.classList.remove('slot-empty', 'slot-engaged');
+                        tripleBtn.classList.add('slot-active');
+                        tripleCount.textContent = storedTripleShoots;
                     } else {
                         tripleBtn.classList.remove('slot-active', 'slot-engaged');
                         tripleBtn.classList.add('slot-empty');
@@ -2328,7 +2444,7 @@
                 invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperFromStorage(e); });
             }
 
-            // --- Handlers de vida y dual (no activan en gameplay, solo visuales) ---
+            // --- Handlers de vida y dual ---
             const invLifeBtn = document.getElementById('inv-life');
             if (invLifeBtn) {
                 invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
@@ -2337,22 +2453,22 @@
             }
             const invDualBtn = document.getElementById('inv-dual');
             if (invDualBtn) {
-                invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useDualShootFromStorage(); }, { passive: false });
                 invDualBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+                invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); useDualShootFromStorage(); });
             }
-            // --- Handlers de laser y triple (no activan en gameplay, solo visuales) ---
+            // --- Handlers de laser y triple ---
             const invLaserBtn = document.getElementById('inv-laser');
             if (invLaserBtn) {
-                invLaserBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invLaserBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useLaserPointFromStorage(); }, { passive: false });
                 invLaserBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLaserBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+                invLaserBtn.addEventListener('click', function(e) { e.stopPropagation(); useLaserPointFromStorage(); });
             }
             var invTripleBtn = document.getElementById('inv-triple');
             if (invTripleBtn) {
-                invTripleBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
+                invTripleBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useTripleShootFromStorage(); }, { passive: false });
                 invTripleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invTripleBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+                invTripleBtn.addEventListener('click', function(e) { e.stopPropagation(); useTripleShootFromStorage(); });
             }
 
             // Disparo gratuito (god mode) - no consume misiles
@@ -2968,6 +3084,9 @@
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
                 storedLives = INITIAL_EXTRA_LIVES;
+                storedDualShoots = 0;
+                storedLaserPoints = 0;
+                storedTripleShoots = 0;
                 updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);
