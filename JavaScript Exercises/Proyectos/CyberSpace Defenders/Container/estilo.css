@@ -1374,8 +1374,8 @@ body, html {
 #mobile-controls {
     display: none;
     position: absolute;
-    bottom: calc(4px + var(--safe-bottom));
-    right: calc(4px + var(--safe-right));
+    bottom: max(0px, calc(var(--safe-bottom) - 2px));
+    right: max(0px, calc(var(--safe-right) - 2px));
     z-index: 25;
     align-items: flex-end;
     gap: 6px;
@@ -1399,9 +1399,9 @@ body, html {
     -webkit-tap-highlight-color: transparent;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 0;
     transition: transform 0.1s, box-shadow 0.1s;
 }
 
@@ -1978,8 +1978,8 @@ body, html {
 
     /* Controles móviles en pantallas pequeñas */
     #mobile-controls {
-        bottom: calc(4px + var(--safe-bottom));
-        right: calc(4px + var(--safe-right));
+        bottom: max(0px, calc(var(--safe-bottom) - 2px));
+        right: max(0px, calc(var(--safe-right) - 2px));
         gap: 6px;
     }
 
