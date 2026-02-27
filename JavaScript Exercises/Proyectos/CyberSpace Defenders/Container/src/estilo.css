@@ -1719,11 +1719,11 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-life { left: 16px; top: 116px; }
-    #inv-super { left: 34px; top: 52px; }
-    #inv-dual { left: 90px; top: 14px; }
-    #inv-laser { left: 154px; top: 26px; }
-    #inv-triple { left: 188px; top: 84px; }
+    #inv-life { left: 2px; top: 154px; }
+    #inv-super { left: 12px; top: 102px; }
+    #inv-dual { left: 50px; top: 48px; }
+    #inv-laser { left: 110px; top: 20px; }
+    #inv-triple { left: 178px; top: 66px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1808,11 +1808,11 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-life { left: 16px; top: 104px; }
-    #inv-super { left: 32px; top: 48px; }
-    #inv-dual { left: 82px; top: 14px; }
-    #inv-laser { left: 138px; top: 24px; }
-    #inv-triple { left: 170px; top: 76px; }
+    #inv-life { left: 2px; top: 136px; }
+    #inv-super { left: 12px; top: 90px; }
+    #inv-dual { left: 46px; top: 42px; }
+    #inv-laser { left: 96px; top: 16px; }
+    #inv-triple { left: 154px; top: 56px; }
 
     .inv-count {
         min-width: 12px;

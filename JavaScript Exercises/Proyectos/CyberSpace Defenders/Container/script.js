@@ -805,6 +805,8 @@
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
         let bgCurrentSpeed = 20;    // velocidad actual (segundos para recorrer el ciclo)
         let bgTargetSpeed = 20;     // velocidad objetivo (se interpola hacia esta)
+        let storageWheelDeltaAccumulator = 0;
+        let lastStorageWheelEventAt = 0;
         // Factor de escala: compensa que el elemento ahora mide 600vh en vez de 200vw.
         // Mantiene la misma velocidad visual (px/s) que con width:200%.
         let bgSpeedScale = 1;
@@ -953,6 +955,10 @@
                 }
             }
 
+            function getStorageNavigationSlots() {
+                return STORAGE_SELECTION_ORDER.slice();
+            }
+
             // Bloquear menú contextual SIEMPRE dentro del juego
             document.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -961,11 +967,53 @@
                 }
             });
 
-            document.addEventListener('wheel', (e) => {
+            function handleStorageWheelInput(rawEvent) {
                 if (!gameStarted || gameOver || gamePaused || isTouchDevice) return;
+
+                const e = rawEvent || window.event;
+                const deltaY = typeof e.deltaY === 'number'
+                    ? e.deltaY
+                    : (typeof e.wheelDelta === 'number' ? -e.wheelDelta : (typeof e.detail === 'number' ? e.detail * 16 : 0));
+                const deltaX = typeof e.deltaX === 'number' ? e.deltaX : 0;
+                const dominantDelta = Math.abs(deltaY) >= Math.abs(deltaX) ? deltaY : deltaX;
+                if (!dominantDelta) return;
+
                 e.preventDefault();
-                cycleSelectedStorageSlot(e.deltaY > 0 ? 1 : -1);
-            }, { passive: false });
+                e.stopPropagation();
+
+                const deltaMode = typeof e.deltaMode === 'number' ? e.deltaMode : 0;
+                const normalizedDelta = deltaMode === 1
+                    ? dominantDelta * 16
+                    : (deltaMode === 2 ? dominantDelta * 40 : dominantDelta);
+
+                const wheelDirection = normalizedDelta > 0 ? 1 : -1; // down -> right, up -> left
+
+                if (Math.abs(normalizedDelta) >= 2) {
+                    storageWheelDeltaAccumulator = 0;
+                    lastStorageWheelEventAt = e.timeStamp || Date.now();
+                    cycleSelectedStorageSlot(wheelDirection);
+                    return;
+                }
+
+                const eventTime = e.timeStamp || Date.now();
+                if ((eventTime - lastStorageWheelEventAt) > 220) {
+                    storageWheelDeltaAccumulator = 0;
+                }
+
+                storageWheelDeltaAccumulator += normalizedDelta;
+                lastStorageWheelEventAt = eventTime;
+
+                if (Math.abs(storageWheelDeltaAccumulator) >= 2) {
+                    cycleSelectedStorageSlot(storageWheelDeltaAccumulator > 0 ? 1 : -1); // down -> right, up -> left
+                    storageWheelDeltaAccumulator = 0;
+                }
+            }
+
+            window.addEventListener('wheel', handleStorageWheelInput, { passive: false, capture: true });
+            window.addEventListener('mousewheel', handleStorageWheelInput, { passive: false, capture: true });
+            window.addEventListener('DOMMouseScroll', handleStorageWheelInput, { passive: false, capture: true });
+            document.addEventListener('wheel', handleStorageWheelInput, { passive: false, capture: true });
+            gameContainer.addEventListener('wheel', handleStorageWheelInput, { passive: false, capture: true });
 
             const distanceCounter = document.getElementById('distance-counter');
             distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
@@ -1810,6 +1858,13 @@
                 });
 
                 document.addEventListener('mousedown', function(e) {
+                    if (e.button === 2) {
+                        if (!gameStarted || gameOver || gamePaused || isTouchDevice) return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                        useSelectedStorageSlot();
+                        return;
+                    }
                     if (e.button !== 0) return;
                     if (gamePaused) {
                         e.preventDefault();
@@ -1817,7 +1872,7 @@
                         return;
                     }
                     if (e.target.closest('button') || e.target.closest('#game-over-message') || e.target.closest('#player-screen') || e.target.closest('#pregame-screen')) return;
-                    e.preventDefault(); // Prevenir selección/drag al hacer click en el juego
+                    e.preventDefault(); // Prevent drag/select while clicking inside the game
                     startDesktopFiring();
                 });
 
@@ -2526,28 +2581,19 @@
             }
 
             function syncSelectedStorageSlot() {
-                const selectable = getSelectableStorageSlots();
                 if (!selectedStorageSlotId || !STORAGE_SELECTION_ORDER.includes(selectedStorageSlotId)) {
                     selectedStorageSlotId = 'super';
-                }
-                if (!selectable.length) {
-                    selectedStorageSlotId = 'super';
-                    return;
-                }
-                if (!selectable.includes(selectedStorageSlotId)) {
-                    selectedStorageSlotId = selectable.includes('super') ? 'super' : selectable[0];
                 }
             }
 
             function cycleSelectedStorageSlot(direction) {
                 if (gameOver || gamePaused || !gameStarted || isTouchDevice) return;
-                const selectable = getSelectableStorageSlots();
-                if (!selectable.length) return;
-                const currentIndex = selectable.includes(selectedStorageSlotId)
-                    ? selectable.indexOf(selectedStorageSlotId)
-                    : (direction >= 0 ? -1 : 0);
-                const nextIndex = (currentIndex + direction + selectable.length) % selectable.length;
-                selectedStorageSlotId = selectable[nextIndex];
+                const currentIndex = STORAGE_SELECTION_ORDER.includes(selectedStorageSlotId)
+                    ? STORAGE_SELECTION_ORDER.indexOf(selectedStorageSlotId)
+                    : 0;
+                const nextIndex = (currentIndex + direction + STORAGE_SELECTION_ORDER.length) % STORAGE_SELECTION_ORDER.length;
+                selectedStorageSlotId = STORAGE_SELECTION_ORDER[nextIndex];
+                storageWheelDeltaAccumulator = 0;
                 updateInventoryUI();
             }
 
