@@ -786,7 +786,7 @@
         let lastMobileFireTime = 0;
         // iOS reporta deltas más agresivos (ProMotion 120Hz + mayor frecuencia de eventos)
         const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        const touchSensitivity = (isIOSDevice ? 0.65 : 1.0) * 1.05;
+        const touchSensitivity = (isIOSDevice ? 0.65 : 1.0) * 1.10;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
