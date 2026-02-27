@@ -72,6 +72,7 @@
         let pauseOverlayEl = null;
         let lastCenterPauseTap = 0;
         let selectedStorageSlotId = 'super';
+        const STORAGE_SELECTION_ORDER = ['super', 'dual', 'laser', 'triple'];
 
         // --- Sistema de misiles ---
         let missileCount = 50;
@@ -788,7 +789,7 @@
         let shipCurrentBottom = -1;
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
-        const touchVerticalSensitivity = 1.10;
+        const touchVerticalSensitivity = 1.15;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
@@ -2523,12 +2524,15 @@
 
             function syncSelectedStorageSlot() {
                 const selectable = getSelectableStorageSlots();
+                if (!selectedStorageSlotId || !STORAGE_SELECTION_ORDER.includes(selectedStorageSlotId)) {
+                    selectedStorageSlotId = 'super';
+                }
                 if (!selectable.length) {
-                    selectedStorageSlotId = null;
+                    selectedStorageSlotId = 'super';
                     return;
                 }
-                if (!selectedStorageSlotId || !selectable.includes(selectedStorageSlotId)) {
-                    selectedStorageSlotId = selectable[0];
+                if (!selectable.includes(selectedStorageSlotId)) {
+                    selectedStorageSlotId = selectable.includes('super') ? 'super' : selectable[0];
                 }
             }
 
@@ -2536,7 +2540,9 @@
                 if (gameOver || gamePaused || !gameStarted || isTouchDevice) return;
                 const selectable = getSelectableStorageSlots();
                 if (!selectable.length) return;
-                const currentIndex = Math.max(0, selectable.indexOf(selectedStorageSlotId));
+                const currentIndex = selectable.includes(selectedStorageSlotId)
+                    ? selectable.indexOf(selectedStorageSlotId)
+                    : (direction >= 0 ? -1 : 0);
                 const nextIndex = (currentIndex + direction + selectable.length) % selectable.length;
                 selectedStorageSlotId = selectable[nextIndex];
                 updateInventoryUI();
@@ -3352,6 +3358,7 @@
                 storedDualShoots = 0;
                 storedLaserPoints = 0;
                 storedTripleShoots = 0;
+                selectedStorageSlotId = 'super';
                 updateInventoryUI();
 
                 clearTimeout(asteroidSpawnTimeout);
