@@ -1387,8 +1387,8 @@ body, html {
 }
 
 #mobile-fire-button {
-    width: 217.8px;
-    height: 217.8px;
+    width: 239.6px;
+    height: 239.6px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -1406,8 +1406,8 @@ body, html {
 }
 
 #mobile-fire-button .fire-icon-img {
-    width: 99px;
-    height: 99px;
+    width: 108.9px;
+    height: 108.9px;
     object-fit: contain;
     pointer-events: none;
 }
@@ -1984,13 +1984,13 @@ body, html {
     }
 
     #mobile-fire-button {
-        width: 196.02px;
-        height: 196.02px;
+        width: 215.6px;
+        height: 215.6px;
     }
 
     #mobile-fire-button .fire-icon-img {
-        width: 86px;
-        height: 86px;
+        width: 94.6px;
+        height: 94.6px;
     }
 
     #mobile-fire-button .fire-label {
