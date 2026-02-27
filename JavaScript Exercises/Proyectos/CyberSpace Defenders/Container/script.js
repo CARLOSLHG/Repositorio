@@ -71,6 +71,7 @@
         let currentEntryId = null;
         let pauseOverlayEl = null;
         let lastCenterPauseTap = 0;
+        let selectedStorageSlotId = 'super';
 
         // --- Sistema de misiles ---
         let missileCount = 50;
@@ -955,9 +956,15 @@
             document.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 if (gameStarted && !gameOver && !gamePaused) {
-                    useSuperCapsule();
+                    useSelectedStorageSlot();
                 }
             });
+
+            document.addEventListener('wheel', (e) => {
+                if (!gameStarted || gameOver || gamePaused || isTouchDevice) return;
+                e.preventDefault();
+                cycleSelectedStorageSlot(e.deltaY > 0 ? 1 : -1);
+            }, { passive: false });
 
             const distanceCounter = document.getElementById('distance-counter');
             distanceCounter.textContent = `Ciberpasos: ${lightYears}`;
@@ -2508,13 +2515,71 @@
             }
 
             // --- Actualizar UI del storage: 4 slots fijos con estados vacío/activo/engaged ---
+            function getSelectableStorageSlots() {
+                const slots = [];
+                if (storedSuperCapsules > 0 && !godModeActive) slots.push('super');
+                if (storedDualShoots > 0 && !dualShootActive) slots.push('dual');
+                if (storedLaserPoints > 0 && !laserPointActive) slots.push('laser');
+                if (storedTripleShoots > 0 && !tripleShootActive) slots.push('triple');
+                return slots;
+            }
+
+            function syncSelectedStorageSlot() {
+                const selectable = getSelectableStorageSlots();
+                if (!selectable.length) {
+                    selectedStorageSlotId = null;
+                    return;
+                }
+                if (!selectedStorageSlotId || !selectable.includes(selectedStorageSlotId)) {
+                    selectedStorageSlotId = selectable[0];
+                }
+            }
+
+            function cycleSelectedStorageSlot(direction) {
+                if (gameOver || gamePaused || !gameStarted || isTouchDevice) return;
+                const selectable = getSelectableStorageSlots();
+                if (!selectable.length) return;
+                const currentIndex = Math.max(0, selectable.indexOf(selectedStorageSlotId));
+                const nextIndex = (currentIndex + direction + selectable.length) % selectable.length;
+                selectedStorageSlotId = selectable[nextIndex];
+                updateInventoryUI();
+            }
+
+            function useSelectedStorageSlot() {
+                if (gameOver || gamePaused || !gameStarted || !selectedStorageSlotId) return false;
+                if (selectedStorageSlotId === 'super') {
+                    useSuperCapsule();
+                    return true;
+                }
+                if (selectedStorageSlotId === 'dual') {
+                    useDualShootFromStorage();
+                    return true;
+                }
+                if (selectedStorageSlotId === 'laser') {
+                    useLaserPointFromStorage();
+                    return true;
+                }
+                if (selectedStorageSlotId === 'triple') {
+                    useTripleShootFromStorage();
+                    return true;
+                }
+                return false;
+            }
+
             function updateInventoryUI() {
+                syncSelectedStorageSlot();
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
                 const lifeBtn = document.getElementById('inv-life');
                 const lifeCount = document.getElementById('inv-life-count');
                 const dualBtn = document.getElementById('inv-dual');
                 const dualCount = document.getElementById('inv-dual-count');
+                const slotButtons = [scBtn, lifeBtn, dualBtn, document.getElementById('inv-laser'), document.getElementById('inv-triple')];
+
+                slotButtons.forEach((slotBtn) => {
+                    if (!slotBtn) return;
+                    slotBtn.classList.toggle('slot-selected', !!selectedStorageSlotId && slotBtn.dataset.slot === selectedStorageSlotId);
+                });
 
                 // Super Capsule slot
                 if (scBtn && scCount) {
@@ -2593,18 +2658,24 @@
             }
 
             // --- Handler del botón de usar super capsule (click/touch en storage) ---
+            function useSuperFromStorage(e) {
+                if (e) { e.preventDefault(); e.stopPropagation(); }
+                if (storedSuperCapsules <= 0 || godModeActive || gameOver || gamePaused || !gameStarted) return;
+                storedSuperCapsules--;
+                updateInventoryUI();
+                activateGodMode();
+            }
+
             const invSuperBtn = document.getElementById('inv-super');
             if (invSuperBtn) {
-                function useSuperFromStorage(e) {
-                    if (e) { e.preventDefault(); e.stopPropagation(); }
-                    if (storedSuperCapsules <= 0 || godModeActive || gameOver || !gameStarted) return;
-                    storedSuperCapsules--;
-                    updateInventoryUI();
-                    activateGodMode();
-                }
                 invSuperBtn.addEventListener('touchstart', useSuperFromStorage, { passive: false });
                 invSuperBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invSuperBtn.addEventListener('click', function(e) { e.stopPropagation(); useSuperFromStorage(e); });
+                invSuperBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selectedStorageSlotId = 'super';
+                    updateInventoryUI();
+                    useSuperFromStorage(e);
+                });
             }
 
             // --- Handlers de vida y dual ---
@@ -2618,20 +2689,35 @@
             if (invDualBtn) {
                 invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useDualShootFromStorage(); }, { passive: false });
                 invDualBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invDualBtn.addEventListener('click', function(e) { e.stopPropagation(); useDualShootFromStorage(); });
+                invDualBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selectedStorageSlotId = 'dual';
+                    updateInventoryUI();
+                    useDualShootFromStorage();
+                });
             }
             // --- Handlers de laser y triple ---
             const invLaserBtn = document.getElementById('inv-laser');
             if (invLaserBtn) {
                 invLaserBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useLaserPointFromStorage(); }, { passive: false });
                 invLaserBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLaserBtn.addEventListener('click', function(e) { e.stopPropagation(); useLaserPointFromStorage(); });
+                invLaserBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selectedStorageSlotId = 'laser';
+                    updateInventoryUI();
+                    useLaserPointFromStorage();
+                });
             }
-            var invTripleBtn = document.getElementById('inv-triple');
+            const invTripleBtn = document.getElementById('inv-triple');
             if (invTripleBtn) {
                 invTripleBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useTripleShootFromStorage(); }, { passive: false });
                 invTripleBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invTripleBtn.addEventListener('click', function(e) { e.stopPropagation(); useTripleShootFromStorage(); });
+                invTripleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selectedStorageSlotId = 'triple';
+                    updateInventoryUI();
+                    useTripleShootFromStorage();
+                });
             }
 
             // Disparo gratuito (god mode) - no consume misiles
