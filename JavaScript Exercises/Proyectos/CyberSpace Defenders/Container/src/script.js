@@ -784,6 +784,7 @@
         let shipCurrentBottom = -1;
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
+        const touchVerticalSensitivity = 1.05;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
@@ -1007,8 +1008,9 @@
                     for (let i = 0; i < event.touches.length; i++) {
                         if (event.touches[i].identifier === moveTouchId) {
                             const currentY = event.touches[i].clientY;
-                            const deltaY = lastTouchY - currentY; // positivo = dedo sube = nave sube
+                            const rawDeltaY = lastTouchY - currentY; // positivo = dedo sube = nave sube
                             lastTouchY = currentY;
+                            const deltaY = rawDeltaY * touchVerticalSensitivity;
                             // Aplicar delta a la posición objetivo de la nave
                             touchTargetBottom = Math.max(0, Math.min(
                                 cachedContainerHeight - cachedSpaceshipHeight,
