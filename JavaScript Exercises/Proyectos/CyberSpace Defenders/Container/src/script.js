@@ -784,7 +784,7 @@
         let shipCurrentBottom = -1;
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
-        const touchVerticalSensitivity = 1.05;
+        const touchVerticalSensitivity = 1.10;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
