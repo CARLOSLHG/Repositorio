@@ -1704,12 +1704,12 @@ body, html {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        border: 1px solid rgba(120, 225, 255, 0.26);
-        background: radial-gradient(circle at 35% 35%, rgba(0, 200, 255, 0.16), rgba(2, 10, 22, 0.54) 72%);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24), 0 0 10px rgba(0, 200, 255, 0.10);
+        border: 1px solid rgba(120, 225, 255, 0.34);
+        background: transparent;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(120, 225, 255, 0.08), 0 0 10px rgba(0, 200, 255, 0.08);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
-        opacity: 0.82;
+        opacity: 0.9;
     }
 
     .inv-icon {
@@ -1732,11 +1732,11 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-life { left: 4px; top: 148px; }
-    #inv-super { left: 10px; top: 92px; }
-    #inv-dual { left: 48px; top: 36px; }
-    #inv-laser { left: 108px; top: 10px; }
-    #inv-triple { left: 170px; top: 34px; }
+    #inv-life { left: 16px; top: 116px; }
+    #inv-super { left: 34px; top: 52px; }
+    #inv-dual { left: 90px; top: 14px; }
+    #inv-laser { left: 154px; top: 26px; }
+    #inv-triple { left: 188px; top: 84px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1810,7 +1810,7 @@ body, html {
     .inv-slot {
         width: 44px;
         height: 44px;
-        opacity: 0.8;
+        opacity: 0.88;
     }
 
     .inv-icon {
@@ -1823,11 +1823,11 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-life { left: 4px; top: 132px; }
-    #inv-super { left: 10px; top: 84px; }
-    #inv-dual { left: 44px; top: 34px; }
-    #inv-laser { left: 98px; top: 12px; }
-    #inv-triple { left: 152px; top: 32px; }
+    #inv-life { left: 16px; top: 104px; }
+    #inv-super { left: 32px; top: 48px; }
+    #inv-dual { left: 82px; top: 14px; }
+    #inv-laser { left: 138px; top: 24px; }
+    #inv-triple { left: 170px; top: 76px; }
 
     .inv-count {
         min-width: 12px;
