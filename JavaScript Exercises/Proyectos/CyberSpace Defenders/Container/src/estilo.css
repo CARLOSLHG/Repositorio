@@ -2571,3 +2571,26 @@ body, html {
         margin-top: 6px;
     }
 }
+
+/* ===== OVERRIDE FINAL MÓVIL: HUD PEGADO A ESQUINAS ===== */
+@media (hover: none) and (pointer: coarse) {
+    #distance-counter,
+    #asteroid-counter,
+    #cyberattack-counter,
+    #missile-counter,
+    #difficulty-display {
+        left: 0 !important;
+    }
+
+    #distance-counter { top: 0 !important; }
+    #cyberattack-counter { top: 16px !important; }
+    #asteroid-counter { top: 30px !important; }
+    #missile-counter { top: 44px !important; }
+    #difficulty-display { top: 60px !important; }
+
+    #storage-panel {
+        left: 0 !important;
+        bottom: 0 !important;
+        right: auto !important;
+    }
+}
