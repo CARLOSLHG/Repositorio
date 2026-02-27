@@ -395,14 +395,14 @@ body, html {
     #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
         font-size: clamp(9px, 2vw, 14px);
         padding: 1px 4px;
-        left: calc(2px + var(--safe-left));
+        left: max(0px, calc(var(--safe-left) - 2px));
         border-left-width: 2px;
         background: rgba(0, 0, 0, 0.55);
         line-height: 1.2;
     }
 
     #distance-counter {
-        top: calc(4px + var(--safe-top));
+        top: max(0px, calc(var(--safe-top) - 2px));
     }
 
     #cyberattack-counter {
@@ -1652,8 +1652,8 @@ body, html {
 /* --- Mobile: storage panel en esquina inferior izquierda, compacto --- */
 @media (hover: none) and (pointer: coarse) {
     #storage-panel {
-        bottom: calc(4px + var(--safe-bottom));
-        left: calc(4px + var(--safe-left));
+        bottom: max(0px, calc(var(--safe-bottom) - 2px));
+        left: max(0px, calc(var(--safe-left) - 2px));
         right: auto;
         padding: 4px 5px 5px;
         border-radius: 8px;
@@ -1763,8 +1763,8 @@ body, html {
     }
 
     #storage-panel {
-        bottom: calc(4px + var(--safe-bottom));
-        left: calc(4px + var(--safe-left));
+        bottom: max(0px, calc(var(--safe-bottom) - 2px));
+        left: max(0px, calc(var(--safe-left) - 2px));
         right: auto;
         padding: 4px 5px 5px;
         border-radius: 7px;
