@@ -1652,37 +1652,28 @@ body, html {
 /* --- Mobile: storage panel en esquina inferior izquierda, compacto --- */
 @media (hover: none) and (pointer: coarse) {
     #storage-panel {
-        bottom: max(0px, calc(var(--safe-bottom) - 2px));
-        left: max(0px, calc(var(--safe-left) - 2px));
-        right: auto;
-        padding: 4px 5px 5px;
-        border-radius: 8px;
-        background: rgba(2, 8, 20, 0.5);
-        opacity: 0.92;
+        bottom: max(0px, calc(var(--safe-bottom) - 6px));
+        right: max(0px, calc(var(--safe-right) + 6px));
+        left: auto;
+        width: 252px;
+        height: 252px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: radial-gradient(circle at 72% 72%, rgba(255, 80, 90, 0.08), rgba(0, 0, 0, 0) 38%);
+        box-shadow: none;
+        opacity: 1;
     }
 
     #storage-header {
-        margin-bottom: 4px;
-        gap: 4px;
-    }
-
-    #storage-player-name {
-        font-size: 9px;
-        max-width: 80px;
-        letter-spacing: 1px;
-    }
-
-    #storage-divider {
-        height: 8px;
-    }
-
-    #storage-title {
-        font-size: 6px;
-        letter-spacing: 2px;
+        display: none;
     }
 
     #storage-slots {
-        gap: 4px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        gap: 0;
     }
 
     .inv-key {
@@ -1690,30 +1681,42 @@ body, html {
     }
 
     .inv-slot {
-        width: 52px;
-        height: 52px;
-        border-radius: 7px;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 200, 255, 0.24);
+        background: radial-gradient(circle at 35% 35%, rgba(0, 200, 255, 0.22), rgba(1, 8, 24, 0.88) 68%);
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35), 0 0 10px rgba(0, 200, 255, 0.16);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
     .inv-icon {
-        width: 26px;
-        height: 26px;
+        width: 24px;
+        height: 24px;
     }
 
     .inv-label {
-        font-size: 5px;
-        letter-spacing: 1px;
+        font-size: 4.5px;
+        letter-spacing: 0.6px;
     }
 
     .inv-count {
-        min-width: 14px;
-        height: 14px;
-        line-height: 14px;
+        min-width: 15px;
+        height: 15px;
+        line-height: 15px;
         font-size: 8px;
-        top: -4px;
-        right: -6px;
-        padding: 0 2px;
+        top: -3px;
+        right: -3px;
+        padding: 0 3px;
     }
+
+    #inv-super { left: 6px; top: 126px; }
+    #inv-life { left: 28px; top: 60px; }
+    #inv-dual { left: 86px; top: 12px; }
+    #inv-laser { left: 150px; top: 36px; }
+    #inv-triple { left: 188px; top: 102px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1763,41 +1766,28 @@ body, html {
     }
 
     #storage-panel {
-        bottom: max(0px, calc(var(--safe-bottom) - 2px));
-        left: max(0px, calc(var(--safe-left) - 2px));
-        right: auto;
-        padding: 4px 5px 5px;
-        border-radius: 7px;
+        bottom: max(0px, calc(var(--safe-bottom) - 6px));
+        right: max(0px, calc(var(--safe-right) + 6px));
+        left: auto;
+        width: 228px;
+        height: 228px;
+        padding: 0;
+        border-radius: 50%;
     }
 
     #storage-header {
-        margin-bottom: 3px;
-        gap: 3px;
-    }
-
-    #storage-player-name {
-        font-size: 8px;
-        max-width: 60px;
-        letter-spacing: 0.8px;
-    }
-
-    #storage-divider {
-        height: 7px;
-    }
-
-    #storage-title {
-        font-size: 5px;
-        letter-spacing: 1.5px;
+        display: none;
     }
 
     #storage-slots {
-        gap: 3px;
+        width: 100%;
+        height: 100%;
+        gap: 0;
     }
 
     .inv-slot {
         width: 44px;
         height: 44px;
-        border-radius: 6px;
     }
 
     .inv-icon {
@@ -1809,6 +1799,12 @@ body, html {
         font-size: 4.5px;
         letter-spacing: 0.6px;
     }
+
+    #inv-super { left: 8px; top: 116px; }
+    #inv-life { left: 28px; top: 58px; }
+    #inv-dual { left: 78px; top: 14px; }
+    #inv-laser { left: 132px; top: 34px; }
+    #inv-triple { left: 168px; top: 92px; }
 
     .inv-count {
         min-width: 12px;
@@ -2589,9 +2585,9 @@ body, html {
     #difficulty-display { top: 60px !important; }
 
     #storage-panel {
-        left: 4px !important;
-        bottom: 0 !important;
-        right: auto !important;
+        left: auto !important;
+        bottom: max(0px, calc(var(--safe-bottom) - 6px)) !important;
+        right: max(0px, calc(var(--safe-right) + 6px)) !important;
     }
 
     #toggle-music-button {
@@ -2599,4 +2595,57 @@ body, html {
         top: 82px !important;
         bottom: auto !important;
     }
+}
+
+#game-container.game-paused .asteroid,
+#game-container.game-paused .cyber-attack,
+#game-container.game-paused .ammo-pack,
+#game-container.game-paused .super-capsule,
+#game-container.game-paused .life-pack,
+#game-container.game-paused .dual-shoot-pack,
+#game-container.game-paused .laser-point-pack,
+#game-container.game-paused .triple-shoot-pack {
+    animation-play-state: paused !important;
+}
+
+#pause-overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 70;
+    pointer-events: none;
+    background: rgba(2, 8, 20, 0.28);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+#pause-overlay.pause-visible {
+    display: flex;
+}
+
+#pause-overlay .pause-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 200, 255, 0.24);
+    background: rgba(4, 14, 30, 0.88);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+#pause-overlay .pause-title {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #00d4ff;
+}
+
+#pause-overlay .pause-hint {
+    font-size: clamp(11px, 1.6vw, 14px);
+    letter-spacing: 1.4px;
+    color: rgba(255, 255, 255, 0.78);
 }
