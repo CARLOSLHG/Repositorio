@@ -1404,8 +1404,8 @@ body, html {
 }
 
 #mobile-fire-button {
-    width: 239.6px;
-    height: 239.6px;
+    width: 270px;
+    height: 270px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -1423,8 +1423,8 @@ body, html {
 }
 
 #mobile-fire-button .fire-icon-img {
-    width: 108.9px;
-    height: 108.9px;
+    width: 112px;
+    height: 112px;
     object-fit: contain;
     pointer-events: none;
 }
@@ -1677,8 +1677,8 @@ body, html {
         bottom: max(0px, calc(var(--safe-bottom) - 2px));
         right: max(0px, calc(var(--safe-right) - 2px));
         left: auto;
-        width: 246px;
-        height: 246px;
+        width: 266px;
+        height: 266px;
         padding: 0;
         border: none;
         border-radius: 50%;
@@ -1735,10 +1735,10 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-super { left: 70px; top: 156px; }
-    #inv-dual { left: 108px; top: 110px; }
-    #inv-laser { left: 162px; top: 104px; }
-    #inv-triple { left: 188px; top: 156px; }
+    #inv-super { left: 50px; top: 168px; }
+    #inv-dual { left: 96px; top: 108px; }
+    #inv-laser { left: 158px; top: 98px; }
+    #inv-triple { left: 210px; top: 144px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1793,8 +1793,8 @@ body, html {
         bottom: max(0px, calc(var(--safe-bottom) - 2px));
         right: max(0px, calc(var(--safe-right) - 2px));
         left: auto;
-        width: 222px;
-        height: 222px;
+        width: 238px;
+        height: 238px;
         padding: 0;
         border-radius: 50%;
     }
@@ -1825,10 +1825,10 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-super { left: 60px; top: 142px; }
-    #inv-dual { left: 92px; top: 100px; }
-    #inv-laser { left: 140px; top: 94px; }
-    #inv-triple { left: 164px; top: 142px; }
+    #inv-super { left: 42px; top: 150px; }
+    #inv-dual { left: 80px; top: 102px; }
+    #inv-laser { left: 134px; top: 94px; }
+    #inv-triple { left: 180px; top: 132px; }
 
     .inv-count {
         min-width: 12px;
