@@ -828,6 +828,7 @@
         let isMouseControlled = false;
         let isPointerLockActive = false;
         let escapeRouteCenterPct = 50;
+        let escapeRoutePhase = Math.random() * Math.PI * 2;
 
         // --- Background scroll fluido (controlado desde game loop) ---
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
@@ -884,6 +885,7 @@
                 return clampedValue;
             }
 
+
             function clampPercent(value, minValue, maxValue) {
                 return Math.max(minValue, Math.min(maxValue, value));
             }
@@ -895,9 +897,23 @@
 
             function updateEscapeRouteCenter(forceSnap) {
                 const shipPct = getShipBottomPercent();
-                const drift = (Math.random() - 0.5) * 6;
+                const elapsedSeconds = gameStartTime ? ((Date.now() - gameStartTime) / 1000) : 0;
+                const primaryAngle = (elapsedSeconds * 0.62) + escapeRoutePhase;
+                const secondaryAngle = (elapsedSeconds * 1.08) + (escapeRoutePhase * 0.55);
+                const primaryBase = Math.sin(primaryAngle);
+                const secondaryBase = Math.sin(secondaryAngle);
+                const crestEnvelope = 0.82 + (((Math.sin((elapsedSeconds * 0.24) + (escapeRoutePhase * 1.7)) + 1) / 2) * 0.50);
+                const valleyEnvelope = 0.78 + (((Math.sin((elapsedSeconds * 0.19) + (escapeRoutePhase * 0.9) + 1.4) + 1) / 2) * 0.42);
+                const valleyTilt = 0.80 + (((Math.sin((elapsedSeconds * 0.13) + (escapeRoutePhase * 1.3) + 2.1) + 1) / 2) * 0.92);
+                const rippleEnvelope = 0.66 + (((Math.sin((elapsedSeconds * 0.39) + (escapeRoutePhase * 1.1) - 0.8) + 1) / 2) * 0.58);
+                const primaryWave = primaryBase >= 0
+                    ? Math.pow(primaryBase, 0.74) * (11.1 * crestEnvelope)
+                    : -Math.pow(-primaryBase, valleyTilt) * (6.8 * valleyEnvelope);
+                const secondaryWave = secondaryBase >= 0
+                    ? Math.pow(secondaryBase, 1.42) * (2.2 * rippleEnvelope)
+                    : -Math.pow(-secondaryBase, 0.66) * (3.6 * rippleEnvelope);
                 const desiredCenter = clampPercent(
-                    shipPct + drift,
+                    (shipPct * 0.52) + 24 + primaryWave + secondaryWave,
                     ESCAPE_ROUTE_MIN_CENTER_PCT,
                     ESCAPE_ROUTE_MAX_CENTER_PCT
                 );
@@ -905,7 +921,7 @@
                     escapeRouteCenterPct = desiredCenter;
                 } else {
                     escapeRouteCenterPct = clampPercent(
-                        escapeRouteCenterPct + (desiredCenter - escapeRouteCenterPct) * 0.35,
+                        escapeRouteCenterPct + (desiredCenter - escapeRouteCenterPct) * 0.22,
                         ESCAPE_ROUTE_MIN_CENTER_PCT,
                         ESCAPE_ROUTE_MAX_CENTER_PCT
                     );
@@ -1447,6 +1463,7 @@
                 if (backgroundEl) {
                     backgroundEl.style.transform = `translate3d(${bgScrollX}%, 0, 0)`;
                 }
+
 
                 // === FASE WRITE: mover misiles con transform (NO dispara layout) ===
                 for (let i = activeMissiles.length - 1; i >= 0; i--) {
@@ -3295,6 +3312,10 @@
                         </div>
                     `;
                     gameContainer.appendChild(continueOverlay);
+                    const continueYesBtn = document.getElementById('continue-yes-btn');
+                    if (continueYesBtn) {
+                        continueYesBtn.focus({ preventScroll: true });
+                    }
 
                     // Ocultar controles móviles, inventario y botón de música durante el diálogo
                     const mobileCtrlCont = document.getElementById('mobile-controls');
@@ -3315,6 +3336,17 @@
                             storedLives = 0;
                             updateInventoryUI();
                             showGameOverMessage(reason);
+                        }
+                    });
+                    continueOverlay.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            const activeEl = document.activeElement;
+                            if (activeEl && activeEl.id === 'continue-no-btn') {
+                                document.getElementById('continue-no-btn').click();
+                            } else if (continueYesBtn) {
+                                continueYesBtn.click();
+                            }
                         }
                     });
                     return;

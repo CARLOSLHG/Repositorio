@@ -93,6 +93,7 @@ body, html {
     contain: strict;
 }
 
+
 .asteroid {
     position: absolute;
     width: 7.56vw;
