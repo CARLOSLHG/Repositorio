@@ -816,7 +816,9 @@
         let shipCurrentBottom = -1;
         let isTouchControlled = false;
         let lastMobileFireTime = 0;
-        const touchVerticalSensitivity = 1.15;
+        // iOS reporta deltas más agresivos (ProMotion 120Hz + mayor frecuencia de eventos)
+        const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const touchSensitivity = (isIOSDevice ? 0.65 : 1.0) * 1.15;
 
         // --- Desktop mouse (zero-delay via game loop) ---
         let cachedContainerHeight = 0;
@@ -832,13 +834,13 @@
         let bgTargetSpeed = 20;     // velocidad objetivo (se interpola hacia esta)
         let storageWheelDeltaAccumulator = 0;
         let lastStorageWheelEventAt = 0;
-        // Factor de escala: compensa que el elemento ahora mide 1400vh en vez de 200vw.
+        // Factor de escala: compensa que el elemento ahora mide 600vh en vez de 200vw.
         // Mantiene la misma velocidad visual (px/s) que con width:200%.
         let bgSpeedScale = 1;
         function updateBgSpeedScale() {
-            // oldElementWidth = 2 * vw, newElementWidth = 14 * vh
-            // scale = oldWidth / newWidth = (2 * vw) / (14 * vh)
-            bgSpeedScale = (2 * window.innerWidth) / (14 * window.innerHeight);
+            // oldElementWidth = 2 * vw, newElementWidth = 6 * vh
+            // scale = oldWidth / newWidth = (2 * vw) / (6 * vh)
+            bgSpeedScale = (2 * window.innerWidth) / (6 * window.innerHeight);
         }
 
         function initGame() {
@@ -867,12 +869,23 @@
                 return Math.max(0, Math.min(maxBottom, value));
             }
 
+            function getShipBottom() {
+                const rawValue = parseFloat(spaceship.style.bottom);
+                return Number.isFinite(rawValue) ? rawValue : clampShipBottom(cachedContainerHeight / 2);
+            }
+
+            function setShipBottom(value) {
+                const clampedValue = clampShipBottom(value);
+                spaceship.style.bottom = `${clampedValue}px`;
+                return clampedValue;
+            }
+
             function syncPointerLockState() {
                 isPointerLockActive = getPointerLockElement() === pointerLockTarget;
                 if (!isPointerLockActive) return;
                 isMouseControlled = true;
                 if (desktopCurrentBottom < 0) {
-                    desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                    desktopCurrentBottom = getShipBottom();
                 }
                 mouseTargetBottom = desktopCurrentBottom;
             }
@@ -905,6 +918,7 @@
 
             // Función para alternar música
             const toggleMusicButton = document.getElementById('toggle-music-button');
+            const pauseGameButton = document.getElementById('pause-game-button');
             function toggleMusic() {
                 if (musicPlaying) {
                     audio.pause();
@@ -914,6 +928,13 @@
                     toggleMusicButton.textContent = isTouchDevice ? 'Apagar Música' : 'Apagar Música (M)';
                 }
                 musicPlaying = !musicPlaying;
+            }
+
+            function updatePauseButtonLabel() {
+                if (!pauseGameButton) return;
+                pauseGameButton.textContent = gamePaused
+                    ? (isTouchDevice ? 'Continuar' : 'Continuar (P)')
+                    : (isTouchDevice ? 'Pausar' : 'Pausar (P)');
             }
 
             // Texto inicial según preferencia del pregame y tipo de dispositivo
@@ -928,6 +949,24 @@
                 e.stopPropagation();
                 toggleMusic();
             });
+
+            if (pauseGameButton) {
+                pauseGameButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleGamePaused();
+                });
+                pauseGameButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleGamePaused();
+                    pauseGameButton.blur();
+                }, { passive: false });
+                pauseGameButton.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            }
 
             // Handlers táctiles dedicados para el botón de música (evita interferir con controles de nave)
             toggleMusicButton.addEventListener('touchstart', function(e) {
@@ -1066,6 +1105,7 @@
                 setTimeout(updateCachedDimensions, 150);
             });
             updateCachedDimensions();
+            spaceship.style.bottom = '50%';
 
             function ensurePauseOverlay() {
                 if (pauseOverlayEl) return pauseOverlayEl;
@@ -1089,6 +1129,7 @@
                     requestGameplayPointerLock();
                 }
                 lastFrameTime = 0;
+                updatePauseButtonLabel();
             }
 
             function toggleGamePaused() {
@@ -1150,7 +1191,7 @@
                 isMouseControlled = true;
                 if (isPointerLockActive) {
                     if (desktopCurrentBottom < 0) {
-                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                        desktopCurrentBottom = getShipBottom();
                     }
                     mouseTargetBottom = clampShipBottom((mouseTargetBottom >= 0 ? mouseTargetBottom : desktopCurrentBottom) - ((event.movementY || 0) * POINTER_LOCK_SENSITIVITY));
                     return;
@@ -1182,7 +1223,7 @@
                     // Activar control táctil sin mover la nave (solo registrar posición inicial)
                     if (!isTouchControlled) {
                         isTouchControlled = true;
-                        shipCurrentBottom = parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2);
+                        shipCurrentBottom = getShipBottom();
                         touchTargetBottom = shipCurrentBottom;
                     }
                 }, { passive: false });
@@ -1193,9 +1234,10 @@
                     for (let i = 0; i < event.touches.length; i++) {
                         if (event.touches[i].identifier === moveTouchId) {
                             const currentY = event.touches[i].clientY;
-                            const rawDeltaY = lastTouchY - currentY; // positivo = dedo sube = nave sube
+                            const rawDelta = lastTouchY - currentY; // positivo = dedo sube = nave sube
                             lastTouchY = currentY;
-                            const deltaY = rawDeltaY * touchVerticalSensitivity;
+                            // Aplicar sensibilidad (iOS recibe deltas más grandes/frecuentes)
+                            const deltaY = rawDelta * touchSensitivity;
                             // Aplicar delta a la posición objetivo de la nave
                             touchTargetBottom = Math.max(0, Math.min(
                                 cachedContainerHeight - cachedSpaceshipHeight,
@@ -1284,27 +1326,27 @@
 
                 // === MOBILE: Movimiento suave de la nave (interpolación lerp) ===
                 if (isTouchControlled && touchTargetBottom >= 0) {
-                    const smoothing = 0.35; // 35% por frame a 60fps — más responsivo
+                    const smoothing = isIOSDevice ? 0.28 : 0.35; // iOS más suave para compensar deltas agresivos
                     const lerpFactor = 1 - Math.pow(1 - smoothing, dt);
                     shipCurrentBottom += (touchTargetBottom - shipCurrentBottom) * lerpFactor;
                     // Snap cuando está muy cerca para evitar micro-movimientos infinitos
                     if (Math.abs(touchTargetBottom - shipCurrentBottom) < 0.5) {
                         shipCurrentBottom = touchTargetBottom;
                     }
-                    spaceship.style.bottom = shipCurrentBottom + 'px';
+                    setShipBottom(shipCurrentBottom);
                 }
 
                 // === DESKTOP: Aplicar posición del mouse directamente (zero-delay) ===
                 if (isMouseControlled && mouseTargetBottom >= 0) {
                     if (desktopCurrentBottom < 0) {
-                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || mouseTargetBottom);
+                        desktopCurrentBottom = getShipBottom();
                     }
                     const desktopLerpFactor = 1 - Math.pow(1 - DESKTOP_MOUSE_SMOOTHING, dt);
                     desktopCurrentBottom += (mouseTargetBottom - desktopCurrentBottom) * desktopLerpFactor;
                     if (Math.abs(mouseTargetBottom - desktopCurrentBottom) < 0.35) {
                         desktopCurrentBottom = mouseTargetBottom;
                     }
-                    spaceship.style.bottom = desktopCurrentBottom + 'px';
+                    setShipBottom(desktopCurrentBottom);
                 }
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
@@ -2175,18 +2217,18 @@
                 const elapsed = (Date.now() - gameStartTime) / 1000;
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece
-                // Nivel 1 ALERTA:      prob 0.08, cada 35s
-                // Nivel 2 PELIGRO:     prob 0.14, cada 28s
-                // Nivel 3 CRÍTICO:     prob 0.22, cada 22s
-                // Nivel 4 EXTREMO:     prob 0.30, cada 18s
-                // Nivel 5 APOCALIPSIS: prob 0.40, cada 14s
+                // Nivel 1 ALERTA:      prob 0.13, cada 35s
+                // Nivel 2 PELIGRO:     prob 0.19, cada 28s
+                // Nivel 3 CRÍTICO:     prob 0.27, cada 22s
+                // Nivel 4 EXTREMO:     prob 0.35, cada 18s
+                // Nivel 5 APOCALIPSIS: prob 0.45, cada 14s
                 const table = [
                     null,
-                    { probability: 0.08, delay: 35000 },
-                    { probability: 0.14, delay: 28000 },
-                    { probability: 0.22, delay: 22000 },
-                    { probability: 0.30, delay: 18000 },
-                    { probability: 0.40, delay: 14000 }
+                    { probability: 0.13, delay: 35000 },
+                    { probability: 0.19, delay: 28000 },
+                    { probability: 0.27, delay: 22000 },
+                    { probability: 0.35, delay: 18000 },
+                    { probability: 0.45, delay: 14000 }
                 ];
                 return table[level] || null;
             }
@@ -2197,18 +2239,18 @@
                 const elapsed = (Date.now() - gameStartTime) / 1000;
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece (empiezas con vidas iniciales)
-                // Nivel 1 ALERTA:      prob 0.06, cada 40s
-                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
-                // Nivel 3 CRÍTICO:     prob 0.18, cada 25s
-                // Nivel 4 EXTREMO:     prob 0.25, cada 20s
-                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
+                // Nivel 1 ALERTA:      prob 0.11, cada 40s
+                // Nivel 2 PELIGRO:     prob 0.15, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.23, cada 25s
+                // Nivel 4 EXTREMO:     prob 0.30, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.40, cada 15s
                 const table = [
                     null,
-                    { probability: scaleSpawnProbability(0.06, 0.90), delay: 40000 },
-                    { probability: scaleSpawnProbability(0.10, 0.90), delay: 32000 },
-                    { probability: scaleSpawnProbability(0.18, 0.90), delay: 25000 },
-                    { probability: scaleSpawnProbability(0.25, 0.90), delay: 20000 },
-                    { probability: scaleSpawnProbability(0.35, 0.90), delay: 15000 }
+                    { probability: scaleSpawnProbability(0.11, 0.90), delay: 40000 },
+                    { probability: scaleSpawnProbability(0.15, 0.90), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.23, 0.90), delay: 25000 },
+                    { probability: scaleSpawnProbability(0.30, 0.90), delay: 20000 },
+                    { probability: scaleSpawnProbability(0.40, 0.90), delay: 15000 }
                 ];
                 return table[level] || null;
             }
@@ -2338,17 +2380,17 @@
                 const level = getDifficultyLevel(elapsed);
                 // Nivel 0 SEGURO:      no aparece
                 // Nivel 1 ALERTA:      no aparece
-                // Nivel 2 PELIGRO:     prob 0.08, cada 35s
-                // Nivel 3 CRÍTICO:     prob 0.14, cada 28s
-                // Nivel 4 EXTREMO:     prob 0.20, cada 22s
-                // Nivel 5 APOCALIPSIS: prob 0.28, cada 16s
+                // Nivel 2 PELIGRO:     prob 0.13, cada 35s
+                // Nivel 3 CRÍTICO:     prob 0.19, cada 28s
+                // Nivel 4 EXTREMO:     prob 0.25, cada 22s
+                // Nivel 5 APOCALIPSIS: prob 0.33, cada 16s
                 const table = [
                     null,
                     null,
-                    { probability: scaleSpawnProbability(0.08, 1.10), delay: 35000 },
-                    { probability: scaleSpawnProbability(0.14, 1.10), delay: 28000 },
-                    { probability: scaleSpawnProbability(0.20, 1.10), delay: 22000 },
-                    { probability: scaleSpawnProbability(0.28, 1.10), delay: 16000 }
+                    { probability: scaleSpawnProbability(0.13, 1.10), delay: 35000 },
+                    { probability: scaleSpawnProbability(0.19, 1.10), delay: 28000 },
+                    { probability: scaleSpawnProbability(0.25, 1.10), delay: 22000 },
+                    { probability: scaleSpawnProbability(0.33, 1.10), delay: 16000 }
                 ];
                 return table[level] || null;
             }
@@ -2415,16 +2457,16 @@
                 var elapsed = (Date.now() - gameStartTime) / 1000;
                 var level = getDifficultyLevel(elapsed);
                 // Nivel 0-1: no aparece
-                // Nivel 2 PELIGRO:     prob 0.10, cada 32s
-                // Nivel 3 CRÍTICO:     prob 0.16, cada 26s
-                // Nivel 4 EXTREMO:     prob 0.22, cada 20s
-                // Nivel 5 APOCALIPSIS: prob 0.30, cada 15s
+                // Nivel 2 PELIGRO:     prob 0.15, cada 32s
+                // Nivel 3 CRÍTICO:     prob 0.21, cada 26s
+                // Nivel 4 EXTREMO:     prob 0.27, cada 20s
+                // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
                 var table = [
                     null, null,
-                    { probability: scaleSpawnProbability(0.10, 1.10), delay: 32000 },
-                    { probability: scaleSpawnProbability(0.16, 1.10), delay: 26000 },
-                    { probability: scaleSpawnProbability(0.22, 1.10), delay: 20000 },
-                    { probability: scaleSpawnProbability(0.30, 1.10), delay: 15000 }
+                    { probability: scaleSpawnProbability(0.15, 1.10), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.21, 1.10), delay: 26000 },
+                    { probability: scaleSpawnProbability(0.27, 1.10), delay: 20000 },
+                    { probability: scaleSpawnProbability(0.35, 1.10), delay: 15000 }
                 ];
                 return table[level] || null;
             }
@@ -2530,14 +2572,14 @@
                 var elapsed = (Date.now() - gameStartTime) / 1000;
                 var level = getDifficultyLevel(elapsed);
                 // Nivel 0-2: no aparece
-                // Nivel 3 CRÍTICO:     prob 0.06, cada 40s
-                // Nivel 4 EXTREMO:     prob 0.12, cada 30s
-                // Nivel 5 APOCALIPSIS: prob 0.18, cada 20s
+                // Nivel 3 CRÍTICO:     prob 0.11, cada 40s
+                // Nivel 4 EXTREMO:     prob 0.17, cada 30s
+                // Nivel 5 APOCALIPSIS: prob 0.23, cada 20s
                 var table = [
                     null, null, null,
-                    { probability: scaleSpawnProbability(0.06, 1.10), delay: 40000 },
-                    { probability: scaleSpawnProbability(0.12, 1.10), delay: 30000 },
-                    { probability: scaleSpawnProbability(0.18, 1.10), delay: 20000 }
+                    { probability: scaleSpawnProbability(0.11, 1.10), delay: 40000 },
+                    { probability: scaleSpawnProbability(0.17, 1.10), delay: 30000 },
+                    { probability: scaleSpawnProbability(0.23, 1.10), delay: 20000 }
                 ];
                 return table[level] || null;
             }
@@ -2651,20 +2693,24 @@
                 return false;
             }
 
+            function updateLivesHUD() {
+                const livesCountText = document.getElementById('lives-count-text');
+                if (livesCountText) livesCountText.textContent = storedLives;
+            }
+
             function updateInventoryUI() {
                 syncSelectedStorageSlot();
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
-                const lifeBtn = document.getElementById('inv-life');
-                const lifeCount = document.getElementById('inv-life-count');
                 const dualBtn = document.getElementById('inv-dual');
                 const dualCount = document.getElementById('inv-dual-count');
-                const slotButtons = [scBtn, lifeBtn, dualBtn, document.getElementById('inv-laser'), document.getElementById('inv-triple')];
+                const slotButtons = [scBtn, dualBtn, document.getElementById('inv-laser'), document.getElementById('inv-triple')];
 
                 slotButtons.forEach((slotBtn) => {
                     if (!slotBtn) return;
                     slotBtn.classList.toggle('slot-selected', !!selectedStorageSlotId && slotBtn.dataset.slot === selectedStorageSlotId);
                 });
+                updateLivesHUD();
 
                 // Super Capsule slot
                 if (scBtn && scCount) {
@@ -2675,17 +2721,6 @@
                     } else {
                         scBtn.classList.remove('slot-active');
                         scBtn.classList.add('slot-empty');
-                    }
-                }
-                // Life slot
-                if (lifeBtn && lifeCount) {
-                    if (storedLives > 0) {
-                        lifeBtn.classList.remove('slot-empty');
-                        lifeBtn.classList.add('slot-active');
-                        lifeCount.textContent = storedLives;
-                    } else {
-                        lifeBtn.classList.remove('slot-active');
-                        lifeBtn.classList.add('slot-empty');
                     }
                 }
                 // Dual Shoot slot
@@ -2763,13 +2798,7 @@
                 });
             }
 
-            // --- Handlers de vida y dual ---
-            const invLifeBtn = document.getElementById('inv-life');
-            if (invLifeBtn) {
-                invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
-            }
+            // --- Handlers de dual ---
             const invDualBtn = document.getElementById('inv-dual');
             if (invDualBtn) {
                 invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useDualShootFromStorage(); }, { passive: false });
@@ -2911,6 +2940,7 @@
                 }
 
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 releaseGameplayPointerLock();
@@ -3000,8 +3030,8 @@
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
                 const invHudVictory = document.getElementById('storage-panel');
                 if (invHudVictory) invHudVictory.style.display = 'none';
-                const musicBtnVictory = document.getElementById('toggle-music-button');
-                if (musicBtnVictory) musicBtnVictory.style.display = 'none';
+                const hudActionsVictory = document.getElementById('hud-actions');
+                if (hudActionsVictory) hudActionsVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -3053,6 +3083,7 @@
                 updateInventoryUI();
                 gameOver = false;
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 gameContainer.style.cursor = 'none';
@@ -3105,8 +3136,8 @@
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
                 const invHud = document.getElementById('storage-panel');
                 if (invHud) invHud.style.display = 'flex';
-                const musicBtnResume = document.getElementById('toggle-music-button');
-                if (musicBtnResume) musicBtnResume.style.display = '';
+                const hudActionsResume = document.getElementById('hud-actions');
+                if (hudActionsResume) hudActionsResume.style.display = '';
 
                 // Limpiar spawners anteriores
                 clearTimeout(asteroidSpawnTimeout);
@@ -3132,7 +3163,7 @@
                 touchTargetBottom = -1;
                 shipCurrentBottom = -1;
                 mouseTargetBottom = -1;
-                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                desktopCurrentBottom = getShipBottom();
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
@@ -3143,6 +3174,7 @@
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 releaseGameplayPointerLock();
@@ -3172,7 +3204,7 @@
                             <img src="./img/pack-life+1.png" alt="" class="continue-life-icon">
                             <span><strong>${storedLives}</strong> ${lifeWord}</span>
                         </p>
-                        <div class="buttons-container" style="margin-top:0.5em;gap:0.6em;flex-wrap:wrap;justify-content:center;">
+                        <div class="buttons-container" style="display:flex;gap:0.6em;flex-wrap:wrap;justify-content:center;flex-shrink:0;margin-top:0.3em;">
                             <button id="continue-yes-btn" class="continue-btn continue-btn-yes">&#9654; Continuar</button>
                             <button id="continue-no-btn" class="continue-btn continue-btn-no">&#10006; Rendirse</button>
                         </div>
@@ -3184,8 +3216,8 @@
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
                     const invHud = document.getElementById('storage-panel');
                     if (invHud) invHud.style.display = 'none';
-                    const musicBtnCont = document.getElementById('toggle-music-button');
-                    if (musicBtnCont) musicBtnCont.style.display = 'none';
+                    const hudActionsCont = document.getElementById('hud-actions');
+                    if (hudActionsCont) hudActionsCont.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
@@ -3292,8 +3324,8 @@
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
                 const invHudGO = document.getElementById('storage-panel');
                 if (invHudGO) invHudGO.style.display = 'none';
-                const musicBtnGO = document.getElementById('toggle-music-button');
-                if (musicBtnGO) musicBtnGO.style.display = 'none';
+                const hudActionsGO = document.getElementById('hud-actions');
+                if (hudActionsGO) hudActionsGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -3347,6 +3379,7 @@
                 }
                 gameOver = false;
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 // Ocultar cursor de nuevo al reiniciar
@@ -3377,7 +3410,6 @@
 
                 spaceship.style.bottom = '50%';
                 spaceship.style.left = '25%';
-                spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
@@ -3418,7 +3450,7 @@
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
                 mouseTargetBottom = -1;
-                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                desktopCurrentBottom = getShipBottom();
                 isMouseControlled = false;
 
                 // Actualizar dimensiones cacheadas por si cambió el viewport
@@ -3431,8 +3463,8 @@
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
                 const invHudReset = document.getElementById('storage-panel');
                 if (invHudReset) invHudReset.style.display = 'flex';
-                const musicBtnReset = document.getElementById('toggle-music-button');
-                if (musicBtnReset) musicBtnReset.style.display = '';
+                const hudActionsReset = document.getElementById('hud-actions');
+                if (hudActionsReset) hudActionsReset.style.display = '';
 
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
@@ -3531,6 +3563,7 @@
             startLaserPointSpawner();
             startTripleShootSpawner();
 
+            updatePauseButtonLabel();
             // Mostrar vidas iniciales en el HUD
             updateInventoryUI();
 
@@ -3539,3 +3572,4 @@
         // Iniciar con la pantalla de ingreso de alias
         initPlayerScreen();
     })();
+
