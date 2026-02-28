@@ -869,12 +869,23 @@
                 return Math.max(0, Math.min(maxBottom, value));
             }
 
+            function getShipBottom() {
+                const rawValue = parseFloat(spaceship.style.bottom);
+                return Number.isFinite(rawValue) ? rawValue : clampShipBottom(cachedContainerHeight / 2);
+            }
+
+            function setShipBottom(value) {
+                const clampedValue = clampShipBottom(value);
+                spaceship.style.bottom = `${clampedValue}px`;
+                return clampedValue;
+            }
+
             function syncPointerLockState() {
                 isPointerLockActive = getPointerLockElement() === pointerLockTarget;
                 if (!isPointerLockActive) return;
                 isMouseControlled = true;
                 if (desktopCurrentBottom < 0) {
-                    desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                    desktopCurrentBottom = getShipBottom();
                 }
                 mouseTargetBottom = desktopCurrentBottom;
             }
@@ -907,6 +918,7 @@
 
             // Función para alternar música
             const toggleMusicButton = document.getElementById('toggle-music-button');
+            const pauseGameButton = document.getElementById('pause-game-button');
             function toggleMusic() {
                 if (musicPlaying) {
                     audio.pause();
@@ -916,6 +928,13 @@
                     toggleMusicButton.textContent = isTouchDevice ? 'Apagar Música' : 'Apagar Música (M)';
                 }
                 musicPlaying = !musicPlaying;
+            }
+
+            function updatePauseButtonLabel() {
+                if (!pauseGameButton) return;
+                pauseGameButton.textContent = gamePaused
+                    ? (isTouchDevice ? 'Continuar' : 'Continuar (P)')
+                    : (isTouchDevice ? 'Pausar' : 'Pausar (P)');
             }
 
             // Texto inicial según preferencia del pregame y tipo de dispositivo
@@ -930,6 +949,24 @@
                 e.stopPropagation();
                 toggleMusic();
             });
+
+            if (pauseGameButton) {
+                pauseGameButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleGamePaused();
+                });
+                pauseGameButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleGamePaused();
+                    pauseGameButton.blur();
+                }, { passive: false });
+                pauseGameButton.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            }
 
             // Handlers táctiles dedicados para el botón de música (evita interferir con controles de nave)
             toggleMusicButton.addEventListener('touchstart', function(e) {
@@ -1068,6 +1105,7 @@
                 setTimeout(updateCachedDimensions, 150);
             });
             updateCachedDimensions();
+            spaceship.style.bottom = '50%';
 
             function ensurePauseOverlay() {
                 if (pauseOverlayEl) return pauseOverlayEl;
@@ -1091,6 +1129,7 @@
                     requestGameplayPointerLock();
                 }
                 lastFrameTime = 0;
+                updatePauseButtonLabel();
             }
 
             function toggleGamePaused() {
@@ -1152,7 +1191,7 @@
                 isMouseControlled = true;
                 if (isPointerLockActive) {
                     if (desktopCurrentBottom < 0) {
-                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                        desktopCurrentBottom = getShipBottom();
                     }
                     mouseTargetBottom = clampShipBottom((mouseTargetBottom >= 0 ? mouseTargetBottom : desktopCurrentBottom) - ((event.movementY || 0) * POINTER_LOCK_SENSITIVITY));
                     return;
@@ -1184,7 +1223,7 @@
                     // Activar control táctil sin mover la nave (solo registrar posición inicial)
                     if (!isTouchControlled) {
                         isTouchControlled = true;
-                        shipCurrentBottom = parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2);
+                        shipCurrentBottom = getShipBottom();
                         touchTargetBottom = shipCurrentBottom;
                     }
                 }, { passive: false });
@@ -1294,20 +1333,20 @@
                     if (Math.abs(touchTargetBottom - shipCurrentBottom) < 0.5) {
                         shipCurrentBottom = touchTargetBottom;
                     }
-                    spaceship.style.bottom = shipCurrentBottom + 'px';
+                    setShipBottom(shipCurrentBottom);
                 }
 
                 // === DESKTOP: Aplicar posición del mouse directamente (zero-delay) ===
                 if (isMouseControlled && mouseTargetBottom >= 0) {
                     if (desktopCurrentBottom < 0) {
-                        desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || mouseTargetBottom);
+                        desktopCurrentBottom = getShipBottom();
                     }
                     const desktopLerpFactor = 1 - Math.pow(1 - DESKTOP_MOUSE_SMOOTHING, dt);
                     desktopCurrentBottom += (mouseTargetBottom - desktopCurrentBottom) * desktopLerpFactor;
                     if (Math.abs(mouseTargetBottom - desktopCurrentBottom) < 0.35) {
                         desktopCurrentBottom = mouseTargetBottom;
                     }
-                    spaceship.style.bottom = desktopCurrentBottom + 'px';
+                    setShipBottom(desktopCurrentBottom);
                 }
 
                 // === MOBILE: Disparo con botón dedicado (sin auto-fire al tocar) ===
@@ -2654,20 +2693,24 @@
                 return false;
             }
 
+            function updateLivesHUD() {
+                const livesCountText = document.getElementById('lives-count-text');
+                if (livesCountText) livesCountText.textContent = storedLives;
+            }
+
             function updateInventoryUI() {
                 syncSelectedStorageSlot();
                 const scBtn = document.getElementById('inv-super');
                 const scCount = document.getElementById('inv-super-count');
-                const lifeBtn = document.getElementById('inv-life');
-                const lifeCount = document.getElementById('inv-life-count');
                 const dualBtn = document.getElementById('inv-dual');
                 const dualCount = document.getElementById('inv-dual-count');
-                const slotButtons = [scBtn, lifeBtn, dualBtn, document.getElementById('inv-laser'), document.getElementById('inv-triple')];
+                const slotButtons = [scBtn, dualBtn, document.getElementById('inv-laser'), document.getElementById('inv-triple')];
 
                 slotButtons.forEach((slotBtn) => {
                     if (!slotBtn) return;
                     slotBtn.classList.toggle('slot-selected', !!selectedStorageSlotId && slotBtn.dataset.slot === selectedStorageSlotId);
                 });
+                updateLivesHUD();
 
                 // Super Capsule slot
                 if (scBtn && scCount) {
@@ -2678,17 +2721,6 @@
                     } else {
                         scBtn.classList.remove('slot-active');
                         scBtn.classList.add('slot-empty');
-                    }
-                }
-                // Life slot
-                if (lifeBtn && lifeCount) {
-                    if (storedLives > 0) {
-                        lifeBtn.classList.remove('slot-empty');
-                        lifeBtn.classList.add('slot-active');
-                        lifeCount.textContent = storedLives;
-                    } else {
-                        lifeBtn.classList.remove('slot-active');
-                        lifeBtn.classList.add('slot-empty');
                     }
                 }
                 // Dual Shoot slot
@@ -2766,13 +2798,7 @@
                 });
             }
 
-            // --- Handlers de vida y dual ---
-            const invLifeBtn = document.getElementById('inv-life');
-            if (invLifeBtn) {
-                invLifeBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLifeBtn.addEventListener('touchend', function(e) { e.preventDefault(); e.stopPropagation(); }, { passive: false });
-                invLifeBtn.addEventListener('click', function(e) { e.stopPropagation(); });
-            }
+            // --- Handlers de dual ---
             const invDualBtn = document.getElementById('inv-dual');
             if (invDualBtn) {
                 invDualBtn.addEventListener('touchstart', function(e) { e.preventDefault(); e.stopPropagation(); useDualShootFromStorage(); }, { passive: false });
@@ -2914,6 +2940,7 @@
                 }
 
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 releaseGameplayPointerLock();
@@ -3003,8 +3030,8 @@
                 if (mobileCtrlVictory) mobileCtrlVictory.style.display = 'none';
                 const invHudVictory = document.getElementById('storage-panel');
                 if (invHudVictory) invHudVictory.style.display = 'none';
-                const musicBtnVictory = document.getElementById('toggle-music-button');
-                if (musicBtnVictory) musicBtnVictory.style.display = 'none';
+                const hudActionsVictory = document.getElementById('hud-actions');
+                if (hudActionsVictory) hudActionsVictory.style.display = 'none';
 
                 victoryOverlay.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -3056,6 +3083,7 @@
                 updateInventoryUI();
                 gameOver = false;
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 gameContainer.style.cursor = 'none';
@@ -3108,8 +3136,8 @@
                 if (isTouchDev && mobileCtrlCont) mobileCtrlCont.style.display = 'flex';
                 const invHud = document.getElementById('storage-panel');
                 if (invHud) invHud.style.display = 'flex';
-                const musicBtnResume = document.getElementById('toggle-music-button');
-                if (musicBtnResume) musicBtnResume.style.display = '';
+                const hudActionsResume = document.getElementById('hud-actions');
+                if (hudActionsResume) hudActionsResume.style.display = '';
 
                 // Limpiar spawners anteriores
                 clearTimeout(asteroidSpawnTimeout);
@@ -3135,7 +3163,7 @@
                 touchTargetBottom = -1;
                 shipCurrentBottom = -1;
                 mouseTargetBottom = -1;
-                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                desktopCurrentBottom = getShipBottom();
 
                 // Reiniciar el game loop
                 lastFrameTime = 0;
@@ -3146,6 +3174,7 @@
             // Mostrar mensaje de "Game Over" con leaderboard
             function showGameOverMessage(reason) {
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 releaseGameplayPointerLock();
@@ -3187,8 +3216,8 @@
                     if (mobileCtrlCont) mobileCtrlCont.style.display = 'none';
                     const invHud = document.getElementById('storage-panel');
                     if (invHud) invHud.style.display = 'none';
-                    const musicBtnCont = document.getElementById('toggle-music-button');
-                    if (musicBtnCont) musicBtnCont.style.display = 'none';
+                    const hudActionsCont = document.getElementById('hud-actions');
+                    if (hudActionsCont) hudActionsCont.style.display = 'none';
 
                     continueOverlay.addEventListener('click', function(event) {
                         event.stopPropagation();
@@ -3295,8 +3324,8 @@
                 if (mobileCtrlGO) mobileCtrlGO.style.display = 'none';
                 const invHudGO = document.getElementById('storage-panel');
                 if (invHudGO) invHudGO.style.display = 'none';
-                const musicBtnGO = document.getElementById('toggle-music-button');
-                if (musicBtnGO) musicBtnGO.style.display = 'none';
+                const hudActionsGO = document.getElementById('hud-actions');
+                if (hudActionsGO) hudActionsGO.style.display = 'none';
 
                 gameOverMessage.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -3350,6 +3379,7 @@
                 }
                 gameOver = false;
                 gamePaused = false;
+                updatePauseButtonLabel();
                 gameContainer.classList.remove('game-paused');
                 if (pauseOverlayEl) pauseOverlayEl.classList.remove('pause-visible');
                 // Ocultar cursor de nuevo al reiniciar
@@ -3380,7 +3410,6 @@
 
                 spaceship.style.bottom = '50%';
                 spaceship.style.left = '25%';
-                spaceship.style.transform = 'translate(-50%, 50%)';
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
@@ -3421,7 +3450,7 @@
                 isTouchControlled = false;
                 lastMobileFireTime = 0;
                 mouseTargetBottom = -1;
-                desktopCurrentBottom = clampShipBottom(parseFloat(spaceship.style.bottom) || (cachedContainerHeight / 2));
+                desktopCurrentBottom = getShipBottom();
                 isMouseControlled = false;
 
                 // Actualizar dimensiones cacheadas por si cambió el viewport
@@ -3434,8 +3463,8 @@
                 if (isTouchDev && mobileCtrlReset) mobileCtrlReset.style.display = 'flex';
                 const invHudReset = document.getElementById('storage-panel');
                 if (invHudReset) invHudReset.style.display = 'flex';
-                const musicBtnReset = document.getElementById('toggle-music-button');
-                if (musicBtnReset) musicBtnReset.style.display = '';
+                const hudActionsReset = document.getElementById('hud-actions');
+                if (hudActionsReset) hudActionsReset.style.display = '';
 
                 // Reiniciar inventario (el jugador empieza con vidas extra de cortesía)
                 storedSuperCapsules = 0;
@@ -3534,6 +3563,7 @@
             startLaserPointSpawner();
             startTripleShootSpawner();
 
+            updatePauseButtonLabel();
             // Mostrar vidas iniciales en el HUD
             updateInventoryUI();
 
@@ -3542,3 +3572,4 @@
         // Iniciar con la pantalla de ingreso de alias
         initPlayerScreen();
     })();
+

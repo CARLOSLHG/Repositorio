@@ -83,10 +83,6 @@
 
         <!-- Asegúrate de que la nave esté en el HTML dentro del contenedor del juego -->
         <img id="spaceship" src="./img/ship.png" alt="Nave Espacial">
-
-        <!-- Botón para controlar la música (posicionado encima del storage panel) -->
-        <button id="toggle-music-button">Apagar Música (M)</button>
-
         <!-- Contador de distancia -->
         <div id="distance-counter"></div>
 
@@ -98,6 +94,15 @@
 
         <!-- Indicador de dificultad -->
         <div id="difficulty-display">Nivel 1: SEGURO</div>
+
+        <!-- Contador de vidas extra -->
+        <div id="lives-counter">Vidas Extra: <span id="lives-count-text">2</span></div>
+
+        <!-- Controles globales -->
+        <div id="hud-actions">
+            <button id="toggle-music-button">Apagar Música (M)</button>
+            <button id="pause-game-button">Pausar (P)</button>
+        </div>
 
         <!-- Contador de misiles -->
         <div id="missile-counter">
@@ -129,13 +134,6 @@
                     </div>
                     <span class="inv-label">SHIELD</span>
                     <span class="inv-key">S</span>
-                </button>
-                <button id="inv-life" class="inv-slot" data-slot="life" aria-label="Vida Extra">
-                    <div class="slot-inner">
-                        <img src="./img/pack-life+1.png" alt="Life +1" class="inv-icon" draggable="false">
-                        <span class="inv-count" id="inv-life-count">0</span>
-                    </div>
-                    <span class="inv-label">LIFE</span>
                 </button>
                 <button id="inv-dual" class="inv-slot" data-slot="dual" aria-label="Dual Shoot">
                     <div class="slot-inner">
@@ -172,3 +170,4 @@
 
     </body>
 </html>
+
