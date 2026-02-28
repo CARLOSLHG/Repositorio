@@ -1404,8 +1404,8 @@ body, html {
 }
 
 #mobile-fire-button {
-    width: 270px;
-    height: 270px;
+    width: 296px;
+    height: 296px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -1423,8 +1423,8 @@ body, html {
 }
 
 #mobile-fire-button .fire-icon-img {
-    width: 112px;
-    height: 112px;
+    width: 114px;
+    height: 114px;
     object-fit: contain;
     pointer-events: none;
 }
@@ -1677,8 +1677,8 @@ body, html {
         bottom: max(0px, calc(var(--safe-bottom) - 2px));
         right: max(0px, calc(var(--safe-right) - 2px));
         left: auto;
-        width: 266px;
-        height: 266px;
+        width: 282px;
+        height: 282px;
         padding: 0;
         border: none;
         border-radius: 50%;
@@ -1735,10 +1735,10 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-super { left: 50px; top: 168px; }
-    #inv-dual { left: 96px; top: 108px; }
-    #inv-laser { left: 158px; top: 98px; }
-    #inv-triple { left: 210px; top: 144px; }
+    #inv-super { left: 34px; top: 178px; }
+    #inv-dual { left: 88px; top: 108px; }
+    #inv-laser { left: 162px; top: 92px; }
+    #inv-triple { left: 226px; top: 146px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1793,8 +1793,8 @@ body, html {
         bottom: max(0px, calc(var(--safe-bottom) - 2px));
         right: max(0px, calc(var(--safe-right) - 2px));
         left: auto;
-        width: 238px;
-        height: 238px;
+        width: 252px;
+        height: 252px;
         padding: 0;
         border-radius: 50%;
     }
@@ -1825,10 +1825,10 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-super { left: 42px; top: 150px; }
-    #inv-dual { left: 80px; top: 102px; }
-    #inv-laser { left: 134px; top: 94px; }
-    #inv-triple { left: 180px; top: 132px; }
+    #inv-super { left: 28px; top: 160px; }
+    #inv-dual { left: 72px; top: 102px; }
+    #inv-laser { left: 134px; top: 88px; }
+    #inv-triple { left: 188px; top: 134px; }
 
     .inv-count {
         min-width: 12px;
