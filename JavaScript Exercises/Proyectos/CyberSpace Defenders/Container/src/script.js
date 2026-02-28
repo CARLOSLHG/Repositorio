@@ -827,6 +827,7 @@
         let desktopCurrentBottom = -1;
         let isMouseControlled = false;
         let isPointerLockActive = false;
+        let escapeRouteCenterPct = 50;
 
         // --- Background scroll fluido (controlado desde game loop) ---
         let bgScrollX = 0;          // posición actual (0 a -50, en %)
@@ -856,6 +857,9 @@
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
             const POINTER_LOCK_SENSITIVITY = 1.10;
             const DESKTOP_MOUSE_SMOOTHING = 0.462;
+            const ESCAPE_ROUTE_HALF_WIDTH_PCT = 14;
+            const ESCAPE_ROUTE_MIN_CENTER_PCT = 18;
+            const ESCAPE_ROUTE_MAX_CENTER_PCT = 82;
             const pointerLockTarget = gameContainer;
             const requestGameplayPointerLockNative = pointerLockTarget.requestPointerLock || pointerLockTarget.mozRequestPointerLock || pointerLockTarget.webkitRequestPointerLock;
             const exitGameplayPointerLockNative = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
@@ -878,6 +882,75 @@
                 const clampedValue = clampShipBottom(value);
                 spaceship.style.bottom = `${clampedValue}px`;
                 return clampedValue;
+            }
+
+            function clampPercent(value, minValue, maxValue) {
+                return Math.max(minValue, Math.min(maxValue, value));
+            }
+
+            function getShipBottomPercent() {
+                const travelRange = Math.max(1, cachedContainerHeight - cachedSpaceshipHeight);
+                return clampPercent((getShipBottom() / travelRange) * 100, 0, 100);
+            }
+
+            function updateEscapeRouteCenter(forceSnap) {
+                const shipPct = getShipBottomPercent();
+                const drift = (Math.random() - 0.5) * 6;
+                const desiredCenter = clampPercent(
+                    shipPct + drift,
+                    ESCAPE_ROUTE_MIN_CENTER_PCT,
+                    ESCAPE_ROUTE_MAX_CENTER_PCT
+                );
+                if (forceSnap) {
+                    escapeRouteCenterPct = desiredCenter;
+                } else {
+                    escapeRouteCenterPct = clampPercent(
+                        escapeRouteCenterPct + (desiredCenter - escapeRouteCenterPct) * 0.35,
+                        ESCAPE_ROUTE_MIN_CENTER_PCT,
+                        ESCAPE_ROUTE_MAX_CENTER_PCT
+                    );
+                }
+                return escapeRouteCenterPct;
+            }
+
+            function getHazardSpanPct(hazardType, src) {
+                if (hazardType === 'cyber') return { startOffset: 0, endOffset: 18 };
+                if (src && src.includes('rock-13.png')) return { startOffset: 0, endOffset: 20 };
+                return { startOffset: 0, endOffset: 16 };
+            }
+
+            function intersectsEscapeRoute(bottomPct, hazardType, src) {
+                const span = getHazardSpanPct(hazardType, src);
+                const routeBottom = escapeRouteCenterPct - ESCAPE_ROUTE_HALF_WIDTH_PCT;
+                const routeTop = escapeRouteCenterPct + ESCAPE_ROUTE_HALF_WIDTH_PCT;
+                const hazardBottom = bottomPct + span.startOffset;
+                const hazardTop = bottomPct + span.endOffset;
+                return !(hazardTop < routeBottom || hazardBottom > routeTop);
+            }
+
+            function chooseHazardBottomPercent(minPct, maxPct, hazardType, src, fixedBottomPct) {
+                updateEscapeRouteCenter(false);
+                if (typeof fixedBottomPct === 'number') {
+                    return intersectsEscapeRoute(fixedBottomPct, hazardType, src) ? null : fixedBottomPct;
+                }
+
+                let bestCandidate = null;
+                let bestDistance = -1;
+                for (let attempt = 0; attempt < 12; attempt++) {
+                    const candidate = Math.floor(Math.random() * (maxPct - minPct + 1)) + minPct;
+                    if (!intersectsEscapeRoute(candidate, hazardType, src)) {
+                        return candidate;
+                    }
+                    const span = getHazardSpanPct(hazardType, src);
+                    const hazardCenter = candidate + ((span.startOffset + span.endOffset) / 2);
+                    const distanceToRoute = Math.abs(hazardCenter - escapeRouteCenterPct);
+                    if (distanceToRoute > bestDistance) {
+                        bestDistance = distanceToRoute;
+                        bestCandidate = candidate;
+                    }
+                }
+
+                return bestCandidate;
             }
 
             function syncPointerLockState() {
@@ -1106,6 +1179,7 @@
             });
             updateCachedDimensions();
             spaceship.style.bottom = '50%';
+            updateEscapeRouteCenter(true);
 
             function ensurePauseOverlay() {
                 if (pauseOverlayEl) return pauseOverlayEl;
@@ -2018,12 +2092,17 @@
                 asteroid.src = src;
                 asteroid.classList.add('asteroid');
 
+                let bottomPosition = null;
                 if (src.includes('rock-13.png')) {
-                    asteroid.style.bottom = '0px';
+                    bottomPosition = chooseHazardBottomPercent(0, 0, 'asteroid', src, 0);
                 } else {
-                    const bottomPosition = isBottom ? 0 : Math.floor(Math.random() * 80) + 10;
-                    asteroid.style.bottom = `${bottomPosition}%`;
+                    bottomPosition = chooseHazardBottomPercent(10, 90, 'asteroid', src, isBottom ? 0 : null);
                 }
+
+                if (bottomPosition === null) {
+                    return false;
+                }
+                asteroid.style.bottom = `${bottomPosition}%`;
                 asteroid.style.left = '100%';
 
                 gameContainer.appendChild(asteroid);
@@ -2045,6 +2124,7 @@
                     const idx = activeHazards.indexOf(hazardEntry);
                     if (idx !== -1) activeHazards.splice(idx, 1);
                 });
+                return true;
             }
 
             // Función para generar un "cyberattack" (velocidad dinámica por dificultad)
@@ -2053,7 +2133,10 @@
                 cyberAttack.src = type;
                 cyberAttack.classList.add('cyber-attack');
 
-                const bottomPosition = Math.floor(Math.random() * 80) + 10;
+                const bottomPosition = chooseHazardBottomPercent(10, 90, 'cyber', type, null);
+                if (bottomPosition === null) {
+                    return false;
+                }
                 cyberAttack.style.bottom = `${bottomPosition}%`;
                 cyberAttack.style.left = '100%';
 
@@ -2084,6 +2167,7 @@
                     const idx = activeHazards.indexOf(hazardEntry);
                     if (idx !== -1) activeHazards.splice(idx, 1);
                 });
+                return true;
             }
 
             // --- Crear pack de munición con SVG de escudo (dificultad dinámica) ---
@@ -3090,6 +3174,7 @@
 
                 // Reposicionar nave en zona segura (centro)
                 spaceship.style.bottom = '50%';
+                updateEscapeRouteCenter(true);
 
                 // Dar misiles mínimos si se quedó sin ellos
                 if (missileCount <= 0) {
@@ -3410,6 +3495,7 @@
 
                 spaceship.style.bottom = '50%';
                 spaceship.style.left = '25%';
+                updateEscapeRouteCenter(true);
 
                 document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.remove());
                 document.querySelectorAll('.cyber-attack').forEach(cyber => cyber.remove());
