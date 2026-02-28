@@ -96,9 +96,9 @@ body, html {
 
 .asteroid {
     position: absolute;
-    width: 7.56vw;
-    max-width: 126px;
-    min-width: 50.4px;
+    width: 7.182vw;
+    max-width: 120px;
+    min-width: 48px;
     height: auto;
     animation: moveAsteroid 5s linear forwards;
     will-change: transform;
