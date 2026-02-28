@@ -854,8 +854,8 @@
 
             // Detección de dispositivo táctil (necesario antes de configurar botones)
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
-            const POINTER_LOCK_SENSITIVITY = 1;
-            const DESKTOP_MOUSE_SMOOTHING = 0.42;
+            const POINTER_LOCK_SENSITIVITY = 1.10;
+            const DESKTOP_MOUSE_SMOOTHING = 0.462;
             const pointerLockTarget = gameContainer;
             const requestGameplayPointerLockNative = pointerLockTarget.requestPointerLock || pointerLockTarget.mozRequestPointerLock || pointerLockTarget.webkitRequestPointerLock;
             const exitGameplayPointerLockNative = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
@@ -1185,7 +1185,7 @@
             // Movimiento de la nave con el mouse para desktop
             // Solo captura posición objetivo; se aplica en el game loop (zero-delay, sin layout thrashing)
             // Margen superior para evitar activar la barra de salida de pantalla completa del navegador
-            const MOUSE_TOP_MARGIN = 30; // px de margen seguro en la parte superior
+            const MOUSE_TOP_MARGIN = 14; // px de margen seguro en la parte superior
             document.addEventListener('mousemove', function(event) {
                 if (gameOver || !gameStarted || isTouchDevice) return;
                 isMouseControlled = true;
