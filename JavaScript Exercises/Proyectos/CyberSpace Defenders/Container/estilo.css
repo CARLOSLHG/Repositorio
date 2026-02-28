@@ -972,8 +972,9 @@ body, html {
     left: calc(12px + var(--safe-left));
     z-index: 26;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
+    align-items: center;
     pointer-events: auto;
 }
 
