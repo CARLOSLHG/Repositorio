@@ -2308,11 +2308,11 @@
                 // Nivel 5 APOCALIPSIS: prob 0.45, cada 14s
                 const table = [
                     null,
-                    { probability: 0.13, delay: 35000 },
-                    { probability: 0.19, delay: 28000 },
-                    { probability: 0.27, delay: 22000 },
-                    { probability: 0.35, delay: 18000 },
-                    { probability: 0.45, delay: 14000 }
+                    { probability: scaleSpawnProbability(0.13, 1.10), delay: 35000 },
+                    { probability: scaleSpawnProbability(0.19, 1.10), delay: 28000 },
+                    { probability: scaleSpawnProbability(0.27, 1.10), delay: 22000 },
+                    { probability: scaleSpawnProbability(0.35, 1.10), delay: 18000 },
+                    { probability: scaleSpawnProbability(0.45, 1.10), delay: 14000 }
                 ];
                 return table[level] || null;
             }
@@ -2471,10 +2471,10 @@
                 const table = [
                     null,
                     null,
-                    { probability: scaleSpawnProbability(0.16, 1.22), delay: 30000 },
-                    { probability: scaleSpawnProbability(0.23, 1.22), delay: 24000 },
-                    { probability: scaleSpawnProbability(0.31, 1.22), delay: 18500 },
-                    { probability: scaleSpawnProbability(0.40, 1.22), delay: 13500 }
+                    { probability: scaleSpawnProbability(0.16, 1.342), delay: 30000 },
+                    { probability: scaleSpawnProbability(0.23, 1.342), delay: 24000 },
+                    { probability: scaleSpawnProbability(0.31, 1.342), delay: 18500 },
+                    { probability: scaleSpawnProbability(0.40, 1.342), delay: 13500 }
                 ];
                 return table[level] || null;
             }
@@ -2547,10 +2547,10 @@
                 // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
                 var table = [
                     null, null,
-                    { probability: scaleSpawnProbability(0.18, 1.22), delay: 28000 },
-                    { probability: scaleSpawnProbability(0.25, 1.22), delay: 22000 },
-                    { probability: scaleSpawnProbability(0.33, 1.22), delay: 17000 },
-                    { probability: scaleSpawnProbability(0.42, 1.22), delay: 12500 }
+                    { probability: scaleSpawnProbability(0.18, 1.342), delay: 28000 },
+                    { probability: scaleSpawnProbability(0.25, 1.342), delay: 22000 },
+                    { probability: scaleSpawnProbability(0.33, 1.342), delay: 17000 },
+                    { probability: scaleSpawnProbability(0.42, 1.342), delay: 12500 }
                 ];
                 return table[level] || null;
             }
@@ -2661,9 +2661,9 @@
                 // Nivel 5 APOCALIPSIS: prob 0.23, cada 20s
                 var table = [
                     null, null, null,
-                    { probability: scaleSpawnProbability(0.15, 1.22), delay: 32000 },
-                    { probability: scaleSpawnProbability(0.22, 1.22), delay: 24000 },
-                    { probability: scaleSpawnProbability(0.30, 1.22), delay: 17000 }
+                    { probability: scaleSpawnProbability(0.15, 1.342), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.22, 1.342), delay: 24000 },
+                    { probability: scaleSpawnProbability(0.30, 1.342), delay: 17000 }
                 ];
                 return table[level] || null;
             }
