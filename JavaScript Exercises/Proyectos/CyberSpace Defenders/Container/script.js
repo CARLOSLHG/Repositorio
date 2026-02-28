@@ -542,6 +542,33 @@
         const pregameScreen = document.getElementById('pregame-screen');
         const launchGameButton = document.getElementById('launch-game-button');
 
+
+        const IMAGE_PRELOAD_SOURCES = Array.from(new Set([
+            ...Array.from(document.querySelectorAll('img[src^="./img/"]'), (img) => img.getAttribute('src')),
+            './img/pack-25.png', './img/pack-50.png', './img/pack-75.png', './img/pack-100.png',
+            './img/exploit.png', './img/missil.png', './img/continue-banner.png',
+            './img/rock-1.png', './img/rock-2.png', './img/rock-3.png', './img/rock-4.png', './img/rock-5.png', './img/rock-6.png',
+            './img/rock-7.png', './img/rock-8.png', './img/rock-9.png', './img/rock-10.png', './img/rock-11.png', './img/rock-12.png', './img/rock-13.png',
+            './img/aster-1.png', './img/aster-2.png', './img/aster-3.png', './img/aster-4.png', './img/aster-5.png', './img/aster-6.png'
+        ].filter(Boolean)));
+
+        function preloadImageAssets(paths) {
+            return Promise.all(paths.map((src) => new Promise((resolve) => {
+                const img = new Image();
+                img.decoding = 'async';
+                img.loading = 'eager';
+                img.src = src;
+                if (img.decode) {
+                    img.decode().then(resolve).catch(resolve);
+                    return;
+                }
+                img.onload = resolve;
+                img.onerror = resolve;
+            })));
+        }
+
+        preloadImageAssets(IMAGE_PRELOAD_SOURCES);
+
         function initPlayerScreen() {
             // Recuperar último alias usado
             const lastAlias = localStorage.getItem('cyberspace_last_alias') || '';
@@ -1544,6 +1571,7 @@
                             if (idx !== -1) activeSuperCapsules.splice(idx, 1);
                         }, 400);
                         storedSuperCapsules++;
+                        focusStorageSlotOnPickup('super');
                         updateInventoryUI();
                     }
                 }
@@ -1583,6 +1611,7 @@
                             activateDualShoot();
                         } else {
                             storedDualShoots++;
+                            focusStorageSlotOnPickup('dual');
                             updateInventoryUI();
                         }
                     }
@@ -1605,6 +1634,7 @@
                             activateLaserPoint();
                         } else {
                             storedLaserPoints++;
+                            focusStorageSlotOnPickup('laser');
                             updateInventoryUI();
                         }
                     }
@@ -1627,6 +1657,7 @@
                             activateTripleShoot();
                         } else {
                             storedTripleShoots++;
+                            focusStorageSlotOnPickup('triple');
                             updateInventoryUI();
                         }
                     }
@@ -2568,6 +2599,11 @@
                 storedTripleShoots--;
                 activateTripleShoot();
                 updateInventoryUI();
+            }
+
+            function focusStorageSlotOnPickup(slotId) {
+                if (isTouchDevice) return;
+                selectedStorageSlotId = slotId;
             }
 
             // --- Actualizar UI del storage: 4 slots fijos con estados vacío/activo/engaged ---
