@@ -36,7 +36,7 @@ body, html {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden;
     cursor: none !important;
@@ -1735,10 +1735,10 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-super { left: 88px; top: 150px; }
-    #inv-dual { left: 124px; top: 104px; }
-    #inv-laser { left: 178px; top: 98px; }
-    #inv-triple { left: 206px; top: 148px; }
+    #inv-super { left: 70px; top: 156px; }
+    #inv-dual { left: 108px; top: 110px; }
+    #inv-laser { left: 162px; top: 104px; }
+    #inv-triple { left: 188px; top: 156px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1825,10 +1825,10 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-super { left: 76px; top: 136px; }
-    #inv-dual { left: 106px; top: 96px; }
-    #inv-laser { left: 154px; top: 90px; }
-    #inv-triple { left: 180px; top: 134px; }
+    #inv-super { left: 60px; top: 142px; }
+    #inv-dual { left: 92px; top: 100px; }
+    #inv-laser { left: 140px; top: 94px; }
+    #inv-triple { left: 164px; top: 142px; }
 
     .inv-count {
         min-width: 12px;
