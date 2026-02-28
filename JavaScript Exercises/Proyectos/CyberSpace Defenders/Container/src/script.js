@@ -176,14 +176,14 @@
                 packSpeedMin: 4 - (1 * factor),
                 packSpeedRange: 3 - (0.5 * factor),
 
-                // Delay base de packs: 10.8s → 18s (−10% más frecuentes)
-                packBaseDelay: 10800 + (7200 * factor),
+                // Delay base de packs: más difícil = salen más seguido
+                packBaseDelay: 11800 - (5200 * factor),
 
-                // Delay máximo de packs: 40.5s → 49.5s (−10%)
-                packMaxDelay: 40500 + (9000 * factor),
+                // Delay máximo de packs: también baja con la dificultad
+                packMaxDelay: 32000 - (14000 * factor),
 
-                // Incremento de delay por segundo: 45ms → 81ms (−10%)
-                packMsPerSecond: 45 + (36 * factor),
+                // Incremento de delay por segundo: crecimiento más lento para mantener flujo
+                packMsPerSecond: 32 + (12 * factor),
 
                 // Probabilidad de multi-spawn (2 asteroides a la vez): 0% → 40%
                 multiSpawnChance: 0.40 * factor,
@@ -2246,11 +2246,11 @@
                 // Nivel 5 APOCALIPSIS: prob 0.40, cada 15s
                 const table = [
                     null,
-                    { probability: scaleSpawnProbability(0.11, 0.90), delay: 40000 },
-                    { probability: scaleSpawnProbability(0.15, 0.90), delay: 32000 },
-                    { probability: scaleSpawnProbability(0.23, 0.90), delay: 25000 },
-                    { probability: scaleSpawnProbability(0.30, 0.90), delay: 20000 },
-                    { probability: scaleSpawnProbability(0.40, 0.90), delay: 15000 }
+                    { probability: scaleSpawnProbability(0.08, 0.78), delay: 46000 },
+                    { probability: scaleSpawnProbability(0.11, 0.78), delay: 37000 },
+                    { probability: scaleSpawnProbability(0.15, 0.78), delay: 30000 },
+                    { probability: scaleSpawnProbability(0.19, 0.78), delay: 24000 },
+                    { probability: scaleSpawnProbability(0.24, 0.78), delay: 19000 }
                 ];
                 return table[level] || null;
             }
@@ -2387,10 +2387,10 @@
                 const table = [
                     null,
                     null,
-                    { probability: scaleSpawnProbability(0.13, 1.10), delay: 35000 },
-                    { probability: scaleSpawnProbability(0.19, 1.10), delay: 28000 },
-                    { probability: scaleSpawnProbability(0.25, 1.10), delay: 22000 },
-                    { probability: scaleSpawnProbability(0.33, 1.10), delay: 16000 }
+                    { probability: scaleSpawnProbability(0.16, 1.22), delay: 30000 },
+                    { probability: scaleSpawnProbability(0.23, 1.22), delay: 24000 },
+                    { probability: scaleSpawnProbability(0.31, 1.22), delay: 18500 },
+                    { probability: scaleSpawnProbability(0.40, 1.22), delay: 13500 }
                 ];
                 return table[level] || null;
             }
@@ -2463,10 +2463,10 @@
                 // Nivel 5 APOCALIPSIS: prob 0.35, cada 15s
                 var table = [
                     null, null,
-                    { probability: scaleSpawnProbability(0.15, 1.10), delay: 32000 },
-                    { probability: scaleSpawnProbability(0.21, 1.10), delay: 26000 },
-                    { probability: scaleSpawnProbability(0.27, 1.10), delay: 20000 },
-                    { probability: scaleSpawnProbability(0.35, 1.10), delay: 15000 }
+                    { probability: scaleSpawnProbability(0.18, 1.22), delay: 28000 },
+                    { probability: scaleSpawnProbability(0.25, 1.22), delay: 22000 },
+                    { probability: scaleSpawnProbability(0.33, 1.22), delay: 17000 },
+                    { probability: scaleSpawnProbability(0.42, 1.22), delay: 12500 }
                 ];
                 return table[level] || null;
             }
@@ -2577,9 +2577,9 @@
                 // Nivel 5 APOCALIPSIS: prob 0.23, cada 20s
                 var table = [
                     null, null, null,
-                    { probability: scaleSpawnProbability(0.11, 1.10), delay: 40000 },
-                    { probability: scaleSpawnProbability(0.17, 1.10), delay: 30000 },
-                    { probability: scaleSpawnProbability(0.23, 1.10), delay: 20000 }
+                    { probability: scaleSpawnProbability(0.15, 1.22), delay: 32000 },
+                    { probability: scaleSpawnProbability(0.22, 1.22), delay: 24000 },
+                    { probability: scaleSpawnProbability(0.30, 1.22), delay: 17000 }
                 ];
                 return table[level] || null;
             }
@@ -3572,4 +3572,3 @@
         // Iniciar con la pantalla de ingreso de alias
         initPlayerScreen();
     })();
-
