@@ -151,7 +151,7 @@ body, html {
     to { left: 110%; }
 }
 
-#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+#distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #lives-counter {
     position: absolute;
     left: calc(10px + var(--safe-left));
     font-size: clamp(11px, 0.85vw, 16px);
@@ -192,6 +192,11 @@ body, html {
     border-left: 2px solid rgba(34, 204, 102, 0.6);
     text-shadow: 0 0 8px rgba(34, 204, 102, 0.5);
     transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+#lives-counter {
+    top: calc(190px + var(--safe-top));
+    border-left: 2px solid rgba(0, 255, 120, 0.6);
 }
 
 #missile-bar-container {
@@ -388,15 +393,19 @@ body, html {
         padding: 0;
     }
 
-    #toggle-music-button {
-        top: calc(130px + var(--safe-top));
-        bottom: auto;
+    #hud-actions {
         left: calc(4px + var(--safe-left));
+        bottom: calc(4px + var(--safe-bottom));
+        gap: 6px;
+    }
+
+    #toggle-music-button,
+    #pause-game-button {
         font-size: clamp(9px, 2vw, 12px);
         padding: 3px 7px;
     }
 
-    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #lives-counter {
         font-size: clamp(9px, 2vw, 14px);
         padding: 1px 4px;
         left: max(0px, calc(var(--safe-left) - 2px));
@@ -957,11 +966,19 @@ body, html {
     }
 }
 
-#toggle-music-button {
+#hud-actions {
     position: absolute;
-    top: calc(192px + var(--safe-top));
-    bottom: auto;
+    bottom: calc(12px + var(--safe-bottom));
     left: calc(12px + var(--safe-left));
+    z-index: 26;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto;
+}
+
+#toggle-music-button,
+#pause-game-button {
     font-size: 0.75em;
     padding: 5px 10px;
     background-color: rgba(30, 58, 95, 0.8);
@@ -970,12 +987,11 @@ body, html {
     border-radius: 6px;
     transition: background-color 0.3s, box-shadow 0.3s;
     white-space: nowrap;
-    z-index: 26;
-    pointer-events: auto;
     max-width: none;
 }
 
-#toggle-music-button:hover {
+#toggle-music-button:hover,
+#pause-game-button:hover {
     background-color: rgba(0, 150, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
     color: #fff;
@@ -1429,7 +1445,7 @@ body, html {
 /* ===== STORAGE PANEL: panel unificado con nombre + 3 cubículos ===== */
 #storage-panel {
     position: absolute;
-    bottom: calc(12px + var(--safe-bottom));
+    bottom: calc(86px + var(--safe-bottom));
     left: calc(12px + var(--safe-left));
     z-index: 25;
     display: flex;
@@ -1481,7 +1497,7 @@ body, html {
     text-transform: uppercase;
 }
 
-/* --- Grid de 3 slots --- */
+/* --- Grid de slots --- */
 #storage-slots {
     display: flex;
     flex-direction: row;
@@ -1546,12 +1562,6 @@ body, html {
     filter: none;
 }
 
-/* Variante: life activo → verde */
-.inv-slot[data-slot="life"].slot-active {
-    border-color: rgba(0, 255, 100, 0.35);
-    box-shadow: inset 0 0 10px rgba(0, 255, 100, 0.08);
-}
-
 /* Variante: dual activo → magenta */
 .inv-slot[data-slot="dual"].slot-active {
     border-color: rgba(255, 0, 200, 0.35);
@@ -1611,10 +1621,6 @@ body, html {
     pointer-events: none;
 }
 
-.inv-slot[data-slot="life"] .inv-count {
-    background: #00ff66;
-}
-
 .inv-slot[data-slot="dual"] .inv-count {
     background: #ff44cc;
     color: #fff;
@@ -1630,10 +1636,6 @@ body, html {
     pointer-events: none;
     line-height: 1;
     transition: opacity 0.3s, color 0.3s;
-}
-
-.inv-slot[data-slot="life"] .inv-label {
-    color: rgba(0, 255, 100, 0.5);
 }
 
 .inv-slot[data-slot="dual"] .inv-label {
@@ -1732,11 +1734,10 @@ body, html {
         padding: 0 3px;
     }
 
-    #inv-life { left: 70px; top: 166px; }
-    #inv-super { left: 98px; top: 114px; }
-    #inv-dual { left: 142px; top: 74px; }
-    #inv-laser { left: 188px; top: 78px; }
-    #inv-triple { left: 194px; top: 136px; }
+    #inv-super { left: 88px; top: 150px; }
+    #inv-dual { left: 124px; top: 104px; }
+    #inv-laser { left: 178px; top: 98px; }
+    #inv-triple { left: 206px; top: 148px; }
 }
 
 /* ===== DETECCIÓN TÁCTIL POR CSS (fallback para JS) ===== */
@@ -1823,11 +1824,10 @@ body, html {
         letter-spacing: 0.6px;
     }
 
-    #inv-life { left: 62px; top: 146px; }
-    #inv-super { left: 88px; top: 100px; }
-    #inv-dual { left: 126px; top: 66px; }
-    #inv-laser { left: 166px; top: 70px; }
-    #inv-triple { left: 170px; top: 122px; }
+    #inv-super { left: 76px; top: 136px; }
+    #inv-dual { left: 106px; top: 96px; }
+    #inv-laser { left: 154px; top: 90px; }
+    #inv-triple { left: 180px; top: 134px; }
 
     .inv-count {
         min-width: 12px;
@@ -2269,7 +2269,7 @@ body, html {
         padding: 0.35em 0.7em;
     }
 
-    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display {
+    #distance-counter, #asteroid-counter, #cyberattack-counter, #missile-counter, #difficulty-display, #lives-counter {
         font-size: clamp(8px, 1.5vw, 11px);
         padding: 1px 4px;
         left: calc(2px + var(--safe-left));
@@ -2281,10 +2281,7 @@ body, html {
     #asteroid-counter { top: calc(34px + var(--safe-top)); }
     #missile-counter { top: calc(50px + var(--safe-top)); }
     #difficulty-display { top: calc(78px + var(--safe-top)); font-size: clamp(8px, 1.5vw, 11px); }
-    #toggle-music-button {
-        top: calc(96px + var(--safe-top));
-        bottom: auto;
-    }
+    #lives-counter { top: calc(96px + var(--safe-top)); }
 }
 
 /* ===== CONTINUE SCREEN: pantallas ultra-pequeñas (iPhone SE, Mini landscape) ===== */
@@ -2658,7 +2655,8 @@ body, html {
     #asteroid-counter,
     #cyberattack-counter,
     #missile-counter,
-    #difficulty-display {
+    #difficulty-display,
+    #lives-counter {
         left: 4px !important;
     }
 
@@ -2667,6 +2665,7 @@ body, html {
     #asteroid-counter { top: 36px !important; }
     #missile-counter { top: 54px !important; }
     #difficulty-display { top: 76px !important; }
+    #lives-counter { top: 98px !important; }
 
     #storage-panel {
         left: auto !important;
@@ -2674,10 +2673,16 @@ body, html {
         right: max(0px, calc(var(--safe-right) + 6px)) !important;
     }
 
-    #toggle-music-button {
+    #hud-actions {
         left: 4px !important;
-        top: 98px !important;
-        bottom: auto !important;
+        bottom: max(4px, calc(var(--safe-bottom) + 4px)) !important;
+        top: auto !important;
+    }
+
+    #toggle-music-button,
+    #pause-game-button {
+        font-size: 11px;
+        padding: 5px 8px;
     }
 }
 
